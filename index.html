@@ -576,9 +576,26 @@
         
         <form id="popup-waitlist-form" class="popup-form">
           <div class="popup-input-wrap">
+            <input type="text" id="popup-name-input" placeholder="Your full name" required autocomplete="name">
+          </div>
+          <div class="popup-input-wrap">
             <input type="email" id="popup-email-input" placeholder="Enter your email address" required autocomplete="email">
           </div>
-          <button type="submit" class="popup-submit-btn">
+          <div class="popup-input-wrap">
+            <input type="tel" id="popup-phone-input" placeholder="Your phone number" required autocomplete="tel">
+          </div>
+          
+          <div class="popup-gender-container" style="margin-bottom: 0.5rem; text-align: left;">
+            <div style="font-size: 11px; font-weight: 800; color: rgba(255, 255, 255, 0.4); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem;">Identity / Gender</div>
+            <div class="gender-segmented-control" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 4px; display: flex; position: relative; height: 46px; cursor: pointer; user-select: none;">
+              <div class="gender-slide-bg" style="position: absolute; top: 3px; left: 3px; width: calc(50% - 6px); height: calc(100% - 6px); background: #003399; border-radius: 9px; box-shadow: 0 0 10px rgba(0, 51, 153, 0.5); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease; z-index: 1;"></div>
+              <button type="button" class="gender-btn active" data-gender="male" style="flex: 1; border: none; background: transparent; color: #ffffff; font-family: 'Bricolage Grotesque', sans-serif; font-size: 12px; font-weight: 800; text-transform: uppercase; cursor: pointer; position: relative; z-index: 2; outline: none; transition: color 0.3s ease;">Male</button>
+              <button type="button" class="gender-btn" data-gender="female" style="flex: 1; border: none; background: transparent; color: rgba(255, 255, 255, 0.5); font-family: 'Bricolage Grotesque', sans-serif; font-size: 12px; font-weight: 800; text-transform: uppercase; cursor: pointer; position: relative; z-index: 2; outline: none; transition: color 0.3s ease;">Female</button>
+            </div>
+            <input type="hidden" id="popup-gender-input" value="male">
+          </div>
+
+          <button type="submit" class="popup-submit-btn" style="margin-top: 0.5rem;">
             <span>Join the Waitlist</span>
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </button>
@@ -864,10 +881,38 @@
       const popupOverlay = document.getElementById('waitlist-popup-overlay');
       const closeBtn = document.getElementById('popup-close-btn');
       const form = document.getElementById('popup-waitlist-form');
+      const nameInput = document.getElementById('popup-name-input');
       const emailInput = document.getElementById('popup-email-input');
+      const phoneInput = document.getElementById('popup-phone-input');
+      const genderInput = document.getElementById('popup-gender-input');
+      const genderButtons = document.querySelectorAll('.gender-btn');
+      const genderSlideBg = document.querySelector('.gender-slide-bg');
       const signupState = document.getElementById('popup-signup-state');
       const successState = document.getElementById('popup-success-state');
       const successCloseBtn = document.getElementById('popup-success-close-btn');
+
+      // Gender Selector Segmented Control Slider Logic
+      genderButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          genderButtons.forEach(b => {
+            b.classList.remove('active');
+            b.style.color = 'rgba(255, 255, 255, 0.5)';
+          });
+          btn.classList.add('active');
+          btn.style.color = '#ffffff';
+          
+          const gender = btn.getAttribute('data-gender');
+          genderInput.value = gender;
+          
+          if (gender === 'female') {
+            genderSlideBg.style.transform = 'translateX(100%)';
+            genderSlideBg.style.backgroundColor = '#207e59'; // Slid to female (Green)
+          } else {
+            genderSlideBg.style.transform = 'translateX(0)';
+            genderSlideBg.style.backgroundColor = '#003399'; // Slid to male (Blue)
+          }
+        });
+      });
       
       // Delay before popup triggers (e.g. 4 seconds)
       const popupDelay = 4000;
@@ -904,8 +949,12 @@
       form.addEventListener('submit', (e) => {
         e.preventDefault();
         
+        const name = nameInput.value.trim();
         const email = emailInput.value.trim();
-        if (email) {
+        const phone = phoneInput.value.trim();
+        const gender = genderInput.value;
+        
+        if (name && email && phone) {
           // Perform submit simulation
           const submitBtn = form.querySelector('.popup-submit-btn');
           const submitSpan = submitBtn.querySelector('span');
@@ -914,8 +963,12 @@
           submitSpan.textContent = 'Joining...';
           
           setTimeout(() => {
-            // Save to localStorage
+            // Save member credentials to localStorage
             localStorage.setItem('superstate_waitlist_signed', 'true');
+            localStorage.setItem('superstate_waitlist_name', name);
+            localStorage.setItem('superstate_waitlist_email', email);
+            localStorage.setItem('superstate_waitlist_phone', phone);
+            localStorage.setItem('superstate_waitlist_gender', gender);
             localStorage.removeItem('superstate_popup_dismissed'); // Ensure no interference
             
             // Switch to success state with micro-animation
