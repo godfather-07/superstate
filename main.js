@@ -153,37 +153,3 @@ if (grid && prev && next) {
   });
 }
 
-// Home Page Waitlist Popup Logic
-const popup = document.getElementById('waitlist-popup');
-const popupClose = document.getElementById('popup-close');
-const popupJoin = document.getElementById('popup-join');
-
-if (popup) {
-  // Show popup after 3.5 seconds
-  setTimeout(() => {
-    // Only show if the user hasn't already joined or dismissed in this session
-    if (!sessionStorage.getItem('popupDismissed')) {
-      popup.classList.add('active');
-    }
-  }, 3500);
-
-  popupClose.addEventListener('click', () => {
-    popup.classList.remove('active');
-    sessionStorage.setItem('popupDismissed', 'true');
-  });
-
-  popupJoin.addEventListener('click', () => {
-    popup.classList.remove('active');
-    sessionStorage.setItem('popupDismissed', 'true');
-    // Scroll is handled by href="#waitlist"
-  });
-
-  // Close on outside click
-  popup.addEventListener('click', (e) => {
-    if (e.target === popup) {
-      popup.classList.remove('active');
-      sessionStorage.setItem('popupDismissed', 'true');
-    }
-  });
-}
-

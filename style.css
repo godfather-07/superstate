@@ -73,6 +73,7 @@ body {
   line-height: 1.7;
   font-size: 17px;
   scroll-behavior: smooth;
+  overflow-x: hidden; /* Prevents stray horizontal scrollbars and extra space on the right */
 }
 
 /* Typography Base */
@@ -418,7 +419,7 @@ section {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 120px; /* Increased for bolder presence */
+  height: 105px; /* Increased just a tad for the perfect vertical balance */
 }
 
 @media (max-width: 768px) {
@@ -429,11 +430,11 @@ section {
 
 @media (min-width: 1440px) {
   .navbar-container {
-    height: 150px;
+    height: 130px;
   }
   
   .logo-img {
-    height: 55px;
+    height: 170px;
   }
 }
 
@@ -443,22 +444,21 @@ section {
 }
 
 .logo-img {
-  height: 45px;
+  height: 130px;
   width: auto;
-  mix-blend-mode: multiply;
   transition: transform 0.3s ease;
 }
 
 /* Footer logo adjustment for dark background */
 .footer .logo-img {
   mix-blend-mode: screen; 
-  filter: grayscale(1) invert(1) brightness(2); /* Removes white background and makes text light */
-  height: 60px;
+  filter: grayscale(1) invert(1) brightness(2); /* Makes the logo light/white on dark bg */
+  height: 80px;
 }
 
 @media (max-width: 768px) {
   .logo-img {
-    height: 35px;
+    height: 90px;
   }
 }
 
@@ -980,3 +980,318 @@ section {
     padding-left: 2.5rem; /* align with text, bypassing the X icon */
   }
 }
+
+/* ==========================================================================
+   SUPERSTATE 3D OUTLINE & SHADOW BRAND STYLE (Inspired by pickld.co.in)
+   ========================================================================== */
+
+/* 1. Global 3D Outline-Shadow Pills & Cards */
+.shadow-3d {
+  background-color: var(--accent-brand);
+  color: var(--text-light);
+  border: 2px solid #207e59;
+  box-shadow: 4px 4px 0px #207e59;
+  border-radius: 9999px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.shadow-3d:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #207e59;
+}
+
+.shadow-3d.secondary-3d {
+  background-color: white;
+  color: #207e59;
+}
+
+.card-3d {
+  background-color: white;
+  border: 2px solid #207e59;
+  box-shadow: 6px 6px 0px #207e59;
+  border-radius: 20px;
+  padding: 2rem;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
+  height: 100%;
+}
+
+.card-3d:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 10px 10px 0px #207e59;
+  border-color: #207e59;
+}
+
+/* 2. Starburst Badges & Highlights */
+.starburst-num {
+  background-color: #e6ff80; /* Lime green */
+  color: #207e59;
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 900;
+  border: 2px solid #207e59;
+  box-shadow: 3px 3px 0px #207e59;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  margin-bottom: 1.5rem;
+}
+
+.sticker-badge {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 2px solid #207e59;
+  background-color: #e6ff80; /* Lime green background */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: #207e59;
+  box-shadow: 4px 4px 0px #207e59;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.sticker-badge:hover {
+  transform: scale(1.08) rotate(6deg);
+}
+
+/* 3. Curved Infinite Rolling Marquee */
+.marquee-container-curved {
+  background-color: var(--accent-brand);
+  color: #e6ff80; /* Lime green text on forest background */
+  padding: 1.5rem 0;
+  font-family: var(--font-heading);
+  font-size: clamp(22px, 4vw, 36px);
+  font-weight: 800;
+  text-transform: uppercase;
+  overflow: hidden;
+  white-space: nowrap;
+  border-top: 2px solid #207e59;
+  border-bottom: 2px solid #207e59;
+  transform: rotate(-1.5deg) scale(1.03);
+  margin: 6rem 0;
+  z-index: 10;
+  position: relative;
+  box-shadow: 0 8px 30px rgba(32, 126, 89, 0.2);
+}
+
+.marquee-content-scroll {
+  display: inline-block;
+  animation: scroll-marquee-infinite 30s linear infinite;
+  padding-left: 100%; /* Push start off screen */
+}
+
+@keyframes scroll-marquee-infinite {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-100%, 0, 0); }
+}
+
+/* 4. Arched reviews image mask */
+.img-arch {
+  border-radius: 120px 120px 0 0;
+  border: 2px solid #207e59;
+  box-shadow: 4px 4px 0px #207e59;
+  object-fit: cover;
+  aspect-ratio: 1/1.2;
+  width: 100%;
+  max-width: 240px;
+  background-color: #e6ff80;
+}
+
+/* 5. Custom Wavy Border Divider */
+.wavy-divider {
+  width: 100%;
+  height: 40px;
+  color: #207e59;
+  fill: currentColor;
+  margin-bottom: -1px; /* avoid whitespace gaps */
+}
+
+/* 6. Compact Product Details Accordion System */
+.product-accordion {
+  border: 2px solid #207e59;
+  border-radius: 16px;
+  margin-bottom: 1.25rem;
+  background-color: white;
+  box-shadow: 4px 4px 0px #207e59;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.product-accordion.open {
+  box-shadow: 6px 6px 0px #207e59;
+}
+
+.accordion-header {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 18px;
+  color: #207e59;
+  background-color: rgba(32, 126, 89, 0.02);
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+
+.accordion-header:hover {
+  background-color: rgba(32, 126, 89, 0.06);
+}
+
+.accordion-icon {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.product-accordion.open .accordion-icon {
+  transform: rotate(45deg); /* plus to cross */
+}
+
+.accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0, 1, 0, 1);
+  padding: 0 1.5rem;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #444;
+  border-top: 0px solid transparent;
+}
+
+.product-accordion.open .accordion-body {
+  max-height: 1200px;
+  padding: 1.5rem;
+  border-top: 2px solid #207e59;
+}
+
+/* Accordion Inside Supplement Facts Grid */
+.supp-table-3d {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.5rem 0;
+}
+
+.supp-table-3d th, .supp-table-3d td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(32, 126, 89, 0.12);
+  font-size: 14px;
+}
+
+.supp-table-3d th {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: #207e59;
+  text-transform: uppercase;
+}
+
+.supp-table-3d tr:last-child td {
+  border-bottom: none;
+}
+
+/* 7. Side-by-Side Comparison Grid */
+.comp-table-3d {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border: 2px solid #207e59;
+  box-shadow: 8px 8px 0px #207e59;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.comp-table-3d th, .comp-table-3d td {
+  padding: 1.25rem 1rem;
+  border: 1px solid rgba(32, 126, 89, 0.12);
+  text-align: center;
+  font-size: 15px;
+}
+
+.comp-table-3d th:first-child, .comp-table-3d td:first-child {
+  text-align: left;
+  font-weight: 700;
+  color: #207e59;
+  padding-left: 1.5rem;
+}
+
+.comp-table-3d thead th {
+  background-color: #207e59;
+  color: white;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: none;
+}
+
+.comp-table-3d tr:nth-child(even) {
+  background-color: rgba(32, 126, 89, 0.02);
+}
+
+.comp-check {
+  color: #207e59;
+  font-weight: 900;
+  font-size: 22px;
+}
+
+.comp-cross {
+  color: #d9534f;
+  font-weight: 900;
+  font-size: 22px;
+}
+
+/* 8. Modern Lifestyle review slider styling */
+.testimonial-card-3d {
+  background-color: white;
+  border: 2px solid #207e59;
+  box-shadow: 6px 6px 0px #207e59;
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.testimonial-card-3d:hover {
+  transform: translateY(-4px);
+  box-shadow: 8px 8px 0px #207e59;
+}
+
+.stars-container {
+  color: #e6ff80;
+  text-shadow: 1px 1px 0px #207e59, -1px -1px 0px #207e59, 1px -1px 0px #207e59, -1px 1px 0px #207e59; /* Outlines stars */
+  font-size: 18px;
+}
+
+/* Custom 2-Column FAQ Layout */
+.faq-grid-3d {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 992px) {
+  .faq-grid-3d {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
