@@ -572,9 +572,11 @@
         <div class="popup-copy-col">
           <span class="popup-eyebrow">Exclusively for Early Members</span>
           <h3 class="popup-title">Make health simple.</h3>
-          <p class="popup-text" style="margin-bottom: 1rem;">
-            Join the waitlist for our upcoming premium product launch and get our weekly, high-value, fluff-free newsletter. No noise, just science.
-          </p>
+          <ul class="popup-bullets">
+            <li>Join the waitlist for our upcoming premium product launch</li>
+            <li>Get our weekly, high-value, fluff-free newsletter</li>
+            <li>No noise, just science</li>
+          </ul>
           <div class="popup-features">
             <span>✓ 100% Transparent</span>
             <span>✓ Early Access Pricing</span>
@@ -756,6 +758,36 @@
       color: #cbd5e1; /* Light Slate grey readable */
       margin: 0 0 1rem;
       font-weight: 500;
+    }
+    
+    .popup-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.5rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      text-align: left;
+    }
+    
+    .popup-bullets li {
+      position: relative;
+      padding-left: 1.25rem;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #cbd5e1;
+      font-weight: 500;
+    }
+    
+    .popup-bullets li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: -1px;
+      color: #E4FF5A; /* Neon Yellow-Green */
+      font-size: 18px;
+      line-height: 1.2;
     }
     
     .popup-form {
