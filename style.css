@@ -1294,4 +1294,14 @@ section {
   .faq-grid-3d {
     grid-template-columns: repeat(2, 1fr);
   }
+}
+
+/* Mobile Responsiveness Gutters and Logo */
+@media (max-width: 768px) {
+  :root {
+    --gutter: 1.25rem; /* Expanded breathing space for content on mobile screens */
+  }
+  .logo-img {
+    height: 60px !important; /* Compact navbar logo size to prevent vertical overflow */
+  }
 }

@@ -168,6 +168,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-top: 0; /* Reset desktop negative margin-top to prevent nav overlap on mobile */
       }
 
       .hero-text-col .subheadline {
@@ -1056,14 +1057,17 @@
         const gender = genderInput.value;
         
         if (name && email && phone) {
-          // Perform submit simulation
           const submitBtn = form.querySelector('.popup-submit-btn');
           const submitSpan = submitBtn.querySelector('span');
           
           submitBtn.disabled = true;
           submitSpan.textContent = 'Joining...';
           
-          setTimeout(() => {
+          // Google Apps Script Web App URL for your Google Sheet!
+          // Replace 'YOUR_DEPLOYED_WEBAPP_URL_HERE' with your deployed Apps Script URL!
+          const webAppUrl = 'YOUR_DEPLOYED_WEBAPP_URL_HERE';
+          
+          const submitToSheet = () => {
             // Save member credentials to localStorage
             localStorage.setItem('superstate_waitlist_signed', 'true');
             localStorage.setItem('superstate_waitlist_name', name);
@@ -1086,7 +1090,32 @@
                 wfBtn.style.color = 'white';
               }
             });
-          }, 1000);
+          };
+
+          if (webAppUrl && webAppUrl !== 'YOUR_DEPLOYED_WEBAPP_URL_HERE') {
+            // Create form data payload
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('email', email);
+            formData.append('phone', phone);
+            formData.append('gender', gender);
+            
+            fetch(webAppUrl, {
+              method: 'POST',
+              mode: 'no-cors', // Standard for Apps Script redirects to prevent CORS preflight blocking
+              body: formData
+            })
+            .then(() => {
+              submitToSheet();
+            })
+            .catch((err) => {
+              console.error('Google Sheet submission failed, falling back to local simulation:', err);
+              submitToSheet();
+            });
+          } else {
+            // Fallback to local simulation instantly
+            setTimeout(submitToSheet, 1000);
+          }
         }
       });
     });

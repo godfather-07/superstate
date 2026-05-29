@@ -1824,6 +1824,16 @@
     .footer-bottom {
       border-top-color: rgba(255, 255, 255, 0.15) !important;
     }
+
+    /* Mobile Overrides for responsive alignment and scaling */
+    @media (max-width: 768px) {
+      .navbar .logo-img {
+        height: 60px !important; /* Compact mobile navbar logo to prevent vertical overflow */
+      }
+      .rhythm-section .container {
+        padding: 0 1.25rem !important; /* Expand content margins on mobile viewports for somatic cards */
+      }
+    }
   </style>
 </head>
 
