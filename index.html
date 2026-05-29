@@ -667,8 +667,8 @@
     
     .popup-modal {
       background: linear-gradient(135deg, #001a4d 0%, #000c24 100%); /* Premium space navy to black gradient */
-      border: 2px solid rgba(255, 255, 0, 0.25); /* Glowing yellow subtle border */
-      box-shadow: 0 25px 60px rgba(0, 51, 153, 0.45), 0 0 30px rgba(255, 255, 0, 0.15);
+      border: 2px solid rgba(228, 255, 90, 0.25); /* Glowing yellow-green subtle border */
+      box-shadow: 0 25px 60px rgba(0, 51, 153, 0.45), 0 0 30px rgba(228, 255, 90, 0.15);
       border-radius: 28px;
       width: 100%;
       max-width: 820px; /* Wider for premium horizontal grid */
@@ -682,7 +682,7 @@
     }
     
     .popup-modal ::selection {
-      background-color: rgba(255, 255, 0, 0.25);
+      background-color: rgba(228, 255, 90, 0.25);
       color: #000000;
     }
     
@@ -724,16 +724,16 @@
     }
     
     .popup-close-btn:hover {
-      background: rgba(255, 255, 0, 0.15);
-      border-color: #ffff00; /* Custom Yellow */
-      color: #ffff00;
+      background: rgba(228, 255, 90, 0.15);
+      border-color: #E4FF5A; /* Custom Yellow-Green */
+      color: #E4FF5A;
       transform: rotate(90deg) scale(1.05);
     }
     
     .popup-eyebrow {
       font-size: 11px;
       font-weight: 800;
-      color: #ffff00; /* Custom Yellow */
+      color: #E4FF5A; /* Custom Yellow-Green */
       text-transform: uppercase;
       letter-spacing: 0.15em;
       display: block;
@@ -784,8 +784,8 @@
     
     .popup-input-wrap input:focus {
       background: rgba(255, 255, 255, 0.08);
-      border-color: #ffff00; /* Custom Yellow focus */
-      box-shadow: 0 0 0 3px rgba(255, 255, 0, 0.15);
+      border-color: #E4FF5A; /* Custom Yellow-Green focus */
+      box-shadow: 0 0 0 3px rgba(228, 255, 90, 0.15);
     }
     
     .gender-btn {
@@ -833,13 +833,13 @@
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      box-shadow: 3px 3px 0 #ffff00; /* Pop brand accent yellow drop-shadow */
+      box-shadow: 3px 3px 0 #E4FF5A; /* Pop brand accent yellow-green drop-shadow */
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
     
     .popup-submit-btn:hover {
-      background-color: #ffff00; /* Vibrant Custom Yellow */
-      border-color: #ffff00;
+      background: linear-gradient(135deg, #E4FF5A 0%, #F0FF66 100%); /* Vibrant Yellow-Green Gradient */
+      border-color: #E4FF5A;
       color: #000000; /* High Contrast Black text */
       box-shadow: 3px 3px 0 #003399;
       transform: translateY(-2px);
@@ -865,14 +865,14 @@
     .success-icon-circle {
       width: 72px;
       height: 72px;
-      background: rgba(255, 255, 0, 0.1);
-      border: 2.5px solid #ffff00; /* Custom Yellow checkmark border */
+      background: rgba(228, 255, 90, 0.1);
+      border: 2.5px solid #E4FF5A; /* Custom Yellow-Green checkmark border */
       border-radius: 50%;
       display: grid;
       place-items: center;
-      color: #ffff00; /* Custom Yellow checkmark color */
+      color: #E4FF5A; /* Custom Yellow-Green checkmark color */
       margin: 0 auto;
-      box-shadow: 0 0 20px rgba(255, 255, 0, 0.3);
+      box-shadow: 0 0 20px rgba(228, 255, 90, 0.3);
     }
     
     .success-icon-circle svg {
@@ -926,7 +926,7 @@
     
     .success-sparkles span {
       position: absolute;
-      color: #ffff00; /* Custom Yellow sparkles */
+      color: #E4FF5A; /* Custom Yellow-Green sparkles */
       font-size: 20px;
       opacity: 0;
       animation: sparkleAnim 1.8s ease-in-out infinite;
@@ -943,7 +943,7 @@
       to { opacity: 1; transform: scale(1); }
     }
   </style>
-
+  
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const popupOverlay = document.getElementById('waitlist-popup-overlay');
@@ -972,12 +972,12 @@
           if (gender === 'female') {
             control.classList.add('female-active');
             genderSlideBg.style.transform = 'translateX(100%)';
-            genderSlideBg.style.backgroundColor = '#ffff00'; // Slid to female (Yellow)
-            genderSlideBg.style.boxShadow = '0 0 10px rgba(255, 255, 0, 0.5)';
+            genderSlideBg.style.background = 'linear-gradient(135deg, #E4FF5A 0%, #F0FF66 100%)'; // Slid to female (Yellow-Green Gradient)
+            genderSlideBg.style.boxShadow = '0 0 10px rgba(228, 255, 90, 0.5)';
           } else {
             control.classList.remove('female-active');
             genderSlideBg.style.transform = 'translateX(0)';
-            genderSlideBg.style.backgroundColor = '#003399'; // Slid to male (Blue)
+            genderSlideBg.style.background = '#003399'; // Slid to male (Blue)
             genderSlideBg.style.boxShadow = '0 0 10px rgba(0, 51, 153, 0.5)';
           }
         });
