@@ -79,9 +79,9 @@
 
         <div class="form-container" id="form-container">
           <form class="waitlist-form" id="waitlist-page-form">
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email Address" required>
-            <input type="tel" placeholder="Phone Number" required>
+            <input type="text" id="waitlist-name" placeholder="Your Name" required autocomplete="name">
+            <input type="email" id="waitlist-email" placeholder="Your Email Address" required autocomplete="email">
+            <input type="tel" id="waitlist-phone" placeholder="Phone Number" required autocomplete="tel">
             <button type="submit" class="btn btn-primary" style="padding: 1.2rem;">Join the Waitlist</button>
           </form>
           <p style="font-size: 13px; color: #666; margin-top: 1.5rem;">
@@ -190,13 +190,61 @@
 
     waitlistForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      formContainer.classList.remove('visible');
-      setTimeout(() => {
-        formContainer.style.display = 'none';
-        heroText.style.display = 'none';
-        heroTitle.style.display = 'none';
-        successMessage.style.display = 'block';
-      }, 400);
+      
+      const name = document.getElementById('waitlist-name').value.trim();
+      const email = document.getElementById('waitlist-email').value.trim();
+      const phone = document.getElementById('waitlist-phone').value.trim();
+      
+      if (name && email && phone) {
+        const submitBtn = waitlistForm.querySelector('button');
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Joining...';
+        
+        // Google Apps Script Web App URL for your Google Sheet!
+        // Replace 'YOUR_DEPLOYED_WEBAPP_URL_HERE' with your deployed Apps Script URL!
+        const webAppUrl = 'YOUR_DEPLOYED_WEBAPP_URL_HERE';
+        
+        const completeSignup = () => {
+          localStorage.setItem('superstate_waitlist_signed', 'true');
+          localStorage.setItem('superstate_waitlist_name', name);
+          localStorage.setItem('superstate_waitlist_email', email);
+          localStorage.setItem('superstate_waitlist_phone', phone);
+          localStorage.setItem('superstate_waitlist_gender', 'N/A');
+          
+          formContainer.classList.remove('visible');
+          setTimeout(() => {
+            formContainer.style.display = 'none';
+            heroText.style.display = 'none';
+            heroTitle.style.display = 'none';
+            successMessage.style.display = 'block';
+          }, 400);
+        };
+        
+        if (webAppUrl && webAppUrl !== 'YOUR_DEPLOYED_WEBAPP_URL_HERE') {
+          const formData = new FormData();
+          formData.append('name', name);
+          formData.append('email', email);
+          formData.append('phone', phone);
+          formData.append('gender', 'N/A');
+          
+          fetch(webAppUrl, {
+            method: 'POST',
+            mode: 'no-cors', // Standard for Apps Script redirects to prevent CORS preflight blocking
+            body: formData
+          })
+          .then(() => {
+            completeSignup();
+          })
+          .catch((err) => {
+            console.error('Google Sheet submission failed, falling back to local simulation:', err);
+            completeSignup();
+          });
+        } else {
+          // Fallback to local simulation instantly
+          setTimeout(completeSignup, 1000);
+        }
+      }
     });
   </script>
   <script src="../../main.js" type="module"></script>
