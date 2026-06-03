@@ -136,6 +136,15 @@
       margin-bottom: 0.5rem;
       font-weight: 500;
     }
+    @media (max-width: 480px) {
+      .assessment-container {
+        padding: 1.25rem;
+        margin: 2rem auto;
+      }
+      .question-title {
+        font-size: 22px;
+      }
+    }
   </style>
 </head>
 
@@ -183,7 +192,7 @@
     <div class="container">
       <div class="text-center" style="margin-bottom: 2rem;">
         <span class="eyebrow">Personalized Wellness</span>
-        <h1 style="font-size: 42px;">Get your simple health plan</h1>
+        <h1 style="font-size: clamp(28px, 4.5vw, 42px);">Get your simple health plan</h1>
         <p class="subheadline" style="max-width: 600px; margin: 0 auto;">Answer a few questions. Get a clear, no-noise plan tailored to you.</p>
       </div>
 
