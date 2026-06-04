@@ -169,13 +169,17 @@
       .hero-text-col {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        text-align: center;
+        align-items: flex-start;
+        text-align: left;
         margin-top: 0; /* Reset desktop negative margin-top to prevent nav overlap on mobile */
       }
 
+      .hero-text-col .btn-outline {
+        align-self: center;
+      }
+
       .hero-text-col .subheadline {
-        text-align: center;
+        text-align: left;
       }
 
       .hero-image-col {
