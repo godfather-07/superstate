@@ -1,4 +1,4 @@
-import { submitWaitlist, getSavedSubmission, clearSavedSubmission } from './services/waitlistService.js';
+import { submitWaitlist, getSavedSubmission, clearSavedSubmission, resolveCoupon } from './services/waitlistService.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   /* ─── Elements ─────────────────────────────────────────────────────────── */
@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const successEmail   = document.getElementById('wl-success-email');
   const successDiscount = document.getElementById('wl-success-discount');
   const redoBtn         = document.getElementById('wl-redo-btn');
+  const codeApplied     = document.getElementById('code-applied');
 
   /* ─── Restore existing submission ────────────────────────────────────── */
   const saved = getSavedSubmission();
@@ -37,8 +38,14 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ─── Real-time inline error clearing ───────────────────────────────── */
-  [nameInput, emailInput, phoneInput].forEach(inp => {
+  [nameInput, emailInput, phoneInput, codeInput].forEach(inp => {
     inp?.addEventListener('input', () => clearError(inp));
+  });
+
+  /* ─── Live influencer code check ─────────────────────────────────────── */
+  codeInput?.addEventListener('input', () => {
+    const coupon = resolveCoupon(codeInput.value);
+    if (codeApplied) codeApplied.style.display = coupon.isInfluencer ? 'block' : 'none';
   });
 
   /* ─── Form submit ────────────────────────────────────────────────────── */
@@ -73,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
     clearSavedSubmission();
     form?.reset();
     clearAllErrors();
+    if (codeApplied) codeApplied.style.display = 'none';
     genderBtns.forEach(b => b.classList.remove('active'));
     genderBtns[0]?.classList.add('active');
     if (genderInput) genderInput.value = genderBtns[0]?.dataset.gender || 'male';
@@ -96,11 +104,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function clearAllErrors() {
-    [nameInput, emailInput, phoneInput].forEach(i => i && clearError(i));
+    [nameInput, emailInput, phoneInput, codeInput].forEach(i => i && clearError(i));
   }
 
   function showErrors(errors) {
-    const map = { name: nameInput, email: emailInput, phone: phoneInput };
+    const map = { name: nameInput, email: emailInput, phone: phoneInput, code: codeInput };
     let first = true;
     Object.entries(errors).forEach(([key, msg]) => {
       const inp = map[key];

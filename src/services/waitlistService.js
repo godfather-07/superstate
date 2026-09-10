@@ -3,16 +3,17 @@
  *
  * COUPON LOGIC:
  * - No code entered → SUPERSTATE10 (10% early access)
- * - Any code entered → Treated as influencer code → 30% off
+ * - A code matching one in VALID_INFLUENCER_CODES → 30% off
+ * - Any other code → rejected as invalid
  *
- * TO ADD A NEW INFLUENCER: Simply share your page link with them.
- * Their followers type whatever code the influencer tells them.
+ * TO ADD A NEW INFLUENCER: add their code to VALID_INFLUENCER_CODES.
  */
 
 export const WAITLIST_CONFIG = {
   EARLY_ACCESS_CODE: 'SUPERSTATE10',
   EARLY_ACCESS_DISCOUNT: 10,
   INFLUENCER_DISCOUNT: 30,
+  VALID_INFLUENCER_CODES: ['ABHIJITH30'],
   STORAGE_KEY_USER: 'superstate_waitlist_user',
   STORAGE_KEY_ALL: 'superstate_waitlist_submissions',
   SIMULATE_LATENCY_MS: 900,
@@ -29,17 +30,22 @@ export function resolveCoupon(enteredCode) {
     return {
       code: WAITLIST_CONFIG.EARLY_ACCESS_CODE,
       discount: WAITLIST_CONFIG.EARLY_ACCESS_DISCOUNT,
-      isInfluencer: false
+      isInfluencer: false,
+      isValid: true
     };
   }
-  return {
-    code,
-    discount: WAITLIST_CONFIG.INFLUENCER_DISCOUNT,
-    isInfluencer: true
-  };
+  if (WAITLIST_CONFIG.VALID_INFLUENCER_CODES.includes(code)) {
+    return {
+      code,
+      discount: WAITLIST_CONFIG.INFLUENCER_DISCOUNT,
+      isInfluencer: true,
+      isValid: true
+    };
+  }
+  return { code, discount: 0, isInfluencer: false, isValid: false };
 }
 
-export function validateForm({ name, email, phone }) {
+export function validateForm({ name, email, phone }, coupon) {
   const errors = {};
   if (!name || name.trim().length < 2) errors.name = 'Please enter your full name.';
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) errors.email = 'Enter a valid email address.';
@@ -48,6 +54,9 @@ export function validateForm({ name, email, phone }) {
   } else {
     const clean = phone.replace(/[\s\-\+\(\)]/g, '');
     if (!/^\d{7,15}$/.test(clean)) errors.phone = 'Enter a valid phone number.';
+  }
+  if (coupon && !coupon.isValid) {
+    errors.code = 'Invalid code. Leave blank for the standard discount.';
   }
   return { isValid: Object.keys(errors).length === 0, errors };
 }
@@ -71,13 +80,13 @@ export async function submitWaitlist(data) {
     email: data.email.trim().toLowerCase(),
     phone: (data.phone || '').trim(),
     gender: data.gender || 'prefer_not_to_say',
-    promoCode: coupon.code,
+    promoCode: coupon.isValid ? coupon.code : '',
     discount: coupon.discount,
     isInfluencer: coupon.isInfluencer,
     submittedAt: new Date().toISOString()
   };
 
-  const validation = validateForm(record);
+  const validation = validateForm(record, coupon);
   if (!validation.isValid) return { success: false, errors: validation.errors };
 
   await new Promise(r => setTimeout(r, WAITLIST_CONFIG.SIMULATE_LATENCY_MS));
