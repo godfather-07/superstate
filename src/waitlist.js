@@ -1,4 +1,4 @@
-import { submitWaitlist, getSavedSubmission, copyToClipboard, WAITLIST_CONFIG } from './services/waitlistService.js';
+import { submitWaitlist, getSavedSubmission } from './services/waitlistService.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   /* ─── Elements ─────────────────────────────────────────────────────────── */
@@ -15,10 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const genderInput  = document.getElementById('wl-gender');
   const codeInput    = document.getElementById('wl-code');
 
-  const copyBtn      = document.getElementById('wl-copy-btn');
-  const couponEl     = document.getElementById('wl-coupon-display');
-  const discountEl   = document.getElementById('wl-discount-display');
-  const copyStatus   = document.getElementById('wl-copy-status');
   const successName  = document.getElementById('wl-success-name');
   const successEmail = document.getElementById('wl-success-email');
   const influencerMsg= document.getElementById('wl-influencer-msg');
@@ -71,22 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  /* ─── Copy coupon ────────────────────────────────────────────────────── */
-  copyBtn?.addEventListener('click', async () => {
-    const code = couponEl?.textContent?.trim() || WAITLIST_CONFIG.EARLY_ACCESS_CODE;
-    const ok = await copyToClipboard(code);
-    if (ok) {
-      copyBtn.classList.add('copied');
-      copyBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
-      if (copyStatus) { copyStatus.textContent = 'Copied to clipboard!'; copyStatus.style.opacity = '1'; }
-      setTimeout(() => {
-        copyBtn.classList.remove('copied');
-        copyBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Code`;
-        if (copyStatus) copyStatus.style.opacity = '0';
-      }, 3000);
-    }
-  });
-
   /* ─── Helpers ────────────────────────────────────────────────────────── */
   function setLoading(on) {
     if (!submitBtn) return;
@@ -124,8 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (successName)  successName.textContent  = record.name?.split(' ')[0] || 'there';
     if (successEmail) successEmail.textContent = record.email || '';
-    if (couponEl)     couponEl.textContent     = record.promoCode || WAITLIST_CONFIG.EARLY_ACCESS_CODE;
-    if (discountEl)   discountEl.textContent   = `${record.discount || 10}% OFF`;
 
     if (influencerMsg) {
       influencerMsg.style.display = record.isInfluencer ? 'block' : 'none';

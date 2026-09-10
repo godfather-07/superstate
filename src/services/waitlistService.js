@@ -101,17 +101,3 @@ async function sendToSheet(record) {
     await fetch(WAITLIST_CONFIG.SHEET_WEBHOOK_URL, { method: 'POST', mode: 'no-cors', body: fd });
   } catch (e) { /* non-fatal: local submission already saved */ }
 }
-
-export async function copyToClipboard(text) {
-  if (navigator.clipboard && window.isSecureContext) {
-    try { await navigator.clipboard.writeText(text); return true; } catch (_) {}
-  }
-  const ta = document.createElement('textarea');
-  ta.value = text;
-  Object.assign(ta.style, { position:'fixed', left:'-9999px', top:'-9999px' });
-  document.body.appendChild(ta);
-  ta.select();
-  const ok = document.execCommand('copy');
-  document.body.removeChild(ta);
-  return ok;
-}
