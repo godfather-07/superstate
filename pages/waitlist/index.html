@@ -227,6 +227,13 @@
       padding-left: 2px;
     }
 
+    .wl-code-applied {
+      font-size: 12.5px;
+      color: var(--green);
+      font-weight: 700;
+      padding-left: 2px;
+    }
+
     /* Two inputs side by side */
     .wl-row {
       display: grid;
@@ -542,7 +549,9 @@
             Promo / Influencer Code
             <span class="wl-opt"> — optional</span>
           </label>
-          <input class="wl-input wl-code-input" id="wl-code" type="text" placeholder="e.g. ABHI30" autocomplete="off" />
+          <input class="wl-input wl-code-input" id="wl-code" type="text" placeholder="e.g. ABHIJITH30" autocomplete="off" />
+          <span class="wl-code-applied" id="code-applied" style="display:none;">✓ Influencer code applied — 30% OFF unlocked!</span>
+          <span class="wl-err" id="code-err"></span>
         </div>
 
         <div class="wl-code-hint">
