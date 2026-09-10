@@ -39,3 +39,35 @@ function doPost(e) {
     .createTextOutput(JSON.stringify({ result: 'success' }))
     .setMimeType(ContentService.MimeType.JSON);
 }
+
+/**
+ * Diagnostic only - run this manually (Run button, function dropdown set to
+ * "checkBinding") to confirm this script is actually bound to the right
+ * sheet. Open View -> Logs (or Executions) afterward to read the output.
+ */
+function checkBinding() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  if (!ss) {
+    Logger.log('NOT BOUND: this script is not attached to any spreadsheet. ' +
+      'It must be opened via Extensions > Apps Script from inside the sheet itself.');
+    return;
+  }
+  Logger.log('Bound spreadsheet name: ' + ss.getName());
+  Logger.log('Bound spreadsheet URL: ' + ss.getUrl());
+  Logger.log('Sheet tabs found: ' + ss.getSheets().map(s => s.getName()).join(', '));
+}
+
+/**
+ * Diagnostic only - run this manually to append a test row and confirm
+ * writes actually reach the sheet. Check the Executions log for errors,
+ * then check the sheet for a new row.
+ */
+function testAppend() {
+  const result = doPost({
+    parameter: {
+      name: 'Test', email: 'test@example.com', phone: '1234567890',
+      gender: 'male', promoCode: 'SUPERSTATE10', discount: '10', isInfluencer: 'false'
+    }
+  });
+  Logger.log('doPost returned: ' + result.getContent());
+}

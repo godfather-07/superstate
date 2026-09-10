@@ -20,7 +20,7 @@ export const WAITLIST_CONFIG = {
   // Not a secret (it's inlined into the client bundle either way) — override
   // it with VITE_WAITLIST_SHEET_URL if the script is ever redeployed.
   SHEET_WEBHOOK_URL: import.meta.env.VITE_WAITLIST_SHEET_URL
-    || 'https://script.google.com/macros/s/AKfycbzGgGkpAi5rKB2MG5hajZB1dxJIcgDSmnS7zXYKoatdckzWxNiSFjQd682CThmV3Lvt/exec'
+    || 'https://script.google.com/macros/s/AKfycbxhS7lMkCtr6ClWnCTr4vg0STeSdXis1Tr3prD5KljXsBfZ_II9t9UGO6aJxMrXTMxJ/exec'
 };
 
 export function resolveCoupon(enteredCode) {
