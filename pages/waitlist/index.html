@@ -372,100 +372,6 @@
     }
     .wl-success-p { font-size: 16px; color: var(--muted); margin-bottom: 1.75rem; line-height: 1.55; }
 
-    .wl-influencer-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: .4rem;
-      background: rgba(228,255,90,.3);
-      border: 1.5px solid rgba(228,255,90,.65);
-      color: #2a4a00;
-      font-size: 13.5px;
-      font-weight: 800;
-      padding: .45rem 1.1rem;
-      border-radius: 99px;
-      margin-bottom: 1.5rem;
-    }
-
-    /* Coupon reveal box */
-    .wl-coupon-box {
-      background: linear-gradient(135deg, #002673 0%, #001240 100%);
-      border: 2.5px dashed var(--lime);
-      border-radius: 22px;
-      padding: 2rem 2rem 1.75rem;
-      margin: 0 0 2rem;
-      color: #fff;
-      position: relative;
-      overflow: hidden;
-      text-align: left;
-    }
-    .wl-coupon-box::before {
-      content: '';
-      position: absolute;
-      top: -60%; right: -10%;
-      width: 280px; height: 280px;
-      background: rgba(228,255,90,.05);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .wl-coupon-eyebrow {
-      display: block;
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--lime);
-      text-transform: uppercase;
-      letter-spacing: .16em;
-      margin-bottom: .6rem;
-    }
-    .wl-coupon-code {
-      font-family: 'Lora', serif;
-      font-size: clamp(36px, 6vw, 54px);
-      font-weight: 700;
-      letter-spacing: 4px;
-      color: #fff;
-      margin-bottom: .3rem;
-      user-select: all;
-      line-height: 1.1;
-    }
-    .wl-coupon-discount {
-      font-size: 17px;
-      font-weight: 800;
-      color: var(--lime);
-      margin-bottom: .35rem;
-    }
-    .wl-coupon-sub {
-      font-size: 13.5px;
-      color: rgba(255,255,255,.6);
-      margin-bottom: 1.5rem;
-    }
-    .wl-copy-btn {
-      background: var(--lime);
-      color: var(--navy);
-      border: none;
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 14px;
-      font-weight: 800;
-      padding: .7rem 1.6rem;
-      border-radius: 99px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: .45rem;
-      transition: all .22s;
-    }
-    .wl-copy-btn:hover { transform: scale(1.06); background: #fff; }
-    .wl-copy-btn.copied { background: var(--green); color: #fff; }
-
-    .wl-copy-status {
-      display: block;
-      font-size: 12.5px;
-      color: var(--lime);
-      font-weight: 700;
-      margin-top: .65rem;
-      opacity: 0;
-      transition: opacity .3s;
-    }
-
     .wl-back-link {
       display: inline-flex;
       align-items: center;
@@ -741,30 +647,10 @@
         </svg>
       </div>
 
-      <h2 class="wl-success-h">You're in, <span id="wl-success-name">friend</span>! 🎉</h2>
+      <h2 class="wl-success-h">Thank you, <span id="wl-success-name">friend</span>! 🎉</h2>
       <p class="wl-success-p">
-        Your early-access spot is locked in.<br>
-        We'll send your launch invite to <strong id="wl-success-email"></strong>.
+        We'll notify <strong id="wl-success-email"></strong> the moment Superstate Sleep Well is available — with 10% off, on us.
       </p>
-
-      <div class="wl-influencer-badge" id="wl-influencer-msg" style="display:none;">
-        ✦ Influencer code applied — 30% OFF unlocked!
-      </div>
-
-      <div class="wl-coupon-box">
-        <span class="wl-coupon-eyebrow">Your exclusive launch coupon</span>
-        <div class="wl-coupon-code" id="wl-coupon-display">SUPERSTATE10</div>
-        <div class="wl-coupon-discount" id="wl-discount-display">10% OFF</div>
-        <div class="wl-coupon-sub">Use at checkout when we go live. It's yours — save it.</div>
-        <button class="wl-copy-btn" id="wl-copy-btn" type="button">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="9" y="9" width="13" height="13" rx="2"/>
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-          </svg>
-          Copy Code
-        </button>
-        <span class="wl-copy-status" id="wl-copy-status">Copied to clipboard!</span>
-      </div>
 
       <a href="https://www.superstate.in" class="wl-back-link">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
