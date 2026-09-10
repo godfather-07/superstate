@@ -17,8 +17,10 @@ export const WAITLIST_CONFIG = {
   STORAGE_KEY_ALL: 'superstate_waitlist_submissions',
   SIMULATE_LATENCY_MS: 900,
   // Apps Script Web App URL for the "Influencer Waitlist Responses" sheet.
-  // Deploy google-apps-script/waitlist-webhook.gs and set VITE_WAITLIST_SHEET_URL.
-  SHEET_WEBHOOK_URL: import.meta.env.VITE_WAITLIST_SHEET_URL || ''
+  // Not a secret (it's inlined into the client bundle either way) — override
+  // it with VITE_WAITLIST_SHEET_URL if the script is ever redeployed.
+  SHEET_WEBHOOK_URL: import.meta.env.VITE_WAITLIST_SHEET_URL
+    || 'https://script.google.com/macros/s/AKfycbzGgGkpAi5rKB2MG5hajZB1dxJIcgDSmnS7zXYKoatdckzWxNiSFjQd682CThmV3Lvt/exec'
 };
 
 export function resolveCoupon(enteredCode) {
