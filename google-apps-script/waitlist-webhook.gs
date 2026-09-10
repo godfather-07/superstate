@@ -1,11 +1,13 @@
 /**
- * Superstate Waitlist → Google Sheets webhook.
+ * Superstate Waitlist -> Google Sheets webhook.
  *
  * Setup (one-time):
  * 1. Open the "Influencer Waitlist Responses" sheet.
- * 2. Extensions → Apps Script.
- * 3. Delete any starter code, paste this whole file in, and save.
- * 4. Deploy → New deployment → type "Web app".
+ * 2. Extensions menu -> Apps Script.
+ * 3. In Code.gs, select ALL existing text (Ctrl/Cmd+A) and delete it first,
+ *    then paste this whole file in. (Google seeds new script files with a
+ *    stub `function myFunction() {}` - leaving that in causes a syntax error.)
+ * 4. Save, then Deploy -> New deployment -> type "Web app".
  *      - Execute as: Me
  *      - Who has access: Anyone
  * 5. Copy the deployment's Web app URL and set it as VITE_WAITLIST_SHEET_URL
