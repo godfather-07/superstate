@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const successName  = document.getElementById('wl-success-name');
   const successEmail = document.getElementById('wl-success-email');
-  const influencerMsg= document.getElementById('wl-influencer-msg');
 
   /* ─── Restore existing submission ────────────────────────────────────── */
   const saved = getSavedSubmission();
@@ -104,10 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (successName)  successName.textContent  = record.name?.split(' ')[0] || 'there';
     if (successEmail) successEmail.textContent = record.email || '';
-
-    if (influencerMsg) {
-      influencerMsg.style.display = record.isInfluencer ? 'block' : 'none';
-    }
 
     formCard.style.transition = 'opacity 0.3s, transform 0.3s';
     formCard.style.opacity = '0';
