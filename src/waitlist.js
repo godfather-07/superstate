@@ -15,8 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const genderInput  = document.getElementById('wl-gender');
   const codeInput    = document.getElementById('wl-code');
 
-  const successName  = document.getElementById('wl-success-name');
-  const successEmail = document.getElementById('wl-success-email');
+  const successName    = document.getElementById('wl-success-name');
+  const successEmail   = document.getElementById('wl-success-email');
+  const successDiscount = document.getElementById('wl-success-discount');
 
   /* ─── Restore existing submission ────────────────────────────────────── */
   const saved = getSavedSubmission();
@@ -101,8 +102,9 @@ document.addEventListener('DOMContentLoaded', () => {
   function showSuccess(record, alreadyJoined) {
     if (!formCard || !successCard) return;
 
-    if (successName)  successName.textContent  = record.name?.split(' ')[0] || 'there';
-    if (successEmail) successEmail.textContent = record.email || '';
+    if (successName)     successName.textContent     = record.name?.split(' ')[0] || 'there';
+    if (successEmail)    successEmail.textContent    = record.email || '';
+    if (successDiscount) successDiscount.textContent = record.discount || 10;
 
     formCard.style.transition = 'opacity 0.3s, transform 0.3s';
     formCard.style.opacity = '0';
