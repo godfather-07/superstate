@@ -384,6 +384,21 @@
     }
     .wl-back-link:hover { gap: .75rem; }
 
+    .wl-redo-btn {
+      display: block;
+      margin: 1rem auto 0;
+      background: none;
+      border: none;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
+    }
+    .wl-redo-btn:hover { color: var(--navy); }
+
     /* ── Reviews marquee ───────────────────────────────────────────────── */
     .wl-reviews-section {
       padding: 0 0 5rem;
@@ -568,6 +583,8 @@
         </svg>
         Back to Superstate
       </a>
+
+      <button type="button" class="wl-redo-btn" id="wl-redo-btn">Join the waitlist again</button>
     </div>
   </section>
 

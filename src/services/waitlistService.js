@@ -59,6 +59,10 @@ export function getSavedSubmission() {
   } catch (e) { return null; }
 }
 
+export function clearSavedSubmission() {
+  try { localStorage.removeItem(WAITLIST_CONFIG.STORAGE_KEY_USER); } catch (e) { /* silent */ }
+}
+
 export async function submitWaitlist(data) {
   const coupon = resolveCoupon(data.promoCode);
 
