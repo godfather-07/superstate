@@ -1,4 +1,4 @@
-import { submitWaitlist, getSavedSubmission } from './services/waitlistService.js';
+import { submitWaitlist, getSavedSubmission, clearSavedSubmission } from './services/waitlistService.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   /* ─── Elements ─────────────────────────────────────────────────────────── */
@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const successName    = document.getElementById('wl-success-name');
   const successEmail   = document.getElementById('wl-success-email');
   const successDiscount = document.getElementById('wl-success-discount');
+  const redoBtn         = document.getElementById('wl-redo-btn');
 
   /* ─── Restore existing submission ────────────────────────────────────── */
   const saved = getSavedSubmission();
@@ -65,6 +66,18 @@ document.addEventListener('DOMContentLoaded', () => {
     } finally {
       setLoading(false);
     }
+  });
+
+  /* ─── Redo waitlist ──────────────────────────────────────────────────── */
+  redoBtn?.addEventListener('click', () => {
+    clearSavedSubmission();
+    form?.reset();
+    clearAllErrors();
+    genderBtns.forEach(b => b.classList.remove('active'));
+    genderBtns[0]?.classList.add('active');
+    if (genderInput) genderInput.value = genderBtns[0]?.dataset.gender || 'male';
+    if (genderBg) genderBg.classList.remove('slide-right');
+    showForm();
   });
 
   /* ─── Helpers ────────────────────────────────────────────────────────── */
@@ -115,6 +128,24 @@ document.addEventListener('DOMContentLoaded', () => {
       successCard.style.display = 'block';
       requestAnimationFrame(() => successCard.classList.add('visible'));
       successCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 280);
+  }
+
+  function showForm() {
+    if (!formCard || !successCard) return;
+
+    successCard.classList.remove('visible');
+
+    setTimeout(() => {
+      successCard.style.display = 'none';
+      formCard.style.display = 'block';
+      formCard.style.opacity = '0';
+      formCard.style.transform = 'translateY(-12px)';
+      requestAnimationFrame(() => {
+        formCard.style.opacity = '1';
+        formCard.style.transform = 'translateY(0)';
+      });
+      formCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }, 280);
   }
 });
