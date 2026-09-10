@@ -1,262 +1,921 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Join the Waitlist | SuperState</title>
-  <meta name="description" content="Secure your spot for early access to SuperState's science-backed sleep ritual." />
-  <link rel="stylesheet" href="../../style.css" />
+  <title>Waitlist | SuperState Sleep Well</title>
+  <meta name="description" content="Join the Superstate waitlist for early access to our dark chocolate sleep ritual. Get 10% off at launch." />
+  <meta property="og:title" content="Join the Superstate Waitlist" />
+  <meta property="og:description" content="Early access to Superstate Sleep Well — science-backed dark chocolate for deep sleep." />
+  <meta property="og:image" content="/assets/sleep-well-box-real.jpg" />
   <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Lora:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
+
   <style>
-    html, body { min-height: 100%; }
-    .waitlist-hero { text-align: center; padding: 4rem 0; min-height: calc(100vh - 80px); display: flex; flex-direction: column; justify-content: center; align-items: center; }
-    .form-container { max-width: 450px; width: 100%; background: var(--bg-white); padding: 3rem; border-radius: var(--border-radius); box-shadow: var(--shadow-soft); transform: translateY(20px); opacity: 0; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-    .form-container.visible { transform: translateY(0); opacity: 1; }
-    
-    .waitlist-form { display: flex; flex-direction: column; gap: 1.5rem; }
-    .waitlist-form input { width: 100%; padding: 1.2rem; border: 1px solid var(--border-color); border-radius: var(--border-radius); font-family: inherit; font-size: 16px; transition: border-color 0.3s; }
-    .waitlist-form input:focus { outline: none; border-color: var(--accent-brand); }
-    
-    .success-message { display: none; text-align: center; padding: 4rem 0; animation: fadeIn 0.8s ease forwards; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    
-    /* Hide footer on this page for a clean landing experience */
-    .footer { display: none; }
-    
-    @media (max-width: 480px) {
-      .form-container {
-        padding: 1.5rem;
-      }
-      .waitlist-hero {
-        padding: 2rem 0;
-      }
+    /* ── Reset ─────────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      background: #f8fef2;
+      color: #0a0a0a;
+      overflow-x: hidden;
+    }
+
+    /* ── Design tokens ─────────────────────────────────────────────────── */
+    :root {
+      --navy:   #003399;
+      --green:  #207e59;
+      --lime:   #E4FF5A;
+      --cream:  #f8fef2;
+      --border: #cde8b4;
+      --muted:  #6b7280;
+      --shadow: 0 12px 40px rgba(32,126,89,.12);
+    }
+
+    /* ── Navbar ────────────────────────────────────────────────────────── */
+    .wl-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(248,254,242,.95);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .wl-nav a img { height: 68px; width: auto; transition: transform .3s; display: block; }
+    .wl-nav a img:hover { transform: scale(1.04); }
+
+    /* ── Hero section ──────────────────────────────────────────────────── */
+    .wl-hero {
+      text-align: center;
+      padding: 5rem 1.5rem 3.5rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .wl-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      background: var(--navy);
+      color: var(--lime);
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: .4rem 1.2rem;
+      border-radius: 99px;
+      margin-bottom: 1.75rem;
+    }
+    .wl-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--lime);
+      animation: pulse 2s infinite;
+      flex-shrink: 0;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(228,255,90,.7); }
+      70%      { box-shadow: 0 0 0 9px rgba(228,255,90,0); }
+    }
+
+    .wl-h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(44px, 7vw, 80px);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -.025em;
+      color: #0a0a0a;
+      margin-bottom: 1.5rem;
+    }
+    .wl-h1 em {
+      font-style: italic;
+      color: var(--navy);
+      position: relative;
+      white-space: nowrap;
+    }
+    .wl-h1 em::after {
+      content: '';
+      position: absolute;
+      bottom: 2px; left: 0;
+      width: 100%; height: 7px;
+      background: var(--lime);
+      border-radius: 4px;
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: underlineIn 1s .7s cubic-bezier(.16,1,.3,1) forwards;
+    }
+    @keyframes underlineIn { to { transform: scaleX(1); } }
+
+    .wl-sub {
+      font-size: clamp(17px, 2vw, 21px);
+      color: var(--muted);
+      font-weight: 500;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    .wl-sub strong { color: var(--green); font-weight: 700; }
+
+    /* ── Form section ──────────────────────────────────────────────────── */
+    .wl-form-section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.5rem 5rem;
+    }
+
+    /* ── Card ──────────────────────────────────────────────────────────── */
+    .wl-card {
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 28px;
+      padding: 3rem 3rem 2.5rem;
+      box-shadow: var(--shadow);
+    }
+    @media (max-width: 540px) {
+      .wl-card { padding: 2rem 1.5rem; border-radius: 20px; }
+    }
+
+    .wl-card-eyebrow {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: .5rem;
+    }
+    .wl-card-title {
+      font-family: 'Lora', serif;
+      font-size: 30px;
+      font-weight: 600;
+      color: #0a0a0a;
+      margin-bottom: .4rem;
+    }
+    .wl-card-sub {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 2.25rem;
+      line-height: 1.5;
+    }
+    .wl-card-sub strong { color: var(--green); }
+
+    /* ── Input group ───────────────────────────────────────────────────── */
+    .wl-group {
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+      margin-bottom: 1.35rem;
+    }
+    .wl-label {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: #2a2a2a;
+    }
+    .wl-label .wl-opt {
+      font-weight: 500;
+      text-transform: none;
+      letter-spacing: 0;
+      color: var(--muted);
+      font-size: 12.5px;
+    }
+
+    .wl-input {
+      width: 100%;
+      padding: 1.1rem 1.25rem;
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 17px;
+      font-weight: 500;
+      background: var(--cream);
+      color: #0a0a0a;
+      outline: none;
+      transition: border-color .22s, box-shadow .22s, background .22s;
+      -webkit-appearance: none;
+    }
+    .wl-input::placeholder { color: #aab5a0; }
+    .wl-input:focus {
+      border-color: var(--navy);
+      background: #fff;
+      box-shadow: 0 0 0 5px rgba(0,51,153,.08);
+    }
+    .wl-input.wl-input-error {
+      border-color: #e53e3e;
+      background: #fff8f8;
+      box-shadow: 0 0 0 4px rgba(229,62,62,.08);
+    }
+    .wl-input.wl-code-input {
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--navy);
+      font-size: 18px;
+    }
+
+    .wl-err {
+      font-size: 12.5px;
+      color: #e53e3e;
+      font-weight: 600;
+      display: none;
+      padding-left: 2px;
+    }
+
+    /* Two inputs side by side */
+    .wl-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 480px) { .wl-row { grid-template-columns: 1fr; } }
+
+    /* ── Gender slider ─────────────────────────────────────────────────── */
+    .wl-gender-wrap {
+      background: rgba(0,51,153,.04);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 4px;
+      display: flex;
+      position: relative;
+      height: 54px;
+      user-select: none;
+    }
+    .wl-gender-bg {
+      position: absolute;
+      top: 4px; left: 4px;
+      width: calc(50% - 4px);
+      height: calc(100% - 8px);
+      background: var(--navy);
+      border-radius: 12px;
+      box-shadow: 0 3px 12px rgba(0,51,153,.28);
+      transition: transform .32s cubic-bezier(.16,1,.3,1);
+      z-index: 1;
+    }
+    .wl-gender-bg.slide-right { transform: translateX(100%); }
+    .wl-gender-btn {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+      position: relative;
+      z-index: 2;
+      transition: color .25s;
+    }
+    .wl-gender-btn.active { color: #fff; }
+
+    /* ── Code hint strip ───────────────────────────────────────────────── */
+    .wl-code-hint {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      background: rgba(228,255,90,.22);
+      border: 1.5px solid rgba(228,255,90,.55);
+      border-radius: 14px;
+      padding: .75rem 1.1rem;
+      font-size: 14px;
+      font-weight: 600;
+      color: #2a4a00;
+      margin-bottom: 1.5rem;
+    }
+    .wl-code-hint .emoji { font-size: 20px; flex-shrink: 0; }
+
+    /* ── CTA Button ────────────────────────────────────────────────────── */
+    .wl-btn {
+      width: 100%;
+      padding: 1.25rem;
+      border: none;
+      border-radius: 16px;
+      background: var(--navy);
+      color: #fff;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      letter-spacing: .01em;
+      box-shadow: 0 10px 28px rgba(0,51,153,.25);
+      transition: background .25s, transform .22s, box-shadow .22s;
+      margin-top: .25rem;
+    }
+    .wl-btn:hover {
+      background: #002270;
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px rgba(0,51,153,.32);
+    }
+    .wl-btn:active { transform: translateY(0); }
+    .wl-btn:disabled { opacity: .75; cursor: not-allowed; transform: none !important; }
+
+    .wl-spinner {
+      width: 20px; height: 20px;
+      border: 3px solid rgba(255,255,255,.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      display: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .wl-privacy {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .45rem;
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 1.25rem;
+      font-weight: 500;
+    }
+
+    /* ── SUCCESS card ──────────────────────────────────────────────────── */
+    .wl-success {
+      display: none;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .5s cubic-bezier(.16,1,.3,1), transform .5s cubic-bezier(.16,1,.3,1);
+      background: #fff;
+      border: 2px solid var(--green);
+      border-radius: 28px;
+      padding: 3.5rem 3rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .wl-success.visible { opacity: 1; transform: translateY(0); }
+
+    .wl-success-icon {
+      width: 72px; height: 72px;
+      background: var(--green);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 1.5rem;
+      box-shadow: 0 0 0 14px rgba(32,126,89,.1), 0 8px 24px rgba(32,126,89,.3);
+    }
+
+    .wl-success-h {
+      font-family: 'Lora', serif;
+      font-size: clamp(28px, 4vw, 38px);
+      font-weight: 600;
+      margin-bottom: .6rem;
+    }
+    .wl-success-p { font-size: 16px; color: var(--muted); margin-bottom: 1.75rem; line-height: 1.55; }
+
+    .wl-influencer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      background: rgba(228,255,90,.3);
+      border: 1.5px solid rgba(228,255,90,.65);
+      color: #2a4a00;
+      font-size: 13.5px;
+      font-weight: 800;
+      padding: .45rem 1.1rem;
+      border-radius: 99px;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Coupon reveal box */
+    .wl-coupon-box {
+      background: linear-gradient(135deg, #002673 0%, #001240 100%);
+      border: 2.5px dashed var(--lime);
+      border-radius: 22px;
+      padding: 2rem 2rem 1.75rem;
+      margin: 0 0 2rem;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+      text-align: left;
+    }
+    .wl-coupon-box::before {
+      content: '';
+      position: absolute;
+      top: -60%; right: -10%;
+      width: 280px; height: 280px;
+      background: rgba(228,255,90,.05);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .wl-coupon-eyebrow {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--lime);
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      margin-bottom: .6rem;
+    }
+    .wl-coupon-code {
+      font-family: 'Lora', serif;
+      font-size: clamp(36px, 6vw, 54px);
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: #fff;
+      margin-bottom: .3rem;
+      user-select: all;
+      line-height: 1.1;
+    }
+    .wl-coupon-discount {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--lime);
+      margin-bottom: .35rem;
+    }
+    .wl-coupon-sub {
+      font-size: 13.5px;
+      color: rgba(255,255,255,.6);
+      margin-bottom: 1.5rem;
+    }
+    .wl-copy-btn {
+      background: var(--lime);
+      color: var(--navy);
+      border: none;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      padding: .7rem 1.6rem;
+      border-radius: 99px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      transition: all .22s;
+    }
+    .wl-copy-btn:hover { transform: scale(1.06); background: #fff; }
+    .wl-copy-btn.copied { background: var(--green); color: #fff; }
+
+    .wl-copy-status {
+      display: block;
+      font-size: 12.5px;
+      color: var(--lime);
+      font-weight: 700;
+      margin-top: .65rem;
+      opacity: 0;
+      transition: opacity .3s;
+    }
+
+    .wl-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--green);
+      text-decoration: none;
+      transition: gap .2s;
+    }
+    .wl-back-link:hover { gap: .75rem; }
+
+    /* ── Product image gallery ─────────────────────────────────────────── */
+    .wl-gallery-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem 5rem;
+    }
+    .wl-gallery-label {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--green);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .wl-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    @media (max-width: 700px) {
+      .wl-gallery { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 440px) {
+      .wl-gallery { grid-template-columns: 1fr; }
+    }
+
+    .wl-gallery-card {
+      border-radius: 22px;
+      overflow: hidden;
+      background: #fff;
+      border: 1.5px solid var(--border);
+      box-shadow: 0 6px 24px rgba(32,126,89,.09);
+      transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s;
+      cursor: pointer;
+    }
+    .wl-gallery-card:hover {
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 18px 42px rgba(32,126,89,.16);
+    }
+
+    /* Large featured card */
+    .wl-gallery-card.featured {
+      grid-column: span 2;
+    }
+    @media (max-width: 700px) {
+      .wl-gallery-card.featured { grid-column: span 2; }
+    }
+    @media (max-width: 440px) {
+      .wl-gallery-card.featured { grid-column: span 1; }
+    }
+
+    .wl-gallery-card img {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s;
+    }
+    .wl-gallery-card:hover img { transform: scale(1.04); }
+    .wl-gallery-card.featured img { height: 420px; }
+    @media (max-width: 540px) {
+      .wl-gallery-card img { height: 260px; }
+      .wl-gallery-card.featured img { height: 300px; }
+    }
+
+    .wl-gallery-info {
+      padding: 1.1rem 1.25rem 1.3rem;
+    }
+    .wl-gallery-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0a0a0a;
+      margin-bottom: .25rem;
+    }
+    .wl-gallery-desc {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* ── Reviews marquee ───────────────────────────────────────────────── */
+    .wl-reviews-section {
+      padding: 0 0 5rem;
+      overflow: hidden;
+    }
+    .wl-reviews-label {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--green);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .wl-marquee-wrap {
+      overflow: hidden;
+      mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    }
+    .wl-marquee-track {
+      display: inline-flex;
+      gap: 1.1rem;
+      animation: marquee 34s linear infinite;
+      white-space: nowrap;
+      padding: 0.5rem 0;
+    }
+    .wl-marquee-wrap:hover .wl-marquee-track { animation-play-state: paused; }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .wl-review-card {
+      flex: 0 0 auto;
+      width: 300px;
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 1.25rem 1.4rem;
+      white-space: normal;
+      box-shadow: 0 4px 16px rgba(32,126,89,.07);
+    }
+    .wl-stars { color: #fbbf24; font-size: 15px; letter-spacing: 1px; margin-bottom: .5rem; }
+    .wl-review-text {
+      font-size: 14.5px;
+      line-height: 1.55;
+      color: #2a2a2a;
+      font-weight: 500;
+      margin-bottom: .75rem;
+    }
+    .wl-review-meta { display: flex; align-items: center; gap: .5rem; }
+    .wl-review-author { font-size: 13px; font-weight: 800; color: var(--navy); }
+    .wl-review-verified { font-size: 11.5px; color: var(--green); font-weight: 700; }
+
+    /* ── Footer ────────────────────────────────────────────────────────── */
+    .wl-footer {
+      background: var(--navy);
+      color: rgba(255,255,255,.5);
+      text-align: center;
+      padding: 2.25rem 1.5rem;
+      font-size: 13.5px;
+    }
+    .wl-footer a { color: rgba(255,255,255,.75); text-decoration: none; transition: color .2s; }
+    .wl-footer a:hover { color: var(--lime); }
+
+    /* ── Fade-up entrance ──────────────────────────────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      animation: fadeUp .75s cubic-bezier(.16,1,.3,1) forwards;
+    }
+    .fade-up.d1 { animation-delay: .08s; }
+    .fade-up.d2 { animation-delay: .2s; }
+    .fade-up.d3 { animation-delay: .32s; }
+    .fade-up.d4 { animation-delay: .44s; }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+    /* divider */
+    .wl-divider {
+      width: 60px;
+      height: 3px;
+      background: var(--lime);
+      border-radius: 99px;
+      margin: 0 auto 3rem;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="container navbar-container">
-      <a href="/" class="brand">
-        <img src="/logo.png" alt="SuperState" class="logo-img">
-      </a>
-      <ul class="nav-links">
-        <li><a href="/">Home</a></li>
-        <li><a href="/pages/our-story/">Our Story</a></li>
-        <li><a href="/pages/get-plan/">Get Your Plan</a></li>
-        <li><a href="/pages/faqs/">FAQs</a></li>
-        <li><a href="/pages/contact/">Contact</a></li>
-      </ul>
-      <a href="/products/sleep-well/" class="btn btn-primary nav-cta">View Product</a>
-      <button class="mobile-menu-btn" aria-label="Open Menu">☰</button>
-    </div>
+  <!-- Navbar: Logo Only -->
+  <nav class="wl-nav">
+    <a href="https://www.superstate.in">
+      <img src="/logo.png" alt="SuperState" />
+    </a>
   </nav>
 
-  <!-- Mobile Drawer -->
-  <div class="mobile-drawer">
-    <div class="mobile-drawer-header">
-      <span class="brand">
-        <img src="/logo.png" alt="SuperState" class="logo-img">
-      </span>
-      <button class="close-drawer" aria-label="Close Menu">✕</button>
-    </div>
-    <ul class="mobile-nav-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/pages/our-story/">Our Story</a></li>
-      <li><a href="/pages/get-plan/">Get Your Plan</a></li>
-      <li><a href="/pages/faqs/">FAQs</a></li>
-      <li><a href="/pages/contact/">Contact</a></li>
-    </ul>
-    <div style="margin-top: 2rem;">
-      <a href="/products/sleep-well/" class="btn btn-primary" style="width: 100%;">View Product</a>
-    </div>
-  </div>
+  <!-- ── HERO ─────────────────────────────────────────────────────────── -->
+  <section class="wl-hero fade-up d1">
+    <div class="wl-pill"><span class="wl-dot"></span> Early Access Open</div>
+    <h1 class="wl-h1">Sleep <em>Better</em>.<br>Starting Tonight.</h1>
+    <p class="wl-sub">
+      The waitlist for Superstate Sleep Well is live.<br>
+      <strong>Join now and get 10% off at launch — no strings attached.</strong>
+    </p>
+  </section>
 
-  <main class="bg-primary">
-    <div class="container">
-      <section class="waitlist-hero">
-        <div id="hero-content">
-          <span class="eyebrow" id="hero-eyebrow">Early Access</span>
-          <h1 id="hero-title" style="margin-bottom: 1.5rem;">The wait is almost over.</h1>
-          <p id="hero-text" style="font-size: 20px; max-width: 600px; margin: 0 auto 3rem; opacity: 0.8;">
-            We're launching in limited batches to ensure the highest quality. Secure your spot now for exclusive early access and founder-tier pricing.
-          </p>
-        </div>
+  <!-- ── WAITLIST FORM ─────────────────────────────────────────────────── -->
+  <section class="wl-form-section fade-up d2">
 
-        <div class="form-container" id="form-container">
-          <form class="waitlist-form" id="waitlist-page-form">
-            <input type="text" id="waitlist-name" placeholder="Your Name" required autocomplete="name">
-            <input type="email" id="waitlist-email" placeholder="Your Email Address" required autocomplete="email">
-            <input type="tel" id="waitlist-phone" placeholder="Phone Number" required autocomplete="tel">
-            <button type="submit" class="btn btn-primary" style="padding: 1.2rem;">Join the Waitlist</button>
-          </form>
-          <p style="font-size: 13px; color: #666; margin-top: 1.5rem;">
-            By joining, you agree to receive occasional updates. No spam, ever.
-          </p>
-        </div>
+    <!-- Form card -->
+    <div class="wl-card" id="wl-form-card">
+      <p class="wl-card-eyebrow">Secure your spot</p>
+      <p class="wl-card-title">Join the Waitlist</p>
+      <p class="wl-card-sub">Fill in your details. Have an influencer code? Add it below — <strong>you'll get 30% off</strong> at launch.</p>
 
-        <div class="success-message" id="success-message">
-          <div class="popup-icon" style="background: var(--success); color: white; margin: 0 auto 2rem;">✓</div>
-          <h2>You're on the list!</h2>
-          <p style="font-size: 18px; margin-bottom: 3rem; opacity: 0.8;">Check your inbox. We've sent a small welcome note with what happens next.</p>
-          <a href="/" class="btn btn-outline">Back to Home</a>
-        </div>
-      </section>
-    </div>
-  </main>
+      <form id="wl-form" novalidate>
 
-  <!-- Global Footer -->
-  <footer class="footer fade-up">
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <a href="/" class="brand" style="display: block; margin-bottom: 1rem;">
-            <img src="/logo.png" alt="SuperState" class="logo-img">
-          </a>
-          <div style="display: flex; gap: 0.75rem;">
-            <a href="https://www.instagram.com/superstate.in/" class="social-icon" aria-label="Instagram"
-              title="Instagram">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-            </a>
-            <a href="https://www.linkedin.com/company/super-state/" class="social-icon" aria-label="LinkedIn"
-              title="LinkedIn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                <rect x="2" y="9" width="4" height="12"></rect>
-                <circle cx="4" cy="4" r="2"></circle>
-              </svg>
-            </a>
-            <a href="https://x.com/_superstate_" class="social-icon" aria-label="X (Twitter)" title="X">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932 6.064-6.932zm-1.292 19.494h2.039L6.486 3.24H4.298l13.311 17.407z" />
-              </svg>
-            </a>
-            <a href="https://substack.com/@georgyvarghese" class="social-icon" aria-label="Substack" title="Substack">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <rect x="3" y="4" width="18" height="2" />
-                <rect x="3" y="8" width="18" height="2" />
-                <path d="M3 12v9l9-5 9 5v-9H3z" />
-              </svg>
-            </a>
+        <div class="wl-row">
+          <div class="wl-group">
+            <label class="wl-label" for="wl-name">Full Name</label>
+            <input class="wl-input" id="wl-name" type="text" placeholder="Arjun Sharma" autocomplete="name" required />
+            <span class="wl-err" id="name-err"></span>
+          </div>
+          <div class="wl-group">
+            <label class="wl-label" for="wl-phone">Phone Number</label>
+            <input class="wl-input" id="wl-phone" type="tel" placeholder="+91 98765 43210" autocomplete="tel" required />
+            <span class="wl-err" id="phone-err"></span>
           </div>
         </div>
-        <div>
-          <h4>Quick Links</h4>
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/pages/our-story/">Our Story</a></li>
-            <li><a href="/products/sleep-well/">Product</a></li>
-            <li><a href="/pages/faqs/">FAQs</a></li>
-            <li><a href="/pages/waitlist/">Waitlist</a></li>
-            <li><a href="/pages/contact/">Contact</a></li>
-          </ul>
+
+        <div class="wl-group">
+          <label class="wl-label" for="wl-email">Email Address</label>
+          <input class="wl-input" id="wl-email" type="email" placeholder="arjun@email.com" autocomplete="email" required />
+          <span class="wl-err" id="email-err"></span>
         </div>
-        <div>
-          <h4>Support</h4>
-          <ul>
-            <li><a href="mailto:support@superstate.in">support@superstate.in</a></li>
-            <li><a href="https://wa.me/919567309388">WhatsApp: 9567309388</a></li>
-          </ul>
+
+        <div class="wl-group">
+          <label class="wl-label">Gender</label>
+          <div class="wl-gender-wrap">
+            <div class="wl-gender-bg" id="wl-gender-bg"></div>
+            <button type="button" class="wl-gender-btn active" data-gender="male">♂ Male</button>
+            <button type="button" class="wl-gender-btn" data-gender="female">♀ Female</button>
+          </div>
+          <input type="hidden" id="wl-gender" value="male" />
         </div>
-        <div>
-          <h4>One honest email a week.</h4>
-          <p style="font-size: 14px; margin-bottom: 1rem; opacity: 0.8;">No fluff. Just science, sleep tips, and early
-            access.</p>
-          <form class="newsletter-form waitlist-form">
-            <input type="email" placeholder="Your email" required>
-            <button type="submit">Subscribe</button>
-          </form>
+
+        <div class="wl-group">
+          <label class="wl-label" for="wl-code">
+            Promo / Influencer Code
+            <span class="wl-opt"> — optional</span>
+          </label>
+          <input class="wl-input wl-code-input" id="wl-code" type="text" placeholder="e.g. ABHI30" autocomplete="off" />
         </div>
-      </div>
-      <div class="footer-bottom">
-        <div>© 2025 SuperState | Privacy Policy | Terms | Shipping | Returns</div>
-        <div>FSSAI Licensed | Vegan Certified | Made in India</div>
+
+        <div class="wl-code-hint">
+          <span class="emoji">🎁</span>
+          No code? Everyone who joins gets <strong>&nbsp;10% off&nbsp;</strong> at launch automatically.
+        </div>
+
+        <button type="submit" class="wl-btn" id="wl-submit">
+          <span id="wl-btn-text">Secure My Early Access →</span>
+          <span class="wl-spinner" id="wl-spinner"></span>
+        </button>
+      </form>
+
+      <div class="wl-privacy">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+        Zero spam. Unsubscribe anytime.
       </div>
     </div>
+
+    <!-- Success card -->
+    <div class="wl-success" id="wl-success-card">
+      <div class="wl-success-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+
+      <h2 class="wl-success-h">You're in, <span id="wl-success-name">friend</span>! 🎉</h2>
+      <p class="wl-success-p">
+        Your early-access spot is locked in.<br>
+        We'll send your launch invite to <strong id="wl-success-email"></strong>.
+      </p>
+
+      <div class="wl-influencer-badge" id="wl-influencer-msg" style="display:none;">
+        ✦ Influencer code applied — 30% OFF unlocked!
+      </div>
+
+      <div class="wl-coupon-box">
+        <span class="wl-coupon-eyebrow">Your exclusive launch coupon</span>
+        <div class="wl-coupon-code" id="wl-coupon-display">SUPERSTATE10</div>
+        <div class="wl-coupon-discount" id="wl-discount-display">10% OFF</div>
+        <div class="wl-coupon-sub">Use at checkout when we go live. It's yours — save it.</div>
+        <button class="wl-copy-btn" id="wl-copy-btn" type="button">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2"/>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+          Copy Code
+        </button>
+        <span class="wl-copy-status" id="wl-copy-status">Copied to clipboard!</span>
+      </div>
+
+      <a href="https://www.superstate.in" class="wl-back-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <path d="M19 12H5"/><polyline points="12 5 5 12 12 19"/>
+        </svg>
+        Back to Superstate
+      </a>
+    </div>
+  </section>
+
+  <!-- ── PRODUCT IMAGE GALLERY ─────────────────────────────────────────── -->
+  <section class="wl-gallery-section fade-up d3">
+    <div class="wl-divider"></div>
+    <p class="wl-gallery-label">The Product</p>
+    <div class="wl-gallery">
+
+      <!-- Featured big image -->
+      <div class="wl-gallery-card featured">
+        <img src="/assets/sleep-well-box-real.jpg" alt="Superstate Sleep Well — Product Box" loading="lazy" />
+        <div class="wl-gallery-info">
+          <div class="wl-gallery-title">Sleep Well Dark Chocolate</div>
+          <div class="wl-gallery-desc">Science-backed blend — Magnesium, L-Theanine, Ashwagandha</div>
+        </div>
+      </div>
+
+      <!-- Side image -->
+      <div class="wl-gallery-card">
+        <img src="/assets/sleep-well-sachets-real.jpg" alt="Superstate Sleep Well — Sachets" loading="lazy" />
+        <div class="wl-gallery-info">
+          <div class="wl-gallery-title">20g Daily Sachets</div>
+          <div class="wl-gallery-desc">One square, every night. Simple.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── SCROLLING REVIEWS ─────────────────────────────────────────────── -->
+  <section class="wl-reviews-section fade-up d4">
+    <p class="wl-reviews-label">What Our Beta Testers Say</p>
+    <div class="wl-marquee-wrap">
+      <div class="wl-marquee-track">
+        <!-- 6 reviews × 2 copies for seamless loop -->
+        <div class="wl-review-card">
+          <div class="wl-stars">★★★★★</div>
+          <p class="wl-review-text">"Actually helps me fall asleep — and I wake up clear, not groggy. Tastes like a proper hot chocolate."</p>
+          <div class="wl-review-meta">
+            <span class="wl-review-author">Rohan S.</span>
+            <span class="wl-review-verified">✓ Verified</span>
+          </div>
+        </div>
+        <div class="wl-review-card">
+          <div class="wl-stars">★★★★★</div>
+          <p class="wl-review-text">"Woke up genuinely rested for the first time in months. Nothing else I've tried has done this."</p>
+          <div class="wl-review-meta">
+            <span class="wl-review-author">Ananya M.</span>
+            <span class="wl-review-verified">✓ Verified</span>
+          </div>
+        </div>
+        <div class="wl-review-card">
+          <div class="wl-stars">★★★★★</div>
+          <p class="wl-review-text">"L-Theanine + Magnesium in a dark chocolate base is brilliant. Clinically dosed and fully transparent."</p>
+          <div class="wl-review-meta">
+            <span class="wl-review-author">Dr. Vikram K.</span>
+            <span class="wl-review-verified">✓ Physician</span>
+          </div>
+        </div>
+        <div class="wl-review-card">
+          <div class="wl-stars">★★★★★</div>
+          <p class="wl-review-text">"My nighttime ritual now. Deeper sleep, far less time staring at the ceiling at 2am."</p>
+          <div class="wl-review-meta">
+            <span class="wl-review-author">Priya N.</span>
+            <span class="wl-review-verified">✓ Verified</span>
+          </div>
+        </div>
+        <div class="wl-review-card">
+          <div class="wl-stars">★★★★★</div>
+          <p class="wl-review-text">"Zero artificial taste, zero grogginess. The kind of product that makes you trust a brand long-term."</p>
+          <div class="wl-review-meta">
+            <span class="wl-review-author">Siddharth R.</span>
+            <span class="wl-review-verified">✓ Verified</span>
+          </div>
+        </div>
+        <div class="wl-review-card">
+          <div class="wl-stars">★★★★★</div>
+          <p class="wl-review-text">"My Oura ring noticed the change before I even did. Sleep score jumped 12 points in the first week."</p>
+          <div class="wl-review-meta">
+            <span class="wl-review-author">Kavita D.</span>
+            <span class="wl-review-verified">✓ Verified</span>
+          </div>
+        </div>
+        <!-- Duplicate set for seamless loop -->
+        <div class="wl-review-card">
+          <div class="wl-stars">★★★★★</div>
+          <p class="wl-review-text">"Actually helps me fall asleep — and I wake up clear, not groggy. Tastes like a proper hot chocolate."</p>
+          <div class="wl-review-meta">
+            <span class="wl-review-author">Rohan S.</span>
+            <span class="wl-review-verified">✓ Verified</span>
+          </div>
+        </div>
+        <div class="wl-review-card">
+          <div class="wl-stars">★★★★★</div>
+          <p class="wl-review-text">"Woke up genuinely rested for the first time in months. Nothing else I've tried has done this."</p>
+          <div class="wl-review-meta">
+            <span class="wl-review-author">Ananya M.</span>
+            <span class="wl-review-verified">✓ Verified</span>
+          </div>
+        </div>
+        <div class="wl-review-card">
+          <div class="wl-stars">★★★★★</div>
+          <p class="wl-review-text">"L-Theanine + Magnesium in a dark chocolate base is brilliant. Clinically dosed and fully transparent."</p>
+          <div class="wl-review-meta">
+            <span class="wl-review-author">Dr. Vikram K.</span>
+            <span class="wl-review-verified">✓ Physician</span>
+          </div>
+        </div>
+        <div class="wl-review-card">
+          <div class="wl-stars">★★★★★</div>
+          <p class="wl-review-text">"My nighttime ritual now. Deeper sleep, far less time staring at the ceiling at 2am."</p>
+          <div class="wl-review-meta">
+            <span class="wl-review-author">Priya N.</span>
+            <span class="wl-review-verified">✓ Verified</span>
+          </div>
+        </div>
+        <div class="wl-review-card">
+          <div class="wl-stars">★★★★★</div>
+          <p class="wl-review-text">"Zero artificial taste, zero grogginess. The kind of product that makes you trust a brand long-term."</p>
+          <div class="wl-review-meta">
+            <span class="wl-review-author">Siddharth R.</span>
+            <span class="wl-review-verified">✓ Verified</span>
+          </div>
+        </div>
+        <div class="wl-review-card">
+          <div class="wl-stars">★★★★★</div>
+          <p class="wl-review-text">"My Oura ring noticed the change before I even did. Sleep score jumped 12 points in the first week."</p>
+          <div class="wl-review-meta">
+            <span class="wl-review-author">Kavita D.</span>
+            <span class="wl-review-verified">✓ Verified</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ────────────────────────────────────────────────────────── -->
+  <footer class="wl-footer">
+    © 2025 <a href="https://www.superstate.in">SuperState</a> &nbsp;·&nbsp;
+    FSSAI Licensed &nbsp;·&nbsp; Vegan Certified &nbsp;·&nbsp; Made in India
   </footer>
 
-  <script>
-    // Reveal form on load
-    window.addEventListener('load', () => {
-      document.getElementById('form-container').classList.add('visible');
-    });
-
-    const waitlistForm = document.getElementById('waitlist-page-form');
-    const formContainer = document.getElementById('form-container');
-    const successMessage = document.getElementById('success-message');
-    const heroTitle = document.getElementById('hero-title');
-    const heroText = document.getElementById('hero-text');
-
-    waitlistForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      const name = document.getElementById('waitlist-name').value.trim();
-      const email = document.getElementById('waitlist-email').value.trim();
-      const phone = document.getElementById('waitlist-phone').value.trim();
-      
-      if (name && email && phone) {
-        const submitBtn = waitlistForm.querySelector('button');
-        const originalText = submitBtn.textContent;
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Joining...';
-        
-        // Google Apps Script Web App URL for your Google Sheet!
-        // Replace 'YOUR_DEPLOYED_WEBAPP_URL_HERE' with your deployed Apps Script URL!
-        const webAppUrl = 'https://script.google.com/macros/s/AKfycbwf-v_WQn9YgTOvwd2qhuVa275u2O1d0ctNbKyN4MMY-4E9nirP0_QnY9a5t4HtRfGI/exec';
-        
-        const completeSignup = () => {
-          localStorage.setItem('superstate_waitlist_signed', 'true');
-          localStorage.setItem('superstate_waitlist_name', name);
-          localStorage.setItem('superstate_waitlist_email', email);
-          localStorage.setItem('superstate_waitlist_phone', phone);
-          localStorage.setItem('superstate_waitlist_gender', 'N/A');
-          
-          formContainer.classList.remove('visible');
-          setTimeout(() => {
-            formContainer.style.display = 'none';
-            heroText.style.display = 'none';
-            heroTitle.style.display = 'none';
-            successMessage.style.display = 'block';
-          }, 400);
-        };
-        
-        if (webAppUrl && webAppUrl !== 'YOUR_DEPLOYED_WEBAPP_URL_HERE') {
-          const formData = new FormData();
-          formData.append('name', name);
-          formData.append('email', email);
-          formData.append('phone', phone);
-          formData.append('gender', 'N/A');
-          
-          fetch(webAppUrl, {
-            method: 'POST',
-            mode: 'no-cors', // Standard for Apps Script redirects to prevent CORS preflight blocking
-            body: formData
-          })
-          .then(() => {
-            completeSignup();
-          })
-          .catch((err) => {
-            console.error('Google Sheet submission failed, falling back to local simulation:', err);
-            completeSignup();
-          });
-        } else {
-          // Fallback to local simulation instantly
-          setTimeout(completeSignup, 1000);
-        }
-      }
-    });
-  </script>
   <script src="../../main.js" type="module"></script>
+  <script src="../../src/waitlist.js" type="module"></script>
 </body>
-
 </html>

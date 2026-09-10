@@ -1374,3 +1374,512 @@ section {
     /* Compact navbar logo size to prevent vertical overflow */
   }
 }
+
+/* ==========================================================================
+   SUPERSTATE EXCLUSIVE WAITLIST PAGE STYLES
+   ========================================================================== */
+
+/* Waitlist Hero Section */
+.waitlist-hero-v2 {
+  padding: 4rem 0 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 992px) {
+  .waitlist-hero-v2 {
+    padding: 5rem 0 4rem;
+  }
+}
+
+.waitlist-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--color-deep-knowing);
+  color: var(--color-first-light);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 0.4rem 1.2rem;
+  border-radius: 99px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 51, 153, 0.2);
+}
+
+.waitlist-badge-pulse {
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-first-light);
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(228, 255, 90, 0.7);
+  animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(228, 255, 90, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(228, 255, 90, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(228, 255, 90, 0);
+  }
+}
+
+/* Waitlist Form Container Card */
+.waitlist-card {
+  background: var(--color-truth-white);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: var(--shadow-hover);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  position: relative;
+}
+
+@media (max-width: 576px) {
+  .waitlist-card {
+    padding: 1.75rem 1.25rem;
+    border-radius: 20px;
+  }
+}
+
+.waitlist-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+  text-align: left;
+}
+
+.waitlist-input-group label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+}
+
+.waitlist-input-group label .optional-tag {
+  font-size: 12px;
+  font-weight: 500;
+  color: #777;
+}
+
+.waitlist-input {
+  width: 100%;
+  padding: 1.1rem 1.25rem;
+  border: 1.5px solid var(--border-color);
+  border-radius: 14px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  background-color: #fafdf7;
+  color: var(--text-primary);
+  transition: all 0.25s ease;
+  outline: none;
+}
+
+.waitlist-input:focus {
+  border-color: var(--color-deep-knowing);
+  background-color: var(--bg-white);
+  box-shadow: 0 0 0 4px rgba(0, 51, 153, 0.08);
+}
+
+.waitlist-input.input-error {
+  border-color: #d9534f !important;
+  background-color: #fff8f8;
+}
+
+.field-error-msg {
+  font-size: 12px;
+  color: #d9534f;
+  font-weight: 600;
+  margin-top: 0.25rem;
+  display: none;
+}
+
+.waitlist-submit-btn {
+  width: 100%;
+  padding: 1.2rem;
+  font-size: 17px;
+  font-weight: 700;
+  font-family: var(--font-body);
+  border-radius: 16px;
+  background-color: var(--color-deep-knowing);
+  color: var(--color-truth-white);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  box-shadow: 0 8px 24px rgba(0, 51, 153, 0.25);
+}
+
+.waitlist-submit-btn:hover {
+  background-color: #002673;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 51, 153, 0.35);
+}
+
+.waitlist-submit-btn:disabled {
+  opacity: 0.85;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: none;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Success Card & Coupon Display */
+.waitlist-success-card {
+  display: none;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  background: var(--color-truth-white);
+  border: 2px solid var(--color-root-state);
+  border-radius: 24px;
+  padding: 3rem 2.5rem;
+  box-shadow: var(--shadow-hover);
+  text-align: center;
+}
+
+.waitlist-success-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.success-badge-icon {
+  width: 64px;
+  height: 64px;
+  background-color: var(--color-root-state);
+  color: white;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 1.5rem;
+  box-shadow: 0 0 25px rgba(32, 126, 89, 0.3);
+}
+
+.coupon-box {
+  background: linear-gradient(135deg, #002673 0%, #001747 100%);
+  border: 2px dashed var(--color-first-light);
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  margin: 2rem 0;
+  color: white;
+  position: relative;
+  box-shadow: 0 12px 36px rgba(0, 38, 115, 0.25);
+}
+
+.coupon-header-tag {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--color-first-light);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.coupon-code-val {
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  user-select: all;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.coupon-sub-tag {
+  font-size: 14px;
+  color: #cbd5e1;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.copy-btn {
+  background-color: var(--color-first-light);
+  color: var(--color-deep-knowing);
+  border: none;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 800;
+  padding: 0.8rem 2rem;
+  border-radius: 99px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 15px rgba(228, 255, 90, 0.3);
+}
+
+.copy-btn:hover {
+  transform: scale(1.05);
+  background-color: #ffffff;
+  color: var(--color-deep-knowing);
+}
+
+.copy-btn.copied {
+  background-color: var(--color-emerge);
+  color: #ffffff;
+}
+
+/* Feature/Benefit Cards */
+.waitlist-benefit-card {
+  background: var(--bg-white);
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  padding: 1.75rem;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.waitlist-benefit-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--color-root-state);
+}
+
+.benefit-icon-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background-color: rgba(32, 126, 89, 0.1);
+  color: var(--color-root-state);
+  display: grid;
+  place-items: center;
+  margin-bottom: 1.25rem;
+}
+
+/* Auto-Scrolling Reviews Marquee Ticker */
+.reviews-marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  width: 100%;
+  padding: 1.5rem 0;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.reviews-marquee-track {
+  display: inline-flex;
+  gap: 1.5rem;
+  animation: marqueeScroll 28s linear infinite;
+}
+
+.reviews-marquee-container:hover .reviews-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.review-marquee-card {
+  flex: 0 0 auto;
+  width: 320px;
+  background: var(--color-truth-white);
+  border: 1.5px solid var(--border-color);
+  border-radius: 18px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  white-space: normal;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.review-stars {
+  color: #ffc107;
+  font-size: 14px;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.review-text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.review-author {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-deep-knowing);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.review-author-verified {
+  font-size: 11px;
+  color: var(--color-root-state);
+  font-weight: 600;
+}
+
+/* Product Real Photo Card */
+.real-photo-card {
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1.5px solid var(--border-color);
+  box-shadow: var(--shadow-hover);
+  background-color: var(--bg-white);
+  transition: transform 0.3s ease;
+}
+
+.real-photo-card:hover {
+  transform: translateY(-50%);
+}
+
+.real-photo-img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Sticky Mobile CTA Bar */
+.sticky-mobile-cta {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 38, 115, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(228, 255, 90, 0.3);
+  padding: 0.85rem 1.25rem;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.sticky-mobile-cta.visible {
+  transform: translateY(0);
+}
+
+@media (min-width: 769px) {
+  .sticky-mobile-cta {
+    display: none !important;
+  }
+}
+
+.sticky-cta-text {
+  color: white;
+  font-family: var(--font-body);
+}
+
+.sticky-cta-text strong {
+  display: block;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.sticky-cta-text span {
+  font-size: 11px;
+  color: var(--color-first-light);
+  font-weight: 600;
+}
+
+.sticky-cta-btn {
+  background-color: var(--color-first-light);
+  color: var(--color-deep-knowing);
+  font-size: 13px;
+  font-weight: 800;
+  padding: 0.6rem 1.2rem;
+  border-radius: 99px;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+/* Gender Segmented Slider Control */
+.gender-segmented-control {
+  background: rgba(0, 51, 153, 0.06);
+  border: 1.5px solid var(--border-color);
+  border-radius: 14px;
+  padding: 4px;
+  display: flex;
+  position: relative;
+  height: 48px;
+  cursor: pointer;
+  user-select: none;
+  margin-top: 0.25rem;
+}
+
+.gender-slide-bg {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  height: calc(100% - 8px);
+  background: var(--color-deep-knowing);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 51, 153, 0.3);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+}
+
+.gender-slide-bg.female {
+  transform: translateX(100%);
+}
+
+.gender-btn {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: #555;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 2;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.gender-btn.active {
+  color: #ffffff;
+}
+
+
+
