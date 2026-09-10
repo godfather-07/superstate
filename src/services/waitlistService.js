@@ -15,7 +15,10 @@ export const WAITLIST_CONFIG = {
   INFLUENCER_DISCOUNT: 30,
   STORAGE_KEY_USER: 'superstate_waitlist_user',
   STORAGE_KEY_ALL: 'superstate_waitlist_submissions',
-  SIMULATE_LATENCY_MS: 900
+  SIMULATE_LATENCY_MS: 900,
+  // Apps Script Web App URL for the "Influencer Waitlist Responses" sheet.
+  // Deploy google-apps-script/waitlist-webhook.gs and set VITE_WAITLIST_SHEET_URL.
+  SHEET_WEBHOOK_URL: import.meta.env.VITE_WAITLIST_SHEET_URL || ''
 };
 
 export function resolveCoupon(enteredCode) {
@@ -73,23 +76,6 @@ export async function submitWaitlist(data) {
 
   await new Promise(r => setTimeout(r, WAITLIST_CONFIG.SIMULATE_LATENCY_MS));
 
-  /* ── BACKEND PLUG-IN POINT ─────────────────────────────────────────────
-     Replace the localStorage block below with any of:
-
-     A) Google Apps Script (Google Sheets):
-        const fd = new FormData();
-        Object.entries(record).forEach(([k,v]) => fd.append(k, v));
-        await fetch('YOUR_APPS_SCRIPT_URL', { method: 'POST', mode: 'no-cors', body: fd });
-
-     B) Supabase:
-        await supabase.from('waitlist').insert([record]);
-
-     C) Klaviyo / Mailchimp / custom REST:
-        await fetch('/api/waitlist', { method:'POST',
-          headers:{'Content-Type':'application/json'},
-          body: JSON.stringify(record) });
-  ──────────────────────────────────────────────────────────────────────── */
-
   try {
     localStorage.setItem(WAITLIST_CONFIG.STORAGE_KEY_USER, JSON.stringify(record));
     const all = JSON.parse(localStorage.getItem(WAITLIST_CONFIG.STORAGE_KEY_ALL) || '[]');
@@ -98,7 +84,20 @@ export async function submitWaitlist(data) {
     localStorage.setItem(WAITLIST_CONFIG.STORAGE_KEY_ALL, JSON.stringify(all));
   } catch (e) { /* silent */ }
 
+  await sendToSheet(record);
+
   return { success: true, record };
+}
+
+async function sendToSheet(record) {
+  if (!WAITLIST_CONFIG.SHEET_WEBHOOK_URL) return;
+  try {
+    const fd = new FormData();
+    Object.entries(record).forEach(([k, v]) => fd.append(k, v));
+    // no-cors: Apps Script web apps don't return CORS headers; the request
+    // still lands and appends the row, we just can't read the response.
+    await fetch(WAITLIST_CONFIG.SHEET_WEBHOOK_URL, { method: 'POST', mode: 'no-cors', body: fd });
+  } catch (e) { /* non-fatal: local submission already saved */ }
 }
 
 export async function copyToClipboard(text) {
