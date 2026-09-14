@@ -880,39 +880,6 @@
       border-bottom: none;
     }
 
-    /* PDF Report Links in Accordion */
-    .pdf-report-pill {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.75rem 1rem;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      border-radius: 8px;
-      background-color: #f1f5f9;
-      margin-bottom: 0.50rem;
-      text-decoration: none !important;
-      color: #003399 !important;
-      font-weight: 700;
-      font-size: 13px;
-      transition: var(--transition-premium);
-    }
-
-    .pdf-report-pill:last-child {
-      margin-bottom: 0;
-    }
-
-    .pdf-report-pill:hover {
-      background-color: var(--color-blue-tint);
-      border-color: rgba(0, 51, 153, 0.3);
-      transform: translateY(-1px);
-    }
-
-    .pdf-report-pill span.arrow {
-      color: var(--color-muted-slate);
-      font-weight: 500;
-      font-size: 11px;
-    }
-
     /* ----------------------------------------------------
        INTERACTIVE SIDE-CART DRAWER WIDGET (Elite UX Component)
        ---------------------------------------------------- */
@@ -2251,33 +2218,6 @@
               <li style="margin-bottom: 0.25rem;"><strong>Zero Artificial Flavors</strong>: Relying strictly on clean, rich unrefined organic raw cacao taste.</li>
               <li style="margin-bottom: 0.25rem;"><strong>Gluten-Free, Dairy-Free, Soy-Free</strong> and 100% Vegan Certified.</li>
             </ul>
-          </div>
-        </div>
-        
-        <!-- Accordion 4: Lab Reports -->
-        <div class="pdp-accordion-item">
-          <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
-            <span>Verified Independent Lab Certificates</span>
-            <span class="pdp-accordion-icon">+</span>
-          </div>
-          <div class="pdp-accordion-body">
-            <p style="margin-bottom: 1rem; font-size: 13px;">In alignment with our unshakeable transparency guidelines, we publish batch-specific third-party analyses:</p>
-            <a href="javascript:void(0)" onclick="alert('Opening Heavy Metals Batch Analysis PDF...')" class="pdf-report-pill">
-              <span>Heavy Metals Report</span>
-              <span class="arrow">View PDF ↗</span>
-            </a>
-            <a href="javascript:void(0)" onclick="alert('Opening Pesticide-Free Analysis PDF...')" class="pdf-report-pill">
-              <span>Pesticide-Free Analysis</span>
-              <span class="arrow">View PDF ↗</span>
-            </a>
-            <a href="javascript:void(0)" onclick="alert('Opening Active Nutritional Assay PDF...')" class="pdf-report-pill">
-              <span>Nutritional Dose Assay</span>
-              <span class="arrow">View PDF ↗</span>
-            </a>
-            <a href="javascript:void(0)" onclick="alert('Opening Microbial & Purity Report PDF...')" class="pdf-report-pill">
-              <span>Microbial & Purity Certification</span>
-              <span class="arrow">View PDF ↗</span>
-            </a>
           </div>
         </div>
         
