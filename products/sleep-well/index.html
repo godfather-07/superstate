@@ -2993,7 +2993,7 @@
     const SHOPIFY_CONFIG = {
       domain: 'superstate-2.myshopify.com',
       storefrontAccessToken: '4e6ac2ef2a817159f95fb6419f592a58',
-      apiVersion: '2024-10'
+      apiVersion: '2025-10'
     };
 
     const PACK_VARIANT_IDS = {
@@ -3366,18 +3366,22 @@
         });
         const data = await res.json();
         const cart = data?.data?.cartCreate?.cart;
-        const errors = data?.data?.cartCreate?.userErrors;
+        const userErrors = data?.data?.cartCreate?.userErrors;
+        const topLevelErrors = data?.errors;
 
         if (cart && cart.checkoutUrl) {
           window.location.href = cart.checkoutUrl;
           return;
         }
 
-        console.error('Shopify checkout error:', errors || data);
-        alert('Sorry, we could not start checkout. Please try again in a moment.');
+        const detail = (topLevelErrors && topLevelErrors.length && topLevelErrors.map(e => e.message).join('; '))
+          || (userErrors && userErrors.length && userErrors.map(e => e.message).join('; '))
+          || `Unexpected response (HTTP ${res.status})`;
+        console.error('Shopify checkout error:', data);
+        alert(`Sorry, we could not start checkout.\n\nDetails: ${detail}`);
       } catch (err) {
         console.error('Shopify checkout error:', err);
-        alert('Sorry, we could not start checkout. Please try again in a moment.');
+        alert(`Sorry, we could not start checkout.\n\nDetails: ${err.message}`);
       }
 
       if (checkoutBtn) {
