@@ -2986,6 +2986,23 @@
     }
     
     // ----------------------------------------------------
+    // SHOPIFY STOREFRONT API CONFIG
+    // The Storefront API token is designed to be public/client-side safe
+    // (unlike an Admin API token) — see Shopify's Storefront API docs.
+    // ----------------------------------------------------
+    const SHOPIFY_CONFIG = {
+      domain: 'superstate-2.myshopify.com',
+      storefrontAccessToken: '4e6ac2ef2a817159f95fb6419f592a58',
+      apiVersion: '2024-10'
+    };
+
+    const PACK_VARIANT_IDS = {
+      'Pack Of 5': 'gid://shopify/ProductVariant/45350782140459',
+      'Pack Of 15': 'gid://shopify/ProductVariant/45350782173227',
+      'Pack Of 30': 'gid://shopify/ProductVariant/45350782205995'
+    };
+
+    // ----------------------------------------------------
     // PDP SELECTION CONFIG & STATE
     // ----------------------------------------------------
     let selectedFlavour = "Organic Cacao";
@@ -3306,9 +3323,67 @@
       }
     }
     
-    function checkoutSecurely() {
+    async function checkoutSecurely() {
       if (!cartItem) return;
-      alert(`Proceeding to Secure Checkout Gateway!\nSubtotal: ₹${cartItem.price.toLocaleString('en-IN')}\nDiscount Applied: ${isCouponApplied ? '20% OFF' : 'None'}\nFinal Order Value calculated securely via GoKwik API.`);
+
+      const variantId = PACK_VARIANT_IDS[cartItem.pack];
+      if (!variantId) {
+        alert('Something went wrong selecting your pack. Please try again.');
+        return;
+      }
+
+      const checkoutBtn = document.querySelector('.cart-checkout-btn');
+      const originalLabel = checkoutBtn ? checkoutBtn.innerText : '';
+      if (checkoutBtn) {
+        checkoutBtn.disabled = true;
+        checkoutBtn.innerText = 'Redirecting to checkout…';
+      }
+
+      const input = {
+        lines: [{ merchandiseId: variantId, quantity: cartItem.qty }]
+      };
+      if (isCouponApplied) {
+        const code = document.getElementById('cart-coupon-code').value.trim();
+        if (code) input.discountCodes = [code];
+      }
+
+      try {
+        const res = await fetch(`https://${SHOPIFY_CONFIG.domain}/api/${SHOPIFY_CONFIG.apiVersion}/graphql.json`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Shopify-Storefront-Access-Token': SHOPIFY_CONFIG.storefrontAccessToken
+          },
+          body: JSON.stringify({
+            query: `mutation cartCreate($input: CartInput!) {
+              cartCreate(input: $input) {
+                cart { id checkoutUrl }
+                userErrors { field message }
+              }
+            }`,
+            variables: { input }
+          })
+        });
+        const data = await res.json();
+        const cart = data?.data?.cartCreate?.cart;
+        const errors = data?.data?.cartCreate?.userErrors;
+
+        if (cart && cart.checkoutUrl) {
+          window.location.href = cart.checkoutUrl;
+          return;
+        }
+
+        console.error('Shopify checkout error:', errors || data);
+        alert('Sorry, we could not start checkout. Please try again in a moment.');
+      } catch (err) {
+        console.error('Shopify checkout error:', err);
+        alert('Sorry, we could not start checkout. Please try again in a moment.');
+      }
+
+      if (checkoutBtn) {
+        checkoutBtn.disabled = false;
+        checkoutBtn.innerText = originalLabel;
+      }
     }
     
     // ----------------------------------------------------
