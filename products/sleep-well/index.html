@@ -880,39 +880,6 @@
       border-bottom: none;
     }
 
-    /* PDF Report Links in Accordion */
-    .pdf-report-pill {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.75rem 1rem;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      border-radius: 8px;
-      background-color: #f1f5f9;
-      margin-bottom: 0.50rem;
-      text-decoration: none !important;
-      color: #003399 !important;
-      font-weight: 700;
-      font-size: 13px;
-      transition: var(--transition-premium);
-    }
-
-    .pdf-report-pill:last-child {
-      margin-bottom: 0;
-    }
-
-    .pdf-report-pill:hover {
-      background-color: var(--color-blue-tint);
-      border-color: rgba(0, 51, 153, 0.3);
-      transform: translateY(-1px);
-    }
-
-    .pdf-report-pill span.arrow {
-      color: var(--color-muted-slate);
-      font-weight: 500;
-      font-size: 11px;
-    }
-
     /* ----------------------------------------------------
        INTERACTIVE SIDE-CART DRAWER WIDGET (Elite UX Component)
        ---------------------------------------------------- */
@@ -2001,29 +1968,21 @@
               </div>
               
               <!-- Pack Of 15 -->
-              <div class="pack-pill-card" onclick="selectPack('Pack Of 15', 744, 897, 50, 17, this)">
+              <div class="pack-pill-card" onclick="selectPack('Pack Of 15', 900, 900, 60, 0, this)">
                 <div style="display: flex; align-items: center; gap: 0.5rem; width: 100%;">
                   <span style="font-weight: 700; font-size: 16px; color: #000000; font-family: var(--font-body);">Pack Of 15</span>
-                  <span style="background-color: #d91e18; color: #ffffff; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px; text-transform: uppercase;">17% OFF</span>
                 </div>
-                <div style="font-weight: 700; font-size: 18px; color: #000000; margin-top: 0.25rem; display: flex; align-items: baseline; gap: 0.4rem;">
-                  <span>₹ 744</span>
-                  <span style="font-size: 14px; text-decoration: line-through; color: #999999; font-weight: 500;">₹ 897</span>
-                </div>
-                <div style="font-size: 13px; color: #777777; margin-top: 0.15rem; font-weight: 500;">₹ 50/serve</div>
+                <div style="font-weight: 700; font-size: 18px; color: #000000; margin-top: 0.25rem;">₹ 900</div>
+                <div style="font-size: 13px; color: #777777; margin-top: 0.15rem; font-weight: 500;">₹ 60/serve</div>
               </div>
-              
+
               <!-- Pack Of 30 -->
-              <div class="pack-pill-card" onclick="selectPack('Pack Of 30', 1435, 1794, 48, 20, this)">
+              <div class="pack-pill-card" onclick="selectPack('Pack Of 30', 1500, 1500, 50, 0, this)">
                 <div style="display: flex; align-items: center; gap: 0.5rem; width: 100%;">
                   <span style="font-weight: 700; font-size: 16px; color: #000000; font-family: var(--font-body);">Pack Of 30</span>
-                  <span style="background-color: #d91e18; color: #ffffff; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px; text-transform: uppercase;">20% OFF</span>
                 </div>
-                <div style="font-weight: 700; font-size: 18px; color: #000000; margin-top: 0.25rem; display: flex; align-items: baseline; gap: 0.4rem;">
-                  <span>₹ 1,435</span>
-                  <span style="font-size: 14px; text-decoration: line-through; color: #999999; font-weight: 500;">₹ 1,794</span>
-                </div>
-                <div style="font-size: 13px; color: #777777; margin-top: 0.15rem; font-weight: 500;">₹ 48/serve</div>
+                <div style="font-weight: 700; font-size: 18px; color: #000000; margin-top: 0.25rem;">₹ 1,500</div>
+                <div style="font-size: 13px; color: #777777; margin-top: 0.15rem; font-weight: 500;">₹ 50/serve</div>
               </div>
               
             </div>
@@ -2251,33 +2210,6 @@
               <li style="margin-bottom: 0.25rem;"><strong>Zero Artificial Flavors</strong>: Relying strictly on clean, rich unrefined organic raw cacao taste.</li>
               <li style="margin-bottom: 0.25rem;"><strong>Gluten-Free, Dairy-Free, Soy-Free</strong> and 100% Vegan Certified.</li>
             </ul>
-          </div>
-        </div>
-        
-        <!-- Accordion 4: Lab Reports -->
-        <div class="pdp-accordion-item">
-          <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
-            <span>Verified Independent Lab Certificates</span>
-            <span class="pdp-accordion-icon">+</span>
-          </div>
-          <div class="pdp-accordion-body">
-            <p style="margin-bottom: 1rem; font-size: 13px;">In alignment with our unshakeable transparency guidelines, we publish batch-specific third-party analyses:</p>
-            <a href="javascript:void(0)" onclick="alert('Opening Heavy Metals Batch Analysis PDF...')" class="pdf-report-pill">
-              <span>Heavy Metals Report</span>
-              <span class="arrow">View PDF ↗</span>
-            </a>
-            <a href="javascript:void(0)" onclick="alert('Opening Pesticide-Free Analysis PDF...')" class="pdf-report-pill">
-              <span>Pesticide-Free Analysis</span>
-              <span class="arrow">View PDF ↗</span>
-            </a>
-            <a href="javascript:void(0)" onclick="alert('Opening Active Nutritional Assay PDF...')" class="pdf-report-pill">
-              <span>Nutritional Dose Assay</span>
-              <span class="arrow">View PDF ↗</span>
-            </a>
-            <a href="javascript:void(0)" onclick="alert('Opening Microbial & Purity Report PDF...')" class="pdf-report-pill">
-              <span>Microbial & Purity Certification</span>
-              <span class="arrow">View PDF ↗</span>
-            </a>
           </div>
         </div>
         
@@ -2926,7 +2858,7 @@
         <button class="cart-checkout-btn" onclick="checkoutSecurely()">Proceed to Secure Checkout</button>
         
         <div class="cart-trust-footer">
-          <span>GoKwik SECURED</span>
+          <span>SHOPIFY SECURED</span>
           <span>100% SAFE UPI</span>
         </div>
       </div>
@@ -3046,6 +2978,23 @@
     }
     
     // ----------------------------------------------------
+    // SHOPIFY STOREFRONT API CONFIG
+    // The Storefront API token is designed to be public/client-side safe
+    // (unlike an Admin API token) — see Shopify's Storefront API docs.
+    // ----------------------------------------------------
+    const SHOPIFY_CONFIG = {
+      domain: 'superstate-2.myshopify.com',
+      storefrontAccessToken: '4db08100fabc18c78a7f367cf442e29f',
+      apiVersion: '2025-10'
+    };
+
+    const PACK_VARIANT_IDS = {
+      'Pack Of 5': 'gid://shopify/ProductVariant/45350782140459',
+      'Pack Of 15': 'gid://shopify/ProductVariant/45350782173227',
+      'Pack Of 30': 'gid://shopify/ProductVariant/45350782205995'
+    };
+
+    // ----------------------------------------------------
     // PDP SELECTION CONFIG & STATE
     // ----------------------------------------------------
     let selectedFlavour = "Organic Cacao";
@@ -3132,7 +3081,7 @@
     }
     
     // ----------------------------------------------------
-    // CART DRAWER ENGINE (GO-KWIK INSPIRED INTERACTIVE STATE)
+    // CART DRAWER ENGINE
     // ----------------------------------------------------
     let cartItem = null; // Single item e-commerce prototype model
     let isCouponApplied = false;
@@ -3189,15 +3138,15 @@
       let original = 299;
       let serve = 60;
       if (cartItem.pack === "Pack Of 15") {
-        price = 744;
-        original = 897;
-        serve = 50;
+        price = 900;
+        original = 900;
+        serve = 60;
       } else if (cartItem.pack === "Pack Of 30") {
-        price = 1435;
-        original = 1794;
-        serve = 48;
+        price = 1500;
+        original = 1500;
+        serve = 50;
       }
-      
+
       cartItem.price = price * cartItem.qty;
       cartItem.originalPrice = original * cartItem.qty;
       cartItem.servePrice = serve;
@@ -3324,15 +3273,15 @@
       let serve = 60;
       let discount = 0;
       if (newPack === "Pack Of 15") {
-        price = 744;
-        original = 897;
-        serve = 50;
-        discount = 17;
+        price = 900;
+        original = 900;
+        serve = 60;
+        discount = 0;
       } else if (newPack === "Pack Of 30") {
-        price = 1435;
-        original = 1794;
-        serve = 48;
-        discount = 20;
+        price = 1500;
+        original = 1500;
+        serve = 50;
+        discount = 0;
       }
       
       const cards = document.querySelectorAll('.pack-pill-card');
@@ -3366,9 +3315,71 @@
       }
     }
     
-    function checkoutSecurely() {
+    async function checkoutSecurely() {
       if (!cartItem) return;
-      alert(`Proceeding to Secure Checkout Gateway!\nSubtotal: ₹${cartItem.price.toLocaleString('en-IN')}\nDiscount Applied: ${isCouponApplied ? '20% OFF' : 'None'}\nFinal Order Value calculated securely via GoKwik API.`);
+
+      const variantId = PACK_VARIANT_IDS[cartItem.pack];
+      if (!variantId) {
+        alert('Something went wrong selecting your pack. Please try again.');
+        return;
+      }
+
+      const checkoutBtn = document.querySelector('.cart-checkout-btn');
+      const originalLabel = checkoutBtn ? checkoutBtn.innerText : '';
+      if (checkoutBtn) {
+        checkoutBtn.disabled = true;
+        checkoutBtn.innerText = 'Redirecting to checkout…';
+      }
+
+      const input = {
+        lines: [{ merchandiseId: variantId, quantity: cartItem.qty }]
+      };
+      if (isCouponApplied) {
+        const code = document.getElementById('cart-coupon-code').value.trim();
+        if (code) input.discountCodes = [code];
+      }
+
+      try {
+        const res = await fetch(`https://${SHOPIFY_CONFIG.domain}/api/${SHOPIFY_CONFIG.apiVersion}/graphql.json`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Shopify-Storefront-Access-Token': SHOPIFY_CONFIG.storefrontAccessToken
+          },
+          body: JSON.stringify({
+            query: `mutation cartCreate($input: CartInput!) {
+              cartCreate(input: $input) {
+                cart { id checkoutUrl }
+                userErrors { field message }
+              }
+            }`,
+            variables: { input }
+          })
+        });
+        const data = await res.json();
+        const cart = data?.data?.cartCreate?.cart;
+        const userErrors = data?.data?.cartCreate?.userErrors;
+        const topLevelErrors = data?.errors;
+
+        if (cart && cart.checkoutUrl) {
+          window.location.href = cart.checkoutUrl;
+          return;
+        }
+
+        const detail = (topLevelErrors && topLevelErrors.length && topLevelErrors.map(e => e.message).join('; '))
+          || (userErrors && userErrors.length && userErrors.map(e => e.message).join('; '))
+          || `Unexpected response (HTTP ${res.status})`;
+        console.error('Shopify checkout error:', data);
+        alert(`Sorry, we could not start checkout.\n\nDetails: ${detail}`);
+      } catch (err) {
+        console.error('Shopify checkout error:', err);
+        alert(`Sorry, we could not start checkout.\n\nDetails: ${err.message}`);
+      }
+
+      if (checkoutBtn) {
+        checkoutBtn.disabled = false;
+        checkoutBtn.innerText = originalLabel;
+      }
     }
     
     // ----------------------------------------------------
