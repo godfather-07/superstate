@@ -3244,9 +3244,9 @@
         discLine.style.display = "none";
       }
       
-      // Shipping is always flat ₹80
-      const shippingVal = 80;
-      document.getElementById("cart-shipping-price").innerText = "₹80";
+      // Shipping is free
+      const shippingVal = 0;
+      document.getElementById("cart-shipping-price").innerText = "FREE";
       
       const grandTotal = subtotal - discountVal + shippingVal;
       
