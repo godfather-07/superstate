@@ -1968,29 +1968,21 @@
               </div>
               
               <!-- Pack Of 15 -->
-              <div class="pack-pill-card" onclick="selectPack('Pack Of 15', 744, 897, 50, 17, this)">
+              <div class="pack-pill-card" onclick="selectPack('Pack Of 15', 900, 900, 60, 0, this)">
                 <div style="display: flex; align-items: center; gap: 0.5rem; width: 100%;">
                   <span style="font-weight: 700; font-size: 16px; color: #000000; font-family: var(--font-body);">Pack Of 15</span>
-                  <span style="background-color: #d91e18; color: #ffffff; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px; text-transform: uppercase;">17% OFF</span>
                 </div>
-                <div style="font-weight: 700; font-size: 18px; color: #000000; margin-top: 0.25rem; display: flex; align-items: baseline; gap: 0.4rem;">
-                  <span>₹ 744</span>
-                  <span style="font-size: 14px; text-decoration: line-through; color: #999999; font-weight: 500;">₹ 897</span>
-                </div>
-                <div style="font-size: 13px; color: #777777; margin-top: 0.15rem; font-weight: 500;">₹ 50/serve</div>
+                <div style="font-weight: 700; font-size: 18px; color: #000000; margin-top: 0.25rem;">₹ 900</div>
+                <div style="font-size: 13px; color: #777777; margin-top: 0.15rem; font-weight: 500;">₹ 60/serve</div>
               </div>
-              
+
               <!-- Pack Of 30 -->
-              <div class="pack-pill-card" onclick="selectPack('Pack Of 30', 1435, 1794, 48, 20, this)">
+              <div class="pack-pill-card" onclick="selectPack('Pack Of 30', 1700, 1700, 57, 0, this)">
                 <div style="display: flex; align-items: center; gap: 0.5rem; width: 100%;">
                   <span style="font-weight: 700; font-size: 16px; color: #000000; font-family: var(--font-body);">Pack Of 30</span>
-                  <span style="background-color: #d91e18; color: #ffffff; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px; text-transform: uppercase;">20% OFF</span>
                 </div>
-                <div style="font-weight: 700; font-size: 18px; color: #000000; margin-top: 0.25rem; display: flex; align-items: baseline; gap: 0.4rem;">
-                  <span>₹ 1,435</span>
-                  <span style="font-size: 14px; text-decoration: line-through; color: #999999; font-weight: 500;">₹ 1,794</span>
-                </div>
-                <div style="font-size: 13px; color: #777777; margin-top: 0.15rem; font-weight: 500;">₹ 48/serve</div>
+                <div style="font-weight: 700; font-size: 18px; color: #000000; margin-top: 0.25rem;">₹ 1,700</div>
+                <div style="font-size: 13px; color: #777777; margin-top: 0.15rem; font-weight: 500;">₹ 57/serve</div>
               </div>
               
             </div>
@@ -2866,7 +2858,7 @@
         <button class="cart-checkout-btn" onclick="checkoutSecurely()">Proceed to Secure Checkout</button>
         
         <div class="cart-trust-footer">
-          <span>GoKwik SECURED</span>
+          <span>SHOPIFY SECURED</span>
           <span>100% SAFE UPI</span>
         </div>
       </div>
@@ -3089,7 +3081,7 @@
     }
     
     // ----------------------------------------------------
-    // CART DRAWER ENGINE (GO-KWIK INSPIRED INTERACTIVE STATE)
+    // CART DRAWER ENGINE
     // ----------------------------------------------------
     let cartItem = null; // Single item e-commerce prototype model
     let isCouponApplied = false;
@@ -3146,15 +3138,15 @@
       let original = 299;
       let serve = 60;
       if (cartItem.pack === "Pack Of 15") {
-        price = 744;
-        original = 897;
-        serve = 50;
+        price = 900;
+        original = 900;
+        serve = 60;
       } else if (cartItem.pack === "Pack Of 30") {
-        price = 1435;
-        original = 1794;
-        serve = 48;
+        price = 1700;
+        original = 1700;
+        serve = 57;
       }
-      
+
       cartItem.price = price * cartItem.qty;
       cartItem.originalPrice = original * cartItem.qty;
       cartItem.servePrice = serve;
@@ -3281,15 +3273,15 @@
       let serve = 60;
       let discount = 0;
       if (newPack === "Pack Of 15") {
-        price = 744;
-        original = 897;
-        serve = 50;
-        discount = 17;
+        price = 900;
+        original = 900;
+        serve = 60;
+        discount = 0;
       } else if (newPack === "Pack Of 30") {
-        price = 1435;
-        original = 1794;
-        serve = 48;
-        discount = 20;
+        price = 1700;
+        original = 1700;
+        serve = 57;
+        discount = 0;
       }
       
       const cards = document.querySelectorAll('.pack-pill-card');
