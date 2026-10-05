@@ -22,7 +22,7 @@
   <!-- Fonts & Core Stylesheet -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Lora:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Lora:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../style.css" />
   <link rel="icon" type="image/png" href="/favicon.png" />
   
@@ -2709,6 +2709,190 @@
     @media (prefers-reduced-motion: reduce) {
       .era-bar span { animation: none; }
     }
+    /* ---------- What's inside: sticky-note board ---------- */
+    .inside-section {
+      padding: 4rem 0;
+      border-top: 1px solid var(--color-border);
+      scroll-margin-top: 90px;
+    }
+    .inside-board {
+      position: relative;
+      background-color: #fbf8ef;
+      background-image: radial-gradient(rgba(0, 51, 153, 0.16) 1.2px, transparent 1.2px);
+      background-size: 22px 22px;
+      border-radius: 22px;
+      padding: clamp(1.5rem, 4vw, 3rem);
+      color: #001a4d;
+      box-shadow: 0 30px 60px rgba(0, 10, 40, 0.35);
+      transform: rotate(-0.4deg);
+    }
+    .board-tape {
+      position: absolute;
+      top: -14px;
+      width: 120px;
+      height: 30px;
+      background: rgba(228, 255, 90, 0.75);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    }
+    .board-tape-l { left: 8%; transform: rotate(-6deg); }
+    .board-tape-r { right: 8%; transform: rotate(5deg); }
+    .board-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .board-kicker {
+      font-family: 'Caveat', cursive;
+      font-size: 24px;
+      font-weight: 700;
+      color: #207e59;
+      display: inline-block;
+      transform: rotate(-2deg);
+    }
+    .board-title {
+      font-family: var(--font-heading) !important;
+      font-weight: 800;
+      font-size: clamp(40px, 6vw, 72px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: #001a4d;
+      margin: 0.1rem 0 0;
+      text-transform: lowercase;
+    }
+    .board-title mark {
+      color: #001a4d;
+      background: linear-gradient(transparent 55%, rgba(228, 255, 90, 0.95) 55%, rgba(228, 255, 90, 0.95) 92%, transparent 92%);
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-weight: 400;
+      padding: 0 0.1em;
+    }
+    .board-stamp {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #d6336c;
+      border: 2px solid #d6336c;
+      border-radius: 10px;
+      padding: 0.5rem 0.75rem;
+      transform: rotate(6deg);
+      text-align: center;
+      line-height: 1.5;
+      opacity: 0.85;
+    }
+    .board-sub {
+      margin: 0.75rem 0 2rem;
+      font-size: 15px;
+      color: #4a5878;
+    }
+    .notes-grid {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.75rem 1.25rem;
+    }
+    .note {
+      position: relative;
+      padding: 1.6rem 1.1rem 1.1rem;
+      border-radius: 4px 4px 18px 4px;
+      box-shadow: 0 10px 18px rgba(0, 10, 40, 0.14), 0 2px 4px rgba(0, 10, 40, 0.08);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .note:nth-child(4n+1) { transform: rotate(-2.2deg); }
+    .note:nth-child(4n+2) { transform: rotate(1.6deg); }
+    .note:nth-child(4n+3) { transform: rotate(-1deg); }
+    .note:nth-child(4n+4) { transform: rotate(2.4deg); }
+    .note:hover {
+      transform: rotate(0) translateY(-4px);
+      box-shadow: 0 18px 28px rgba(0, 10, 40, 0.2);
+    }
+    .note-tape {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      width: 64px;
+      height: 20px;
+      transform: translateX(-50%) rotate(-3deg);
+      background: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    .note-yellow { background: #fff27a; }
+    .note-pink   { background: #ffc9e0; }
+    .note-mint   { background: #bff2da; }
+    .note-lilac  { background: #dcd0ff; }
+    .note-peach  { background: #ffd9b3; }
+    .note-sky    { background: #c9e6ff; }
+    .note-lime   { background: #E4FF5A; }
+    .note-card {
+      background: #ffffff;
+      background-image: repeating-linear-gradient(transparent 0 25px, rgba(0, 51, 153, 0.12) 25px 26px);
+      border-left: 3px solid #ff8fab;
+    }
+    .note-amt {
+      display: inline-block;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 26px;
+      letter-spacing: -0.03em;
+      color: #001a4d;
+      background: linear-gradient(transparent 60%, rgba(255, 255, 255, 0.75) 60%, rgba(255, 255, 255, 0.75) 92%, transparent 92%);
+      font-variant-numeric: tabular-nums;
+    }
+    .note-name {
+      font-family: var(--font-heading) !important;
+      font-size: 17px !important;
+      font-weight: 800;
+      line-height: 1.2;
+      color: #001a4d !important;
+      margin: 0.3rem 0 0.6rem;
+    }
+    .note-why {
+      margin: 0;
+      font-size: 13.5px;
+      line-height: 1.45;
+      color: #24345a;
+    }
+    .note-why span {
+      display: block;
+      font-family: 'Caveat', cursive;
+      font-size: 19px;
+      font-weight: 700;
+      color: #d6336c;
+      margin-bottom: 0.1rem;
+    }
+    .note-rules {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 0.75rem;
+      font-family: 'Caveat', cursive;
+      font-size: 21px;
+      font-weight: 700;
+      line-height: 26px;
+      color: #001a4d;
+    }
+    .note-rules li::before {
+      content: "✓ ";
+      color: #207e59;
+    }
+    @media (max-width: 991px) {
+      .notes-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 420px) {
+      .notes-grid { gap: 1.5rem 0.9rem; }
+      .note { padding: 1.4rem 0.85rem 0.9rem; }
+      .note-amt { font-size: 22px; }
+      .note-name { font-size: 15px !important; }
+      .note-why { font-size: 12.5px; }
+      .note-why span { font-size: 16px; white-space: nowrap; }
+      .note-rules { font-size: 17px; line-height: 22px; }
+      .board-stamp { display: none; }
+    }
   </style>
 </head>
 
@@ -2945,26 +3129,77 @@
     </div>
   </section>
 
-  <!-- WHAT'S INSIDE -->
-  <section class="simple-section" id="inside">
-    <div class="container simple-container">
-      <h2 class="simple-title">What's inside</h2>
-      <p class="simple-lead">Seven ingredients. Every amount listed. No proprietary blends.</p>
-      <table class="simple-table">
-        <thead>
-          <tr><th>Per sachet (10 g)</th><th>Amount</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Organic raw cacao</td><td>3,000 mg</td></tr>
-          <tr><td>Glycine</td><td>3,000 mg</td></tr>
-          <tr><td>Magnesium L-threonate</td><td>2,000 mg</td></tr>
-          <tr><td>Magnesium bisglycinate</td><td>1,000 mg</td></tr>
-          <tr><td>Tart cherry extract</td><td>500 mg</td></tr>
-          <tr><td>L-theanine</td><td>200 mg</td></tr>
-          <tr><td>Apigenin (from chamomile)</td><td>50 mg</td></tr>
-        </tbody>
-      </table>
-      <p class="simple-note">The full ingredient list and allergen information are printed on the pack.</p>
+  <!-- WHAT'S INSIDE: sticky-note board -->
+  <section class="inside-section" id="inside">
+    <div class="container">
+      <div class="inside-board">
+        <span class="board-tape board-tape-l" aria-hidden="true"></span>
+        <span class="board-tape board-tape-r" aria-hidden="true"></span>
+
+        <div class="board-head">
+          <div>
+            <span class="board-kicker">the whole recipe. no secrets.</span>
+            <h2 class="board-title">what's <mark>inside</mark></h2>
+          </div>
+          <span class="board-stamp">7 ingredients<br>0 proprietary blends</span>
+        </div>
+        <p class="board-sub">every amount, per 10 g sachet. scribbled notes included 👇</p>
+
+        <ul class="notes-grid">
+        <li class="note note-yellow">
+          <span class="note-tape" aria-hidden="true"></span>
+          <span class="note-amt">3,000 mg</span>
+          <h3 class="note-name">organic raw cacao</h3>
+          <p class="note-why"><span>why it’s here →</span> the base. real dark chocolate, not “chocolate flavour”. the bit that makes this a treat 🍫</p>
+        </li>
+        <li class="note note-pink">
+          <span class="note-tape" aria-hidden="true"></span>
+          <span class="note-amt">3,000 mg</span>
+          <h3 class="note-name">glycine</h3>
+          <p class="note-why"><span>why it’s here →</span> an amino acid your body already makes. tastes lightly sweet, which is a nice bonus.</p>
+        </li>
+        <li class="note note-mint">
+          <span class="note-tape" aria-hidden="true"></span>
+          <span class="note-amt">2,000 mg</span>
+          <h3 class="note-name">magnesium L-threonate</h3>
+          <p class="note-why"><span>why it’s here →</span> magnesium bound to threonate. the fancy form, and we’re not shy about the dose.</p>
+        </li>
+        <li class="note note-lilac">
+          <span class="note-tape" aria-hidden="true"></span>
+          <span class="note-amt">1,000 mg</span>
+          <h3 class="note-name">magnesium bisglycinate</h3>
+          <p class="note-why"><span>why it’s here →</span> magnesium paired with glycine. we used two forms of magnesium, not one.</p>
+        </li>
+        <li class="note note-peach">
+          <span class="note-tape" aria-hidden="true"></span>
+          <span class="note-amt">500 mg</span>
+          <h3 class="note-name">tart cherry extract</h3>
+          <p class="note-why"><span>why it’s here →</span> from tart cherries. a little fruity edge hiding under the chocolate 🍒</p>
+        </li>
+        <li class="note note-sky">
+          <span class="note-tape" aria-hidden="true"></span>
+          <span class="note-amt">200 mg</span>
+          <h3 class="note-name">L-theanine</h3>
+          <p class="note-why"><span>why it’s here →</span> found naturally in tea leaves. yes, the same stuff in your chai ☕</p>
+        </li>
+        <li class="note note-lime">
+          <span class="note-tape" aria-hidden="true"></span>
+          <span class="note-amt">50 mg</span>
+          <h3 class="note-name">apigenin</h3>
+          <p class="note-why"><span>why it’s here →</span> a compound found in chamomile, the OG bedtime tea 🌼</p>
+        </li>
+        <li class="note note-card">
+          <span class="note-tape" aria-hidden="true"></span>
+          <h3 class="note-name">rules we made for ourselves</h3>
+          <ul class="note-rules">
+            <li>every amount on the label</li>
+            <li>no proprietary blends</li>
+            <li>no melatonin</li>
+          </ul>
+          <p class="note-why">full ingredient + allergen list is printed on the pack 📦</p>
+        </li>
+        </ul>
+      </div>
     </div>
   </section>
 
