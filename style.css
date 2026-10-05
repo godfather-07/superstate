@@ -91,9 +91,24 @@ body {
   background-color: var(--bg-primary);
   line-height: 1.7;
   font-size: 17px;
+}
+
+/* Scrolling: keep the page itself as the only scroller.
+   overflow-x: hidden on both html and body turns body into its own
+   scroll box (stuck wheel scrolling, broken sticky navbar, janky iOS).
+   `clip` hides sideways overflow without creating a scroll container. */
+html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
-  /* Prevents stray horizontal scrollbars and extra space on the right */
+}
+
+body {
+  overflow-x: clip;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 /* Typography Base */
@@ -1882,4 +1897,4 @@ section {
 }
 
 
-
+

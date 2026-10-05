@@ -68,117 +68,176 @@
   </div>
 
 
-  <!-- SECTION 1 — HERO (Whole Truth Style) -->
-  <header class="hero manifesto-hero section bg-primary fade-up"
-    style="padding-bottom: 0; padding-top: 0; overflow-x: clip;">
-    <div class="container" style="position: relative; padding-top: 0;">
+  <!-- SECTION 1 — HERO -->
+  <header class="home-hero">
+    <div class="container home-hero-grid">
 
-      <div class="hero-two-col">
-
-        <!-- Left: Text -->
-        <div class="hero-text-col" style="max-width: 700px; display: flex; flex-direction: column; gap: 1.25rem; align-items: flex-start;">
-          <h1
-            style="margin-bottom: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 600; font-size: clamp(54px, 6vw, 70px); line-height: 1.05; letter-spacing: -1.5px;">
-            Health, <br><span class="text-underline">simplified.</span></h1>
-
-          <div class="hero-subheadline"
-            style="width:100%; font-size: clamp(16px, 1.3vw, 19px); line-height: 1.7; white-space: normal;">
-            <span class="subheadline-left">
-              We make health simple in a world <br>
-              that makes it
-              <span
-                style="position: relative; z-index: 1; padding: 0.1rem 0.4rem; color: #fff; display: inline-block; white-space: nowrap;">
-                complicated.
-                <svg style="width:0; height:0; position:absolute;" aria-hidden="true" focusable="false">
-                  <defs>
-                    <filter id="rough-highlighter" x="-10%" y="-10%" width="120%" height="120%">
-                      <feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="3" result="noise" />
-                      <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R"
-                        yChannelSelector="G" />
-                    </filter>
-                  </defs>
-                </svg>
-                <span
-                  style="position: absolute; top: 5%; left: -2%; width: 104%; height: 90%; background-color: var(--accent-brand); z-index: -1; transform: rotate(-2deg); border-radius: 3px; filter: url(#rough-highlighter);"></span>
-              </span>
-            </span>
-          </div>
-
-          <div class="hero-cta-row">
-          <a href="/products/sleep-well/" class="btn btn-primary hero-shop-btn">Pre-book Sleep Well · 50% off</a>
-          <a href="/pages/our-story/" class="btn btn-outline"
-            style="padding:0.75rem 1.75rem; font-size:15px; letter-spacing: 0.5px; display:inline-block; margin-top: 0;">Our Story →</a>
-          </div>
+      <div class="home-hero-copy">
+        <span class="home-pill"><span class="home-pill-dot"></span> batch 01 sold out 💅 next drop loading</span>
+        <h1 class="home-h1">Health,<br><em>simplified.</em></h1>
+        <p class="home-sub">we make health simple in a world that makes it <span class="home-mark">complicated.</span></p>
+        <p class="home-sub home-sub-small">first up: <strong>sleep well</strong>, a dark chocolate drink for your evenings. coffee, but for sleep ☾</p>
+        <div class="home-ctas">
+          <a href="/products/sleep-well/" class="home-btn home-btn-primary">Pre-book Sleep Well · 50% off</a>
+          <a href="/pages/our-story/" class="home-btn home-btn-ghost">Our Story →</a>
         </div>
-
-        <!-- Right: Product Image -->
-        <div class="hero-image-col">
-          <div class="hero-product-wrap">
-            <span class="home-sticker" aria-hidden="true">coffee, but for sleep ☾</span>
-            <img src="/assets/sleep-well-box.webp" alt="SuperState Sleep Well box" class="hero-product-img" width="763" height="1172">
-          </div>
-        </div>
-
+        <ul class="home-facts">
+          <li>no melatonin</li>
+          <li>every amount listed</li>
+          <li>free shipping in India</li>
+        </ul>
       </div>
+
+      <div class="home-hero-visual">
+        <span class="home-sticker" aria-hidden="true">coffee, but for sleep ☾</span>
+        <img src="/assets/sleep-well-box.webp" alt="SuperState Sleep Well box" width="763" height="1172" fetchpriority="high">
+      </div>
+
     </div>
   </header>
 
   <style>
-    .hero-cta-row {
+    .home-hero {
+      position: relative;
+      overflow: hidden;
+      color: #ffffff;
+      background: radial-gradient(circle at 72% 50%, rgba(77, 128, 255, 0.55), rgba(0, 51, 153, 0) 42%), #003399;
+    }
+    .home-hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      align-items: center;
+      gap: 2rem;
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+      min-height: min(640px, calc(100vh - 80px));
+    }
+    .home-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 13px;
+      font-weight: 700;
+      color: #E4FF5A;
+      border: 1px solid rgba(228, 255, 90, 0.5);
+      border-radius: 999px;
+      padding: 0.35rem 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+    .home-pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ff6b6b;
+      animation: home-pulse 1.8s infinite;
+    }
+    @keyframes home-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(255, 107, 107, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); }
+    }
+    .home-h1 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 800;
+      font-size: clamp(54px, 7.5vw, 104px);
+      line-height: 0.95;
+      letter-spacing: -0.045em;
+      color: #ffffff;
+      margin: 0 0 1.25rem;
+    }
+    .home-h1 em {
+      font-family: 'Instrument Serif', serif;
+      font-weight: 400;
+      font-style: italic;
+      letter-spacing: -0.01em;
+      background: linear-gradient(transparent 60%, rgba(228, 255, 90, 0.85) 60%, rgba(228, 255, 90, 0.85) 92%, transparent 92%);
+      padding: 0 0.08em;
+    }
+    .home-sub {
+      font-size: clamp(18px, 1.6vw, 21px);
+      line-height: 1.5;
+      color: #ffffff;
+      margin: 0 0 0.75rem;
+      max-width: 32ch;
+    }
+    .home-sub-small {
+      font-size: 16px;
+      color: #cbd5e1;
+      max-width: 40ch;
+      margin-bottom: 1.75rem;
+    }
+    .home-sub-small strong {
+      color: #E4FF5A;
+    }
+    .home-mark {
+      display: inline-block;
+      background: #E4FF5A;
+      color: #003399;
+      font-weight: 700;
+      padding: 0 0.4rem;
+      border-radius: 4px;
+      transform: rotate(-2deg);
+    }
+    .home-ctas {
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
-      gap: 1rem;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
     }
-
-    .hero-cta-row .btn {
-      margin-top: 0 !important;
+    .home-btn {
+      display: inline-block;
+      font-weight: 800;
+      font-size: 16px;
+      text-decoration: none;
+      border-radius: 14px;
+      padding: 0.95rem 1.5rem;
+      line-height: 1.2;
+      transition: transform 0.2s ease;
     }
-
-    .hero-two-col {
+    .home-btn:hover {
+      transform: translateY(-2px);
+    }
+    .home-btn-primary {
+      background: #E4FF5A;
+      color: #003399;
+    }
+    .home-btn-ghost {
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+    .home-facts {
+      list-style: none;
+      padding: 0;
+      margin: 0;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 2rem;
-      min-height: auto;
-      padding: 2rem 0 0;
+      flex-wrap: wrap;
+      gap: 0.4rem 1.25rem;
+      font-size: 14px;
+      color: #cbd5e1;
     }
-
-    .hero-text-col {
-      flex: 1 1 50%;
-      z-index: 1;
-      order: 1;
-      margin-top: -3rem;
+    .home-facts li::before {
+      content: "✓";
+      color: #33cc99;
+      font-weight: 700;
+      margin-right: 0.4rem;
     }
-
-    .hero-image-col {
-      flex: 1 1 50%;
-      max-width: 600px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      order: 2;
-      margin-top: -1rem;
-      padding: 2rem 0 4rem;
-    }
-
-    .hero-product-wrap {
+    .home-hero-visual {
       position: relative;
-      width: 100%;
       display: flex;
-      justify-content: flex-end;
-      animation: floatProduct 4s ease-in-out infinite;
+      justify-content: center;
     }
-
-    .hero-product-img {
+    .home-hero-visual img {
       width: auto;
-      height: auto;
       max-width: 100%;
-      max-height: 520px;
-      display: block;
-      filter: drop-shadow(0 30px 30px rgba(0, 26, 77, 0.35)) drop-shadow(0 8px 10px rgba(0, 26, 77, 0.2));
+      height: auto;
+      max-height: min(560px, 70vh);
+      filter: drop-shadow(0 30px 32px rgba(0, 10, 40, 0.55)) drop-shadow(0 6px 10px rgba(0, 10, 40, 0.35));
+      animation: home-float 6s ease-in-out infinite;
     }
-
+    @keyframes home-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
     .home-sticker {
       position: absolute;
       bottom: 16%;
@@ -192,65 +251,33 @@
       font-size: clamp(16px, 2vw, 22px);
       padding: 0.45rem 1rem;
       border-radius: 999px;
-      box-shadow: 0 8px 20px rgba(0, 26, 77, 0.25);
+      box-shadow: 0 8px 20px rgba(0, 10, 40, 0.35);
       white-space: nowrap;
     }
-
-    @keyframes floatProduct {
-      0%, 100% {
-        transform: translateY(0px);
+    @media (max-width: 860px) {
+      .home-hero-grid {
+        grid-template-columns: 1fr;
+        min-height: 0;
+        padding-top: 2rem;
+        padding-bottom: 2.5rem;
+        gap: 1.5rem;
       }
-      50% {
-        transform: translateY(-16px);
+      .home-hero-visual {
+        order: -1;
       }
-    }
-
-    @media (max-width: 992px) {
-      .hero-two-col {
-        flex-direction: column;
-        text-align: center;
-        min-height: auto;
-        padding: var(--space-13) 0 0;
-        align-items: center;
+      .home-hero-visual img {
+        max-height: 250px;
       }
-
-      .hero-text-col {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        text-align: left;
-        margin-top: 0; /* Reset desktop negative margin-top to prevent nav overlap on mobile */
+      .home-sticker {
+        left: 2%;
+        bottom: 10%;
       }
-
-      .hero-text-col .btn-outline {
-        align-self: center; /* centered on mobile */
-      }
-
-      .hero-text-col .subheadline {
-        text-align: left;
-      }
-
-      .hero-image-col {
-        flex: 0 0 auto;
-        width: 100%;
-        max-width: 480px;
-        margin: 2rem auto 0;
-        justify-content: center;
-      }
-
-      .hero-product-wrap {
-        justify-content: center;
-      }
-
-      .hero-product-img {
-        max-width: 100%;
-        max-height: 420px;
-        margin: 0 auto;
-      }
-
-      .hero-image-col {
+      .home-pill {
         margin-bottom: 1rem;
       }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .home-hero-visual img, .home-pill-dot { animation: none; }
     }
   </style>
 
