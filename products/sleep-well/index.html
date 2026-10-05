@@ -140,14 +140,35 @@
         grid-template-columns: 1.05fr 0.95fr;
         grid-template-areas:
           "gallery info"
-          "extras  info";
-        grid-template-rows: auto 1fr;
+          "extras  info"
+          "bar     bar";
+        grid-template-rows: auto 1fr auto;
         column-gap: 3.5rem;
         row-gap: 1.25rem;
       }
       .pdp-gallery-column { grid-area: gallery; }
       .pdp-info-column { grid-area: info; }
       .pdp-extras { grid-area: extras; align-self: start; }
+      .era-bar-wrap { grid-area: bar; }
+      .era-bar-wrap .era-card {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 0.9rem 1.25rem;
+      }
+      .era-bar-wrap .era-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.35rem;
+        flex-shrink: 0;
+      }
+      .era-bar-wrap .era-copy {
+        flex: 1;
+        margin: 0;
+      }
+      .era-bar-wrap .era-progress {
+        flex: 0 0 220px;
+      }
     }
 
     /* Sticky Gallery Column */
@@ -2516,6 +2537,14 @@
       width: 100%;
       margin: 0 auto;
     }
+    .era-bar-wrap {
+      max-width: 600px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    @media (min-width: 992px) {
+      .era-bar-wrap { max-width: none; }
+    }
     .era-card {
       position: relative;
       padding: 1.1rem 1.25rem 1rem;
@@ -2821,20 +2850,25 @@
             <li>Free shipping in India</li>
             <li>No melatonin</li>
           </ul>
+          
+        </div>
 
-          <div class="era-card" style="margin-top: 1.5rem;">
+        <!-- SOLD-OUT BAR (spans both columns on desktop) -->
+        <div class="era-bar-wrap">
+          <div class="era-card">
             <div class="era-top">
               <span class="era-badge">sold out era 💅</span>
               <span class="era-batch">batch 01</span>
             </div>
             <p class="era-copy">ok so… batch 01 got <strong>absolutely cleared.</strong> y'all ate it up way faster than we planned 🫠 we took notes, made it <em>even better</em>, and the next drop is loading:</p>
-            <div class="era-bar" role="img" aria-label="Next drop loading"><span></span></div>
-            <p class="era-foot">hold your horses 🐎 steady, steady.</p>
+            <div class="era-progress">
+              <div class="era-bar" role="img" aria-label="Next drop loading"><span></span></div>
+              <p class="era-foot">hold your horses 🐎 steady, steady.</p>
+            </div>
           </div>
-          
         </div>
 
-        <!-- EXTRAS: sold-out note + win-your-code game -->
+        <!-- EXTRAS: win-your-code game -->
         <div class="pdp-extras">
           <div class="game-card" id="win">
             <!-- intro -->
