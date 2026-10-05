@@ -144,20 +144,30 @@
       max-width: 600px;
       margin: 0 auto;
       aspect-ratio: 1080 / 1060;
-      border-radius: 20px;
-      overflow: hidden;
-      border: 1px solid var(--color-border);
       position: relative;
-      background-color: var(--color-truth-white);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+      display: grid;
+      place-items: center;
+      /* No frame: the cut-out box sits directly on the page blue */
+      background: radial-gradient(closest-side, rgba(77, 128, 255, 0.45), rgba(0, 51, 153, 0) 100%);
     }
 
     .pdp-gallery-viewport img {
-      width: 100%;
-      height: 100%;
+      width: auto;
+      height: 92%;
+      max-height: 68vh;
+      max-width: 100%;
       object-fit: contain;
-      transition: opacity 0.4s ease;
-      opacity: 1;
+      filter: drop-shadow(0 28px 32px rgba(0, 10, 40, 0.55)) drop-shadow(0 6px 10px rgba(0, 10, 40, 0.35));
+      animation: box-float 6s ease-in-out infinite;
+    }
+
+    @keyframes box-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pdp-gallery-viewport img { animation: none; }
     }
 
     .gallery-nav-btn {
@@ -1035,14 +1045,14 @@
       border-radius: 8px;
       overflow: hidden;
       flex-shrink: 0;
-      background-color: var(--color-truth-white);
+      background-color: var(--color-off-white);
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .cart-item-img img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
     }
 
     .cart-item-details {
@@ -1916,14 +1926,7 @@
         <!-- COLUMN 1: STICKY GALLERY (Left) -->
         <div class="pdp-gallery-column">
           <div class="pdp-gallery-viewport">
-            <img id="main-gallery-img" src="/assets/Product%20Image%201.png" alt="SuperState Sleep Well Product Hero">
-            
-            <button class="gallery-nav-btn prev" onclick="navigateGallery(-1)">❮</button>
-            <button class="gallery-nav-btn next" onclick="navigateGallery(1)">❯</button>
-          </div>
-          
-          <div class="gallery-thumbnails-row" id="gallery-thumbs-container">
-            <!-- Thumbnails generated dynamically by JS -->
+            <img id="main-gallery-img" src="/assets/sleep-well-box.webp" alt="SuperState Sleep Well dark chocolate ritual box" width="763" height="1172" fetchpriority="high">
           </div>
 
         </div>
@@ -2868,70 +2871,6 @@
   <!-- INTERACTIVE FUNCTIONAL JAVASCRIPT -->
   <script>
     // ----------------------------------------------------
-    // GALLERY IMAGES DATA
-    // ----------------------------------------------------
-    const galleryImages = [
-      { src: "/assets/Product%20Image%201.png", alt: "SuperState Sleep Well Product Image 1" },
-      { src: "/assets/Product%20Image%202.png", alt: "SuperState Sleep Well Product Image 2" },
-      { src: "/assets/Product%20Image%203.png", alt: "SuperState Sleep Well Product Image 3" },
-      { src: "/assets/Product%20Image%204.png", alt: "SuperState Sleep Well Product Image 4" },
-      { src: "/assets/Product%20Image%205.png", alt: "SuperState Sleep Well Product Image 5" }
-    ];
-    
-    let currentGalleryIndex = 0;
-    
-    // Generate thumbnails on load
-    function initGallery() {
-      const thumbsContainer = document.getElementById("gallery-thumbs-container");
-      thumbsContainer.innerHTML = "";
-      
-      galleryImages.forEach((imgData, index) => {
-        const thumbDiv = document.createElement("div");
-        thumbDiv.className = `gallery-thumb ${index === 0 ? 'active' : ''}`;
-        thumbDiv.setAttribute("onclick", `setGalleryImage(${index})`);
-        
-        const img = document.createElement("img");
-        img.src = imgData.src;
-        img.alt = imgData.alt;
-        
-        thumbDiv.appendChild(img);
-        thumbsContainer.appendChild(thumbDiv);
-      });
-    }
-    
-    function setGalleryImage(index) {
-      currentGalleryIndex = index;
-      const mainImg = document.getElementById("main-gallery-img");
-      
-      // Fade transition effect
-      mainImg.style.opacity = 0;
-      setTimeout(() => {
-        mainImg.src = galleryImages[index].src;
-        mainImg.alt = galleryImages[index].alt;
-        mainImg.style.opacity = 1;
-      }, 150);
-      
-      // Update active state in thumbnails
-      const thumbs = document.querySelectorAll(".gallery-thumb");
-      thumbs.forEach((thumb, idx) => {
-        if (idx === index) {
-          thumb.classList.add("active");
-          // Smooth scroll thumbnail into view if needed
-          thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-        } else {
-          thumb.classList.remove("active");
-        }
-      });
-    }
-    
-    function navigateGallery(direction) {
-      let newIndex = currentGalleryIndex + direction;
-      if (newIndex >= galleryImages.length) newIndex = 0;
-      if (newIndex < 0) newIndex = galleryImages.length - 1;
-      setGalleryImage(newIndex);
-    }
-    
-    // ----------------------------------------------------
     // GALLERY EXTRA INFO TABS ENGINE
     // ----------------------------------------------------
     function switchGalleryTab(tabId, btnElement) {
@@ -3191,7 +3130,7 @@
       
       card.innerHTML = `
         <div class="cart-item-img">
-          <img src="/assets/Product%20Image%201.png" alt="Product Box Packaging">
+          <img src="/assets/sleep-well-box.webp" alt="Sleep Well box">
         </div>
         <div class="cart-item-details">
           <div>
@@ -3386,7 +3325,6 @@
     // INITIALIZATION & DYNAMIC LOOPS
     // ----------------------------------------------------
     window.addEventListener("DOMContentLoaded", () => {
-      initGallery();
       updateSummaryFeedback();
       
       // Accordion responsive trigger: Make sure open accordions are correctly dimensioned
