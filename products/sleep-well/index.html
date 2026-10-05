@@ -6,6 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sleep Well | SuperState</title>
   <meta name="description" content="SuperState Sleep Well: a dark chocolate drink you mix and sip 30 minutes before bed. Every ingredient and amount listed." />
+  <link rel="canonical" href="https://superstate.in/products/sleep-well/" />
+  <meta name="theme-color" content="#003399" />
+  <meta property="og:type" content="product" />
+  <meta property="og:site_name" content="SuperState" />
+  <meta property="og:url" content="https://superstate.in/products/sleep-well/" />
+  <meta property="og:title" content="Sleep Well by SuperState: coffee, but for sleep ☾" />
+  <meta property="og:description" content="A dark chocolate drink for your evenings. Mix one sachet, sip it 30 minutes before bed. ₹299, free shipping." />
+  <meta property="og:image" content="https://superstate.in/assets/og-sleep-well.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://superstate.in/assets/og-sleep-well.jpg" />
   
   <!-- Fonts & Core Stylesheet -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2285,6 +2297,86 @@
     @media (prefers-reduced-motion: reduce) {
       .vibe-ticker-track { animation: none; }
     }
+    /* Best value tag */
+    .pack-best-tag {
+      position: absolute;
+      top: -11px;
+      right: 10px;
+      background: var(--color-first-light);
+      color: var(--color-deep-knowing);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      padding: 3px 9px;
+      border-radius: 999px;
+      transform: rotate(3deg);
+      box-shadow: 0 4px 10px rgba(0, 10, 40, 0.25);
+      white-space: nowrap;
+    }
+
+    /* Sticky mobile add-to-cart bar */
+    .sticky-buy {
+      display: none;
+    }
+    @media (max-width: 991px) {
+      .sticky-buy {
+        position: fixed;
+        left: 12px;
+        right: 12px;
+        bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+        z-index: 1500;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.6rem 0.6rem 0.6rem 0.9rem;
+        background: rgba(0, 26, 77, 0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 18px;
+        box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4);
+        transform: translateY(140%);
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .sticky-buy.visible {
+        transform: translateY(0);
+      }
+      .sticky-buy img {
+        width: 32px;
+        height: auto;
+        flex-shrink: 0;
+      }
+      .sticky-buy-info {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.2;
+        min-width: 0;
+        flex: 1;
+      }
+      .sticky-buy-info strong {
+        font-size: 15px;
+        color: #ffffff;
+      }
+      .sticky-buy-info span {
+        font-size: 13px;
+        color: var(--color-muted-slate);
+      }
+      .sticky-buy button {
+        flex-shrink: 0;
+        background: var(--color-first-light);
+        color: var(--color-deep-knowing);
+        border: none;
+        border-radius: 12px;
+        padding: 0.8rem 1.2rem;
+        font-family: var(--font-body);
+        font-weight: 800;
+        font-size: 15px;
+        cursor: pointer;
+      }
+      footer.footer {
+        padding-bottom: 6rem;
+      }
+    }
   </style>
 </head>
 
@@ -2395,6 +2487,7 @@
 
               <!-- Pack Of 30 -->
               <div class="pack-pill-card" onclick="selectPack('Pack Of 30', 1500, 1500, 50, 0, this)">
+                <span class="pack-best-tag">best value ✶</span>
                 <div style="display: flex; align-items: center; gap: 0.5rem; width: 100%;">
                   <span style="font-weight: 700; font-size: 16px; color: #000000; font-family: var(--font-body);">Pack Of 30</span>
                 </div>
@@ -2636,6 +2729,16 @@
     </div>
   </footer>
 
+  <!-- STICKY MOBILE ADD-TO-CART BAR -->
+  <div class="sticky-buy" id="sticky-buy" aria-hidden="true">
+    <img src="/assets/sleep-well-box.webp" alt="" width="32" height="49">
+    <div class="sticky-buy-info">
+      <strong>Sleep Well</strong>
+      <span id="sticky-buy-meta">Pack Of 5 · ₹299</span>
+    </div>
+    <button type="button" onclick="triggerAddToCart()" tabindex="-1">Add to cart</button>
+  </div>
+
   <!-- INTERACTIVE SIDE-CART DRAWER WIDGET (HTML) -->
   <div class="cart-drawer-overlay" id="cart-overlay" onclick="closeCartDrawer(event)">
     <div class="cart-drawer-panel" onclick="event.stopPropagation()">
@@ -2829,6 +2932,9 @@
       if (summaryServe) summaryServe.innerText = `₹${currentServePrice} / serving`;
       
       // Update top prices (displays single pack unit price)
+      const stickyMeta = document.getElementById("sticky-buy-meta");
+      if (stickyMeta) stickyMeta.innerText = `${selectedPack} · ₹${currentPrice.toLocaleString('en-IN')}`;
+
       const topPrice = document.getElementById("pdp-top-price");
       if (topPrice) topPrice.innerText = `₹${currentPrice.toLocaleString('en-IN')}`;
       
@@ -3154,6 +3260,18 @@
     // ----------------------------------------------------
     window.addEventListener("DOMContentLoaded", () => {
       updateSummaryFeedback();
+
+      // Sticky add-to-cart bar: visible once the buy box scrolls out of view
+      const stickyBuy = document.getElementById("sticky-buy");
+      const buySection = document.getElementById("buy-section");
+      if (stickyBuy && buySection && "IntersectionObserver" in window) {
+        new IntersectionObserver(([entry]) => {
+          const show = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+          stickyBuy.classList.toggle("visible", show);
+          stickyBuy.setAttribute("aria-hidden", show ? "false" : "true");
+          stickyBuy.querySelector("button").tabIndex = show ? 0 : -1;
+        }).observe(buySection);
+      }
 
       // Keep the ritual video still for people who prefer reduced motion
       const ritualVideo = document.querySelector(".ritual-video");

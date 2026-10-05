@@ -6,7 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SuperState | Health, simplified.</title>
   <meta name="description"
-    content="Science-backed daily restoration. We turn complex nutrition into a simple, dark-chocolate ritual." />
+    content="SuperState makes health simple. Our first product, Sleep Well, is a dark chocolate drink for your evenings: coffee, but for sleep." />
+  <link rel="canonical" href="https://superstate.in/" />
+  <meta name="theme-color" content="#003399" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="SuperState" />
+  <meta property="og:url" content="https://superstate.in/" />
+  <meta property="og:title" content="SuperState | Health, simplified." />
+  <meta property="og:description" content="Meet Sleep Well: a dark chocolate drink for your evenings. Coffee, but for sleep ☾" />
+  <meta property="og:image" content="https://superstate.in/assets/og-sleep-well.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://superstate.in/assets/og-sleep-well.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css" />
   <link rel="icon" type="image/png" href="/favicon.png" />
 </head>
@@ -89,14 +104,18 @@
             </span>
           </div>
 
+          <div class="hero-cta-row">
+          <a href="/products/sleep-well/" class="btn btn-primary hero-shop-btn">Shop Sleep Well · ₹299</a>
           <a href="/pages/our-story/" class="btn btn-outline"
             style="padding:0.75rem 1.75rem; font-size:15px; letter-spacing: 0.5px; display:inline-block; margin-top: 0;">Our Story →</a>
+          </div>
         </div>
 
         <!-- Right: Product Image -->
         <div class="hero-image-col">
           <div class="hero-product-wrap">
-            <img src="/assets/Product%20Image%201.png" alt="SuperState Product Image" class="hero-product-img">
+            <span class="home-sticker" aria-hidden="true">coffee, but for sleep ☾</span>
+            <img src="/assets/sleep-well-box.webp" alt="SuperState Sleep Well box" class="hero-product-img" width="763" height="1172">
           </div>
         </div>
 
@@ -105,6 +124,17 @@
   </header>
 
   <style>
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hero-cta-row .btn {
+      margin-top: 0 !important;
+    }
+
     .hero-two-col {
       display: flex;
       align-items: center;
@@ -128,9 +158,8 @@
       align-items: center;
       justify-content: flex-end;
       order: 2;
-      margin-top: -3rem;
-      margin-right: -3rem;
-      margin-bottom: -5rem;
+      margin-top: -1rem;
+      padding: 2rem 0 4rem;
     }
 
     .hero-product-wrap {
@@ -142,10 +171,29 @@
     }
 
     .hero-product-img {
-      width: 100%;
+      width: auto;
       height: auto;
-      max-width: 600px;
+      max-width: 100%;
+      max-height: 520px;
       display: block;
+      filter: drop-shadow(0 30px 30px rgba(0, 26, 77, 0.35)) drop-shadow(0 8px 10px rgba(0, 26, 77, 0.2));
+    }
+
+    .home-sticker {
+      position: absolute;
+      bottom: 16%;
+      left: 4%;
+      z-index: 2;
+      transform: rotate(-6deg);
+      background: #E4FF5A;
+      color: #003399;
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: clamp(16px, 2vw, 22px);
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      box-shadow: 0 8px 20px rgba(0, 26, 77, 0.25);
+      white-space: nowrap;
     }
 
     @keyframes floatProduct {
@@ -196,7 +244,12 @@
 
       .hero-product-img {
         max-width: 100%;
+        max-height: 420px;
         margin: 0 auto;
+      }
+
+      .hero-image-col {
+        margin-bottom: 1rem;
       }
     }
   </style>
@@ -477,20 +530,112 @@
     </style>
   </section>
 
-  <!-- SECTION 6 — PRODUCT TEASER (The Whisper) -->
-  <section class="product-teaser bg-white fade-up" style="padding: var(--space-21) 0;">
-    <div class="container text-center">
-      <h2 style="margin-bottom: 3rem; line-height: 1;">Our first product <br> is <span class="text-underline"
-          style="text-decoration-color: var(--accent-brand);">almost here.</span></h2>
-      <p
-        style="font-size: 28px; max-width: 800px; margin: 0 auto 5rem; color: #666; font-weight: 500; line-height: 1.4;">
-        We are starting where restoration begins: the night. Our first release is a simple, science-led ritual for
-        deeper recovery.
-      </p>
-      <a href="/products/sleep-well/" class="btn btn-outline"
-        style="border-style: dashed; border-width: 3px; font-size: 20px; padding: 1.5rem 4rem;">See the product →</a>
+  <!-- SECTION 6 — FIRST PRODUCT -->
+  <section class="first-product fade-up">
+    <div class="container first-product-grid">
+      <div class="first-product-copy">
+        <span class="fp-tag">our first product ✶ out now</span>
+        <h2 class="fp-title">sleep is the <em>best supplement</em> in the whole world.</h2>
+        <p class="fp-text">so we started with the night. sleep well is a dark chocolate drink you mix and sip 30 minutes before bed. seven ingredients, every amount listed, no melatonin.</p>
+        <p class="fp-coffee"><em>coffee, but for sleep ☾</em></p>
+        <a href="/products/sleep-well/" class="btn fp-btn">Shop Sleep Well · ₹299 →</a>
+      </div>
+      <div class="first-product-visual">
+        <img src="/assets/sleep-well-box.webp" alt="SuperState Sleep Well box" width="763" height="1172" loading="lazy">
+      </div>
     </div>
   </section>
+
+  <style>
+    .first-product {
+      background: radial-gradient(circle at 75% 50%, rgba(77, 128, 255, 0.55), rgba(0, 51, 153, 0) 45%), #003399;
+      color: #ffffff;
+      padding: 6rem 0;
+      overflow: hidden;
+    }
+    .first-product-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+      gap: 3rem;
+      align-items: center;
+    }
+    .fp-tag {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #E4FF5A;
+      border: 1px solid rgba(228, 255, 90, 0.5);
+      border-radius: 999px;
+      padding: 0.35rem 0.85rem;
+      margin-bottom: 1.75rem;
+    }
+    .fp-title {
+      color: #ffffff;
+      font-weight: 800;
+      font-size: clamp(38px, 5.5vw, 72px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin: 0 0 1.5rem;
+      text-transform: lowercase;
+    }
+    .fp-title em,
+    .fp-coffee em {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+    .fp-title em {
+      background: linear-gradient(transparent 58%, rgba(228, 255, 90, 0.85) 58%, rgba(228, 255, 90, 0.85) 92%, transparent 92%);
+      padding: 0 0.1em;
+    }
+    .fp-text {
+      font-size: clamp(17px, 1.8vw, 20px);
+      line-height: 1.55;
+      color: #cbd5e1;
+      max-width: 36ch;
+      margin: 0 0 1.25rem;
+    }
+    .fp-coffee {
+      font-size: clamp(26px, 3vw, 36px);
+      color: #E4FF5A;
+      margin: 0 0 2rem;
+    }
+    .fp-btn {
+      background: #E4FF5A !important;
+      color: #003399 !important;
+      border: none !important;
+      font-weight: 800;
+    }
+    .first-product-visual {
+      display: flex;
+      justify-content: center;
+    }
+    .first-product-visual img {
+      width: auto;
+      max-width: 100%;
+      max-height: 480px;
+      height: auto;
+      transform: rotate(4deg);
+      filter: drop-shadow(0 30px 32px rgba(0, 10, 40, 0.55));
+    }
+    @media (max-width: 860px) {
+      .first-product {
+        padding: 4.5rem 0;
+      }
+      .first-product-grid {
+        grid-template-columns: 1fr;
+      }
+      .first-product-visual {
+        order: -1;
+      }
+      .first-product-visual img {
+        max-height: 340px;
+      }
+    }
+  </style>
 
   <!-- Global Footer -->
   <footer class="footer fade-up">
@@ -554,7 +699,7 @@
         </div>
         <div>
           <h4>One honest email a week.</h4>
-          <p style="font-size: 14px; margin-bottom: 1rem; opacity: 0.8;">No fluff. Just science, sleep tips, and early
+          <p style="font-size: 14px; margin-bottom: 1rem; opacity: 0.8;">No fluff. Just updates and early
             access.</p>
           <form class="newsletter-form waitlist-form">
             <input type="email" placeholder="Your email" required>
@@ -564,7 +709,7 @@
       </div>
       <div class="footer-bottom">
         <div>© 2025 SuperState | Privacy Policy | Terms | Shipping | Returns</div>
-        <div>FSSAI Licensed | Vegan Certified | Made in India</div>
+        <div>Made in India</div>
       </div>
     </div>
   </footer>
