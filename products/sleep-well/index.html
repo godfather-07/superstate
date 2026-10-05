@@ -12,7 +12,7 @@
   <meta property="og:site_name" content="SuperState" />
   <meta property="og:url" content="https://superstate.in/products/sleep-well/" />
   <meta property="og:title" content="Sleep Well by SuperState: coffee, but for sleep ☾" />
-  <meta property="og:description" content="A dark chocolate drink for your evenings. Mix one sachet, sip it 30 minutes before bed. ₹299, free shipping." />
+  <meta property="og:description" content="Batch 01 sold out. Pre-book the next drop at 50% off, or grab 20% off with code STEADY20." />
   <meta property="og:image" content="https://superstate.in/assets/og-sleep-well.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -2377,6 +2377,100 @@
         padding-bottom: 6rem;
       }
     }
+    /* Sold-out drop + offers */
+    .drop-card {
+      border: 1px dashed rgba(228, 255, 90, 0.55);
+      background: rgba(228, 255, 90, 0.06);
+      border-radius: 16px;
+      padding: 1rem 1.1rem;
+      margin: 0 0 1.75rem;
+      max-width: 34rem;
+    }
+    .drop-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-first-light);
+    }
+    .drop-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ff6b6b;
+      box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7);
+      animation: drop-pulse 1.8s infinite;
+    }
+    @keyframes drop-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(255, 107, 107, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); }
+    }
+    .drop-copy {
+      margin: 0.5rem 0 0;
+      font-size: 15px;
+      line-height: 1.55;
+      color: #ffffff;
+    }
+    .drop-copy em {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 1.15em;
+      color: var(--color-first-light);
+    }
+    .pack-was {
+      font-size: 13px;
+      font-weight: 500;
+      color: #999999;
+      margin-left: 0.25rem;
+    }
+    .trust-later-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      max-width: 600px;
+      padding: 1rem 1.1rem;
+      margin: -0.75rem 0 1.5rem;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--color-border);
+    }
+    .trust-later-card strong {
+      font-size: 15px;
+      color: #ffffff;
+    }
+    .trust-later-card p {
+      margin: 0.25rem 0 0;
+      font-size: 14px;
+      color: var(--color-muted-slate);
+    }
+    .code-chip {
+      display: inline-block;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--color-deep-knowing);
+      background: var(--color-first-light);
+      padding: 1px 7px;
+      border-radius: 6px;
+    }
+    .trust-later-btn {
+      flex-shrink: 0;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--color-first-light);
+      text-decoration: none;
+      border-bottom: 2px solid var(--color-first-light);
+      padding-bottom: 2px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .drop-dot { animation: none; }
+    }
   </style>
 </head>
 
@@ -2448,13 +2542,18 @@
           <h1 class="product-headline" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Sleep Well</h1>
           
           <p class="pdp-subline">A dark chocolate drink for your evenings. Mix one sachet, sip it 30 minutes before bed.</p>
+
+          <div class="drop-card">
+            <span class="drop-badge"><span class="drop-dot"></span> batch 01 · sold out 🫠</span>
+            <p class="drop-copy">our first batch vanished way faster than we planned for. so we used the break to make sleep well <em>even better</em>. the next drop lands soon, so hold your horses (steady, steady 🐎).</p>
+          </div>
           
           <div class="pdp-price-row" style="margin-bottom: 0.25rem;">
-            <div class="pdp-price-current" id="pdp-top-price">₹1,495</div>
+            <div class="pdp-price-current" id="pdp-top-price">₹149.50</div>
             <div class="pdp-price-original" id="pdp-top-original" style="display: none;">₹1,495</div>
             <div class="pdp-price-badge" id="pdp-top-discount" style="display: none;">0% OFF</div>
           </div>
-          <div class="pdp-tax-note" style="margin-bottom: 2rem;">MRP (Inclusive of all taxes)</div>
+          <div class="pdp-tax-note" style="margin-bottom: 2rem;">pre-book price · pay today, ships with the next drop · incl. taxes</div>
           
           <!-- Selected Flavour (Organic Cacao Only) Hidden Element for DOM bindings -->
           <span id="selected-flavour-lbl" style="display: none;">Organic Cacao</span>
@@ -2468,31 +2567,31 @@
             <div class="supply-pack-stack">
               
               <!-- Pack Of 5 (Active default) -->
-              <div class="pack-pill-card active" onclick="selectPack('Pack Of 5', 299, 299, 60, 0, this)">
+              <div class="pack-pill-card active" onclick="selectPack('Pack Of 5', 149.50, 299, 30, 50, this)">
                 <div style="display: flex; align-items: center; gap: 0.5rem; width: 100%;">
                   <span style="font-weight: 700; font-size: 16px; color: #000000; font-family: var(--font-body);">Pack Of 5</span>
                 </div>
-                <div style="font-weight: 700; font-size: 18px; color: #000000; margin-top: 0.25rem;">₹ 299</div>
-                <div style="font-size: 13px; color: #777777; margin-top: 0.15rem; font-weight: 500;">₹ 60/serve</div>
+                <div style="font-weight: 700; font-size: 18px; color: #000000; margin-top: 0.25rem;">₹ 149.50 <s class="pack-was">₹299</s></div>
+                <div style="font-size: 13px; color: #777777; margin-top: 0.15rem; font-weight: 500;">₹ 30/serve</div>
               </div>
               
               <!-- Pack Of 15 -->
-              <div class="pack-pill-card" onclick="selectPack('Pack Of 15', 900, 900, 60, 0, this)">
+              <div class="pack-pill-card" onclick="selectPack('Pack Of 15', 450, 900, 30, 50, this)">
                 <div style="display: flex; align-items: center; gap: 0.5rem; width: 100%;">
                   <span style="font-weight: 700; font-size: 16px; color: #000000; font-family: var(--font-body);">Pack Of 15</span>
                 </div>
-                <div style="font-weight: 700; font-size: 18px; color: #000000; margin-top: 0.25rem;">₹ 900</div>
-                <div style="font-size: 13px; color: #777777; margin-top: 0.15rem; font-weight: 500;">₹ 60/serve</div>
+                <div style="font-weight: 700; font-size: 18px; color: #000000; margin-top: 0.25rem;">₹ 450 <s class="pack-was">₹900</s></div>
+                <div style="font-size: 13px; color: #777777; margin-top: 0.15rem; font-weight: 500;">₹ 30/serve</div>
               </div>
 
               <!-- Pack Of 30 -->
-              <div class="pack-pill-card" onclick="selectPack('Pack Of 30', 1500, 1500, 50, 0, this)">
+              <div class="pack-pill-card" onclick="selectPack('Pack Of 30', 750, 1500, 25, 50, this)">
                 <span class="pack-best-tag">best value ✶</span>
                 <div style="display: flex; align-items: center; gap: 0.5rem; width: 100%;">
                   <span style="font-weight: 700; font-size: 16px; color: #000000; font-family: var(--font-body);">Pack Of 30</span>
                 </div>
-                <div style="font-weight: 700; font-size: 18px; color: #000000; margin-top: 0.25rem;">₹ 1,500</div>
-                <div style="font-size: 13px; color: #777777; margin-top: 0.15rem; font-weight: 500;">₹ 50/serve</div>
+                <div style="font-weight: 700; font-size: 18px; color: #000000; margin-top: 0.25rem;">₹ 750 <s class="pack-was">₹1,500</s></div>
+                <div style="font-size: 13px; color: #777777; margin-top: 0.15rem; font-weight: 500;">₹ 25/serve</div>
               </div>
               
             </div>
@@ -2506,14 +2605,22 @@
               <button type="button" onclick="incrementQty()" style="flex: 1; height: 100%; border: none; background: transparent; font-size: 22px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #000000; outline: none; transition: background-color 0.2s;">+</button>
             </div>
             
-            <button onclick="triggerAddToCart()" style="flex: 1; height: 50px; background-color: #000000; color: #ffffff; border: none; border-radius: 8px; font-size: 18px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: opacity 0.2s; outline: none; font-family: var(--font-body);">
-              Add To Cart
+            <button id="prebook-btn" onclick="prebookCheckout(this)" style="flex: 1; height: 50px; background-color: #000000; color: #ffffff; border: none; border-radius: 8px; font-size: 18px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: opacity 0.2s; outline: none; font-family: var(--font-body);">
+              Pre-book · 50% off
             </button>
           </div>
 
+          <div class="trust-later-card">
+            <div>
+              <strong>not ready to trust us yet? fair 🤝</strong>
+              <p>drop your details and use code <span class="code-chip">STEADY20</span> for 20% off when we launch.</p>
+            </div>
+            <a href="/pages/waitlist/" class="trust-later-btn">get 20% off →</a>
+          </div>
+
           <ul class="pdp-facts-row">
+            <li>Pay today, ships with the next drop</li>
             <li>Free shipping in India</li>
-            <li>Cash on delivery</li>
             <li>No melatonin</li>
           </ul>
           
@@ -2527,8 +2634,8 @@
   <div class="vibe-ticker-clip" aria-hidden="true">
   <div class="vibe-ticker">
     <div class="vibe-ticker-track">
-      <span>coffee for sleep</span><i>☾</i><span>no melatonin</span><i>✶</i><span>real dark chocolate</span><i>☾</i><span>30 min before bed</span><i>✶</i>
-      <span>coffee for sleep</span><i>☾</i><span>no melatonin</span><i>✶</i><span>real dark chocolate</span><i>☾</i><span>30 min before bed</span><i>✶</i>
+      <span>batch 01 sold out</span><i>✶</i><span>coffee for sleep</span><i>☾</i><span>no melatonin</span><i>✶</i><span>real dark chocolate</span><i>☾</i><span>30 min before bed</span><i>✶</i>
+      <span>batch 01 sold out</span><i>✶</i><span>coffee for sleep</span><i>☾</i><span>no melatonin</span><i>✶</i><span>real dark chocolate</span><i>☾</i><span>30 min before bed</span><i>✶</i>
     </div>
   </div>
   </div>
@@ -2630,11 +2737,21 @@
 
         <div class="pdp-accordion-item">
           <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
-            <span>Shipping, payment and returns</span>
+            <span>How does pre-booking work?</span>
             <span class="pdp-accordion-icon">+</span>
           </div>
           <div class="pdp-accordion-body">
-            Free shipping across India. Orders dispatch in 24–48 hours and usually arrive in 5–6 business days. Pay by UPI, card or cash on delivery. 10-day refund policy.
+            Pick your pack and pay today at 50% off. Your order ships as soon as the next drop is ready, and we'll email and WhatsApp you the dispatch date. Shipping is free across India.
+          </div>
+        </div>
+
+        <div class="pdp-accordion-item">
+          <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
+            <span>I'm not ready to pay yet. Can I still get a discount?</span>
+            <span class="pdp-accordion-icon">+</span>
+          </div>
+          <div class="pdp-accordion-body">
+            Of course. <a href="/pages/waitlist/">Join the list</a> and use code STEADY20 for 20% off when we launch. We'll let you know the moment it's live.
           </div>
         </div>
 
@@ -2734,9 +2851,9 @@
     <img src="/assets/sleep-well-box.webp" alt="" width="32" height="49">
     <div class="sticky-buy-info">
       <strong>Sleep Well</strong>
-      <span id="sticky-buy-meta">Pack Of 5 · ₹299</span>
+      <span id="sticky-buy-meta">Pack Of 5 · ₹149.50</span>
     </div>
-    <button type="button" onclick="triggerAddToCart()" tabindex="-1">Add to cart</button>
+    <button type="button" onclick="prebookCheckout(this)" tabindex="-1">Pre-book 50% off</button>
   </div>
 
   <!-- INTERACTIVE SIDE-CART DRAWER WIDGET (HTML) -->
@@ -2869,10 +2986,10 @@
     // ----------------------------------------------------
     let selectedFlavour = "Organic Cacao";
     let selectedPack = "Pack Of 5";
-    let currentPrice = 299;
+    let currentPrice = 149.5;
     let originalPrice = 299;
-    let currentServePrice = 60;
-    let discountPct = 0;
+    let currentServePrice = 30;
+    let discountPct = 50;
     let quantity = 1;
     
     function selectFlavour(flavour, element) {
@@ -2918,6 +3035,12 @@
       updateSummaryFeedback();
     }
     
+    function formatINR(n) {
+      return Number.isInteger(n)
+        ? n.toLocaleString('en-IN')
+        : n.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
     function updateSummaryFeedback() {
       const totalPrice = currentPrice * quantity;
       const totalOriginal = originalPrice * quantity;
@@ -2933,10 +3056,10 @@
       
       // Update top prices (displays single pack unit price)
       const stickyMeta = document.getElementById("sticky-buy-meta");
-      if (stickyMeta) stickyMeta.innerText = `${selectedPack} · ₹${currentPrice.toLocaleString('en-IN')}`;
+      if (stickyMeta) stickyMeta.innerText = `${selectedPack} · ₹${formatINR(currentPrice)}`;
 
       const topPrice = document.getElementById("pdp-top-price");
-      if (topPrice) topPrice.innerText = `₹${currentPrice.toLocaleString('en-IN')}`;
+      if (topPrice) topPrice.innerText = `₹${formatINR(currentPrice)}`;
       
       const topOriginal = document.getElementById("pdp-top-original");
       const topDiscount = document.getElementById("pdp-top-discount");
@@ -3188,6 +3311,70 @@
       }
     }
     
+    // ----------------------------------------------------
+    // PRE-BOOK CHECKOUT (50% off via Shopify discount code)
+    // Never sends a customer to checkout at full price: if Shopify
+    // doesn't apply PREBOOK_CODE, we stop and point them to the 20% list.
+    // ----------------------------------------------------
+    const PREBOOK_CODE = 'PREBOOK50';
+
+    async function prebookCheckout(btn) {
+      const variantId = PACK_VARIANT_IDS[selectedPack];
+      if (!variantId) {
+        alert('Something went wrong selecting your pack. Please try again.');
+        return;
+      }
+      const originalLabel = btn ? btn.innerText : '';
+      if (btn) {
+        btn.disabled = true;
+        btn.innerText = 'Holding your spot…';
+      }
+
+      try {
+        const res = await fetch(`https://${SHOPIFY_CONFIG.domain}/api/${SHOPIFY_CONFIG.apiVersion}/graphql.json`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Shopify-Storefront-Access-Token': SHOPIFY_CONFIG.storefrontAccessToken
+          },
+          body: JSON.stringify({
+            query: `mutation cartCreate($input: CartInput!) {
+              cartCreate(input: $input) {
+                cart { id checkoutUrl discountCodes { code applicable } }
+                userErrors { field message }
+              }
+            }`,
+            variables: {
+              input: {
+                lines: [{ merchandiseId: variantId, quantity: quantity }],
+                discountCodes: [PREBOOK_CODE],
+                attributes: [{ key: 'Order type', value: 'Pre-book (next drop)' }]
+              }
+            }
+          })
+        });
+        const data = await res.json();
+        const cart = data?.data?.cartCreate?.cart;
+        const discountApplied = cart?.discountCodes?.some(d => d.code.toUpperCase() === PREBOOK_CODE && d.applicable);
+
+        if (cart && cart.checkoutUrl && discountApplied) {
+          window.location.href = cart.checkoutUrl;
+          return;
+        }
+
+        console.error('Pre-book checkout not ready:', data);
+        alert("Pre-booking is opening in a moment, we're just setting it up 🐎\n\nMeanwhile, join the list for code STEADY20 (20% off at launch).");
+      } catch (err) {
+        console.error('Pre-book checkout error:', err);
+        alert(`Sorry, we could not start your pre-booking.\n\nDetails: ${err.message}`);
+      }
+
+      if (btn) {
+        btn.disabled = false;
+        btn.innerText = originalLabel;
+      }
+    }
+
     async function checkoutSecurely() {
       if (!cartItem) return;
 

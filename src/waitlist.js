@@ -125,7 +125,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (successName)     successName.textContent     = record.name?.split(' ')[0] || 'there';
     if (successEmail)    successEmail.textContent    = record.email || '';
-    if (successDiscount) successDiscount.textContent = record.discount || 10;
+    if (successDiscount) successDiscount.textContent = record.discount || 20;
+    const successCode = document.getElementById('wl-success-code');
+    if (successCode) successCode.textContent = record.promoCode || 'STEADY20';
 
     formCard.style.transition = 'opacity 0.3s, transform 0.3s';
     formCard.style.opacity = '0';

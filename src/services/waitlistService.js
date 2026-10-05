@@ -2,7 +2,7 @@
  * Superstate Waitlist Service
  *
  * COUPON LOGIC:
- * - No code entered → SUPERSTATE10 (10% early access)
+ * - No code entered → STEADY20 (20% off at launch)
  * - A code matching one in VALID_INFLUENCER_CODES → 30% off
  * - Any other code → rejected as invalid
  *
@@ -10,8 +10,8 @@
  */
 
 export const WAITLIST_CONFIG = {
-  EARLY_ACCESS_CODE: 'SUPERSTATE10',
-  EARLY_ACCESS_DISCOUNT: 10,
+  EARLY_ACCESS_CODE: 'STEADY20',
+  EARLY_ACCESS_DISCOUNT: 20,
   INFLUENCER_DISCOUNT: 30,
   VALID_INFLUENCER_CODES: ['ABHIJITH30', 'AMAL30'],
   STORAGE_KEY_USER: 'superstate_waitlist_user',
