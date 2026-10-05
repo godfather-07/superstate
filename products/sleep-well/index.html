@@ -2086,155 +2086,92 @@
     }
 
     .manifesto {
-      padding: 3.5rem 0 4rem;
-    }
-    .bento {
-      display: grid;
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-      gap: 1rem;
-    }
-    .bento-card {
+      padding: 4.5rem 0 4rem;
       position: relative;
-      border-radius: 24px;
-      padding: clamp(1.25rem, 2.5vw, 2rem);
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--color-border);
       overflow: hidden;
     }
-    .bento-card p {
+    .manifesto-inner {
+      max-width: 1060px;
+      position: relative;
+    }
+    .manifesto p {
       margin: 0;
       text-transform: lowercase;
     }
-    .bento-hero {
-      grid-column: span 7;
-      grid-row: span 2;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 2rem;
-      background: radial-gradient(circle at 85% 15%, rgba(77, 128, 255, 0.5), rgba(0, 51, 153, 0) 55%), var(--color-off-white);
-    }
-    .bento-hero .manifesto-tag {
-      align-self: flex-start;
-      margin-bottom: 0;
-    }
-    .bento-big {
+    .manifesto-big {
       font-family: var(--font-heading);
       font-weight: 800;
-      font-size: clamp(40px, 5.6vw, 80px);
+      font-size: clamp(40px, 7vw, 88px);
       line-height: 0.98;
       letter-spacing: -0.04em;
       color: #ffffff;
     }
-    .bento-fix {
-      grid-column: span 5;
-      background: #ffffff;
-      color: var(--color-deep-knowing);
+    .manifesto-mid {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: clamp(24px, 3.4vw, 40px);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      margin-top: 2rem !important;
+      max-width: 22ch;
     }
-    .bento-fix p {
+    .manifesto-soft {
+      font-size: clamp(17px, 1.8vw, 21px);
+      line-height: 1.5;
+      color: var(--color-muted-slate);
+      margin-top: 1.5rem !important;
+      max-width: 34ch;
+    }
+    .manifesto-close {
       font-family: var(--font-heading);
       font-weight: 800;
-      font-size: clamp(24px, 2.6vw, 34px);
-      line-height: 1.08;
-      letter-spacing: -0.03em;
-      max-width: 16ch;
-    }
-    .bento-emoji {
-      position: absolute;
-      right: 1rem;
-      bottom: 0.5rem;
-      font-size: 56px;
-      transform: rotate(-8deg);
-      opacity: 0.9;
-    }
-    .bento-but {
-      grid-column: span 5;
-    }
-    .bento-label {
-      font-family: 'Instrument Serif', serif;
-      font-style: italic;
-      font-size: 26px;
+      font-size: clamp(36px, 6vw, 72px);
+      line-height: 1;
+      letter-spacing: -0.04em;
       color: var(--color-first-light);
+      margin-top: 0 !important;
     }
-    .bento-chips {
+    .manifesto-close em {
+      color: #ffffff;
+    }
+    .manifesto-chips {
       list-style: none;
       padding: 0;
-      margin: 0.8rem 0 0.9rem;
+      margin: 1rem 0 0;
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
     }
-    .bento-chips li {
+    .manifesto-chips li {
       font-size: 14px;
       font-weight: 700;
       color: #ffffff;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.18);
-      padding: 0.4rem 0.75rem;
+      padding: 0.35rem 0.75rem;
       border-radius: 999px;
     }
-    .bento-chips li:nth-child(odd) { transform: rotate(-2deg); }
-    .bento-chips li:nth-child(even) { transform: rotate(2deg); }
-    .bento-small {
-      font-size: 15px;
-      color: var(--color-muted-slate);
-    }
-    .bento-close {
-      grid-column: span 12;
+    .manifesto-chips li:nth-child(odd) { transform: rotate(-2deg); }
+    .manifesto-chips li:nth-child(even) { transform: rotate(2deg); }
+    .manifesto-close-row {
       display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      min-height: 150px;
-      padding-right: 180px;
-      background: var(--color-first-light);
-      border: none;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 1rem 2rem;
+      margin-top: 2.75rem;
     }
-    .bento-close-text {
-      font-family: var(--font-heading);
-      font-weight: 800;
-      font-size: clamp(32px, 5vw, 64px);
-      line-height: 1;
-      letter-spacing: -0.04em;
-      color: var(--color-deep-knowing);
-    }
-    .bento-close-text em {
-      color: var(--color-deep-knowing);
-    }
-    .bento-sticker {
-      flex-shrink: 0;
+    .manifesto-sticker {
       transform: rotate(-6deg);
-      background: var(--color-deep-knowing);
-      color: #ffffff;
+      background: #ffffff;
+      color: var(--color-deep-knowing);
       font-family: 'Instrument Serif', serif;
       font-style: italic;
-      font-size: clamp(18px, 2vw, 24px);
-      padding: 0.5rem 1rem;
-      border-radius: 12px;
-      white-space: nowrap;
-    }
-    .bento-close img {
-      position: absolute;
-      right: 24px;
-      top: 50%;
-      height: 220px;
-      width: auto;
-      transform: translateY(-38%) rotate(10deg);
-      filter: drop-shadow(0 18px 20px rgba(0, 10, 40, 0.35));
-    }
-    @media (max-width: 860px) {
-      .bento-hero, .bento-fix, .bento-but, .bento-close {
-        grid-column: span 12;
-        grid-row: auto;
-      }
-      .bento-close {
-        flex-direction: column;
-        align-items: flex-start;
-        padding-right: 120px;
-      }
-      .bento-close img {
-        height: 160px;
-        right: 12px;
-      }
+      font-size: clamp(20px, 2.4vw, 28px);
+      padding: 0.55rem 1.15rem;
+      border-radius: 14px;
+      box-shadow: 0 12px 30px rgba(0, 10, 40, 0.35);
+      margin-bottom: 0.5rem;
     }
     .manifesto-tag {
       display: inline-block;
@@ -2954,34 +2891,22 @@
   </div>
   </div>
 
-  <!-- MANIFESTO (bento) -->
+  <!-- MANIFESTO -->
   <section class="manifesto">
-    <div class="container bento">
-      <div class="bento-card bento-hero">
-        <span class="manifesto-tag">real talk ✶</span>
-        <p class="bento-big">sleep is the <em class="marker">best supplement</em> in the whole world.</p>
-      </div>
-
-      <div class="bento-card bento-fix">
-        <span class="bento-emoji" aria-hidden="true">🛌</span>
-        <p>there's almost nothing a good night's sleep can't fix.</p>
-      </div>
-
-      <div class="bento-card bento-but">
-        <p class="bento-label">but life be like:</p>
-        <ul class="bento-chips">
-          <li>📧 deadlines</li>
-          <li>📱 doomscrolling</li>
-          <li>🧠 2am overthinking</li>
-          <li>☕ one coffee too many</li>
-        </ul>
-        <p class="bento-small">so sometimes we just can't have that luxury.</p>
-      </div>
-
-      <div class="bento-card bento-close">
-        <p class="bento-close-text">so, <em>sleep well</em> with superstate ☾</p>
-        <span class="bento-sticker">coffee, but for sleep.</span>
-        <img src="/assets/sleep-well-box.webp" alt="" width="763" height="1172" loading="lazy" aria-hidden="true">
+    <div class="container manifesto-inner">
+      <span class="manifesto-tag">real talk ✶</span>
+      <p class="manifesto-big">sleep is the <em class="marker">best supplement</em> in the whole world.</p>
+      <p class="manifesto-mid">there's almost nothing a good night's sleep can't fix.</p>
+      <p class="manifesto-soft">but deadlines, doomscrolling and 2am overthinking don't always let you have that luxury.</p>
+      <ul class="manifesto-chips" aria-hidden="true">
+        <li>📧 deadlines</li>
+        <li>📱 doomscrolling</li>
+        <li>🧠 2am overthinking</li>
+        <li>☕ one coffee too many</li>
+      </ul>
+      <div class="manifesto-close-row">
+        <p class="manifesto-close">so, <em>sleep well</em><br>with superstate<span class="moon"> ☾</span></p>
+        <span class="manifesto-sticker" aria-hidden="true">coffee, but for sleep.</span>
       </div>
     </div>
   </section>
