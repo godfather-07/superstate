@@ -10,7 +10,7 @@
   <!-- Fonts & Core Stylesheet -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Lora:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../style.css" />
   <link rel="icon" type="image/png" href="/favicon.png" />
   
@@ -2013,6 +2013,278 @@
     .pdp-accordion-body a {
       color: var(--color-first-light);
     }
+    /* ----------------------------------------------------
+       GEN-Z LAYER: sticker, ticker, manifesto, ritual
+       ---------------------------------------------------- */
+    .hero-sticker {
+      position: absolute;
+      top: 8%;
+      right: 4%;
+      z-index: 2;
+      transform: rotate(8deg);
+      background: var(--color-first-light);
+      color: var(--color-deep-knowing);
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: clamp(16px, 2vw, 22px);
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      box-shadow: 0 8px 20px rgba(0, 10, 40, 0.35);
+      white-space: nowrap;
+    }
+
+    .vibe-ticker-clip {
+      overflow: hidden;
+      padding: 1.5rem 0;
+    }
+    .vibe-ticker {
+      overflow: hidden;
+      background: var(--color-first-light);
+      color: var(--color-deep-knowing);
+      padding: 0.9rem 0;
+      transform: rotate(-1.5deg);
+      margin: 0 -2rem;
+      box-shadow: 0 10px 30px rgba(0, 10, 40, 0.3);
+    }
+    .vibe-ticker-track {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      width: max-content;
+      animation: ticker 28s linear infinite;
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: clamp(22px, 3vw, 32px);
+      white-space: nowrap;
+    }
+    .vibe-ticker-track i {
+      font-style: normal;
+      font-size: 0.8em;
+    }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .manifesto {
+      padding: 7rem 0 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .manifesto-inner {
+      max-width: 900px;
+      position: relative;
+    }
+    .manifesto-tag {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-first-light);
+      border: 1px solid rgba(228, 255, 90, 0.5);
+      border-radius: 999px;
+      padding: 0.35rem 0.85rem;
+      margin-bottom: 2rem;
+    }
+    .manifesto p {
+      margin: 0;
+      text-transform: lowercase;
+    }
+    .manifesto-big {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: clamp(40px, 7vw, 88px);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+      color: #ffffff;
+    }
+    .manifesto em,
+    .ritual em {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+    .marker {
+      background: linear-gradient(transparent 58%, rgba(228, 255, 90, 0.85) 58%, rgba(228, 255, 90, 0.85) 92%, transparent 92%);
+      padding: 0 0.1em;
+      color: #ffffff;
+    }
+    .manifesto-mid {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: clamp(24px, 3.4vw, 40px);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      margin-top: 2rem !important;
+      max-width: 22ch;
+    }
+    .manifesto-soft {
+      font-size: clamp(17px, 1.8vw, 21px);
+      line-height: 1.5;
+      color: var(--color-muted-slate);
+      margin-top: 1.5rem !important;
+      max-width: 34ch;
+    }
+    .manifesto-close {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: clamp(36px, 6vw, 72px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--color-first-light);
+      margin-top: 3.5rem !important;
+    }
+    .manifesto-close em {
+      color: #ffffff;
+    }
+    .manifesto-sticker {
+      position: absolute;
+      right: 1rem;
+      bottom: 0.5rem;
+      transform: rotate(-7deg);
+      background: #ffffff;
+      color: var(--color-deep-knowing);
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: clamp(20px, 2.4vw, 28px);
+      padding: 0.6rem 1.2rem;
+      border-radius: 14px;
+      box-shadow: 0 12px 30px rgba(0, 10, 40, 0.35);
+    }
+
+    .ritual {
+      padding: 5.5rem 0;
+      background-color: var(--color-off-white);
+      border-top: 1px solid var(--color-border);
+    }
+    .ritual-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+      gap: 4rem;
+      align-items: center;
+      max-width: 1040px;
+    }
+    .ritual-video-wrap {
+      position: relative;
+      max-width: 380px;
+      width: 100%;
+      justify-self: center;
+      transform: rotate(-2deg);
+    }
+    .ritual-video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
+      border-radius: 28px;
+      border: 6px solid #ffffff;
+      box-shadow: 0 30px 60px rgba(0, 10, 40, 0.5);
+      background: #1a1a1a;
+    }
+    .ritual-chip {
+      position: absolute;
+      left: 50%;
+      bottom: 1.25rem;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .ritual-title {
+      font-family: var(--font-heading) !important;
+      font-weight: 800;
+      font-size: clamp(40px, 5.5vw, 64px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: #ffffff;
+      margin: 0 0 0.75rem;
+    }
+    .ritual-title em {
+      color: var(--color-first-light);
+    }
+    .ritual-lead {
+      color: var(--color-muted-slate);
+      font-size: 17px;
+      margin: 0 0 2.25rem;
+    }
+    .ritual-steps {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      border-left: 2px dashed rgba(228, 255, 90, 0.4);
+    }
+    .ritual-steps li {
+      position: relative;
+      display: grid;
+      grid-template-columns: 84px 1fr;
+      gap: 1rem;
+      padding: 0 0 1.75rem 1.5rem;
+    }
+    .ritual-steps li:last-child {
+      padding-bottom: 0;
+    }
+    .ritual-steps li::before {
+      content: "";
+      position: absolute;
+      left: -7px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--color-first-light);
+      box-shadow: 0 0 0 4px rgba(228, 255, 90, 0.18);
+    }
+    .ritual-steps time {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--color-first-light);
+      padding-top: 3px;
+      font-variant-numeric: tabular-nums;
+    }
+    .ritual-steps strong {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 28px;
+      line-height: 1;
+      color: #ffffff;
+    }
+    .ritual-steps p {
+      margin: 0.35rem 0 0;
+      color: var(--color-muted-slate);
+      font-size: 15px;
+    }
+
+    @media (max-width: 860px) {
+      .ritual-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      .ritual-video-wrap {
+        max-width: 280px;
+      }
+      .manifesto {
+        padding: 5rem 0 6.5rem;
+      }
+      .manifesto-sticker {
+        right: auto;
+        left: 1rem;
+        bottom: 1.5rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .vibe-ticker-track { animation: none; }
+    }
   </style>
 </head>
 
@@ -2072,6 +2344,7 @@
         <!-- COLUMN 1: STICKY GALLERY (Left) -->
         <div class="pdp-gallery-column">
           <div class="pdp-gallery-viewport">
+            <span class="hero-sticker" aria-hidden="true">coffee, but for sleep ☾</span>
             <img id="main-gallery-img" src="/assets/sleep-well-box.webp" alt="SuperState Sleep Well dark chocolate ritual box" width="763" height="1172" fetchpriority="high">
           </div>
 
@@ -2157,6 +2430,27 @@
     </div>
   </section>
 
+  <!-- TICKER -->
+  <div class="vibe-ticker-clip" aria-hidden="true">
+  <div class="vibe-ticker">
+    <div class="vibe-ticker-track">
+      <span>coffee for sleep</span><i>☾</i><span>no melatonin</span><i>✶</i><span>real dark chocolate</span><i>☾</i><span>30 min before bed</span><i>✶</i>
+      <span>coffee for sleep</span><i>☾</i><span>no melatonin</span><i>✶</i><span>real dark chocolate</span><i>☾</i><span>30 min before bed</span><i>✶</i>
+    </div>
+  </div>
+  </div>
+
+  <!-- MANIFESTO -->
+  <section class="manifesto">
+    <div class="container manifesto-inner">
+      <span class="manifesto-tag">real talk ✶</span>
+      <p class="manifesto-big">sleep is the <em class="marker">best supplement</em> in the whole world.</p>
+      <p class="manifesto-mid">there's almost nothing a good night's sleep can't fix.</p>
+      <p class="manifesto-soft">but deadlines, doomscrolling and 2am overthinking don't always let you have that luxury.</p>
+      <p class="manifesto-close">so, <em>sleep well</em><br>with superstate<span class="moon"> ☾</span></p>
+    </div>
+  </section>
+
   <!-- WHAT'S INSIDE -->
   <section class="simple-section" id="inside">
     <div class="container simple-container">
@@ -2180,15 +2474,38 @@
     </div>
   </section>
 
-  <!-- HOW TO USE -->
-  <section class="simple-section simple-section-alt">
-    <div class="container simple-container">
-      <h2 class="simple-title">How to use</h2>
-      <ol class="simple-steps">
-        <li><span class="step-num">1</span><div><strong>Open a sachet</strong><p>One sachet is one serving.</p></div></li>
-        <li><span class="step-num">2</span><div><strong>Mix it in</strong><p>Stir into a cup of warm milk or water.</p></div></li>
-        <li><span class="step-num">3</span><div><strong>Sip and wind down</strong><p>Drink it about 30 minutes before bed.</p></div></li>
-      </ol>
+  <!-- HOW TO USE: THE 10PM RITUAL -->
+  <section class="ritual" id="how-to-use">
+    <div class="container ritual-grid">
+      <div class="ritual-video-wrap">
+        <video class="ritual-video" src="/assets/video/ritual.mp4" poster="/assets/video/ritual-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <span class="ritual-chip">● now playing: wind-down.mp4</span>
+      </div>
+
+      <div class="ritual-copy">
+        <span class="manifesto-tag">how to use</span>
+        <h2 class="ritual-title">your <em>10pm</em> ritual.</h2>
+        <p class="ritual-lead">four steps. zero effort. it's giving main character bedtime.</p>
+
+        <ol class="ritual-steps">
+          <li>
+            <time>9:30 pm</time>
+            <div><strong>rip it.</strong><p>tear open one sachet. that's one serving.</p></div>
+          </li>
+          <li>
+            <time>9:31 pm</time>
+            <div><strong>stir it.</strong><p>into a mug of warm milk or water.</p></div>
+          </li>
+          <li>
+            <time>9:35 pm</time>
+            <div><strong>sip it slow.</strong><p>lights low, phone face-down, candle optional.</p></div>
+          </li>
+          <li>
+            <time>10:00 pm</time>
+            <div><strong>lights out.</strong><p>that's it. same time tomorrow?</p></div>
+          </li>
+        </ol>
+      </div>
     </div>
   </section>
 
@@ -2837,6 +3154,13 @@
     // ----------------------------------------------------
     window.addEventListener("DOMContentLoaded", () => {
       updateSummaryFeedback();
+
+      // Keep the ritual video still for people who prefer reduced motion
+      const ritualVideo = document.querySelector(".ritual-video");
+      if (ritualVideo && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        ritualVideo.removeAttribute("autoplay");
+        ritualVideo.pause();
+      }
       
       // Accordion responsive trigger: Make sure open accordions are correctly dimensioned
       document.querySelectorAll('.pdp-accordion-item.open').forEach(el => {
