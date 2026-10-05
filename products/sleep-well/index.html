@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sleep Well | SuperState</title>
-  <meta name="description" content="Science-Backed Dark Chocolate Ritual. Relax. Sleep deeper. Wake up sharp." />
+  <meta name="description" content="SuperState Sleep Well: a dark chocolate drink you mix and sip 30 minutes before bed. Every ingredient and amount listed." />
   
   <!-- Fonts & Core Stylesheet -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1867,6 +1867,152 @@
         padding: 0 1.25rem !important; /* Expand content margins on mobile viewports for somatic cards */
       }
     }
+    /* ----------------------------------------------------
+       SIMPLE PDP SECTIONS
+       ---------------------------------------------------- */
+    .pdp-subline {
+      font-size: 17px;
+      line-height: 1.5;
+      color: var(--color-muted-slate);
+      margin: 0 0 1.5rem;
+      max-width: 34rem;
+    }
+    .pdp-facts-row {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.25rem;
+      padding: 0;
+      margin: 0;
+      font-size: 14px;
+      color: var(--color-muted-slate);
+    }
+    .pdp-facts-row li::before {
+      content: "✓";
+      color: var(--color-emerge);
+      font-weight: 700;
+      margin-right: 0.4rem;
+    }
+    .simple-section {
+      padding: 4.5rem 0;
+      border-top: 1px solid var(--color-border);
+    }
+    .simple-section-alt {
+      background-color: var(--color-off-white);
+    }
+    .simple-container {
+      max-width: 720px;
+    }
+    .simple-title {
+      font-family: var(--font-heading) !important;
+      font-size: clamp(28px, 4vw, 36px);
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 0 0.5rem;
+    }
+    .simple-lead {
+      color: var(--color-muted-slate);
+      font-size: 16px;
+      margin: 0 0 2rem;
+    }
+    .simple-note {
+      font-size: 13px;
+      color: var(--color-muted-slate);
+      margin-top: 1rem;
+      line-height: 1.5;
+    }
+    .simple-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 16px;
+    }
+    .simple-table th {
+      text-align: left;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-muted-slate);
+      padding: 0 0 0.75rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .simple-table td {
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--color-border);
+      color: #ffffff;
+    }
+    .simple-table th:last-child,
+    .simple-table td:last-child {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+    .simple-steps {
+      list-style: none;
+      padding: 0;
+      margin: 2rem 0 0;
+      display: grid;
+      gap: 1.5rem;
+    }
+    .simple-steps li {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .simple-steps strong {
+      font-size: 18px;
+      color: #ffffff;
+    }
+    .simple-steps p {
+      margin: 0.25rem 0 0;
+      color: var(--color-muted-slate);
+    }
+    .step-num {
+      flex: 0 0 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background-color: var(--color-first-light);
+      color: var(--color-deep-knowing);
+      font-weight: 800;
+    }
+    .simple-section .pdp-accordions-group {
+      gap: 0;
+      margin-top: 1.5rem;
+      border-top: 1px solid var(--color-border);
+    }
+    .simple-section .pdp-accordion-item,
+    .simple-section .pdp-accordion-item.open {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--color-border);
+      border-radius: 0;
+      box-shadow: none;
+    }
+    .simple-section .pdp-accordion-header {
+      padding: 1.25rem 0;
+      font-size: 17px;
+      color: #ffffff;
+    }
+    .simple-section .pdp-accordion-header:hover {
+      background: transparent;
+      color: var(--color-first-light);
+    }
+    .simple-section .pdp-accordion-icon {
+      font-size: 22px;
+      color: #ffffff;
+    }
+    .simple-section .pdp-accordion-body {
+      font-size: 15px;
+      color: var(--color-muted-slate);
+    }
+    .simple-section .pdp-accordion-item.open .pdp-accordion-body {
+      padding: 0 0 1.25rem;
+      border-top-color: transparent;
+    }
+    .pdp-accordion-body a {
+      color: var(--color-first-light);
+    }
   </style>
 </head>
 
@@ -1936,11 +2082,7 @@
           
           <h1 class="product-headline" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Sleep Well</h1>
           
-          <div class="rating-badge-row" style="margin-bottom: 1.5rem;">
-            <div class="stars-glow">★★★★★</div>
-            <div class="rating-divider"></div>
-            <div class="rating-text">4.9 Rating (6 Reviews)</div>
-          </div>
+          <p class="pdp-subline">A dark chocolate drink for your evenings. Mix one sachet, sip it 30 minutes before bed.</p>
           
           <div class="pdp-price-row" style="margin-bottom: 0.25rem;">
             <div class="pdp-price-current" id="pdp-top-price">₹1,495</div>
@@ -1957,7 +2099,6 @@
             <div style="margin-bottom: 0.75rem;">
               <span class="selector-label" style="margin-bottom: 0px; text-transform: none; font-size: 18px; font-family: var(--font-body); font-weight: 700; letter-spacing: normal;">Select Pack Size</span>
               <span id="selected-pack-lbl" style="display: none;">Pack Of 5</span>
-              <div style="font-size: 14px; color: #cbd5e1; font-weight: 500; margin-top: 2px; font-family: var(--font-body);">Which one is best for you?</div>
             </div>
             <div class="supply-pack-stack">
               
@@ -2003,6 +2144,12 @@
               Add To Cart
             </button>
           </div>
+
+          <ul class="pdp-facts-row">
+            <li>Free shipping in India</li>
+            <li>Cash on delivery</li>
+            <li>No melatonin</li>
+          </ul>
           
         </div>
         
@@ -2010,724 +2157,89 @@
     </div>
   </section>
 
-  <!-- FULL-WIDTH PRODUCT DETAILS SECTION -->
-  <section class="pdp-full-details-section" style="padding: 4rem 0; background-color: var(--color-blue-tint); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
-    <div class="container">
-      
-      <!-- 1. Expected Sleep Benefits Grid (Icon-based circular layout) -->
-      <div class="benefits-checklist-full" style="margin-bottom: 4rem;">
-        <h3 style="font-family: var(--font-heading) !important; color: #ffffff; font-size: 24px; font-weight: 700; margin-bottom: 2.5rem; text-align: center;">Sleep Benefits</h3>
-        
-        <div class="benefits-icons-container">
-          
-          <!-- Benefit 1: Fall Asleep Faster -->
-          <div class="benefit-icon-card">
-            <div class="benefit-icon-circle">
-              <!-- Crescent moon and stars SVG -->
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#001a4d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="#001a4d" fill-opacity="0.12"></path>
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                <path d="M19 3l.5 1.2.7.3-.7.3-.5 1.2-.5-1.2-.7-.3.7-.3z" fill="#001a4d" stroke="none"></path>
-                <path d="M14 1.5l.3.7.7.2-.7.2-.3.7-.3-.7-.7-.2.7-.2z" fill="#001a4d" stroke="none"></path>
-              </svg>
-            </div>
-            <strong class="benefit-icon-title">Fall Asleep Faster</strong>
-          </div>
-          
-          <!-- Benefit 2: Stay Asleep Longer -->
-          <div class="benefit-icon-card">
-            <div class="benefit-icon-circle">
-              <!-- Clock and moon SVG -->
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#001a4d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10" fill="#001a4d" fill-opacity="0.08"></circle>
-                <polyline points="12 6 12 12 15 15"></polyline>
-                <path d="M17 9A3.5 3.5 0 0 1 13.5 5.5 3 3 0 0 0 17 9z" fill="#001a4d" stroke="none"></path>
-              </svg>
-            </div>
-            <strong class="benefit-icon-title">Stay Asleep Longer</strong>
-          </div>
-          
-          <!-- Benefit 3: Improve Deep Sleep Quality -->
-          <div class="benefit-icon-card">
-            <div class="benefit-icon-circle">
-              <!-- Pillow and zZ SVG -->
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#001a4d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="7" width="18" height="11" rx="2" fill="#001a4d" fill-opacity="0.12"></rect>
-                <rect x="3" y="7" width="18" height="11" rx="2"></rect>
-                <path d="M3 12.5h18M6 7v11M18 7v11" opacity="0.25"></path>
-                <!-- zZ -->
-                <path d="M14 2h3l-3 3h3" stroke-width="1.5"></path>
-                <path d="M10 2.5h1.5l-1.5 1.5h1.5" stroke-width="1"></path>
-              </svg>
-            </div>
-            <strong class="benefit-icon-title">Improve Deep Sleep Quality</strong>
-          </div>
-          
-          <!-- Benefit 4: Activate Alpha Waves -->
-          <div class="benefit-icon-card">
-            <div class="benefit-icon-circle">
-              <!-- Neural waveform brainwave SVG -->
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#001a4d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M2 12c2.5-4 4.5-4 7 0s4.5 4 7 0 4.5-4 7 0" opacity="0.3"></path>
-                <path d="M2 12c1.5 6 3.5 6 5 0s3-10 5 0 3.5 6 5 0 3-10 5 0" stroke-width="2.5"></path>
-              </svg>
-            </div>
-            <strong class="benefit-icon-title">Activate Alpha Waves</strong>
-          </div>
-          
-          <!-- Benefit 5: Support Natural Sleep Cycles -->
-          <div class="benefit-icon-card">
-            <div class="benefit-icon-circle">
-              <!-- Pillow in circular loop SVG -->
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#001a4d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="8" y="10" width="8" height="5" rx="1" fill="#001a4d" fill-opacity="0.12"></rect>
-                <rect x="8" y="10" width="8" height="5" rx="1"></rect>
-                <path d="M21 12a9 9 0 0 1-17 4.5l1-1.5"></path>
-                <path d="M3 12A9 9 0 0 1 20 7.5l-1 1.5"></path>
-                <polyline points="21.5 10 21 13 18 12"></polyline>
-                <polyline points="2.5 14 3 11 6 12"></polyline>
-              </svg>
-            </div>
-            <strong class="benefit-icon-title">Support Natural Sleep Cycles</strong>
-          </div>
-          
-          <!-- Benefit 6: Wake Up Refreshed -->
-          <div class="benefit-icon-card">
-            <div class="benefit-icon-circle">
-              <!-- Stretching sunburst rising figure SVG -->
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#001a4d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M6 7.5L5 6m14 1.5L19 6M12 2v2M3.5 12H2m20 0h-1.5" opacity="0.6"></path>
-                <circle cx="12" cy="11" r="2.5" fill="#001a4d" fill-opacity="0.15"></circle>
-                <circle cx="12" cy="11" r="2.5"></circle>
-                <path d="M6 18c0-3 3-4 6-4s6 1 6 4" fill="#001a4d" fill-opacity="0.1"></path>
-                <path d="M6 18c0-3 3-4 6-4s6 1 6 4M8.5 14.5l3.5-3 3.5 3"></path>
-              </svg>
-            </div>
-            <strong class="benefit-icon-title">Wake Up Refreshed</strong>
-          </div>
-          
-        </div>
-      </div>
-      
-      <!-- 2. Badges & WhatsApp link -->
-      <div class="paylater-badge-card" style="background-color: var(--color-off-white); border: 1.5px solid var(--color-border); border-radius: 16px; padding: 1.5rem; margin-bottom: 3.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);">
-        <div class="trust-badges-grid" style="display: flex; gap: 0.75rem; margin-bottom: 0;">
-          <div class="trust-badge-card" style="background-color: rgba(255,255,255,0.08); color: #ffffff; font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid rgba(255,255,255,0.1);">FREE SHIPPING</div>
-          <div class="trust-badge-card" style="background-color: rgba(255,255,255,0.08); color: #ffffff; font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid rgba(255,255,255,0.1);">COD AVAILABLE</div>
-          <div class="trust-badge-card" style="background-color: rgba(255,255,255,0.08); color: #ffffff; font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid rgba(255,255,255,0.1);">FAST DISPATCH</div>
-        </div>
-        <a href="https://wa.me/919567309388" target="_blank" class="clinical-query-link" style="display: inline-flex; align-items: center; font-size: 13px; font-weight: 700; color: var(--color-first-light); text-decoration: none; border-bottom: 2px solid var(--color-first-light); padding-bottom: 2px; transition: opacity 0.2s;">
-          Clinical Query? WhatsApp Scientist ↗
-        </a>
-      </div>
+  <!-- WHAT'S INSIDE -->
+  <section class="simple-section" id="inside">
+    <div class="container simple-container">
+      <h2 class="simple-title">What's inside</h2>
+      <p class="simple-lead">Seven ingredients. Every amount listed. No proprietary blends.</p>
+      <table class="simple-table">
+        <thead>
+          <tr><th>Per sachet (10 g)</th><th>Amount</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Organic raw cacao</td><td>3,000 mg</td></tr>
+          <tr><td>Glycine</td><td>3,000 mg</td></tr>
+          <tr><td>Magnesium L-threonate</td><td>2,000 mg</td></tr>
+          <tr><td>Magnesium bisglycinate</td><td>1,000 mg</td></tr>
+          <tr><td>Tart cherry extract</td><td>500 mg</td></tr>
+          <tr><td>L-theanine</td><td>200 mg</td></tr>
+          <tr><td>Apigenin (from chamomile)</td><td>50 mg</td></tr>
+        </tbody>
+      </table>
+      <p class="simple-note">The full ingredient list and allergen information are printed on the pack.</p>
+    </div>
+  </section>
 
-      <!-- 3. PDP Details (Nutritional Supplement Facts, Shipping & Exclusions, Lab Certificates) -->
-      <div class="pdp-accordions-group" style="display: flex; flex-direction: column; gap: 1rem; width: 100%;">
-        
-        <!-- Accordion 1: Supplement Facts -->
+  <!-- HOW TO USE -->
+  <section class="simple-section simple-section-alt">
+    <div class="container simple-container">
+      <h2 class="simple-title">How to use</h2>
+      <ol class="simple-steps">
+        <li><span class="step-num">1</span><div><strong>Open a sachet</strong><p>One sachet is one serving.</p></div></li>
+        <li><span class="step-num">2</span><div><strong>Mix it in</strong><p>Stir into a cup of warm milk or water.</p></div></li>
+        <li><span class="step-num">3</span><div><strong>Sip and wind down</strong><p>Drink it about 30 minutes before bed.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="simple-section">
+    <div class="container simple-container">
+      <h2 class="simple-title">Questions</h2>
+      <div class="pdp-accordions-group">
+
         <div class="pdp-accordion-item">
           <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
-            <span>Nutritional Supplement Facts</span>
+            <span>Does it contain melatonin?</span>
             <span class="pdp-accordion-icon">+</span>
           </div>
           <div class="pdp-accordion-body">
-            <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--color-muted-slate); margin-bottom: 0.5rem; letter-spacing: 0.02em;">
-              Serving Size: 1 sachet (10g) | Servings Per Pack: Based on Selected Supply
-            </div>
-            <table class="supplement-table-3d">
-              <thead>
-                <tr>
-                  <th>Active Compound</th>
-                  <th>Weight Per Serve</th>
-                  <th>Clinical Standard</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Magnesium L-Threonate</td>
-                  <td>2,000 mg</td>
-                  <td>Brain-Penetrating Rest</td>
-                </tr>
-                <tr>
-                  <td>Magnesium Bisglycinate</td>
-                  <td>1,000 mg</td>
-                  <td>Bioavailable Muscle Calm</td>
-                </tr>
-                <tr>
-                  <td>Glycine</td>
-                  <td>3,000 mg</td>
-                  <td>Core Body Temperature Drop</td>
-                </tr>
-                <tr>
-                  <td>L-Theanine</td>
-                  <td>200 mg</td>
-                  <td>Alpha Wave Anxiety-Relief</td>
-                </tr>
-                <tr>
-                  <td>Apigenin (Chamomile Extract)</td>
-                  <td>50 mg</td>
-                  <td>Non-Addictive Sleep Onset</td>
-                </tr>
-                <tr>
-                  <td>Tart Cherry Extract</td>
-                  <td>500 mg</td>
-                  <td>Phyto-Melatonin Booster</td>
-                </tr>
-                <tr>
-                  <td>Raw Cacao Powder</td>
-                  <td>3,000 mg</td>
-                  <td>Flavonoid Metabolic Carrier</td>
-                </tr>
-              </tbody>
-            </table>
-            <div style="font-size: 11px; font-style: italic; color: var(--color-muted-slate); margin-top: 1rem; line-height: 1.4;">
-              *Consult your physician before starting if pregnant, nursing or on active prescription medication. Bedtime sequence only.
-            </div>
+            No. There is no melatonin and no other hormone in Sleep Well. The full list of ingredients is above.
           </div>
         </div>
-        
-        <!-- Accordion 2: Shipping & Policy -->
+
         <div class="pdp-accordion-item">
           <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
-            <span>Shipping & Delivery Policies</span>
+            <span>Who should check with a doctor first?</span>
             <span class="pdp-accordion-icon">+</span>
           </div>
           <div class="pdp-accordion-body">
-            <p style="margin-bottom: 0.5rem;"><strong>Nationwide Free Delivery:</strong> Free shipping is provided across India on all subscriptions and orders.</p>
-            <p style="margin-bottom: 0.5rem;"><strong>Dispatch Timings:</strong> Dispatches within 24-48 hours. Delivered directly in 5-6 business days.</p>
-            <p><strong>Payment Modes:</strong> Cash on Delivery (COD), UPI, and major cards supported seamlessly. 10-day no-questions-asked refund policy applies.</p>
+            Please speak to your doctor before using it if you are pregnant or breastfeeding, take prescription medicine, or have a medical condition. Not for children.
           </div>
         </div>
-        
-        <!-- Accordion 3: What's Stripped Out -->
+
         <div class="pdp-accordion-item">
           <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
-            <span>Formulation Integrity Exclusions</span>
+            <span>Shipping, payment and returns</span>
             <span class="pdp-accordion-icon">+</span>
           </div>
           <div class="pdp-accordion-body">
-            <ul style="padding-left: 1.25rem; list-style-type: square;">
-              <li style="margin-bottom: 0.25rem;"><strong>No Proprietary Blends</strong>: We disclose the exact clinical weight of every single active ingredient.</li>
-              <li style="margin-bottom: 0.25rem;"><strong>No Synthetic Melatonin</strong>: Avoiding synthetic hormonal dependencies or heavy morning grogginess.</li>
-              <li style="margin-bottom: 0.25rem;"><strong>Zero Preservatives</strong>: Sealed in individual airtight sachets to maintain formulation stability.</li>
-              <li style="margin-bottom: 0.25rem;"><strong>Zero Artificial Flavors</strong>: Relying strictly on clean, rich unrefined organic raw cacao taste.</li>
-              <li style="margin-bottom: 0.25rem;"><strong>Gluten-Free, Dairy-Free, Soy-Free</strong> and 100% Vegan Certified.</li>
-            </ul>
+            Free shipping across India. Orders dispatch in 24–48 hours and usually arrive in 5–6 business days. Pay by UPI, card or cash on delivery. 10-day refund policy.
           </div>
         </div>
-        
+
+        <div class="pdp-accordion-item">
+          <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
+            <span>Something else?</span>
+            <span class="pdp-accordion-icon">+</span>
+          </div>
+          <div class="pdp-accordion-body">
+            Message us on <a href="https://wa.me/919567309388" target="_blank" rel="noopener">WhatsApp</a> or email <a href="mailto:support@superstate.in">support@superstate.in</a>. A real person replies.
+          </div>
+        </div>
+
       </div>
-
-    </div>
-  </section>
-
-  <div class="pdp-marquee-bar">
-    <div class="pdp-marquee-content">
-      DEEP RESTORATIVE SLEEP · MAGNESIUM L-THREONATE · WAKE UP SHARP · NO PROPRIETARY BLENDS · CLINICALLY STUDIED DOSAGES · ZERO PRESERVATIVES · VEGAN CERTIFIED · 100% RAW CACAO BASE · DEEP RESTORATIVE SLEEP · MAGNESIUM L-THREONATE · WAKE UP SHARP · NO PROPRIETARY BLENDS · CLINICALLY STUDIED DOSAGES · ZERO PRESERVATIVES · VEGAN CERTIFIED · 100% RAW CACAO BASE ·
-    </div>
-  </div>
-
-  <!-- SOMATIC MUSCLE RELIEF (MAGNESIUM FOCUS) -->
-  <section class="rhythm-section" style="background-color: var(--color-off-white); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); padding: 4.5rem 0;">
-    <div class="container text-center" style="max-width: 1400px; margin: 0 auto; padding: 0 2.5rem;">
-      <span class="section-eyebrow" style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--color-first-light); letter-spacing: 0.15em; display: block; margin-bottom: 0.75rem;">SOMATIC MUSCLE RELIEF</span>
-      <h2 class="section-title" style="font-size: 38px; line-height: 1.2; color: #ffffff; margin-bottom: 1.5rem; font-family: var(--font-heading) !important; font-weight: 700 !important;">Not just for sleep. Crafted for physical relief.</h2>
-      <p class="section-desc" style="font-size: 16px; line-height: 1.7; color: var(--color-muted-slate); margin-bottom: 3.5rem; max-width: 800px; margin-left: auto; margin-right: auto; font-weight: 500;">
-        Muscle cramping, menstrual back fatigue, and senior leg spasms can completely ruin your nightly rest. Most standard sleep products ignore the body. 
-        <strong>Sleep Well</strong> does the opposite: by introducing a massive dose of highly bioavailable Magnesium Bisglycinate, it works directly on your skeletal muscle cells to ease cramping, halt period contractions, and soothe older adults' nighttime leg pain.
-      </p>
-      
-      <div class="rhythm-timeline" style="margin-top: 3.5rem; text-align: left; gap: 2.5rem;">
-        
-        <!-- Card 1: Period Relief -->
-        <div class="timeline-card" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 24px; padding: 2.5rem; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.06);" onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 16px 36px rgba(0, 51, 153, 0.08), 0 0 15px rgba(228, 255, 90, 0.2)'; this.style.borderColor='var(--color-first-light)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.06)'; this.style.borderColor='#e2e8f0'">
-          <div style="font-size: 11px; font-weight: 800; color: #003399; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem;">FOR MENSTRUAL REST</div>
-          <h3 style="font-size: 22px; color: #001a4d; font-weight: 750; margin-bottom: 0.75rem; font-family: var(--font-heading) !important; letter-spacing: -0.015em;">Relieve Period Cramps</h3>
-          <p style="font-size: 14px; line-height: 1.65; color: #475569; margin: 0; font-weight: 500;">
-            Menstrual pain is caused by spasms in smooth muscle tissues that trigger nightly distress. High-dose Magnesium Bisglycinate relaxes these muscle fibers, significantly dropping lower-back fatigue and physical contractions to clear your path to deep, uninterrupted sleep.
-          </p>
-        </div>
-        
-        <!-- Card 2: Older Adults -->
-        <div class="timeline-card" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 24px; padding: 2.5rem; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.06);" onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 16px 36px rgba(0, 51, 153, 0.08), 0 0 15px rgba(228, 255, 90, 0.2)'; this.style.borderColor='var(--color-first-light)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.06)'; this.style.borderColor='#e2e8f0'">
-          <div style="font-size: 11px; font-weight: 800; color: #003399; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem;">FOR SENIOR NOCTURNAL COMFORT</div>
-          <h3 style="font-size: 22px; color: #001a4d; font-weight: 750; margin-bottom: 0.75rem; font-family: var(--font-heading) !important; letter-spacing: -0.015em;">Stop Nighttime Leg Cramps</h3>
-          <p style="font-size: 14px; line-height: 1.65; color: #475569; margin: 0; font-weight: 500;">
-            Older adults frequently suffer from sudden, painful leg cramps and twitching muscles during deep sleep. Magnesium Bisglycinate regulates calcium flow and nerve signals, stopping nighttime spasms so seniors can cycle peacefully into deep, restorative slow-wave sleep.
-          </p>
-        </div>
-        
-        <!-- Card 3: Somatic Tension -->
-        <div class="timeline-card" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 24px; padding: 2.5rem; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.06);" onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 16px 36px rgba(0, 51, 153, 0.08), 0 0 15px rgba(228, 255, 90, 0.2)'; this.style.borderColor='var(--color-first-light)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.06)'; this.style.borderColor='#e2e8f0'">
-          <div style="font-size: 11px; font-weight: 800; color: #003399; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem;">FOR SOMATIC HEALING & REM</div>
-          <h3 style="font-size: 22px; color: #001a4d; font-weight: 750; margin-bottom: 0.75rem; font-family: var(--font-heading) !important; letter-spacing: -0.015em;">Relax Somatic Tension</h3>
-          <p style="font-size: 14px; line-height: 1.65; color: #475569; margin: 0; font-weight: 500;">
-            Daily stress and post-workout soreness lock muscle cells in a contracted state, keeping your body tense. Magnesium blocks excess calcium, letting muscle fibers fully stretch and drop in temperature to trigger immediate physical rest, delta waves, and overnight recovery.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- THE MELATONIN-FREE PROMISE -->
-  <section class="personas-section" style="padding: 4.5rem 0; background-color: var(--color-off-white); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
-    <div class="container">
-      <div class="text-center" style="max-width: 700px; margin: 0 auto 4rem;">
-        <span class="section-eyebrow" style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--color-first-light); letter-spacing: 0.15em; display: block; margin-bottom: 0.75rem;">100% NON-HABIT FORMING</span>
-        <h2 class="section-title" style="font-size: 38px; color: #ffffff; font-family: var(--font-heading) !important; font-weight: 700 !important;">The Melatonin-Free Promise.</h2>
-        <p class="section-desc" style="font-size: 15.5px; color: var(--color-muted-slate); line-height: 1.65; margin-top: 1rem; font-weight: 500;">
-          Many sleep products rely on synthetic melatonin which can disrupt natural endocrine pathways, suppress REM sleep, and lead to morning drowsiness. We take the opposite approach.
-        </p>
-      </div>
-      
-      <div class="personas-grid">
-        <!-- Column 1: Melatonin -->
-        <div style="background: linear-gradient(135deg, #18090b 0%, #291014 100%); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 28px; padding: 3rem 2.5rem; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);" onmouseover="this.style.transform='translateY(-6px)'; this.style.borderColor='rgba(239, 68, 68, 0.7)'; this.style.boxShadow='0 20px 50px rgba(239, 68, 68, 0.2)';" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(239, 68, 68, 0.35)'; this.style.boxShadow='0 10px 40px rgba(0, 0, 0, 0.45)';">
-          <div>
-            <h3 style="font-size: 24px; color: #f87171; font-weight: 800; margin-bottom: 1.25rem; font-family: var(--font-heading) !important; letter-spacing: -0.02em;">Synthetic Melatonin</h3>
-            <p style="font-size: 15px; line-height: 1.75; color: #cbd5e1; margin-bottom: 1.5rem; font-weight: 500;">
-              Forces your brain into a state of artificial sedation by flooding your hormone receptors. Over time, this down-regulates your body's natural production, creating chemical dependencies, vivid nightmares, and heavy morning "grogginess."
-            </p>
-          </div>
-          <div style="font-size: 11px; font-weight: 800; color: #f87171; text-transform: uppercase; letter-spacing: 0.1em; border-top: 1px solid rgba(239, 68, 68, 0.15); padding-top: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
-            <span style="display: inline-block; width: 6px; height: 6px; background-color: #f87171; border-radius: 50%;"></span>
-            RISK: HORMONE DISRUPTION & TOLERANCE
-          </div>
-        </div>
-        
-        <!-- Column 2: Sleep Well -->
-        <div style="background: linear-gradient(135deg, #020914 0%, #061229 100%); border: 2.5px solid var(--color-first-light); border-radius: 28px; padding: 3rem 2.5rem; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 12px 45px rgba(228, 255, 90, 0.15);" onmouseover="this.style.transform='translateY(-6px)'; this.style.borderColor='var(--color-first-light)'; this.style.boxShadow='0 22px 55px rgba(228, 255, 90, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--color-first-light)'; this.style.boxShadow='0 12px 45px rgba(228, 255, 90, 0.15)';">
-          <div>
-            <h3 style="font-size: 24px; color: var(--color-first-light); font-weight: 800; margin-bottom: 1.25rem; font-family: var(--font-heading) !important; letter-spacing: -0.02em; text-shadow: 0 0 10px rgba(228, 255, 90, 0.15);">The Sleep Well Approach</h3>
-            <p style="font-size: 15px; line-height: 1.75; color: #ffffff; margin-bottom: 1.5rem; font-weight: 500;">
-              Rather than introducing hormones, Sleep Well feeds your nervous system the vital raw minerals and amino acids (Magnesium Bisglycinate + L-Theanine + L-Glycine) it uses to naturally switch itself off. This supports your natural sleep cycles so you cycle peacefully into deep rest and wake up completely clean.
-            </p>
-          </div>
-          <div style="font-size: 11px; font-weight: 800; color: var(--color-first-light); text-transform: uppercase; letter-spacing: 0.1em; border-top: 1px solid rgba(228, 255, 90, 0.15); padding-top: 1.5rem; display: flex; align-items: center; gap: 0.5rem; text-shadow: 0 0 8px rgba(228, 255, 90, 0.15);">
-            <span style="display: inline-block; width: 6px; height: 6px; background-color: var(--color-first-light); border-radius: 50%; box-shadow: 0 0 6px var(--color-first-light);"></span>
-            BENEFIT: ENDOCRINE SYSTEM INTEGRITY & 100% RECOVERY
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- THE SCIENCE STRIPPED BARE -->
-  <section class="science-section">
-    <div class="container">
-      <div class="text-center">
-        <span class="section-eyebrow">THE SCIENCE STRIPPED BARE</span>
-        <h2 class="section-title">Every dose has clinical logic.</h2>
-        <p class="section-desc">
-          No hidden proprietary blends. We disclose the exact clinical weight of every active compound.
-        </p>
-      </div>
-      <style>
-        .clinical-ingredients-container {
-          max-width: 1100px;
-          margin: 3.5rem auto 0;
-        }
-        .clinical-ingredients-row {
-          display: flex;
-          justify-content: center;
-          gap: 2rem 2.5rem;
-          flex-wrap: wrap;
-        }
-        .clinical-ingredients-row.row-top {
-          margin-bottom: 3rem;
-        }
-        .ingredient-clinical-card {
-          flex: 0 1 230px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-        }
-        .ingredient-img-box {
-          width: 190px;
-          height: 190px;
-          background-color: #ffffff;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          overflow: hidden;
-          margin-bottom: 1.25rem;
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 255, 255, 0.1);
-          border: 1px solid rgba(255, 255, 255, 0.15);
-          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
-        }
-        .ingredient-img-box img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .ingredient-clinical-card:hover .ingredient-img-box {
-          transform: translateY(-8px);
-          box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 15px rgba(228, 255, 90, 0.15);
-        }
-        .ingredient-clinical-card:hover .ingredient-img-box img {
-          transform: scale(1.05);
-        }
-        .ingredient-title-label {
-          font-family: var(--font-heading) !important;
-          font-size: 20px;
-          font-weight: 750;
-          color: #ffffff;
-          margin-top: 0px;
-          margin-bottom: 0.5rem;
-          letter-spacing: -0.015em;
-        }
-        .ingredient-desc-label {
-          font-family: var(--font-body);
-          font-size: 13.5px;
-          line-height: 1.5;
-          color: #cbd5e1;
-          max-width: 220px;
-          margin: 0;
-          font-weight: 500;
-        }
-        @media (max-width: 768px) {
-          .clinical-ingredients-row {
-            gap: 3rem 1.5rem !important;
-          }
-          .ingredient-clinical-card {
-            flex: 0 1 45% !important;
-          }
-        }
-        @media (max-width: 480px) {
-          .ingredient-clinical-card {
-            flex: 0 1 100% !important;
-            max-width: 280px;
-          }
-        }
-      </style>
-
-      <div class="clinical-ingredients-container">
-        <!-- Top Row (4 Items) -->
-        <div class="clinical-ingredients-row row-top">
-          <!-- Ingredient 1: Magnesium L-Threonate -->
-          <div class="ingredient-clinical-card">
-            <div class="ingredient-img-box">
-              <img src="/assets/magnesium_threonate_watchglass.png" alt="Magnesium L-Threonate">
-            </div>
-            <h3 class="ingredient-title-label">Magnesium L-Threonate</h3>
-            <div style="font-size: 11px; font-weight: 800; background: rgba(228, 255, 90, 0.15); color: var(--color-first-light); padding: 3px 10px; border-radius: 12px; display: inline-block; margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">2,000mg Dosage</div>
-            <p class="ingredient-desc-label">Quiets the central nervous system, helping you enter deep, restorative delta wave sleep.</p>
-          </div>
-          
-          <!-- Ingredient 2: Magnesium Bisglycinate -->
-          <div class="ingredient-clinical-card">
-            <div class="ingredient-img-box">
-              <img src="/assets/magnesium_bisglycinate_watchglass.png" alt="Magnesium Bisglycinate">
-            </div>
-            <h3 class="ingredient-title-label">Magnesium Bisglycinate</h3>
-            <div style="font-size: 11px; font-weight: 800; background: rgba(228, 255, 90, 0.15); color: var(--color-first-light); padding: 3px 10px; border-radius: 12px; display: inline-block; margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">1,000mg Dosage</div>
-            <p class="ingredient-desc-label">Relaxes your skeletal muscles, prevents nighttime cramps or tension, and drops body temp.</p>
-          </div>
-          
-          <!-- Ingredient 3: L-Theanine -->
-          <div class="ingredient-clinical-card">
-            <div class="ingredient-img-box" style="background-color: transparent; box-shadow: none; border: none;">
-              <img src="/assets/l_theanine_leaves.png" alt="L-Theanine" style="object-fit: contain;">
-            </div>
-            <h3 class="ingredient-title-label">L-Theanine</h3>
-            <div style="font-size: 11px; font-weight: 800; background: rgba(228, 255, 90, 0.15); color: var(--color-first-light); padding: 3px 10px; border-radius: 12px; display: inline-block; margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">200mg Dosage</div>
-            <p class="ingredient-desc-label">Quiets evening anxiety, racing thoughts, and mental chatter—without causing daytime sleepiness.</p>
-          </div>
-          
-          <!-- Ingredient 4: Organic Cocoa Base -->
-          <div class="ingredient-clinical-card">
-            <div class="ingredient-img-box">
-              <img src="/assets/cocoa_powder_watchglass.png" alt="Organic Raw Cocoa">
-            </div>
-            <h3 class="ingredient-title-label">Organic Raw Cocoa</h3>
-            <div style="font-size: 11px; font-weight: 800; background: rgba(228, 255, 90, 0.15); color: var(--color-first-light); padding: 3px 10px; border-radius: 12px; display: inline-block; margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">3,000mg Dosage</div>
-            <p class="ingredient-desc-label">Flavor-rich carrier base packed with dietary flavonoids that maximize bio-absorption rates.</p>
-          </div>
-        </div>
-        
-        <!-- Bottom Row (3 Items) -->
-        <div class="clinical-ingredients-row">
-          <!-- Ingredient 5: Apigenin -->
-          <div class="ingredient-clinical-card">
-            <div class="ingredient-img-box" style="background-color: transparent; box-shadow: none; border: none;">
-              <img src="/assets/apigenin.png" alt="Apigenin" style="object-fit: contain;">
-            </div>
-            <h3 class="ingredient-title-label">Apigenin</h3>
-            <div style="font-size: 11px; font-weight: 800; background: rgba(228, 255, 90, 0.15); color: var(--color-first-light); padding: 3px 10px; border-radius: 12px; display: inline-block; margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">50mg Dosage</div>
-            <p class="ingredient-desc-label">Binds to specific GABA receptors in the brain to trigger mental relaxation.</p>
-          </div>
-          
-          <!-- Ingredient 6: Tart Cherry Extract -->
-          <div class="ingredient-clinical-card">
-            <div class="ingredient-img-box" style="background-color: transparent; box-shadow: none; border: none;">
-              <img src="/assets/tart_cherry.png" alt="Tart Cherry Extract" style="object-fit: contain;">
-            </div>
-            <h3 class="ingredient-title-label">Tart Cherry Extract</h3>
-            <div style="font-size: 11px; font-weight: 800; background: rgba(228, 255, 90, 0.15); color: var(--color-first-light); padding: 3px 10px; border-radius: 12px; display: inline-block; margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">500mg Dosage</div>
-            <p class="ingredient-desc-label">Rich in organic phyto-melatonin, promoting a longer, more structured sleep cycle.</p>
-          </div>
-          
-          <!-- Ingredient 7: Glycine -->
-          <div class="ingredient-clinical-card">
-            <div class="ingredient-img-box">
-              <img src="/assets/glycine_watchglass.png" alt="Glycine">
-            </div>
-            <h3 class="ingredient-title-label">Glycine</h3>
-            <div style="font-size: 11px; font-weight: 800; background: rgba(228, 255, 90, 0.15); color: var(--color-first-light); padding: 3px 10px; border-radius: 12px; display: inline-block; margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">3,000mg Dosage</div>
-            <p class="ingredient-desc-label">Decreases core body heat, operating as a biological signal to trigger immediate sleep onset.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3D SIDE-BY-SIDE COMPARISON TABLE -->
-  <section class="comp-section">
-    <div class="container">
-      <div class="text-center">
-        <h2 class="section-title">Why it beats regular supplements.</h2>
-      </div>
-      
-      <div class="comp-table-container">
-        <table class="comp-table-premium">
-          <thead>
-            <tr>
-              <th>Performance Standard</th>
-              <th>SuperState Sleep Well</th>
-              <th>Generic Magnesium</th>
-              <th>Synthetic Melatonin</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Crosses Blood-Brain Barrier?</td>
-              <td><span class="comp-status-check">✓</span> <span style="font-size: 11px; display: block; color: var(--color-root-state);">(L-Threonate)</span></td>
-              <td><span class="comp-status-cross">✗</span> <span style="font-size: 11px; display: block; color: var(--color-muted-slate);">(Insoluble oxides)</span></td>
-              <td><span class="comp-status-cross">✗</span> <span style="font-size: 11px; display: block; color: var(--color-muted-slate);">(Hormone only)</span></td>
-            </tr>
-            <tr>
-              <td>100% Disclosed Formulation?</td>
-              <td><span class="comp-status-check">✓</span> <span style="font-size: 11px; display: block; color: var(--color-root-state);">(Zero hidden blends)</span></td>
-              <td><span class="comp-status-cross">✗</span> <span style="font-size: 11px; display: block; color: var(--color-muted-slate);">(Proprietary mix)</span></td>
-              <td><span class="comp-status-cross">✗</span> <span style="font-size: 11px; display: block; color: var(--color-muted-slate);">(Hidden binders)</span></td>
-            </tr>
-            <tr>
-              <td>Delicious Bedtime Ritual?</td>
-              <td><span class="comp-status-check">✓</span> <span style="font-size: 11px; display: block; color: var(--color-root-state);">(Warm Cocoa)</span></td>
-              <td><span class="comp-status-cross">✗</span> <span style="font-size: 11px; display: block; color: var(--color-muted-slate);">(Boring pills)</span></td>
-              <td><span class="comp-status-cross">✗</span> <span style="font-size: 11px; display: block; color: var(--color-muted-slate);">(Chalky tablets)</span></td>
-            </tr>
-            <tr>
-              <td>Zero Next-Day Dependency?</td>
-              <td><span class="comp-status-check">✓</span> <span style="font-size: 11px; display: block; color: var(--color-root-state);">(100% natural)</span></td>
-              <td><span class="comp-status-check">✓</span> <span style="font-size: 11px; display: block; color: var(--color-root-state);">(Safe mineral)</span></td>
-              <td><span class="comp-status-cross">✗</span> <span style="font-size: 11px; display: block; color: var(--color-muted-slate);">(High tolerance)</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- CUSTOMER TESTIMONIALS -->
-  <section class="reviews-section">
-    <div class="container">
-      <div class="text-center">
-        <span class="section-eyebrow">MEMBER REVIEWS</span>
-        <h2 class="section-title">Real feedback. Honest rest.</h2>
-        <p class="section-desc">
-          How SuperState is helping high performers, builders, and athletes optimize their nightly recovery.
-        </p>
-      </div>
-      
-      <div class="reviews-grid">
-        <!-- Review 1 -->
-        <div class="review-card-3d">
-          <div>
-            <div class="review-meta-row">
-              <div class="review-stars">★★★★★</div>
-              <div class="review-verified-badge">Verified Buyer</div>
-            </div>
-            <p class="review-quote-body">
-              "I used to lie awake for hours with my mind racing about code deployment pipelines and next-day standups. Since making Sleep Well my 10 PM dark chocolate ritual, the wind-down is effortless. I drift off in minutes and wake up completely clear-headed at 7 AM with zero morning brain fog."
-            </p>
-          </div>
-          <div class="review-author-block">
-            <div class="review-author-name">Aditya R., 28</div>
-            <div class="review-author-sub">Software Engineer · Bangalore</div>
-          </div>
-        </div>
-        
-        <!-- Review 2 -->
-        <div class="review-card-3d">
-          <div>
-            <div class="review-meta-row">
-              <div class="review-stars">★★★★★</div>
-              <div class="review-verified-badge">Verified Buyer</div>
-            </div>
-            <p class="review-quote-body">
-              "As a startup founder, my daily cortisol and stress levels are constantly through the roof. I absolutely hated taking generic melatonin pills because they gave me a heavy, groggy hangover the next morning. Sleep Well is a total game-changer. Quietens the mental chatter and helps me wake up 100% charged."
-            </p>
-          </div>
-          <div class="review-author-block">
-            <div class="review-author-name">Sneha M., 31</div>
-            <div class="review-author-sub">Startup Founder · Mumbai</div>
-          </div>
-        </div>
-
-        <!-- Review 3 -->
-        <div class="review-card-3d">
-          <div>
-            <div class="review-meta-row">
-              <div class="review-stars">★★★★★</div>
-              <div class="review-verified-badge">Verified Buyer</div>
-            </div>
-            <p class="review-quote-body">
-              "I dreaded my periods because of lower back fatigue and intense cramps that made it impossible to sleep. A friend recommended Sleep Well for the high Magnesium Bisglycinate dose. It acts like a warm physical hug—relaxing my muscle spasms completely so I can sleep restfully throughout the night."
-            </p>
-          </div>
-          <div class="review-author-block">
-            <div class="review-author-name">Pooja K., 26</div>
-            <div class="review-author-sub">Dancer · New Delhi</div>
-          </div>
-        </div>
-
-        <!-- Review 4 -->
-        <div class="review-card-3d">
-          <div>
-            <div class="review-meta-row">
-              <div class="review-stars">★★★★★</div>
-              <div class="review-verified-badge">Verified Buyer</div>
-            </div>
-            <p class="review-quote-body">
-              "At 64, sudden, painful leg cramps in the middle of the night were ruining my sleep. Since drinking this cacao ritual every night, my nighttime leg spasms have stopped entirely. It's safe, delicious, and helps me wake up completely refreshed."
-            </p>
-          </div>
-          <div class="review-author-block">
-            <div class="review-author-name">Ramesh V., 64</div>
-            <div class="review-author-sub">Retired Professor · Pune</div>
-          </div>
-        </div>
-
-        <!-- Review 5 -->
-        <div class="review-card-3d">
-          <div>
-            <div class="review-meta-row">
-              <div class="review-stars">★★★★★</div>
-              <div class="review-verified-badge">Verified Buyer</div>
-            </div>
-            <p class="review-quote-body">
-              "Heavy strength training left my body tense and aching, making it hard to wind down. Sleep Well is the perfect post-workout nighttime recovery. The somatic relaxation from the magnesium and amino acids is instant. My muscles feel fully recovered by morning."
-            </p>
-          </div>
-          <div class="review-author-block">
-            <div class="review-author-name">Kabir S., 34</div>
-            <div class="review-author-sub">CrossFit Athlete · Hyderabad</div>
-          </div>
-        </div>
-
-        <!-- Review 6 -->
-        <div class="review-card-3d">
-          <div>
-            <div class="review-meta-row">
-              <div class="review-stars">★★★★★</div>
-              <div class="review-verified-badge">Verified Buyer</div>
-            </div>
-            <p class="review-quote-body">
-              "I had a terrible habit of midnight overthinking. The combination of L-Theanine and chamomile in this dark chocolate drink is amazing. Within 20 minutes, my brain goes into calm mode and I drift off naturally. Best D2C wellness product in India."
-            </p>
-          </div>
-          <div class="review-author-block">
-            <div class="review-author-name">Meera J., 29</div>
-            <div class="review-author-sub">UX Architect · Chennai</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TWO-COLUMN FAQ SECTION -->
-  <section class="faq-section">
-    <div class="container">
-      <div class="text-center">
-        <span class="section-eyebrow">ANY QUESTIONS?</span>
-        <h2 class="section-title">We have direct answers.</h2>
-      </div>
-      
-      <div class="faq-grid-split">
-        <!-- Col 1 -->
-        <div class="pdp-accordions-group">
-          
-          <div class="pdp-accordion-item">
-            <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
-              <span>What exactly is Sleep Well?</span>
-              <span class="pdp-accordion-icon">+</span>
-            </div>
-            <div class="pdp-accordion-body">
-              Sleep Well is a premium, open-label nighttime functional cocoa powder formulation containing Magnesium L-Threonate, Bisglycinate, L-Theanine, Apigenin, and Glycine. It acts as a delicious nightly dark chocolate ritual designed to switch off racing brain circuits and relax physical muscle cells.
-            </div>
-          </div>
-          
-          <div class="pdp-accordion-item">
-            <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
-              <span>Why fermented dark chocolate/raw cocoa base?</span>
-              <span class="pdp-accordion-icon">+</span>
-            </div>
-            <div class="pdp-accordion-body">
-              Cocoa is an elegant, organic carrier molecule. It is rich in natural tryptophan (the core building block of serotonin and melatonin) and mood-enhancing flavonoids. Using it as a warm beverage ritual triggers standard sensory relaxation signals, making it far superior to clinical pill-popping.
-            </div>
-          </div>
-          
-          <div class="pdp-accordion-item">
-            <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
-              <span>Is Magnesium L-Threonate better than standard salts?</span>
-              <span class="pdp-accordion-icon">+</span>
-            </div>
-            <div class="pdp-accordion-body">
-              Yes, absolutely. Standard magnesium salts (like oxide or citrate) are poorly absorbed and mostly trigger digestive purging. L-Threonate is the only form scientifically proven to cross the blood-brain barrier directly, rapidly increasing cellular magnesium density inside the central nervous system.
-            </div>
-          </div>
-          
-        </div>
-        
-        <!-- Col 2 -->
-        <div class="pdp-accordions-group">
-          
-          <div class="pdp-accordion-item">
-            <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
-              <span>Will it cause chemical dependency?</span>
-              <span class="pdp-accordion-icon">+</span>
-            </div>
-            <div class="pdp-accordion-body">
-              No. Unlike melatonin or prescription sleep sedatives, Sleep Well does not introduce synthetic hormones or block receptors. It only supplies natural minerals and amino acids your nervous system naturally utilizes to relax, ensuring zero chemical tolerance or withdrawal issues.
-            </div>
-          </div>
-          
-          <div class="pdp-accordion-item">
-            <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
-              <span>When should I take it?</span>
-              <span class="pdp-accordion-icon">+</span>
-            </div>
-            <div class="pdp-accordion-body">
-              We recommend preparing your Sleep Well chocolate ritual exactly 30 minutes before your planned sleep window. This gives the L-Theanine and Magnesium Glycinate plenty of time to drop muscle tension and transition brainwaves into relax mode.
-            </div>
-          </div>
-          
-          <div class="pdp-accordion-item">
-            <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
-              <span>Are there any synthetic ingredients or fillers?</span>
-              <span class="pdp-accordion-icon">+</span>
-            </div>
-            <div class="pdp-accordion-body">
-              None. Every dose is strictly unadulterated. We use unrefined low-GI coconut sugar for a light sweetness, 100% organic raw cacao, trace Himalayan sea salts, and direct active elements. There are no preservatives, anti-caking agents, or colorings.
-            </div>
-          </div>
-          
-        </div>
-      </div>
+      <p class="simple-note" style="margin-top: 2rem;">This is a food product and is not intended to diagnose, treat, cure or prevent any disease. Not for medicinal use.</p>
     </div>
   </section>
 
@@ -2793,8 +2305,7 @@
         </div>
         <div>
           <h4>One honest email a week.</h4>
-          <p style="font-size: 14px; margin-bottom: 1rem; opacity: 0.8;">No fluff. Just science, sleep tips, and early
-            access.</p>
+          <p style="font-size: 14px; margin-bottom: 1rem; opacity: 0.8;">No fluff. Just updates and early access.</p>
           <form class="newsletter-form waitlist-form">
             <input type="email" placeholder="Your email" required>
             <button type="submit">Subscribe</button>
@@ -2803,7 +2314,7 @@
       </div>
       <div class="footer-bottom">
         <div>© 2025 SuperState | Privacy Policy | Terms | Shipping | Returns</div>
-        <div>FSSAI Licensed | Vegan Certified | Made in India</div>
+        <div>Made in India</div>
       </div>
     </div>
   </footer>
