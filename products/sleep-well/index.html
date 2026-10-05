@@ -124,17 +124,30 @@
     /* ----------------------------------------------------
        PRODUCT SHOWCASE GRID (Inspired by Ace Blend)
        ---------------------------------------------------- */
+    .pdp-hero-section {
+      padding: 1rem 0 3rem;
+    }
+
     .pdp-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 3.5rem;
-      padding: 2.5rem 0;
+      gap: 1.5rem;
+      padding: 1rem 0;
     }
 
     @media (min-width: 992px) {
       .pdp-grid {
-        grid-template-columns: 1.1fr 0.9fr;
+        grid-template-columns: 1.05fr 0.95fr;
+        grid-template-areas:
+          "gallery info"
+          "extras  info";
+        grid-template-rows: auto 1fr;
+        column-gap: 3.5rem;
+        row-gap: 1.25rem;
       }
+      .pdp-gallery-column { grid-area: gallery; }
+      .pdp-info-column { grid-area: info; }
+      .pdp-extras { grid-area: extras; align-self: start; }
     }
 
     /* Sticky Gallery Column */
@@ -143,19 +156,13 @@
       min-width: 0;
     }
 
-    @media (min-width: 992px) {
-      .pdp-gallery-column {
-        position: sticky;
-        top: 130px;
-        align-self: start;
-      }
-    }
+
 
     .pdp-gallery-viewport {
       width: 100%;
       max-width: 600px;
       margin: 0 auto;
-      aspect-ratio: 1080 / 1060;
+      padding: 1.5rem 0 1rem;
       position: relative;
       display: grid;
       place-items: center;
@@ -165,8 +172,8 @@
 
     .pdp-gallery-viewport img {
       width: auto;
-      height: 92%;
-      max-height: 68vh;
+      height: auto;
+      max-height: min(540px, 62vh);
       max-width: 100%;
       object-fit: contain;
       filter: drop-shadow(0 28px 32px rgba(0, 10, 40, 0.55)) drop-shadow(0 6px 10px rgba(0, 10, 40, 0.35));
@@ -2079,13 +2086,155 @@
     }
 
     .manifesto {
-      padding: 7rem 0 6rem;
+      padding: 3.5rem 0 4rem;
+    }
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .bento-card {
       position: relative;
+      border-radius: 24px;
+      padding: clamp(1.25rem, 2.5vw, 2rem);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--color-border);
       overflow: hidden;
     }
-    .manifesto-inner {
-      max-width: 900px;
-      position: relative;
+    .bento-card p {
+      margin: 0;
+      text-transform: lowercase;
+    }
+    .bento-hero {
+      grid-column: span 7;
+      grid-row: span 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 2rem;
+      background: radial-gradient(circle at 85% 15%, rgba(77, 128, 255, 0.5), rgba(0, 51, 153, 0) 55%), var(--color-off-white);
+    }
+    .bento-hero .manifesto-tag {
+      align-self: flex-start;
+      margin-bottom: 0;
+    }
+    .bento-big {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: clamp(40px, 5.6vw, 80px);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+      color: #ffffff;
+    }
+    .bento-fix {
+      grid-column: span 5;
+      background: #ffffff;
+      color: var(--color-deep-knowing);
+    }
+    .bento-fix p {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: clamp(24px, 2.6vw, 34px);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      max-width: 16ch;
+    }
+    .bento-emoji {
+      position: absolute;
+      right: 1rem;
+      bottom: 0.5rem;
+      font-size: 56px;
+      transform: rotate(-8deg);
+      opacity: 0.9;
+    }
+    .bento-but {
+      grid-column: span 5;
+    }
+    .bento-label {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 26px;
+      color: var(--color-first-light);
+    }
+    .bento-chips {
+      list-style: none;
+      padding: 0;
+      margin: 0.8rem 0 0.9rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .bento-chips li {
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+    }
+    .bento-chips li:nth-child(odd) { transform: rotate(-2deg); }
+    .bento-chips li:nth-child(even) { transform: rotate(2deg); }
+    .bento-small {
+      font-size: 15px;
+      color: var(--color-muted-slate);
+    }
+    .bento-close {
+      grid-column: span 12;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      min-height: 150px;
+      padding-right: 180px;
+      background: var(--color-first-light);
+      border: none;
+    }
+    .bento-close-text {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: clamp(32px, 5vw, 64px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--color-deep-knowing);
+    }
+    .bento-close-text em {
+      color: var(--color-deep-knowing);
+    }
+    .bento-sticker {
+      flex-shrink: 0;
+      transform: rotate(-6deg);
+      background: var(--color-deep-knowing);
+      color: #ffffff;
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: clamp(18px, 2vw, 24px);
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      white-space: nowrap;
+    }
+    .bento-close img {
+      position: absolute;
+      right: 24px;
+      top: 50%;
+      height: 220px;
+      width: auto;
+      transform: translateY(-38%) rotate(10deg);
+      filter: drop-shadow(0 18px 20px rgba(0, 10, 40, 0.35));
+    }
+    @media (max-width: 860px) {
+      .bento-hero, .bento-fix, .bento-but, .bento-close {
+        grid-column: span 12;
+        grid-row: auto;
+      }
+      .bento-close {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-right: 120px;
+      }
+      .bento-close img {
+        height: 160px;
+        right: 12px;
+      }
     }
     .manifesto-tag {
       display: inline-block;
@@ -2099,18 +2248,6 @@
       padding: 0.35rem 0.85rem;
       margin-bottom: 2rem;
     }
-    .manifesto p {
-      margin: 0;
-      text-transform: lowercase;
-    }
-    .manifesto-big {
-      font-family: var(--font-heading);
-      font-weight: 800;
-      font-size: clamp(40px, 7vw, 88px);
-      line-height: 0.98;
-      letter-spacing: -0.04em;
-      color: #ffffff;
-    }
     .manifesto em,
     .ritual em {
       font-family: 'Instrument Serif', serif;
@@ -2122,49 +2259,6 @@
       background: linear-gradient(transparent 58%, rgba(228, 255, 90, 0.85) 58%, rgba(228, 255, 90, 0.85) 92%, transparent 92%);
       padding: 0 0.1em;
       color: #ffffff;
-    }
-    .manifesto-mid {
-      font-family: var(--font-heading);
-      font-weight: 600;
-      font-size: clamp(24px, 3.4vw, 40px);
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      color: #ffffff;
-      margin-top: 2rem !important;
-      max-width: 22ch;
-    }
-    .manifesto-soft {
-      font-size: clamp(17px, 1.8vw, 21px);
-      line-height: 1.5;
-      color: var(--color-muted-slate);
-      margin-top: 1.5rem !important;
-      max-width: 34ch;
-    }
-    .manifesto-close {
-      font-family: var(--font-heading);
-      font-weight: 800;
-      font-size: clamp(36px, 6vw, 72px);
-      line-height: 1;
-      letter-spacing: -0.04em;
-      color: var(--color-first-light);
-      margin-top: 3.5rem !important;
-    }
-    .manifesto-close em {
-      color: #ffffff;
-    }
-    .manifesto-sticker {
-      position: absolute;
-      right: 1rem;
-      bottom: 0.5rem;
-      transform: rotate(-7deg);
-      background: #ffffff;
-      color: var(--color-deep-knowing);
-      font-family: 'Instrument Serif', serif;
-      font-style: italic;
-      font-size: clamp(20px, 2.4vw, 28px);
-      padding: 0.6rem 1.2rem;
-      border-radius: 14px;
-      box-shadow: 0 12px 30px rgba(0, 10, 40, 0.35);
     }
 
     .ritual {
@@ -2283,14 +2377,6 @@
       }
       .ritual-video-wrap {
         max-width: 280px;
-      }
-      .manifesto {
-        padding: 5rem 0 6.5rem;
-      }
-      .manifesto-sticker {
-        right: auto;
-        left: 1rem;
-        bottom: 1.5rem;
       }
     }
 
@@ -2471,6 +2557,192 @@
     @media (prefers-reduced-motion: reduce) {
       .drop-dot { animation: none; }
     }
+    /* ---------- Buy box link to game ---------- */
+    .win-link {
+      display: inline-block;
+      margin: -0.75rem 0 1.25rem;
+      font-size: 14px;
+      color: var(--color-muted-slate);
+      text-decoration: none;
+    }
+    .win-link span {
+      color: var(--color-first-light);
+      font-weight: 700;
+      border-bottom: 2px solid var(--color-first-light);
+    }
+
+    /* ---------- Sold-out era card ---------- */
+    .pdp-extras {
+      display: grid;
+      gap: 1rem;
+      max-width: 600px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .era-card {
+      position: relative;
+      padding: 1.1rem 1.25rem 1rem;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(228, 255, 90, 0.12), rgba(51, 204, 153, 0.06));
+      border: 1px solid rgba(228, 255, 90, 0.35);
+    }
+    .era-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .era-badge {
+      display: inline-block;
+      background: var(--color-first-light);
+      color: var(--color-deep-knowing);
+      font-weight: 800;
+      font-size: 14px;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      transform: rotate(-3deg);
+    }
+    .era-batch {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      color: var(--color-muted-slate);
+      text-decoration: line-through;
+      text-decoration-color: #ff6b6b;
+      text-decoration-thickness: 2px;
+    }
+    .era-copy {
+      margin: 0.8rem 0 0.75rem;
+      font-size: 15px;
+      line-height: 1.55;
+      color: #ffffff;
+    }
+    .era-copy em {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 1.2em;
+      color: var(--color-first-light);
+    }
+    .era-bar {
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      overflow: hidden;
+    }
+    .era-bar span {
+      display: block;
+      height: 100%;
+      width: 72%;
+      border-radius: 999px;
+      background: repeating-linear-gradient(-45deg, var(--color-first-light) 0 10px, #cfe84d 10px 20px);
+      background-size: 28px 28px;
+      animation: era-stripes 1s linear infinite;
+    }
+    @keyframes era-stripes {
+      to { background-position: 28px 0; }
+    }
+    .era-foot {
+      margin: 0.6rem 0 0;
+      font-size: 13px;
+      color: var(--color-muted-slate);
+    }
+
+    /* ---------- Game card ---------- */
+    .game-card {
+      scroll-margin-top: 110px;
+      padding: 1.25rem;
+      border-radius: 20px;
+      background: var(--color-off-white);
+      border: 1px solid var(--color-border);
+      box-shadow: 0 14px 34px rgba(0, 10, 40, 0.3);
+    }
+    .game-eyebrow {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--color-muted-slate);
+    }
+    .game-title {
+      font-family: var(--font-heading) !important;
+      font-size: clamp(24px, 3vw, 30px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: #ffffff;
+      margin: 0.35rem 0 0.4rem;
+    }
+    .game-title em {
+      font-family: 'Instrument Serif', serif;
+      font-weight: 400;
+      color: var(--color-first-light);
+    }
+    .game-sub {
+      margin: 0 0 1rem;
+      font-size: 14px;
+      color: var(--color-muted-slate);
+    }
+    .game-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .game-btn {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 800;
+      border-radius: 12px;
+      padding: 0.75rem 1.1rem;
+      cursor: pointer;
+      text-decoration: none;
+      line-height: 1.2;
+    }
+    .game-btn-primary {
+      background: var(--color-first-light);
+      color: var(--color-deep-knowing);
+      border: none;
+    }
+    .game-btn-ghost {
+      background: transparent;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+    }
+    .game-btn:focus-visible {
+      outline: 3px solid #ffffff;
+      outline-offset: 2px;
+    }
+    .game-hud {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.5rem;
+      font-weight: 800;
+      color: var(--color-first-light);
+      font-variant-numeric: tabular-nums;
+    }
+    .game-hint {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-muted-slate);
+    }
+    #sheep-canvas {
+      display: block;
+      width: 100%;
+      height: 170px;
+      border-radius: 14px;
+      background: linear-gradient(#001a4d, #002b7a);
+      touch-action: manipulation;
+      cursor: pointer;
+    }
+    .game-code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      background: var(--color-first-light);
+      color: var(--color-deep-knowing);
+      padding: 0.1rem 0.5rem;
+      border-radius: 8px;
+      font-size: 0.85em;
+      white-space: nowrap;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .era-bar span { animation: none; }
+    }
   </style>
 </head>
 
@@ -2523,7 +2795,7 @@
   </div>
 
   <!-- MAIN PRODUCT SECTION -->
-  <section style="padding: 2.5rem 0 5rem 0;">
+  <section class="pdp-hero-section">
     <div class="container">
       <div class="pdp-grid">
         
@@ -2542,11 +2814,6 @@
           <h1 class="product-headline" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Sleep Well</h1>
           
           <p class="pdp-subline">A dark chocolate drink for your evenings. Mix one sachet, sip it 30 minutes before bed.</p>
-
-          <div class="drop-card">
-            <span class="drop-badge"><span class="drop-dot"></span> batch 01 · sold out 🫠</span>
-            <p class="drop-copy">our first batch vanished way faster than we planned for. so we used the break to make sleep well <em>even better</em>. the next drop lands soon, so hold your horses (steady, steady 🐎).</p>
-          </div>
           
           <div class="pdp-price-row" style="margin-bottom: 0.25rem;">
             <div class="pdp-price-current" id="pdp-top-price">₹149.50</div>
@@ -2610,22 +2877,69 @@
             </button>
           </div>
 
-          <div class="trust-later-card">
-            <div>
-              <strong>not ready to trust us yet? fair 🤝</strong>
-              <p>drop your details and use code <span class="code-chip">STEADY20</span> for 20% off when we launch.</p>
-            </div>
-            <a href="/pages/waitlist/" class="trust-later-btn">get 20% off →</a>
-          </div>
+          <a href="#win" class="win-link">not ready to pay? 🎮 <span>play a 20-second game for 20% off</span></a>
 
           <ul class="pdp-facts-row">
             <li>Pay today, ships with the next drop</li>
             <li>Free shipping in India</li>
             <li>No melatonin</li>
           </ul>
+
+          <div class="era-card" style="margin-top: 1.5rem;">
+            <div class="era-top">
+              <span class="era-badge">sold out era 💅</span>
+              <span class="era-batch">batch 01</span>
+            </div>
+            <p class="era-copy">ok so… batch 01 got <strong>absolutely cleared.</strong> y'all ate it up way faster than we planned 🫠 we took notes, made it <em>even better</em>, and the next drop is loading:</p>
+            <div class="era-bar" role="img" aria-label="Next drop loading"><span></span></div>
+            <p class="era-foot">hold your horses 🐎 steady, steady.</p>
+          </div>
           
         </div>
-        
+
+        <!-- EXTRAS: sold-out note + win-your-code game -->
+        <div class="pdp-extras">
+          <div class="game-card" id="win">
+            <!-- intro -->
+            <div class="game-state" data-state="intro">
+              <span class="game-eyebrow">not ready to trust us yet? fair 🤝</span>
+              <h3 class="game-title">wanna <em>win</em> your 20% off?</h3>
+              <p class="game-sub">help a sleepy sheep jump 10 alarms and the code is yours. 20 seconds, max.</p>
+              <div class="game-actions">
+                <button type="button" class="game-btn game-btn-primary" data-action="play">yes, let's play 🐑</button>
+                <button type="button" class="game-btn game-btn-ghost" data-action="skip">nah, just give me the code</button>
+              </div>
+            </div>
+
+            <!-- playing -->
+            <div class="game-state" data-state="play" hidden>
+              <div class="game-hud"><span id="game-score">0 / 10</span><span class="game-hint">tap · click · space to jump</span></div>
+              <canvas id="sheep-canvas" aria-label="Sheep jump game. Press space or tap to jump."></canvas>
+            </div>
+
+            <!-- lost -->
+            <div class="game-state" data-state="lost" hidden>
+              <h3 class="game-title">oop, the alarm got you ⏰</h3>
+              <p class="game-sub">so close. run it back?</p>
+              <div class="game-actions">
+                <button type="button" class="game-btn game-btn-primary" data-action="play">try again</button>
+                <button type="button" class="game-btn game-btn-ghost" data-action="skip">just give me the code</button>
+              </div>
+            </div>
+
+            <!-- reveal -->
+            <div class="game-state" data-state="reveal" hidden>
+              <span class="game-eyebrow" id="reveal-eyebrow">you did that ✨</span>
+              <h3 class="game-title">your code: <span class="game-code" id="game-code">STEADY20</span></h3>
+              <p class="game-sub">20% off when we launch. drop your details so we can ping you the second it's live.</p>
+              <div class="game-actions">
+                <button type="button" class="game-btn game-btn-primary" data-action="copy">copy code</button>
+                <a href="/pages/waitlist/" class="game-btn game-btn-ghost">save my spot →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -2640,14 +2954,35 @@
   </div>
   </div>
 
-  <!-- MANIFESTO -->
+  <!-- MANIFESTO (bento) -->
   <section class="manifesto">
-    <div class="container manifesto-inner">
-      <span class="manifesto-tag">real talk ✶</span>
-      <p class="manifesto-big">sleep is the <em class="marker">best supplement</em> in the whole world.</p>
-      <p class="manifesto-mid">there's almost nothing a good night's sleep can't fix.</p>
-      <p class="manifesto-soft">but deadlines, doomscrolling and 2am overthinking don't always let you have that luxury.</p>
-      <p class="manifesto-close">so, <em>sleep well</em><br>with superstate<span class="moon"> ☾</span></p>
+    <div class="container bento">
+      <div class="bento-card bento-hero">
+        <span class="manifesto-tag">real talk ✶</span>
+        <p class="bento-big">sleep is the <em class="marker">best supplement</em> in the whole world.</p>
+      </div>
+
+      <div class="bento-card bento-fix">
+        <span class="bento-emoji" aria-hidden="true">🛌</span>
+        <p>there's almost nothing a good night's sleep can't fix.</p>
+      </div>
+
+      <div class="bento-card bento-but">
+        <p class="bento-label">but life be like:</p>
+        <ul class="bento-chips">
+          <li>📧 deadlines</li>
+          <li>📱 doomscrolling</li>
+          <li>🧠 2am overthinking</li>
+          <li>☕ one coffee too many</li>
+        </ul>
+        <p class="bento-small">so sometimes we just can't have that luxury.</p>
+      </div>
+
+      <div class="bento-card bento-close">
+        <p class="bento-close-text">so, <em>sleep well</em> with superstate ☾</p>
+        <span class="bento-sticker">coffee, but for sleep.</span>
+        <img src="/assets/sleep-well-box.webp" alt="" width="763" height="1172" loading="lazy" aria-hidden="true">
+      </div>
     </div>
   </section>
 
@@ -3476,6 +3811,194 @@
         }, 400);
       });
     });
+  </script>
+
+  <!-- SLEEPY SHEEP: win-your-code mini game -->
+  <script>
+    (() => {
+      const card = document.getElementById("win");
+      if (!card) return;
+
+      const CODE = "STEADY20";
+      const TARGET = 10;
+      const states = card.querySelectorAll(".game-state");
+      const canvas = document.getElementById("sheep-canvas");
+      const ctx = canvas.getContext("2d");
+      const scoreEl = document.getElementById("game-score");
+
+      let raf = null;
+      let game = null;
+
+      function show(name) {
+        states.forEach(el => { el.hidden = el.dataset.state !== name; });
+      }
+
+      function reveal(won) {
+        stop();
+        document.getElementById("reveal-eyebrow").textContent = won
+          ? "you did that ✨ 10/10 alarms dodged"
+          : "no games, no stress. here you go 💛";
+        show("reveal");
+      }
+
+      function sizeCanvas() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const w = canvas.clientWidth;
+        const h = canvas.clientHeight;
+        canvas.width = Math.round(w * dpr);
+        canvas.height = Math.round(h * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        return { w, h };
+      }
+
+      function start() {
+        show("play");
+        const { w, h } = sizeCanvas();
+        const ground = h - 28;
+        game = {
+          w, h, ground,
+          sheep: { x: 44, y: ground, vy: 0, size: 34 },
+          obstacles: [],
+          stars: Array.from({ length: 18 }, () => ({ x: Math.random() * w, y: Math.random() * (ground - 40), r: Math.random() * 1.4 + 0.4 })),
+          speed: 260,
+          nextSpawn: 1.1,
+          score: 0,
+          last: performance.now(),
+          over: false
+        };
+        scoreEl.textContent = `0 / ${TARGET}`;
+        window.addEventListener("keydown", onKey);
+        raf = requestAnimationFrame(loop);
+        canvas.focus({ preventScroll: true });
+      }
+
+      function stop() {
+        if (raf) cancelAnimationFrame(raf);
+        raf = null;
+        window.removeEventListener("keydown", onKey);
+      }
+
+      function jump() {
+        if (!game || game.over) return;
+        const s = game.sheep;
+        if (s.y >= game.ground - 0.5) s.vy = -540;
+      }
+
+      function onKey(e) {
+        if (e.code === "Space" || e.code === "ArrowUp") {
+          e.preventDefault();
+          jump();
+        }
+      }
+
+      function spawn() {
+        const kinds = ["⏰", "⏰", "☕", "📱"];
+        game.obstacles.push({ x: game.w + 20, kind: kinds[Math.floor(Math.random() * kinds.length)], size: 28, passed: false });
+        // gap shrinks a little as the game speeds up, but stays fair
+        game.nextSpawn = 0.95 + Math.random() * 0.8 - Math.min(game.score * 0.015, 0.15);
+      }
+
+      function loop(now) {
+        const dt = Math.min((now - game.last) / 1000, 0.033);
+        game.last = now;
+        update(dt);
+        draw();
+        if (!game.over) raf = requestAnimationFrame(loop);
+      }
+
+      function update(dt) {
+        const g = game, s = g.sheep;
+        g.speed += dt * 8;
+        s.vy += 1900 * dt;
+        s.y = Math.min(s.y + s.vy * dt, g.ground);
+        if (s.y === g.ground) s.vy = 0;
+
+        g.nextSpawn -= dt;
+        if (g.nextSpawn <= 0) spawn();
+
+        g.stars.forEach(st => { st.x -= g.speed * 0.08 * dt; if (st.x < 0) st.x += g.w; });
+
+        for (const o of g.obstacles) {
+          o.x -= g.speed * dt;
+          // forgiving hitbox
+          const hit = Math.abs(o.x - s.x) < (o.size + s.size) * 0.32 && s.y > g.ground - o.size * 0.75;
+          if (hit) {
+            g.over = true;
+            setTimeout(() => { stop(); show("lost"); }, 350);
+            return;
+          }
+          if (!o.passed && o.x < s.x - 10) {
+            o.passed = true;
+            g.score++;
+            scoreEl.textContent = `${g.score} / ${TARGET}`;
+            if (g.score >= TARGET) {
+              g.over = true;
+              setTimeout(() => reveal(true), 300);
+              return;
+            }
+          }
+        }
+        g.obstacles = g.obstacles.filter(o => o.x > -40);
+      }
+
+      function draw() {
+        const g = game, s = g.sheep;
+        ctx.clearRect(0, 0, g.w, g.h);
+
+        ctx.fillStyle = "rgba(255,255,255,0.7)";
+        g.stars.forEach(st => { ctx.beginPath(); ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2); ctx.fill(); });
+
+        ctx.font = "26px serif";
+        ctx.textBaseline = "alphabetic";
+        ctx.fillText("🌙", g.w - 48, 38);
+
+        ctx.strokeStyle = "rgba(228,255,90,0.6)";
+        ctx.setLineDash([6, 8]);
+        ctx.beginPath();
+        ctx.moveTo(0, g.ground + 4);
+        ctx.lineTo(g.w, g.ground + 4);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.textAlign = "center";
+        g.obstacles.forEach(o => {
+          ctx.font = `${o.size}px serif`;
+          ctx.fillText(o.kind, o.x, g.ground);
+        });
+
+        // sheep faces right
+        ctx.save();
+        ctx.translate(s.x, s.y);
+        ctx.scale(-1, 1);
+        ctx.font = `${s.size}px serif`;
+        ctx.fillText("🐑", 0, 0);
+        ctx.restore();
+        if (s.y < g.ground - 6) {
+          ctx.font = "13px serif";
+          ctx.fillText("z", s.x + 20, s.y - 30);
+        }
+        ctx.textAlign = "start";
+      }
+
+      canvas.tabIndex = 0;
+      canvas.addEventListener("pointerdown", e => { e.preventDefault(); jump(); });
+
+      card.addEventListener("click", async e => {
+        const btn = e.target.closest("[data-action]");
+        if (!btn) return;
+        const action = btn.dataset.action;
+        if (action === "play") start();
+        if (action === "skip") reveal(false);
+        if (action === "copy") {
+          try {
+            await navigator.clipboard.writeText(CODE);
+            btn.textContent = "copied ✓";
+          } catch (err) {
+            btn.textContent = CODE;
+          }
+        }
+      });
+    })();
   </script>
 
   <script src="../../main.js" type="module"></script>
