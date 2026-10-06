@@ -483,6 +483,19 @@ section {
 @media (max-width: 992px) {
   .navbar-container {
     height: 64px;
+    position: relative;
+  }
+
+  /* centre the logo in the mobile bar; menu/cart stay on the right */
+  .navbar-container > .brand {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .navbar-container > :last-child {
+    margin-left: auto;
   }
 }
 
