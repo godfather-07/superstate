@@ -477,23 +477,22 @@ section {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 105px;
-  /* Increased just a tad for the perfect vertical balance */
+  height: 84px;
 }
 
 @media (max-width: 992px) {
   .navbar-container {
-    height: 80px;
+    height: 64px;
   }
 }
 
 @media (min-width: 1440px) {
   .navbar-container {
-    height: 130px;
+    height: 92px;
   }
 
   .logo-img {
-    height: 170px;
+    height: 40px;
   }
 }
 
@@ -502,23 +501,24 @@ section {
   align-items: center;
 }
 
+/* logo-wordmark.png is the trimmed wordmark (640x135), so these heights
+   are the real visible logo size */
 .logo-img {
-  height: 130px;
+  height: 36px;
   width: auto;
   transition: transform 0.3s ease;
 }
 
 /* Footer logo adjustment for dark background */
 .footer .logo-img {
-  mix-blend-mode: screen;
-  filter: grayscale(1) invert(1) brightness(2);
-  /* Makes the logo light/white on dark bg */
-  height: 80px;
+  filter: brightness(0) invert(1);
+  /* Makes the logo white on the dark footer */
+  height: 32px;
 }
 
 @media (max-width: 992px) {
   .logo-img {
-    height: 90px;
+    height: 32px;
   }
 }
 
@@ -1385,8 +1385,7 @@ section {
   }
 
   .logo-img {
-    height: 60px !important;
-    /* Compact navbar logo size to prevent vertical overflow */
+    height: 30px !important;
   }
 }
 
@@ -1898,3 +1897,166 @@ section {
 
 
 
+
+/* ==========================================================================
+   DARK MODE
+   A real dark theme, so phones in dark mode use our colours instead of
+   auto-inverting the page. Night navy surfaces, white text, lime accents.
+   ========================================================================== */
+:root {
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --night-bg: #0a1433;
+    --night-surface: #111d45;
+    --night-raised: #17265a;
+    --night-text: #e8edff;
+    --night-muted: #a8b3d6;
+    --bg-primary: var(--night-bg);
+    --bg-white: var(--night-surface);
+    /* accent used as text (headings, links) needs to be light at night */
+    --accent-brand: #9db8ff;
+    --border-color: rgba(255, 255, 255, 0.12);
+    --accent-secondary: #4fd6a6;
+    --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.35);
+    --shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.45);
+  }
+
+  html,
+  body {
+    background-color: var(--night-bg);
+    color: var(--night-text);
+  }
+
+  .bg-white,
+  .card,
+  .card-3d {
+    background-color: var(--night-surface);
+    color: var(--night-text);
+  }
+
+  .bg-primary {
+    background-color: var(--night-bg);
+    color: var(--night-text);
+  }
+
+  .bg-dark,
+  .footer {
+    background-color: #081131;
+  }
+
+  /* footer text used --border-color, which is a faint line colour at night */
+  .footer {
+    color: var(--night-muted);
+  }
+
+  .footer a {
+    color: var(--night-muted);
+  }
+
+  .footer h4,
+  .footer a:hover {
+    color: #ffffff;
+  }
+
+  .subheadline {
+    color: var(--night-muted);
+  }
+
+  /* Navbar + mobile drawer */
+  .navbar {
+    background-color: rgba(8, 17, 49, 0.92);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .navbar .logo-img,
+  .mobile-drawer .logo-img {
+    filter: brightness(0) invert(1);
+  }
+
+  .nav-links a,
+  .mobile-menu-btn,
+  .close-drawer,
+  .mobile-nav-links a {
+    color: var(--night-text);
+  }
+
+  .mobile-drawer {
+    background-color: var(--night-bg);
+  }
+
+  /* Buttons: lime on navy reads best at night */
+  .btn-primary,
+  .btn-outline,
+  .newsletter-form button {
+    background-color: var(--color-first-light);
+    border-color: var(--color-first-light);
+    color: #001a4d;
+  }
+
+  .btn-primary:hover,
+  .btn-outline:hover,
+  .newsletter-form button:hover {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    color: #001a4d;
+  }
+
+  .social-icon {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--night-text);
+  }
+
+  .btn-secondary {
+    color: #ffffff;
+  }
+
+  /* places that use the accent as a background keep the brand blue */
+  .bg-accent,
+  .announcement-bar,
+  .img-placeholder,
+  .avatar-placeholder,
+  .popup-icon {
+    background-color: #0f2a7a;
+  }
+
+  /* grey body copy written for white backgrounds */
+  .caption,
+  .founder-prose p,
+  .question-microcopy,
+  .faq-inner {
+    color: var(--night-muted);
+  }
+
+  .shadow-3d.secondary-3d,
+  .card-3d,
+  .product-accordion,
+  .comp-table-3d,
+  .testimonial-card-3d {
+    background-color: var(--night-surface);
+    color: var(--night-text);
+  }
+
+  input,
+  textarea,
+  select {
+    color-scheme: dark;
+  }
+
+  /* inline greys/blacks written for white backgrounds */
+  [style*="color: #666"],
+  [style*="color: #777"],
+  [style*="color: #555"],
+  [style*="color: #444"],
+  [style*="color: #334155"] {
+    color: var(--night-muted) !important;
+  }
+
+  [style*="color: var(--color-truth-black)"],
+  [style*="color: #000"],
+  [style*="color: black"] {
+    color: var(--night-text) !important;
+  }
+}

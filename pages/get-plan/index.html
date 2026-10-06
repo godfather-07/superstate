@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
   <title>Get Your Plan | SuperState</title>
   <meta name="description" content="Get a personalized, science-backed health and lifestyle plan in minutes." />
   <link rel="stylesheet" href="../../style.css" />
@@ -145,6 +146,10 @@
         font-size: 22px;
       }
     }
+    @media (prefers-color-scheme: dark) {
+      .question-microcopy { color: var(--night-muted); }
+      .input-field { background: var(--night-raised); color: var(--night-text); }
+    }
   </style>
 </head>
 
@@ -154,7 +159,7 @@
   <nav class="navbar">
     <div class="container navbar-container">
       <a href="/" class="brand">
-        <img src="/logo.png" alt="SuperState" class="logo-img">
+        <img src="/logo-wordmark.png" alt="SuperState" class="logo-img">
       </a>
       <ul class="nav-links">
         <li><a href="/">Home</a></li>
@@ -172,7 +177,7 @@
   <div class="mobile-drawer">
     <div class="mobile-drawer-header">
       <span class="brand">
-        <img src="/logo.png" alt="SuperState" class="logo-img">
+        <img src="/logo-wordmark.png" alt="SuperState" class="logo-img">
       </span>
       <button class="close-drawer" aria-label="Close Menu">✕</button>
     </div>
@@ -399,7 +404,7 @@
       <div class="footer-grid">
         <div>
           <a href="/" class="brand" style="display: block; margin-bottom: 1rem;">
-            <img src="/logo.png" alt="SuperState" class="logo-img">
+            <img src="/logo-wordmark.png" alt="SuperState" class="logo-img">
           </a>
           <div style="display: flex; gap: 0.75rem;">
             <a href="https://www.instagram.com/superstate.in/" class="social-icon" aria-label="Instagram"

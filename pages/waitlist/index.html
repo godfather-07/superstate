@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
   <title>Waitlist | SuperState Sleep Well</title>
   <meta name="description" content="Join the Superstate waitlist for early access to our dark chocolate sleep ritual. Get 20% off at launch with code STEADY20." />
   <meta property="og:title" content="Join the Superstate Waitlist" />
@@ -47,7 +48,7 @@
       top: 0;
       z-index: 100;
     }
-    .wl-nav a img { height: 68px; width: auto; transition: transform .3s; display: block; }
+    .wl-nav a img { height: 32px; width: auto; transition: transform .3s; display: block; }
     .wl-nav a img:hover { transform: scale(1.04); }
 
     /* ── Hero section ──────────────────────────────────────────────────── */
@@ -482,6 +483,36 @@
     .fade-up.d3 { animation-delay: .32s; }
     .fade-up.d4 { animation-delay: .44s; }
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+    /* ── Dark mode ─────────────────────────────────────────────────────── */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --cream: #17265a;
+        --border: rgba(255, 255, 255, 0.14);
+        --muted: #a8b3d6;
+        --green: #4fd6a6;
+        --shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+      }
+      body { background: #0a1433; color: #e8edff; }
+      .wl-nav { background: rgba(8, 17, 49, 0.92); }
+      .wl-nav a img { filter: brightness(0) invert(1); }
+      .wl-h1, .wl-card-title { color: #ffffff; }
+      .wl-h1 em { color: #E4FF5A; }
+      .wl-card, .wl-success, .wl-review-card { background: #111d45; }
+      .wl-label, .wl-review-text { color: #e8edff; }
+      .wl-input { color: #ffffff; }
+      .wl-input::placeholder { color: #7f8bb3; }
+      .wl-input:focus { background: #1d2f6b; border-color: #E4FF5A; }
+      .wl-input.wl-code-input { color: #E4FF5A; }
+      .wl-gender-bg { background: #E4FF5A; }
+      .wl-gender-btn.active { color: #001a4d; }
+      .wl-code-hint { color: #E4FF5A; }
+      .wl-btn { background: #E4FF5A; color: #001a4d; }
+      .wl-btn:hover { background: #ffffff; }
+      .wl-spinner { border-top-color: #001a4d; }
+      .wl-redo-btn:hover, .wl-review-author { color: #9db8ff; }
+      .wl-footer { background: #081131; }
+    }
   </style>
 </head>
 
@@ -490,7 +521,7 @@
   <!-- Navbar: Logo Only -->
   <nav class="wl-nav">
     <a href="https://www.superstate.in">
-      <img src="/logo.png" alt="SuperState" />
+      <img src="/logo-wordmark.png" alt="SuperState" />
     </a>
   </nav>
 

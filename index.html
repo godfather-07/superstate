@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
   <title>SuperState | Health, simplified.</title>
   <meta name="description"
     content="SuperState makes health simple. Our first product, Sleep Well, is a dark chocolate drink for your evenings: coffee, but for sleep." />
@@ -33,7 +34,7 @@
   <nav class="navbar">
     <div class="container navbar-container">
       <a href="/" class="brand">
-        <img src="/logo.png" alt="SuperState" class="logo-img">
+        <img src="/logo-wordmark.png" alt="SuperState" class="logo-img">
       </a>
       <ul class="nav-links">
         <li><a href="/">Home</a></li>
@@ -51,7 +52,7 @@
   <div class="mobile-drawer">
     <div class="mobile-drawer-header">
       <span class="brand">
-        <img src="/logo.png" alt="SuperState" class="logo-img">
+        <img src="/logo-wordmark.png" alt="SuperState" class="logo-img">
       </span>
       <button class="close-drawer" aria-label="Close Menu">✕</button>
     </div>
@@ -278,6 +279,76 @@
     }
     @media (prefers-reduced-motion: reduce) {
       .home-hero-visual img, .home-pill-dot { animation: none; }
+    }
+
+    /* ---------- Mobile: fewer words, one clear action ---------- */
+    @media (max-width: 600px) {
+      .home-sub-small,
+      .home-facts {
+        display: none;
+      }
+      .home-h1 {
+        font-size: 56px;
+        margin-bottom: 0.9rem;
+      }
+      .home-sub {
+        font-size: 18px;
+        margin-bottom: 1.4rem;
+      }
+      .home-ctas {
+        flex-direction: column;
+        align-items: stretch;
+        margin-bottom: 0;
+      }
+      .home-btn {
+        text-align: center;
+      }
+      .home-btn-ghost {
+        border: none;
+        padding: 0.4rem;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+      .fp-text-long {
+        display: none;
+      }
+    }
+    @media (min-width: 601px) {
+      .fp-text-short {
+        display: none;
+      }
+    }
+
+    /* ---------- Dark mode: homepage sections with inline colours ---------- */
+    @media (prefers-color-scheme: dark) {
+      .home-hero {
+        background: radial-gradient(circle at 72% 50%, rgba(77, 128, 255, 0.35), rgba(0, 51, 153, 0) 42%), #0b1a52;
+      }
+      .beliefs-manifesto {
+        --text-primary: var(--night-text);
+        --color-deep-knowing: #9db8ff;
+        background-color: var(--night-bg) !important;
+      }
+      .beliefs-manifesto [style*="#777"] {
+        color: var(--night-muted) !important;
+      }
+      .venn-section {
+        --color-deep-knowing: #E4FF5A;
+        background-color: var(--night-surface) !important;
+        padding: 3rem 0 !important;
+      }
+      .venn-image-col {
+        transform: none !important;
+        background: #E4FF5A;
+        border-radius: 28px;
+        padding: 1rem;
+      }
+      .venn-image-col img {
+        mix-blend-mode: normal !important;
+      }
+      .first-product {
+        background: radial-gradient(circle at 75% 50%, rgba(77, 128, 255, 0.35), rgba(0, 51, 153, 0) 45%), #0b1a52;
+      }
     }
   </style>
 
@@ -563,7 +634,8 @@
       <div class="first-product-copy">
         <span class="fp-tag">batch 01 sold out ✶ next drop soon</span>
         <h2 class="fp-title">sleep is the <em>best supplement</em> in the whole world.</h2>
-        <p class="fp-text">so we started with the night. sleep well is a dark chocolate drink you mix and sip 30 minutes before bed. our first batch sold out way faster than we planned, so we made it even better. the next drop lands soon, so hold your horses 🐎</p>
+        <p class="fp-text fp-text-short">batch 01 sold out. the next drop lands soon, so hold your horses 🐎</p>
+        <p class="fp-text fp-text-long">so we started with the night. sleep well is a dark chocolate drink you mix and sip 30 minutes before bed. our first batch sold out way faster than we planned, so we made it even better. the next drop lands soon, so hold your horses 🐎</p>
         <p class="fp-coffee"><em>coffee, but for sleep ☾</em></p>
         <div class="fp-offers">
           <a href="/products/sleep-well/" class="btn fp-btn">Pre-book at 50% off →</a>
@@ -690,7 +762,7 @@
       <div class="footer-grid">
         <div>
           <a href="/" class="brand" style="display: block; margin-bottom: 1rem;">
-            <img src="/logo.png" alt="SuperState" class="logo-img">
+            <img src="/logo-wordmark.png" alt="SuperState" class="logo-img">
           </a>
           <div style="display: flex; gap: 0.75rem;">
             <a href="https://www.instagram.com/superstate.in/" class="social-icon" aria-label="Instagram"
