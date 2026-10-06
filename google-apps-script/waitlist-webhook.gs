@@ -22,7 +22,7 @@ const HEADERS = ['Timestamp', 'Name', 'Email', 'Phone', 'Gender', 'Promo Code', 
 
 // Pre-bookings (no payment yet) go to their own tab.
 const PREBOOK_SHEET_NAME = 'Prebooks';
-const PREBOOK_HEADERS = ['Timestamp', 'Member No.', 'Name', 'Phone', 'Email', 'Pack', 'Qty', 'Full Price', 'Pre-book Price', 'Payment Status'];
+const PREBOOK_HEADERS = ['Timestamp', 'Member No.', 'Name', 'Phone', 'Email', 'Pack', 'Qty', 'Full Price', 'Pre-book Price', 'Payment Status', 'Razorpay Order ID', 'Razorpay Payment ID'];
 // Batch 01 customers already hold cards #1-#27, so pre-bookers start at #28.
 const MEMBER_OFFSET = 27;
 
@@ -69,7 +69,9 @@ function handlePrebook(data) {
       data.qty || '',
       data.fullPrice || '',
       data.prebookPrice || '',
-      'Awaiting payment link'
+      data.paymentStatus || 'Awaiting payment link',
+      data.orderId || '',
+      data.paymentId || ''
     ]);
     return json({ result: 'success', memberNumber: memberNumber });
   } finally {

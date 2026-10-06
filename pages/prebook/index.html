@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="only light" />
   <meta name="theme-color" content="#003399" />
   <title>Pre-book | SuperState Sleep Well</title>
-  <meta name="description" content="Pre-book SuperState Sleep Well at 50% off and get your SuperState member card." />
+  <meta name="description" content="Pre-book SuperState Sleep Well at 50% off, pay securely with Razorpay, and get your SuperState member card." />
   <meta name="robots" content="noindex" />
   <meta property="og:title" content="I just got my SuperState card 🌙" />
   <meta property="og:description" content="Pre-book Sleep Well at 50% off. Coffee, but for sleep." />
@@ -486,7 +486,7 @@
         <div class="pb-intro">
           <span class="pb-tag"><span class="pb-dot"></span> batch 02 · pre-booking open</span>
           <h1 class="pb-h1">lock in <em>50% off.</em></h1>
-          <p class="pb-sub">no payment today. reserve your pack and your SuperState member card, and we'll WhatsApp you a secure payment link the moment payments go live.</p>
+          <p class="pb-sub">pay half today, get your SuperState member card instantly, and your pack ships with the next drop.</p>
 
           <div class="pb-summary">
             <img src="/assets/sleep-well-box.webp" alt="" width="763" height="1172">
@@ -504,7 +504,7 @@
 
         <div class="pb-card-form">
           <h2 class="pb-form-title">your details</h2>
-          <p class="pb-form-sub">takes 20 seconds. we only use these for your order.</p>
+          <p class="pb-form-sub">takes 20 seconds. then pay securely with UPI, card or netbanking.</p>
           <form id="pb-form" novalidate>
             <div class="pb-field">
               <label class="pb-label" for="pb-name">Name</label>
@@ -521,12 +521,12 @@
               <input class="pb-input" id="pb-email" type="email" inputmode="email" autocomplete="email" placeholder="arjun@email.com" required>
               <span class="pb-err" id="pb-email-err"></span>
             </div>
-            <button class="pb-submit" id="pb-submit" type="submit">lock my 50% off →</button>
+            <button class="pb-submit" id="pb-submit" type="submit">pay · 50% off →</button>
             <span class="pb-err" id="pb-form-err"></span>
           </form>
           <ul class="pb-assure">
-            <li>no payment today</li>
-            <li>secure Razorpay link on WhatsApp once payments open</li>
+            <li>secure payment by Razorpay</li>
+            <li>UPI, cards and netbanking</li>
             <li>free shipping in India, ships with the next drop</li>
           </ul>
         </div>
@@ -583,8 +583,8 @@
       </div>
 
       <ol class="pb-steps">
-        <li class="done"><strong>spot locked</strong><span id="pb-step1">Pack Of 5 × 1 at ₹149.50 (50% off)</span></li>
-        <li><strong>payment link on WhatsApp</strong><span>a secure Razorpay link to <b id="pb-step2-phone">your number</b>, as soon as payments go live</span></li>
+        <li class="done"><strong>paid &amp; locked in</strong><span id="pb-step1">Pack Of 5 × 1 · ₹149.50 paid (50% off)</span><span id="pb-payid" style="display:block; font-size:12px; opacity:0.8;"></span></li>
+        <li><strong>updates on WhatsApp</strong><span>we'll message <b id="pb-step2-phone">your number</b> when the next drop is packed and shipped</span></li>
         <li><strong>ships with the next drop</strong><span>free shipping across India. your physical card comes in the box</span></li>
       </ol>
 
@@ -595,6 +595,7 @@
   <footer class="pb-foot">© SuperState · Made in India · questions? <a href="https://wa.me/919567309388">WhatsApp us</a></footer>
 
   <canvas id="confetti" aria-hidden="true"></canvas>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <script src="../../src/prebook.js" type="module"></script>
 </body>
 </html>

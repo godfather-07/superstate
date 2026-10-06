@@ -1,5 +1,6 @@
 import {
-  PREBOOK_CONFIG, priceFor, formatINR, submitPrebook, getSavedPrebook, clearSavedPrebook
+  PREBOOK_CONFIG, PACKS, priceFor, formatINR, validatePrebook, getSavedPrebook, clearSavedPrebook,
+  savePrebook, memberIdFor, createOrder, verifyPayment
 } from './services/prebookService.js';
 
 const $ = id => document.getElementById(id);
@@ -7,7 +8,7 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 
 /* ---------- Pack + price from the product page link ---------- */
 const params = new URLSearchParams(location.search);
-const pack = PREBOOK_CONFIG.PACKS[params.get('pack')] ? params.get('pack') : 'Pack Of 5';
+const pack = PACKS[params.get('pack')] ? params.get('pack') : 'Pack Of 5';
 const qty = Math.min(Math.max(parseInt(params.get('qty'), 10) || 1, 1), 20);
 const price = priceFor(pack, qty);
 
@@ -25,36 +26,102 @@ const fields = ['name', 'phone', 'email'];
 
 fields.forEach(f => $(`pb-${f}`).addEventListener('input', () => setError(f, '')));
 
+const submitBtn = $('pb-submit');
+const payLabel = `pay ₹${formatINR(price.pre)} · 50% off →`;
+submitBtn.textContent = payLabel;
+
+function setBusy(on, label) {
+  submitBtn.disabled = on;
+  submitBtn.textContent = on ? label : payLabel;
+}
+
 form.addEventListener('submit', async e => {
   e.preventDefault();
   fields.forEach(f => setError(f, ''));
   setError('form', '');
 
-  const btn = $('pb-submit');
-  btn.disabled = true;
-  btn.textContent = 'locking it in…';
-
-  const res = await submitPrebook({
-    name: $('pb-name').value,
+  const details = {
+    name: $('pb-name').value.trim(),
     phone: $('pb-phone').value,
-    email: $('pb-email').value,
-    pack,
-    qty
-  });
-
-  btn.disabled = false;
-  btn.textContent = 'lock my 50% off →';
-
-  if (!res.success) {
-    let first = null;
-    Object.entries(res.errors).forEach(([k, msg]) => {
-      setError(k, msg);
-      if (!first && $(`pb-${k}`) && k !== 'form') first = $(`pb-${k}`);
-    });
-    first?.focus();
+    email: $('pb-email').value.trim().toLowerCase()
+  };
+  const check = validatePrebook(details);
+  if (!check.isValid) {
+    const firstBad = fields.find(f => check.errors[f]);
+    Object.entries(check.errors).forEach(([k, msg]) => setError(k, msg));
+    if (firstBad) $(`pb-${firstBad}`).focus();
     return;
   }
-  showCard(res.record, true);
+  details.phone = check.phone;
+
+  if (typeof window.Razorpay !== 'function') {
+    setError('form', "Payments couldn't load. Check your connection and refresh the page.");
+    return;
+  }
+
+  // 1. Server creates the order (and decides the amount)
+  setBusy(true, 'opening secure payment…');
+  const order = await createOrder({ ...details, pack, qty });
+  if (!order.ok) {
+    setBusy(false);
+    setError('form', order.data.error || 'Could not start the payment. Please try again.');
+    return;
+  }
+
+  // 2. Razorpay checkout modal
+  const rzp = new window.Razorpay({
+    key: PREBOOK_CONFIG.RAZORPAY_KEY_ID || order.data.key_id,
+    order_id: order.data.order_id,
+    amount: order.data.amount,
+    currency: order.data.currency,
+    name: 'SuperState',
+    description: `Sleep Well · ${pack} × ${qty} (pre-book, 50% off)`,
+    image: `${location.origin}/logo-wordmark.png`,
+    prefill: { name: details.name, email: details.email, contact: `+91${details.phone}` },
+    notes: { pack, qty: String(qty) },
+    theme: { color: '#003399' },
+    handler: async response => {
+      // 3. Server verifies the signature before we show anything as paid
+      setBusy(true, 'confirming your payment…');
+      const result = await verifyPayment(response);
+      if (!result.ok || !result.data.verified) {
+        setBusy(false);
+        setError('form', `We couldn't confirm this payment. If money left your account, WhatsApp us with ID ${response.razorpay_payment_id} and we'll sort it out.`);
+        return;
+      }
+      const memberNumber = result.data.member_number || null;
+      const record = {
+        ...details,
+        pack,
+        qty,
+        fullPrice: price.full,
+        prebookPrice: price.pre,
+        paid: true,
+        paymentId: response.razorpay_payment_id,
+        orderId: response.razorpay_order_id,
+        submittedAt: new Date().toISOString(),
+        memberNumber,
+        memberId: memberIdFor(memberNumber, details.phone)
+      };
+      savePrebook(record);
+      setBusy(false);
+      showCard(record, true);
+    },
+    modal: {
+      ondismiss: () => {
+        setBusy(false);
+        setError('form', 'Payment cancelled. Your 50% off is still here whenever you’re ready.');
+      }
+    }
+  });
+
+  rzp.on('payment.failed', resp => {
+    const reason = resp && resp.error && resp.error.description;
+    setBusy(false);
+    setError('form', `Payment failed${reason ? `: ${reason}` : ''}. No money was taken. Please try again.`);
+  });
+
+  rzp.open();
 });
 
 function setError(field, msg) {
@@ -81,9 +148,10 @@ function showCard(r, celebrate) {
   $('ss-number').textContent = r.memberId;
   $('ss-meta').textContent = `BATCH 02 · ${r.pack.toUpperCase()}${r.qty > 1 ? ` × ${r.qty}` : ''}`;
   $('ss-since').textContent = `${String(since.getMonth() + 1).padStart(2, '0')}/${String(since.getFullYear()).slice(-2)}`;
-  $('pb-done-sub').textContent = `${first}, your spot is locked at 50% off. here's your SuperState card.`;
-  $('pb-step1').textContent = `${r.pack} × ${r.qty} at ₹${formatINR(r.prebookPrice)} (50% off)`;
+  $('pb-done-sub').textContent = `${first}, you're paid up at 50% off. here's your SuperState card.`;
+  $('pb-step1').textContent = `${r.pack} × ${r.qty} · ₹${formatINR(r.prebookPrice)} paid (50% off)`;
   $('pb-step2-phone').textContent = `+91 ${r.phone.slice(0, 5)} ${r.phone.slice(5)}`;
+  $('pb-payid').textContent = r.paymentId ? `payment ID ${r.paymentId}` : '';
 
   const others = PREBOOK_CONFIG.BATCH01_MEMBERS;
   $('pb-club-text').innerHTML = r.memberNumber

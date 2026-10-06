@@ -23,3 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 .vercel
+
+# Local secrets (Razorpay keys etc.) - never commit
+.env
+.env.*
+!.env.example
