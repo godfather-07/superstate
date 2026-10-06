@@ -1951,9 +1951,10 @@ section {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --night-bg: #0a1433;
-    --night-surface: #111d45;
-    --night-raised: #17265a;
+    /* still clearly brand blue, just deeper than the light theme */
+    --night-bg: #0c2470;
+    --night-surface: #12308a;
+    --night-raised: #1a3c9c;
     --night-text: #e8edff;
     --night-muted: #a8b3d6;
     --bg-primary: var(--night-bg);
@@ -1984,9 +1985,13 @@ section {
     color: var(--night-text);
   }
 
-  .bg-dark,
+  /* brand-blue sections keep the exact brand blue */
+  .bg-dark {
+    background-color: #003399;
+  }
+
   .footer {
-    background-color: #081131;
+    background-color: #002673;
   }
 
   /* footer text used --border-color, which is a faint line colour at night */
@@ -2009,7 +2014,7 @@ section {
 
   /* Navbar + mobile drawer */
   .navbar {
-    background-color: rgba(8, 17, 49, 0.92);
+    background-color: rgba(0, 38, 115, 0.95);
     border-bottom-color: rgba(255, 255, 255, 0.08);
   }
 
