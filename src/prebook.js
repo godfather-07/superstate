@@ -146,6 +146,19 @@ form.addEventListener('submit', async e => {
     prefill: { name: details.name, email: details.email, contact: `+91${details.phone}` },
     notes: { pack, qty: String(qty) },
     theme: { color: '#003399' },
+    // Only UPI and cards are enabled on our Razorpay account for now.
+    config: {
+      display: {
+        blocks: {
+          pay: {
+            name: 'Pay with UPI or card',
+            instruments: [{ method: 'upi' }, { method: 'card' }]
+          }
+        },
+        sequence: ['block.pay'],
+        preferences: { show_default_blocks: false }
+      }
+    },
     handler: async response => {
       // 3. Server verifies the signature before we show anything as paid
       setBusy(true, 'confirming your payment…');
