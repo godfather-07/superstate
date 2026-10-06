@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="light dark" />
+  <meta name="color-scheme" content="only light" />
   <title>Sleep Well | SuperState</title>
   <meta name="description" content="SuperState Sleep Well: a dark chocolate drink you mix and sip 30 minutes before bed. Every ingredient and amount listed." />
   <link rel="canonical" href="https://superstate.in/products/sleep-well/" />
@@ -2893,51 +2893,6 @@
       .note-why span { font-size: 16px; white-space: nowrap; }
       .note-rules { font-size: 17px; line-height: 22px; }
       .board-stamp { display: none; }
-    }
-    /* ---------- Dark mode ---------- */
-    @media (prefers-color-scheme: dark) {
-      .navbar {
-        background-color: rgba(0, 38, 115, 0.95) !important;
-        border-bottom-color: rgba(255, 255, 255, 0.08) !important;
-      }
-      .navbar .logo-img {
-        filter: brightness(0) invert(1) !important;
-      }
-      .nav-links a {
-        color: #e8edff !important;
-      }
-      .cart-toggle-btn {
-        color: #e8edff !important;
-      }
-      /* pack cards: dark cards, light text */
-      .pack-pill-card {
-        background-color: #12308a;
-        border-color: rgba(255, 255, 255, 0.14);
-      }
-      .pack-pill-card.active {
-        background-color: #1f3478;
-        border-color: #E4FF5A;
-        box-shadow: 0 0 0 1px #E4FF5A;
-      }
-      .pack-was {
-        color: #8d98c0;
-      }
-      /* quantity stepper (inline white box) */
-      #buy-section div[style*="background-color: #ffffff"] {
-        background-color: #12308a !important;
-        border-color: rgba(255, 255, 255, 0.2) !important;
-      }
-      #pdp-qty-input {
-        border-color: rgba(255, 255, 255, 0.2) !important;
-      }
-      #prebook-btn {
-        background-color: #E4FF5A !important;
-        color: #001a4d !important;
-      }
-      /* the paper board is a bright sheet at night; soften it a touch */
-      .inside-board {
-        background-color: #ebe6d8;
-      }
     }
   </style>
 </head>
