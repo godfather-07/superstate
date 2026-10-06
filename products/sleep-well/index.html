@@ -13,7 +13,7 @@
   <meta property="og:site_name" content="SuperState" />
   <meta property="og:url" content="https://superstate.in/products/sleep-well/" />
   <meta property="og:title" content="Sleep Well by SuperState: coffee, but for sleep ☾" />
-  <meta property="og:description" content="Batch 01 sold out. Pre-book the next drop at 50% off, or grab 20% off with code STEADY20." />
+  <meta property="og:description" content="Batch 01 sold out. Pre-book the next drop at 50% off, or grab 20% off with code FIRSTNIGHT20." />
   <meta property="og:image" content="https://superstate.in/assets/og-sleep-well.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -3086,7 +3086,7 @@
             <!-- reveal -->
             <div class="game-state" data-state="reveal" hidden>
               <span class="game-eyebrow" id="reveal-eyebrow">you did that ✨</span>
-              <h3 class="game-title">your code: <span class="game-code" id="game-code">STEADY20</span></h3>
+              <h3 class="game-title">your code: <span class="game-code" id="game-code">FIRSTNIGHT20</span></h3>
               <p class="game-sub">20% off when we launch. drop your details so we can ping you the second it's live.</p>
               <div class="game-actions">
                 <button type="button" class="game-btn game-btn-primary" data-action="copy">copy code</button>
@@ -3281,7 +3281,7 @@
             <span class="pdp-accordion-icon">+</span>
           </div>
           <div class="pdp-accordion-body">
-            Of course. <a href="/pages/waitlist/">Join the list</a> and use code STEADY20 for 20% off when we launch. We'll let you know the moment it's live.
+            Of course. <a href="/pages/waitlist/">Join the list</a> and use code FIRSTNIGHT20 for 20% off when we launch. We'll let you know the moment it's live.
           </div>
         </div>
 
@@ -3830,7 +3830,7 @@
     
     function applyCoupon() {
       const code = document.getElementById("cart-coupon-code").value.trim().toUpperCase();
-      if (code === "FIRSTNIGHT20" || code === "STEADY20") {
+      if (code === "FIRSTNIGHT20") {
         isCouponApplied = true;
         alert("Coupon Applied! You get a flat 20% discount on Sleep Well Cocoa Ritual!");
         recalcCartValues();
@@ -3893,7 +3893,7 @@
         }
 
         console.error('Pre-book checkout not ready:', data);
-        alert("Pre-booking is opening in a moment, we're just setting it up 🐎\n\nMeanwhile, join the list for code STEADY20 (20% off at launch).");
+        alert("Pre-booking is opening in a moment, we're just setting it up 🐎\n\nMeanwhile, join the list for code FIRSTNIGHT20 (20% off at launch).");
       } catch (err) {
         console.error('Pre-book checkout error:', err);
         alert(`Sorry, we could not start your pre-booking.\n\nDetails: ${err.message}`);
@@ -4014,7 +4014,7 @@
       const card = document.getElementById("win");
       if (!card) return;
 
-      const CODE = "STEADY20";
+      const CODE = "FIRSTNIGHT20";
       const TARGET = 10;
       const states = card.querySelectorAll(".game-state");
       const canvas = document.getElementById("sheep-canvas");

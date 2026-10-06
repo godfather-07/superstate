@@ -66,7 +66,7 @@ function testAppend() {
   const result = doPost({
     parameter: {
       name: 'Test', email: 'test@example.com', phone: '1234567890',
-      gender: 'male', promoCode: 'STEADY20', discount: '20', isInfluencer: 'false'
+      gender: 'male', promoCode: 'FIRSTNIGHT20', discount: '20', isInfluencer: 'false'
     }
   });
   Logger.log('doPost returned: ' + result.getContent());

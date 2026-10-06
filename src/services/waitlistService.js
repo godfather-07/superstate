@@ -1,22 +1,15 @@
 /**
  * Superstate Waitlist Service
  *
- * COUPON LOGIC:
- * - No code entered → STEADY20 (20% off at launch)
- * - A code in PUBLIC_CODES (e.g. STEADY20, FIRSTNIGHT20) → its discount
- * - A code matching one in VALID_INFLUENCER_CODES → 30% off
- * - Any other code → rejected as invalid
- *
- * TO ADD A NEW INFLUENCER: add their code to VALID_INFLUENCER_CODES.
- * TO ADD A PUBLIC CODE: add it to PUBLIC_CODES with its % off.
+ * COUPON LOGIC: one code for everyone. Every signup gets FIRSTNIGHT20
+ * (20% off at launch); there is no code field on the form.
+ * The sheet keeps its Promo Code / Discount / Is Influencer columns so the
+ * existing Apps Script keeps working.
  */
 
 export const WAITLIST_CONFIG = {
-  EARLY_ACCESS_CODE: 'STEADY20',
+  EARLY_ACCESS_CODE: 'FIRSTNIGHT20',
   EARLY_ACCESS_DISCOUNT: 20,
-  INFLUENCER_DISCOUNT: 30,
-  VALID_INFLUENCER_CODES: ['ABHIJITH30', 'AMAL30'],
-  PUBLIC_CODES: { STEADY20: 20, FIRSTNIGHT20: 20 },
   STORAGE_KEY_USER: 'superstate_waitlist_user',
   STORAGE_KEY_ALL: 'superstate_waitlist_submissions',
   SIMULATE_LATENCY_MS: 900,
@@ -27,33 +20,13 @@ export const WAITLIST_CONFIG = {
     || 'https://script.google.com/macros/s/AKfycbxhS7lMkCtr6ClWnCTr4vg0STeSdXis1Tr3prD5KljXsBfZ_II9t9UGO6aJxMrXTMxJ/exec'
 };
 
-export function resolveCoupon(enteredCode) {
-  const code = (enteredCode || '').trim().toUpperCase();
-  if (!code) {
-    return {
-      code: WAITLIST_CONFIG.EARLY_ACCESS_CODE,
-      discount: WAITLIST_CONFIG.EARLY_ACCESS_DISCOUNT,
-      isInfluencer: false,
-      isValid: true
-    };
-  }
-  if (Object.prototype.hasOwnProperty.call(WAITLIST_CONFIG.PUBLIC_CODES, code)) {
-    return {
-      code,
-      discount: WAITLIST_CONFIG.PUBLIC_CODES[code],
-      isInfluencer: false,
-      isValid: true
-    };
-  }
-  if (WAITLIST_CONFIG.VALID_INFLUENCER_CODES.includes(code)) {
-    return {
-      code,
-      discount: WAITLIST_CONFIG.INFLUENCER_DISCOUNT,
-      isInfluencer: true,
-      isValid: true
-    };
-  }
-  return { code, discount: 0, isInfluencer: false, isValid: false };
+export function resolveCoupon() {
+  return {
+    code: WAITLIST_CONFIG.EARLY_ACCESS_CODE,
+    discount: WAITLIST_CONFIG.EARLY_ACCESS_DISCOUNT,
+    isInfluencer: false,
+    isValid: true
+  };
 }
 
 export function validateForm({ name, email, phone }, coupon) {

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="only light" />
   <title>Waitlist | SuperState Sleep Well</title>
-  <meta name="description" content="Join the Superstate waitlist for early access to our dark chocolate sleep ritual. Get 20% off at launch with code STEADY20." />
+  <meta name="description" content="Join the Superstate waitlist for early access to our dark chocolate sleep ritual. Get 20% off at launch with code FIRSTNIGHT20." />
   <meta property="og:title" content="Join the Superstate Waitlist" />
   <meta property="og:description" content="Early access to SuperState Sleep Well: a dark chocolate drink for your evenings." />
   <meta property="og:image" content="/assets/sleep-well-box-real.jpg" />
@@ -213,13 +213,6 @@
       background: #fff8f8;
       box-shadow: 0 0 0 4px rgba(229,62,62,.08);
     }
-    .wl-input.wl-code-input {
-      font-weight: 800;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: var(--navy);
-      font-size: 18px;
-    }
 
     .wl-err {
       font-size: 12.5px;
@@ -229,12 +222,6 @@
       padding-left: 2px;
     }
 
-    .wl-code-applied {
-      font-size: 12.5px;
-      color: var(--green);
-      font-weight: 700;
-      padding-left: 2px;
-    }
 
     /* Two inputs side by side */
     .wl-row {
@@ -283,20 +270,6 @@
     .wl-gender-btn.active { color: #fff; }
 
     /* ── Code hint strip ───────────────────────────────────────────────── */
-    .wl-code-hint {
-      display: flex;
-      align-items: center;
-      gap: .6rem;
-      background: rgba(228,255,90,.22);
-      border: 1.5px solid rgba(228,255,90,.55);
-      border-radius: 14px;
-      padding: .75rem 1.1rem;
-      font-size: 14px;
-      font-weight: 600;
-      color: #2a4a00;
-      margin-bottom: 1.5rem;
-    }
-    .wl-code-hint .emoji { font-size: 20px; flex-shrink: 0; }
 
     /* ── CTA Button ────────────────────────────────────────────────────── */
     .wl-btn {
@@ -485,6 +458,50 @@
     .fade-up.d4 { animation-delay: .44s; }
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
+
+    /* ── Minimal coupon ticket on the success card ─────────────────────── */
+    .wl-coupon {
+      margin: 0 auto 1.75rem;
+      max-width: 320px;
+      border: 2px dashed var(--navy);
+      border-radius: 14px;
+      padding: 1rem;
+      text-align: center;
+    }
+    .wl-coupon-label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+    .wl-coupon-row {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.75rem;
+    }
+    .wl-coupon-code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: clamp(20px, 6.2vw, 28px);
+      letter-spacing: 0.04em;
+      color: var(--navy);
+      min-width: 0;
+    }
+    .wl-coupon-copy {
+      min-height: 44px;
+      padding: 0 1rem;
+      border: none;
+      border-radius: 10px;
+      background: var(--lime);
+      color: var(--navy);
+      font-family: inherit;
+      font-weight: 800;
+      font-size: 14px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
   </style>
 </head>
 
@@ -503,7 +520,7 @@
     <h1 class="wl-h1">Hold your <em>horses</em>.<br>The next drop is coming.</h1>
     <p class="wl-sub">
       Our first batch sold out way faster than we planned, so we made it even better.<br>
-      <strong>Join the list and get 20% off at launch with code STEADY20.</strong><br>
+      <strong>Join the list and get 20% off at launch.</strong><br>
       Ready to commit? <a href="/products/sleep-well/" style="color: inherit; text-decoration: underline;">Pre-book now at 50% off →</a>
     </p>
   </section>
@@ -515,7 +532,7 @@
     <div class="wl-card" id="wl-form-card">
       <p class="wl-card-eyebrow">Secure your spot</p>
       <p class="wl-card-title">Join the Waitlist</p>
-      <p class="wl-card-sub">Fill in your details. Have an influencer code? Add it below — <strong>you'll get 30% off</strong> at launch.</p>
+      <p class="wl-card-sub">Takes 20 seconds. Your 20% code shows up right after.</p>
 
       <form id="wl-form" novalidate>
 
@@ -548,21 +565,6 @@
           <input type="hidden" id="wl-gender" value="male" />
         </div>
 
-        <div class="wl-group">
-          <label class="wl-label" for="wl-code">
-            Promo / Influencer Code
-            <span class="wl-opt"> — optional</span>
-          </label>
-          <input class="wl-input wl-code-input" id="wl-code" type="text" placeholder="e.g. FIRSTNIGHT20" autocomplete="off" />
-          <span class="wl-code-applied" id="code-applied" style="display:none;">✓ Influencer code applied — 30% OFF unlocked!</span>
-          <span class="wl-err" id="code-err"></span>
-        </div>
-
-        <div class="wl-code-hint">
-          <span class="emoji">🎁</span>
-          <span>No code? Everyone who joins gets <strong>20% off</strong> at launch with code <strong>STEADY20</strong>.</span>
-        </div>
-
         <button type="submit" class="wl-btn" id="wl-submit">
           <span id="wl-btn-text">Secure My Early Access →</span>
           <span class="wl-spinner" id="wl-spinner"></span>
@@ -587,8 +589,16 @@
 
       <h2 class="wl-success-h">Thank you, <span id="wl-success-name">friend</span>! 🎉</h2>
       <p class="wl-success-p">
-        We'll notify <strong id="wl-success-email"></strong> the moment Superstate Sleep Well is available — with <strong id="wl-success-discount">20</strong>% off, on us. Your code: <strong id="wl-success-code">STEADY20</strong>
+        We'll ping <strong id="wl-success-email"></strong> the moment Sleep Well drops.
       </p>
+
+      <div class="wl-coupon">
+        <span class="wl-coupon-label">your code · <span id="wl-success-discount">20</span>% off at launch</span>
+        <div class="wl-coupon-row">
+          <strong class="wl-coupon-code" id="wl-success-code">FIRSTNIGHT20</strong>
+          <button type="button" class="wl-coupon-copy" id="wl-copy-btn">copy</button>
+        </div>
+      </div>
 
       <a href="https://www.superstate.in" class="wl-back-link">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
