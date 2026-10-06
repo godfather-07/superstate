@@ -3,10 +3,12 @@
  *
  * COUPON LOGIC:
  * - No code entered → STEADY20 (20% off at launch)
+ * - A code in PUBLIC_CODES (e.g. STEADY20, FIRSTNIGHT20) → its discount
  * - A code matching one in VALID_INFLUENCER_CODES → 30% off
  * - Any other code → rejected as invalid
  *
  * TO ADD A NEW INFLUENCER: add their code to VALID_INFLUENCER_CODES.
+ * TO ADD A PUBLIC CODE: add it to PUBLIC_CODES with its % off.
  */
 
 export const WAITLIST_CONFIG = {
@@ -14,6 +16,7 @@ export const WAITLIST_CONFIG = {
   EARLY_ACCESS_DISCOUNT: 20,
   INFLUENCER_DISCOUNT: 30,
   VALID_INFLUENCER_CODES: ['ABHIJITH30', 'AMAL30'],
+  PUBLIC_CODES: { STEADY20: 20, FIRSTNIGHT20: 20 },
   STORAGE_KEY_USER: 'superstate_waitlist_user',
   STORAGE_KEY_ALL: 'superstate_waitlist_submissions',
   SIMULATE_LATENCY_MS: 900,
@@ -30,6 +33,14 @@ export function resolveCoupon(enteredCode) {
     return {
       code: WAITLIST_CONFIG.EARLY_ACCESS_CODE,
       discount: WAITLIST_CONFIG.EARLY_ACCESS_DISCOUNT,
+      isInfluencer: false,
+      isValid: true
+    };
+  }
+  if (Object.prototype.hasOwnProperty.call(WAITLIST_CONFIG.PUBLIC_CODES, code)) {
+    return {
+      code,
+      discount: WAITLIST_CONFIG.PUBLIC_CODES[code],
       isInfluencer: false,
       isValid: true
     };

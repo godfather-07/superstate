@@ -549,10 +549,16 @@ section {
 }
 
 .mobile-menu-btn {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-right: -10px;
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: 26px;
+  line-height: 1;
   cursor: pointer;
 }
 
@@ -680,6 +686,8 @@ section {
   outline: none;
   width: 100%;
   font-family: var(--font-body);
+  font-size: 16px;
+  /* 16px stops iOS zooming in when the field is tapped */
 }
 
 .newsletter-form button {
@@ -751,6 +759,27 @@ section {
 
 
 /* WhatsApp Button */
+/* On phones the bubble waits until you've scrolled past the hero,
+   so it never covers the headline or the main button */
+@media (max-width: 768px) {
+  .whatsapp-float {
+    width: 52px !important;
+    height: 52px !important;
+    right: 16px !important;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+    opacity: 0;
+    transform: scale(0.6);
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  body.scrolled-past-hero .whatsapp-float {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+  }
+}
+
 .whatsapp-float {
   position: fixed;
   bottom: 2rem;
@@ -919,8 +948,8 @@ section {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.05);
   color: var(--accent-secondary);
@@ -1374,6 +1403,19 @@ section {
 @media (min-width: 992px) {
   .faq-grid-3d {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile basics: comfortable tap target for the logo link, no iOS input zoom */
+.brand {
+  min-height: 44px;
+}
+
+@media (max-width: 768px) {
+  input,
+  select,
+  textarea {
+    font-size: max(16px, 1em);
   }
 }
 

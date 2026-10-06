@@ -45,7 +45,13 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ─── Live influencer code check ─────────────────────────────────────── */
   codeInput?.addEventListener('input', () => {
     const coupon = resolveCoupon(codeInput.value);
-    if (codeApplied) codeApplied.style.display = coupon.isInfluencer ? 'block' : 'none';
+    const typed = codeInput.value.trim() !== '';
+    if (codeApplied) {
+      codeApplied.style.display = typed && coupon.isValid ? 'block' : 'none';
+      codeApplied.textContent = coupon.isInfluencer
+        ? '✓ Influencer code applied — 30% OFF unlocked!'
+        : `✓ ${coupon.code} applied — ${coupon.discount}% OFF at launch!`;
+    }
   });
 
   /* ─── Form submit ────────────────────────────────────────────────────── */

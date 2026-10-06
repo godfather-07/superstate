@@ -38,6 +38,14 @@ if (navbar) {
   });
 }
 
+// Mark when the visitor has scrolled past the first screen (used to show
+// the floating WhatsApp button on phones only after the hero)
+const markScrolled = () => {
+  document.body.classList.toggle('scrolled-past-hero', window.scrollY > window.innerHeight * 0.6);
+};
+window.addEventListener('scroll', markScrolled, { passive: true });
+markScrolled();
+
 // Fade-up Animation on Scroll
 const fadeUpElements = document.querySelectorAll('.fade-up');
 const observerOptions = {

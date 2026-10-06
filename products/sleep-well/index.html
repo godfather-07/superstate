@@ -2349,7 +2349,7 @@
       right: 10px;
       background: var(--color-first-light);
       color: var(--color-deep-knowing);
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 800;
       letter-spacing: 0.02em;
       padding: 3px 9px;
@@ -2966,7 +2966,7 @@
       </ul>
       <div style="display: flex; align-items: center; gap: 1rem;">
         <a href="#buy-section" class="btn btn-primary nav-cta">Pre-book</a>
-        <button class="cart-toggle-btn" onclick="openCartDrawer()" style="background: transparent; border: none; cursor: pointer; position: relative; color: var(--color-deep-knowing); display: flex; align-items: center; justify-content: center; padding: 5px; outline: none;" aria-label="Open Cart">
+        <button class="cart-toggle-btn" onclick="openCartDrawer()" style="min-width: 44px; min-height: 44px; justify-content: center; background: transparent; border: none; cursor: pointer; position: relative; color: var(--color-deep-knowing); display: flex; align-items: center; justify-content: center; padding: 5px; outline: none;" aria-label="Open Cart">
           <svg style="width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 2;" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
           </svg>
@@ -3466,7 +3466,7 @@
       <!-- Cart Footer Block -->
       <div class="cart-drawer-footer" id="cart-drawer-footer" style="display: none;">
         <div class="cart-coupon-box">
-          <input type="text" class="cart-coupon-input" id="cart-coupon-code" placeholder="Enter Promo Code (e.g. SLEEP20)">
+          <input type="text" class="cart-coupon-input" id="cart-coupon-code" placeholder="Enter Promo Code (e.g. FIRSTNIGHT20)">
           <button class="cart-coupon-btn" onclick="applyCoupon()">Apply</button>
         </div>
         
@@ -3882,14 +3882,14 @@
     
     function applyCoupon() {
       const code = document.getElementById("cart-coupon-code").value.trim().toUpperCase();
-      if (code === "SLEEP20" || code === "SUPER20") {
+      if (code === "FIRSTNIGHT20" || code === "STEADY20") {
         isCouponApplied = true;
         alert("Coupon Applied! You get a flat 20% discount on Sleep Well Cocoa Ritual!");
         recalcCartValues();
       } else if (code === "") {
         alert("Please enter a valid coupon code.");
       } else {
-        alert("Invalid coupon code! Try 'SLEEP20' for 20% off.");
+        alert("Invalid coupon code! Try 'FIRSTNIGHT20' for 20% off.");
       }
     }
     
