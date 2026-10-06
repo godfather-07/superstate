@@ -12,18 +12,29 @@
  *      - Who has access: Anyone
  * 5. Copy the deployment's Web app URL and set it as VITE_WAITLIST_SHEET_URL
  *    (see .env.example) before building/deploying the site.
+ *
+ * Updating an existing deployment (keeps the same URL):
+ *   Deploy -> Manage deployments -> pencil icon -> Version: "New version" -> Deploy.
  */
 
 const SHEET_NAME = 'Sheet1';
 const HEADERS = ['Timestamp', 'Name', 'Email', 'Phone', 'Gender', 'Promo Code', 'Discount', 'Is Influencer'];
 
+// Pre-bookings (no payment yet) go to their own tab.
+const PREBOOK_SHEET_NAME = 'Prebooks';
+const PREBOOK_HEADERS = ['Timestamp', 'Member No.', 'Name', 'Phone', 'Email', 'Pack', 'Qty', 'Full Price', 'Pre-book Price', 'Payment Status'];
+// Batch 01 customers already hold cards #1-#27, so pre-bookers start at #28.
+const MEMBER_OFFSET = 27;
+
 function doPost(e) {
+  const data = e.parameter;
+  if (data.type === 'prebook') return handlePrebook(data);
+
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME)
     || SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
 
   if (sheet.getLastRow() === 0) sheet.appendRow(HEADERS);
 
-  const data = e.parameter;
   sheet.appendRow([
     new Date(),
     data.name || '',
@@ -35,8 +46,40 @@ function doPost(e) {
     data.isInfluencer || ''
   ]);
 
+  return json({ result: 'success' });
+}
+
+function handlePrebook(data) {
+  // Lock so two people pre-booking at the same moment never get the same number.
+  const lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const sheet = ss.getSheetByName(PREBOOK_SHEET_NAME) || ss.insertSheet(PREBOOK_SHEET_NAME);
+    if (sheet.getLastRow() === 0) sheet.appendRow(PREBOOK_HEADERS);
+
+    const memberNumber = MEMBER_OFFSET + sheet.getLastRow(); // header row counts as 1 -> first pre-booker is #28
+    sheet.appendRow([
+      new Date(),
+      memberNumber,
+      data.name || '',
+      data.phone || '',
+      data.email || '',
+      data.pack || '',
+      data.qty || '',
+      data.fullPrice || '',
+      data.prebookPrice || '',
+      'Awaiting payment link'
+    ]);
+    return json({ result: 'success', memberNumber: memberNumber });
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function json(obj) {
   return ContentService
-    .createTextOutput(JSON.stringify({ result: 'success' }))
+    .createTextOutput(JSON.stringify(obj))
     .setMimeType(ContentService.MimeType.JSON);
 }
 

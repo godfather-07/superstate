@@ -2971,7 +2971,7 @@
             <div class="pdp-price-original" id="pdp-top-original" style="display: none;">₹1,495</div>
             <div class="pdp-price-badge" id="pdp-top-discount" style="display: none;">0% OFF</div>
           </div>
-          <div class="pdp-tax-note" style="margin-bottom: 2rem;">pre-book price · pay today, ships with the next drop · incl. taxes</div>
+          <div class="pdp-tax-note" style="margin-bottom: 2rem;">pre-book price · reserve today, pay when payments open · incl. taxes</div>
           
           <!-- Selected Flavour (Organic Cacao Only) Hidden Element for DOM bindings -->
           <span id="selected-flavour-lbl" style="display: none;">Organic Cacao</span>
@@ -3031,7 +3031,7 @@
           <a href="#win" class="win-link">not ready to pay? 🎮 <span>play a 20-second game for 20% off</span></a>
 
           <ul class="pdp-facts-row">
-            <li>Pay today, ships with the next drop</li>
+            <li>Reserve now, no payment today</li>
             <li>Free shipping in India</li>
             <li>No melatonin</li>
           </ul>
@@ -3271,7 +3271,7 @@
             <span class="pdp-accordion-icon">+</span>
           </div>
           <div class="pdp-accordion-body">
-            Pick your pack and pay today at 50% off. Your order ships as soon as the next drop is ready, and we'll email and WhatsApp you the dispatch date. Shipping is free across India.
+            Pick your pack and lock in 50% off. There's no payment today: as soon as our payments go live, we'll WhatsApp you a secure Razorpay link to confirm at the pre-book price. Your order ships with the next drop, and shipping is free across India.
           </div>
         </div>
 
@@ -3842,67 +3842,12 @@
     }
     
     // ----------------------------------------------------
-    // PRE-BOOK CHECKOUT (50% off via Shopify discount code)
-    // Never sends a customer to checkout at full price: if Shopify
-    // doesn't apply PREBOOK_CODE, we stop and point them to the 20% list.
+    // PRE-BOOK: reserve the selected pack on /pages/prebook/
+    // (no payment yet; a Razorpay link follows once payments go live)
     // ----------------------------------------------------
-    const PREBOOK_CODE = 'PREBOOK50';
-
-    async function prebookCheckout(btn) {
-      const variantId = PACK_VARIANT_IDS[selectedPack];
-      if (!variantId) {
-        alert('Something went wrong selecting your pack. Please try again.');
-        return;
-      }
-      const originalLabel = btn ? btn.innerText : '';
-      if (btn) {
-        btn.disabled = true;
-        btn.innerText = 'Holding your spot…';
-      }
-
-      try {
-        const res = await fetch(`https://${SHOPIFY_CONFIG.domain}/api/${SHOPIFY_CONFIG.apiVersion}/graphql.json`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-Shopify-Storefront-Access-Token': SHOPIFY_CONFIG.storefrontAccessToken
-          },
-          body: JSON.stringify({
-            query: `mutation cartCreate($input: CartInput!) {
-              cartCreate(input: $input) {
-                cart { id checkoutUrl discountCodes { code applicable } }
-                userErrors { field message }
-              }
-            }`,
-            variables: {
-              input: {
-                lines: [{ merchandiseId: variantId, quantity: quantity }],
-                discountCodes: [PREBOOK_CODE],
-                attributes: [{ key: 'Order type', value: 'Pre-book (next drop)' }]
-              }
-            }
-          })
-        });
-        const data = await res.json();
-        const cart = data?.data?.cartCreate?.cart;
-        const discountApplied = cart?.discountCodes?.some(d => d.code.toUpperCase() === PREBOOK_CODE && d.applicable);
-
-        if (cart && cart.checkoutUrl && discountApplied) {
-          window.location.href = cart.checkoutUrl;
-          return;
-        }
-
-        console.error('Pre-book checkout not ready:', data);
-        alert("Pre-booking is opening in a moment, we're just setting it up 🐎\n\nMeanwhile, join the list for code FIRSTNIGHT20 (20% off at launch).");
-      } catch (err) {
-        console.error('Pre-book checkout error:', err);
-        alert(`Sorry, we could not start your pre-booking.\n\nDetails: ${err.message}`);
-      }
-
-      if (btn) {
-        btn.disabled = false;
-        btn.innerText = originalLabel;
-      }
+    function prebookCheckout() {
+      const params = new URLSearchParams({ pack: selectedPack, qty: String(quantity) });
+      window.location.href = `/pages/prebook/?${params.toString()}`;
     }
 
     async function checkoutSecurely() {

@@ -12,6 +12,7 @@ export default defineConfig({
         contact: resolve(__dirname, 'pages/contact/index.html'),
         waitlist: resolve(__dirname, 'pages/waitlist/index.html'),
         getPlan: resolve(__dirname, 'pages/get-plan/index.html'),
+        prebook: resolve(__dirname, 'pages/prebook/index.html'),
       },
     },
   },

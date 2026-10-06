@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="only light" />
+  <meta name="theme-color" content="#003399" />
+  <title>Pre-book | SuperState Sleep Well</title>
+  <meta name="description" content="Pre-book SuperState Sleep Well at 50% off and get your SuperState member card." />
+  <meta name="robots" content="noindex" />
+  <meta property="og:title" content="I just got my SuperState card 🌙" />
+  <meta property="og:description" content="Pre-book Sleep Well at 50% off. Coffee, but for sleep." />
+  <meta property="og:image" content="https://superstate.in/assets/og-sleep-well.jpg" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Serif:ital@0;1&family=Caveat:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      color-scheme: only light;
+      --blue: #003399;
+      --deep: #002673;
+      --lime: #E4FF5A;
+      --mint: #33cc99;
+      --muted: #cbd5e1;
+      --line: rgba(255, 255, 255, 0.16);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      color: #ffffff;
+      background: radial-gradient(circle at 50% 0%, rgba(77, 128, 255, 0.5), rgba(0, 51, 153, 0) 55%), var(--blue);
+      min-height: 100vh;
+      overflow-x: clip;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    button { font-family: inherit; }
+    [hidden] { display: none !important; }
+
+    /* ---------- Header ---------- */
+    .pb-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 64px;
+      border-bottom: 1px solid var(--line);
+    }
+    .pb-nav a { display: inline-flex; align-items: center; min-height: 44px; }
+    .pb-nav img { height: 30px; width: auto; filter: brightness(0) invert(1); }
+
+    .pb-wrap {
+      width: 100%;
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 2.5rem 20px 4rem;
+    }
+
+    /* ---------- Step 1: reserve ---------- */
+    .pb-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 2.5rem;
+      align-items: start;
+    }
+    .pb-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--lime);
+      border: 1px solid rgba(228, 255, 90, 0.5);
+      border-radius: 999px;
+      padding: 0.35rem 0.85rem;
+      margin-bottom: 1.25rem;
+    }
+    .pb-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #ff6b6b;
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(255, 107, 107, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); }
+    }
+    .pb-h1 {
+      font-weight: 800;
+      font-size: clamp(40px, 6vw, 68px);
+      line-height: 0.95;
+      letter-spacing: -0.045em;
+      margin-bottom: 1rem;
+    }
+    .pb-h1 em {
+      font-family: 'Instrument Serif', serif;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      background: linear-gradient(transparent 60%, rgba(228, 255, 90, 0.85) 60%, rgba(228, 255, 90, 0.85) 92%, transparent 92%);
+      padding: 0 0.08em;
+      white-space: nowrap;
+    }
+    .pb-sub {
+      font-size: 17px;
+      line-height: 1.5;
+      color: var(--muted);
+      max-width: 34ch;
+      margin-bottom: 1.75rem;
+    }
+
+    .pb-summary {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      padding: 1rem;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid var(--line);
+    }
+    .pb-summary img {
+      width: 64px;
+      height: auto;
+      flex-shrink: 0;
+      filter: drop-shadow(0 8px 12px rgba(0, 10, 40, 0.4));
+    }
+    .pb-summary-info { flex: 1; min-width: 0; }
+    .pb-summary-name { font-weight: 800; font-size: 17px; }
+    .pb-summary-pack { font-size: 14px; color: var(--muted); margin-top: 2px; }
+    .pb-summary-price { text-align: right; flex-shrink: 0; }
+    .pb-price-now { font-weight: 800; font-size: 22px; color: var(--lime); }
+    .pb-price-was { font-size: 13px; color: var(--muted); text-decoration: line-through; }
+    .pb-change {
+      display: inline-block;
+      margin-top: 0.75rem;
+      font-size: 14px;
+      color: var(--muted);
+      min-height: 32px;
+    }
+
+    .pb-card-form {
+      background: #ffffff;
+      color: #001a4d;
+      border-radius: 24px;
+      padding: clamp(1.25rem, 3vw, 2rem);
+      box-shadow: 0 30px 60px rgba(0, 10, 40, 0.35);
+    }
+    .pb-form-title {
+      font-weight: 800;
+      font-size: 24px;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.25rem;
+    }
+    .pb-form-sub { font-size: 14px; color: #4a5878; margin-bottom: 1.25rem; }
+    .pb-field { margin-bottom: 1rem; }
+    .pb-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #24345a;
+      margin-bottom: 0.4rem;
+    }
+    .pb-input {
+      width: 100%;
+      min-height: 50px;
+      padding: 0 1rem;
+      font-family: inherit;
+      font-size: 16px;
+      color: #001a4d;
+      background: #f4f6fc;
+      border: 2px solid #dfe5f3;
+      border-radius: 12px;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .pb-input:focus { border-color: var(--blue); background: #ffffff; }
+    .pb-input.err { border-color: #e53e3e; background: #fff8f8; }
+    .pb-err { display: block; min-height: 0; font-size: 13px; color: #c53030; margin-top: 0.3rem; }
+    .pb-err:empty { display: none; }
+    .pb-submit {
+      width: 100%;
+      min-height: 56px;
+      margin-top: 0.5rem;
+      border: none;
+      border-radius: 14px;
+      background: var(--blue);
+      color: #ffffff;
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.2s;
+    }
+    .pb-submit:hover { background: #002270; }
+    .pb-submit:active { transform: scale(0.98); }
+    .pb-submit:disabled { opacity: 0.7; cursor: wait; }
+    .pb-assure {
+      list-style: none;
+      margin-top: 1rem;
+      display: grid;
+      gap: 0.4rem;
+      font-size: 13.5px;
+      color: #4a5878;
+    }
+    .pb-assure li::before { content: "✓ "; color: #207e59; font-weight: 800; }
+
+    /* ---------- Step 2: card reveal ---------- */
+    .pb-done { text-align: center; }
+    .pb-done-kicker {
+      font-family: 'Caveat', cursive;
+      font-size: 28px;
+      color: var(--lime);
+      display: inline-block;
+      transform: rotate(-2deg);
+    }
+    .pb-done-h {
+      font-weight: 800;
+      font-size: clamp(36px, 6vw, 64px);
+      line-height: 0.95;
+      letter-spacing: -0.045em;
+      margin: 0.25rem 0 0.75rem;
+    }
+    .pb-done-h em { font-family: 'Instrument Serif', serif; font-weight: 400; color: var(--lime); }
+    .pb-done-sub { color: var(--muted); font-size: 17px; max-width: 36ch; margin: 0 auto 2rem; line-height: 1.5; }
+
+    .card-stage {
+      perspective: 1200px;
+      width: min(420px, 100%);
+      margin: 0 auto;
+    }
+    .ss-card {
+      --mx: 50%;
+      --my: 50%;
+      --rx: 0deg;
+      --ry: 0deg;
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1.586;
+      transform-style: preserve-3d;
+      transform: rotateX(var(--rx)) rotateY(calc(var(--ry) + 180deg));
+      transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+      cursor: grab;
+      touch-action: pan-y;
+    }
+    .ss-card.revealed { transform: rotateX(var(--rx)) rotateY(var(--ry)); }
+    .ss-card.tilting { transition: transform 0.12s linear; }
+    .ss-face {
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      overflow: hidden;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      box-shadow: 0 30px 60px rgba(0, 10, 40, 0.45), inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+    }
+    .ss-front {
+      padding: 6% 7%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: left;
+      color: #ffffff;
+      background:
+        radial-gradient(circle at 85% 15%, rgba(228, 255, 90, 0.35), transparent 40%),
+        radial-gradient(circle at 10% 100%, rgba(51, 204, 153, 0.35), transparent 45%),
+        linear-gradient(135deg, #0a3fbf 0%, #003399 45%, #001f66 100%);
+    }
+    .ss-front::before {
+      /* holographic sheen that follows the pointer */
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at var(--mx) var(--my), rgba(255, 255, 255, 0.45), transparent 35%),
+        conic-gradient(from 120deg at var(--mx) var(--my), rgba(228, 255, 90, 0.25), rgba(51, 204, 153, 0.2), rgba(157, 184, 255, 0.25), rgba(255, 143, 171, 0.2), rgba(228, 255, 90, 0.25));
+      mix-blend-mode: overlay;
+      pointer-events: none;
+    }
+    .ss-front::after {
+      /* faint moon watermark */
+      content: "☾";
+      position: absolute;
+      right: -2%;
+      bottom: -18%;
+      font-size: 220px;
+      line-height: 1;
+      color: rgba(255, 255, 255, 0.06);
+      pointer-events: none;
+    }
+    .ss-row { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: flex-start; }
+    .ss-logo { height: clamp(16px, 4.5vw, 22px); width: auto; filter: brightness(0) invert(1); }
+    .ss-tier {
+      font-size: clamp(9px, 2.4vw, 11px);
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #001a4d;
+      background: var(--lime);
+      padding: 0.25rem 0.55rem;
+      border-radius: 999px;
+    }
+    .ss-chip {
+      width: 14%;
+      aspect-ratio: 1.3;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #f6e7a8, #c9a74b 55%, #f2df92);
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+      position: relative;
+    }
+    .ss-chip::after {
+      content: "";
+      position: absolute;
+      inset: 28% 0;
+      border-top: 1px solid rgba(0, 0, 0, 0.18);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+    }
+    .ss-title {
+      position: relative;
+      z-index: 1;
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: clamp(16px, 4.6vw, 22px);
+      color: var(--lime);
+    }
+    .ss-number {
+      position: relative;
+      z-index: 1;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-weight: 700;
+      font-size: clamp(26px, 8vw, 40px);
+      letter-spacing: 0.06em;
+      line-height: 1;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+    }
+    .ss-bottom { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: flex-end; gap: 0.5rem; }
+    .ss-name {
+      font-weight: 800;
+      font-size: clamp(12px, 3.4vw, 15px);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .ss-meta {
+      font-size: clamp(9px, 2.4vw, 11px);
+      color: rgba(255, 255, 255, 0.75);
+      letter-spacing: 0.04em;
+      margin-top: 2px;
+    }
+    .ss-since { text-align: right; flex-shrink: 0; }
+    .ss-back {
+      transform: rotateY(180deg);
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #001f66, #003399);
+    }
+    .ss-back img { width: 48%; filter: brightness(0) invert(1); opacity: 0.9; }
+    .ss-back span {
+      position: absolute;
+      bottom: 10%;
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      color: var(--lime);
+      font-size: clamp(14px, 4vw, 18px);
+    }
+    .card-hint { font-size: 13px; color: var(--muted); margin-top: 1rem; }
+
+    .pb-club {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin: 1.75rem auto 0;
+      padding: 0.6rem 1rem 0.6rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--line);
+      font-size: 15px;
+    }
+    .pb-avatars { display: flex; }
+    .pb-avatars span {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: grid; place-items: center;
+      font-size: 14px;
+      border: 2px solid var(--blue);
+      margin-left: -8px;
+    }
+    .pb-avatars span:first-child { margin-left: 0; }
+    .pb-club strong { color: var(--lime); }
+
+    .pb-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin: 1.75rem 0 2.5rem;
+    }
+    .pb-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: 50px;
+      padding: 0 1.4rem;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 800;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+    }
+    .pb-btn-primary { background: var(--lime); color: #001a4d; }
+    .pb-btn-ghost { background: transparent; color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.35); }
+
+    .pb-steps {
+      list-style: none;
+      max-width: 520px;
+      margin: 0 auto;
+      text-align: left;
+      border-left: 2px dashed rgba(228, 255, 90, 0.45);
+    }
+    .pb-steps li {
+      position: relative;
+      padding: 0 0 1.4rem 1.5rem;
+    }
+    .pb-steps li:last-child { padding-bottom: 0; }
+    .pb-steps li::before {
+      content: "";
+      position: absolute;
+      left: -8px;
+      top: 4px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--blue);
+      border: 2px solid var(--lime);
+    }
+    .pb-steps li.done::before { background: var(--lime); }
+    .pb-steps strong { display: block; font-size: 17px; }
+    .pb-steps span { font-size: 14px; color: var(--muted); }
+    .pb-again { display: inline-block; margin-top: 2rem; font-size: 14px; color: var(--muted); background: none; border: none; text-decoration: underline; cursor: pointer; min-height: 44px; }
+
+    #confetti {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    .pb-foot {
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+      padding: 1.5rem 20px 2rem;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 860px) {
+      .pb-wrap { padding-top: 1.75rem; }
+      .pb-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .pb-intro { text-align: center; }
+      .pb-sub { margin-left: auto; margin-right: auto; }
+      .pb-summary { text-align: left; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .ss-card, .ss-card.tilting { transition: none; }
+      .pb-dot { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="pb-nav">
+    <a href="/" aria-label="SuperState home"><img src="/logo-wordmark.png" alt="SuperState" width="640" height="135"></a>
+  </header>
+
+  <main class="pb-wrap">
+
+    <!-- STEP 1: reserve -->
+    <section id="pb-reserve">
+      <div class="pb-grid">
+        <div class="pb-intro">
+          <span class="pb-tag"><span class="pb-dot"></span> batch 02 · pre-booking open</span>
+          <h1 class="pb-h1">lock in <em>50% off.</em></h1>
+          <p class="pb-sub">no payment today. reserve your pack and your SuperState member card, and we'll WhatsApp you a secure payment link the moment payments go live.</p>
+
+          <div class="pb-summary">
+            <img src="/assets/sleep-well-box.webp" alt="" width="763" height="1172">
+            <div class="pb-summary-info">
+              <div class="pb-summary-name">Sleep Well</div>
+              <div class="pb-summary-pack" id="pb-pack-label">Pack Of 5 × 1</div>
+            </div>
+            <div class="pb-summary-price">
+              <div class="pb-price-now" id="pb-price-now">₹149.50</div>
+              <div class="pb-price-was" id="pb-price-was">₹299</div>
+            </div>
+          </div>
+          <a class="pb-change" href="/products/sleep-well/#buy-section">← change pack</a>
+        </div>
+
+        <div class="pb-card-form">
+          <h2 class="pb-form-title">your details</h2>
+          <p class="pb-form-sub">takes 20 seconds. we only use these for your order.</p>
+          <form id="pb-form" novalidate>
+            <div class="pb-field">
+              <label class="pb-label" for="pb-name">Name</label>
+              <input class="pb-input" id="pb-name" type="text" autocomplete="name" placeholder="Arjun Sharma" required>
+              <span class="pb-err" id="pb-name-err"></span>
+            </div>
+            <div class="pb-field">
+              <label class="pb-label" for="pb-phone">WhatsApp number</label>
+              <input class="pb-input" id="pb-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="98765 43210" required>
+              <span class="pb-err" id="pb-phone-err"></span>
+            </div>
+            <div class="pb-field">
+              <label class="pb-label" for="pb-email">Email</label>
+              <input class="pb-input" id="pb-email" type="email" inputmode="email" autocomplete="email" placeholder="arjun@email.com" required>
+              <span class="pb-err" id="pb-email-err"></span>
+            </div>
+            <button class="pb-submit" id="pb-submit" type="submit">lock my 50% off →</button>
+            <span class="pb-err" id="pb-form-err"></span>
+          </form>
+          <ul class="pb-assure">
+            <li>no payment today</li>
+            <li>secure Razorpay link on WhatsApp once payments open</li>
+            <li>free shipping in India, ships with the next drop</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 2: card reveal -->
+    <section id="pb-done" class="pb-done" hidden>
+      <span class="pb-done-kicker">you're in 🎉</span>
+      <h1 class="pb-done-h">welcome to the <em>night shift.</em></h1>
+      <p class="pb-done-sub" id="pb-done-sub">your spot is locked at 50% off. here's your SuperState card.</p>
+
+      <div class="card-stage">
+        <div class="ss-card" id="ss-card" role="img" aria-label="Your SuperState member card">
+          <div class="ss-face ss-front">
+            <div class="ss-row">
+              <img class="ss-logo" src="/logo-wordmark.png" alt="SuperState" width="640" height="135">
+              <span class="ss-tier">founding member</span>
+            </div>
+            <div class="ss-row" style="align-items: center;">
+              <div class="ss-chip" aria-hidden="true"></div>
+              <span class="ss-title">night owl ☾</span>
+            </div>
+            <div class="ss-number" id="ss-number">Nº 028</div>
+            <div class="ss-bottom">
+              <div style="min-width: 0;">
+                <div class="ss-name" id="ss-name">ARJUN SHARMA</div>
+                <div class="ss-meta" id="ss-meta">BATCH 02 · PACK OF 5</div>
+              </div>
+              <div class="ss-since">
+                <div class="ss-meta">MEMBER SINCE</div>
+                <div class="ss-name" id="ss-since">10/26</div>
+              </div>
+            </div>
+          </div>
+          <div class="ss-face ss-back" aria-hidden="true">
+            <img src="/logo-wordmark.png" alt="" width="640" height="135">
+            <span>sleep well ☾</span>
+          </div>
+        </div>
+      </div>
+      <p class="card-hint">move your mouse or drag your finger over it ✨</p>
+
+      <div class="pb-club">
+        <span class="pb-avatars" aria-hidden="true">
+          <span style="background:#E4FF5A">🌙</span><span style="background:#bff2da">🦉</span><span style="background:#ffc9e0">✨</span>
+        </span>
+        <span id="pb-club-text"><strong>27 night owls</strong> from batch 01 already have theirs</span>
+      </div>
+
+      <div class="pb-actions">
+        <a class="pb-btn pb-btn-primary" id="pb-share" href="#" target="_blank" rel="noopener">share on WhatsApp</a>
+        <a class="pb-btn pb-btn-ghost" href="/">back to home</a>
+      </div>
+
+      <ol class="pb-steps">
+        <li class="done"><strong>spot locked</strong><span id="pb-step1">Pack Of 5 × 1 at ₹149.50 (50% off)</span></li>
+        <li><strong>payment link on WhatsApp</strong><span>a secure Razorpay link to <b id="pb-step2-phone">your number</b>, as soon as payments go live</span></li>
+        <li><strong>ships with the next drop</strong><span>free shipping across India. your physical card comes in the box</span></li>
+      </ol>
+
+      <button type="button" class="pb-again" id="pb-again">pre-book another pack</button>
+    </section>
+  </main>
+
+  <footer class="pb-foot">© SuperState · Made in India · questions? <a href="https://wa.me/919567309388">WhatsApp us</a></footer>
+
+  <canvas id="confetti" aria-hidden="true"></canvas>
+  <script src="../../src/prebook.js" type="module"></script>
+</body>
+</html>
