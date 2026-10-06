@@ -6,15 +6,58 @@ import {
 const $ = id => document.getElementById(id);
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ---------- Pack + price from the product page link ---------- */
+/* ---------- Pack + price (from the product page link, editable here) ---------- */
 const params = new URLSearchParams(location.search);
-const pack = PACKS[params.get('pack')] ? params.get('pack') : 'Pack Of 5';
-const qty = Math.min(Math.max(parseInt(params.get('qty'), 10) || 1, 1), 20);
-const price = priceFor(pack, qty);
+let pack = PACKS[params.get('pack')] ? params.get('pack') : 'Pack Of 5';
+let qty = Math.min(Math.max(parseInt(params.get('qty'), 10) || 1, 1), 20);
+let price = priceFor(pack, qty);
 
-$('pb-pack-label').textContent = `${pack} × ${qty}`;
-$('pb-price-now').textContent = `₹${formatINR(price.pre)}`;
-$('pb-price-was').textContent = `₹${formatINR(price.full)}`;
+const rupees = n => `₹${formatINR(n)}`;
+
+// prices on the pack buttons
+document.querySelectorAll('.pv-pack-price').forEach(el => {
+  const p = priceFor(el.dataset.for, 1);
+  el.innerHTML = `${rupees(p.pre)} <s>${rupees(p.full)}</s>`;
+});
+
+function renderOrder(animate) {
+  price = priceFor(pack, qty);
+  document.querySelectorAll('.pv-pack').forEach(btn => {
+    btn.setAttribute('aria-checked', String(btn.dataset.pack === pack));
+  });
+  $('pv-qty').textContent = qty;
+  $('pv-minus').disabled = qty <= 1;
+  $('pv-plus').disabled = qty >= 20;
+  $('pv-line-label').textContent = `Sleep Well · ${pack} × ${qty}`;
+  $('pv-line-mrp').textContent = rupees(price.full);
+  $('pv-line-off').textContent = `−${rupees(price.full - price.pre)}`;
+  const total = $('pv-total');
+  total.textContent = rupees(price.pre);
+  if (animate && !reduceMotion) { total.classList.remove('bump'); void total.offsetWidth; total.classList.add('bump'); }
+  $('pv-meta').textContent = `BATCH 02 · ${pack.toUpperCase()}${qty > 1 ? ` × ${qty}` : ''}`;
+  $('pv-sticky-label').textContent = `${pack} × ${qty}`;
+  $('pv-sticky-total').textContent = rupees(price.pre);
+  if (!submitBtn.disabled) submitBtn.textContent = payLabel();
+  history.replaceState(null, '', `?pack=${encodeURIComponent(pack)}&qty=${qty}`);
+}
+
+document.querySelectorAll('.pv-pack').forEach(btn => btn.addEventListener('click', () => {
+  pack = btn.dataset.pack;
+  renderOrder(true);
+}));
+$('pv-minus').addEventListener('click', () => { if (qty > 1) { qty--; renderOrder(true); } });
+$('pv-plus').addEventListener('click', () => { if (qty < 20) { qty++; renderOrder(true); } });
+
+// live card preview
+const now = new Date();
+$('pv-since').textContent = `${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getFullYear()).slice(-2)}`;
+$('pv-stat-members').textContent = PREBOOK_CONFIG.BATCH01_MEMBERS;
+$('pb-name').addEventListener('input', e => {
+  const v = e.target.value.trim();
+  $('pv-name').textContent = v ? v.toUpperCase() : 'YOUR NAME HERE';
+  $('pv-name').classList.toggle('typing', !!v);
+});
+enableTilt($('pv-card'));
 
 /* ---------- Returning visitor: show their card straight away ---------- */
 const saved = getSavedPrebook();
@@ -27,13 +70,36 @@ const fields = ['name', 'phone', 'email'];
 fields.forEach(f => $(`pb-${f}`).addEventListener('input', () => setError(f, '')));
 
 const submitBtn = $('pb-submit');
-const payLabel = `pay ₹${formatINR(price.pre)} · 50% off →`;
-submitBtn.textContent = payLabel;
+const payLabel = () => `pay ${rupees(price.pre)} · 50% off →`;
 
 function setBusy(on, label) {
   submitBtn.disabled = on;
-  submitBtn.textContent = on ? label : payLabel;
+  submitBtn.textContent = on ? label : payLabel();
 }
+renderOrder(false);
+
+/* ---------- Sticky pay bar (phones): after the hero, until the pay form is on screen ---------- */
+const sticky = $('pv-sticky');
+const payForm = document.querySelector('.pv-checkout .pb-card-form');
+let formOnScreen = false;
+function updateSticky() {
+  const pastHero = window.scrollY > window.innerHeight * 0.6;
+  const show = pastHero && !formOnScreen && !$('pb-reserve').hidden;
+  sticky.classList.toggle('visible', show);
+  sticky.setAttribute('aria-hidden', show ? 'false' : 'true');
+  $('pv-sticky-btn').tabIndex = show ? 0 : -1;
+}
+if ('IntersectionObserver' in window) {
+  new IntersectionObserver(([entry]) => {
+    formOnScreen = entry.isIntersecting;
+    updateSticky();
+  }, { threshold: 0.2 }).observe(payForm);
+}
+window.addEventListener('scroll', updateSticky, { passive: true });
+$('pv-sticky-btn').addEventListener('click', () => {
+  payForm.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+  setTimeout(() => $('pb-name').focus({ preventScroll: true }), reduceMotion ? 0 : 500);
+});
 
 form.addEventListener('submit', async e => {
   e.preventDefault();
@@ -140,6 +206,7 @@ $('pb-again').addEventListener('click', () => {
 function showCard(r, celebrate) {
   $('pb-reserve').hidden = true;
   $('pb-done').hidden = false;
+  $('pv-sticky').classList.remove('visible');
   window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
 
   const first = r.name.split(' ')[0];
