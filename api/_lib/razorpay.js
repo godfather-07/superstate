@@ -8,8 +8,9 @@
 import Razorpay from 'razorpay';
 
 export function getKeys() {
-  const keyId = process.env.RAZORPAY_KEY_ID;
-  const keySecret = process.env.RAZORPAY_KEY_SECRET;
+  // trim: values pasted into a dashboard often pick up a stray space/newline
+  const keyId = (process.env.RAZORPAY_KEY_ID || '').trim();
+  const keySecret = (process.env.RAZORPAY_KEY_SECRET || '').trim();
   if (!keyId || !keySecret) return null;
   return { keyId, keySecret };
 }

@@ -14,6 +14,9 @@ let price = priceFor(pack, qty);
 
 const rupees = n => `₹${formatINR(n)}`;
 
+// The 30-night pack gets the gold edition member card
+const isGoldPack = p => p === 'Pack Of 30';
+
 // prices on the pack buttons
 document.querySelectorAll('.pv-pack-price').forEach(el => {
   const p = priceFor(el.dataset.for, 1);
@@ -35,6 +38,7 @@ function renderOrder(animate) {
   total.textContent = rupees(price.pre);
   if (animate && !reduceMotion) { total.classList.remove('bump'); void total.offsetWidth; total.classList.add('bump'); }
   $('pv-meta').textContent = `BATCH 02 · ${pack.toUpperCase()}${qty > 1 ? ` × ${qty}` : ''}`;
+  $('pv-card').classList.toggle('gold', isGoldPack(pack));
   $('pv-sticky-label').textContent = `${pack} × ${qty}`;
   $('pv-sticky-total').textContent = rupees(price.pre);
   if (!submitBtn.disabled) submitBtn.textContent = payLabel();
@@ -227,6 +231,7 @@ function showCard(r, celebrate) {
   $('ss-name').textContent = r.name.toUpperCase();
   $('ss-number').textContent = r.memberId;
   $('ss-meta').textContent = `BATCH 02 · ${r.pack.toUpperCase()}${r.qty > 1 ? ` × ${r.qty}` : ''}`;
+  $('ss-card').classList.toggle('gold', isGoldPack(r.pack));
   $('ss-since').textContent = `${String(since.getMonth() + 1).padStart(2, '0')}/${String(since.getFullYear()).slice(-2)}`;
   $('pb-done-sub').textContent = `${first}, you're paid up at 50% off. here's your SuperState card.`;
   $('pb-step1').textContent = `${r.pack} × ${r.qty} · ₹${formatINR(r.prebookPrice)} paid (50% off)`;
