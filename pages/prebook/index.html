@@ -147,6 +147,8 @@
     }
     .pb-input:focus { border-color: var(--blue); background: #ffffff; }
     .pb-input.err { border-color: #e53e3e; background: #fff8f8; }
+    .pb-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 0.75rem; }
+    .pb-input-area { min-height: 76px; padding: 0.8rem 1rem; resize: vertical; line-height: 1.4; }
     .pb-err { display: block; min-height: 0; font-size: 13px; color: #c53030; margin-top: 0.3rem; }
     .pb-err:empty { display: none; }
     .pb-submit {
@@ -897,7 +899,7 @@
         <div class="pb-card-form">
           <span class="pv-kicker pv-kicker-dark">step 2</span>
           <h2 class="pb-form-title">your details</h2>
-          <p class="pb-form-sub">we only use these for your order. (30-night pack: your name goes on the card.)</p>
+          <p class="pb-form-sub">we only use these to ship your order. (30-night pack: your name goes on the card.)</p>
           <form id="pb-form" novalidate>
             <div class="pb-field">
               <label class="pb-label" for="pb-name">Name</label>
@@ -913,6 +915,28 @@
               <label class="pb-label" for="pb-email">Email</label>
               <input class="pb-input" id="pb-email" type="email" inputmode="email" autocomplete="email" placeholder="arjun@email.com" required>
               <span class="pb-err" id="pb-email-err"></span>
+            </div>
+            <div class="pb-field">
+              <label class="pb-label" for="pb-address">Delivery address</label>
+              <textarea class="pb-input pb-input-area" id="pb-address" autocomplete="street-address" placeholder="Flat / house no., building, street, area" maxlength="200" rows="2" required></textarea>
+              <span class="pb-err" id="pb-address-err"></span>
+            </div>
+            <div class="pb-row">
+              <div class="pb-field">
+                <label class="pb-label" for="pb-pincode">Pincode</label>
+                <input class="pb-input" id="pb-pincode" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="560001" maxlength="6" required>
+                <span class="pb-err" id="pb-pincode-err"></span>
+              </div>
+              <div class="pb-field">
+                <label class="pb-label" for="pb-city">City</label>
+                <input class="pb-input" id="pb-city" type="text" autocomplete="address-level2" placeholder="Bengaluru" maxlength="40" required>
+                <span class="pb-err" id="pb-city-err"></span>
+              </div>
+            </div>
+            <div class="pb-field">
+              <label class="pb-label" for="pb-state">State</label>
+              <input class="pb-input" id="pb-state" type="text" autocomplete="address-level1" placeholder="Karnataka" maxlength="40" required>
+              <span class="pb-err" id="pb-state-err"></span>
             </div>
             <button class="pb-submit" id="pb-submit" type="submit">pay · 50% off →</button>
             <span class="pb-err" id="pb-form-err" role="alert"></span>
