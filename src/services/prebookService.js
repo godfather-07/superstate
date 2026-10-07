@@ -14,9 +14,7 @@ import { PACKS, priceFor } from '../shared/packs.js';
 export const PREBOOK_CONFIG = {
   // Batch 01 customers who already have a card. Keep this number true.
   BATCH01_MEMBERS: 27,
-  STORAGE_KEY: 'superstate_prebook',
-  // Public key id (safe in the browser). The server also returns it.
-  RAZORPAY_KEY_ID: import.meta.env.VITE_RAZORPAY_KEY_ID || ''
+  STORAGE_KEY: 'superstate_prebook'
 };
 
 export { PACKS, priceFor };

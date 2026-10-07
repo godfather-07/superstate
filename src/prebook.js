@@ -136,7 +136,7 @@ form.addEventListener('submit', async e => {
 
   // 2. Razorpay checkout modal
   const rzp = new window.Razorpay({
-    key: PREBOOK_CONFIG.RAZORPAY_KEY_ID || order.data.key_id,
+    key: order.data.key_id, // public Key ID, sent by our server with each order
     order_id: order.data.order_id,
     amount: order.data.amount,
     currency: order.data.currency,
