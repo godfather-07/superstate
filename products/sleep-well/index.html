@@ -4,13 +4,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dark Mode | SuperState</title>
-  <meta name="description" content="Science-Backed Dark Chocolate Ritual. Relax. Sleep deeper. Wake up sharp." />
+  <meta name="color-scheme" content="only light" />
+  <title>Sleep Well | SuperState</title>
+  <meta name="description" content="SuperState Sleep Well: a dark chocolate drink you mix and sip 30 minutes before bed. Every ingredient and amount listed." />
+  <link rel="canonical" href="https://superstate.in/products/sleep-well/" />
+  <meta name="theme-color" content="#003399" />
+  <meta property="og:type" content="product" />
+  <meta property="og:site_name" content="SuperState" />
+  <meta property="og:url" content="https://superstate.in/products/sleep-well/" />
+  <meta property="og:title" content="Sleep Well by SuperState: coffee, but for sleep ☾" />
+  <meta property="og:description" content="Batch 01 sold out. Pre-book the next drop at 50% off, or grab 20% off with code FIRSTNIGHT20." />
+  <meta property="og:image" content="https://superstate.in/assets/og-sleep-well.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://superstate.in/assets/og-sleep-well.jpg" />
   
   <!-- Fonts & Core Stylesheet -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Lora:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../style.css" />
   <link rel="icon" type="image/png" href="/favicon.png" />
   
@@ -42,7 +55,7 @@
       background-color: var(--color-deep-knowing); /* Saturated Brand Primary Blue Page Background */
       color: #ffffff;                 /* Pure white text for high contrast readability */
       font-family: var(--font-body);
-      overflow-x: hidden;
+      overflow-x: clip;
     }
 
     .custom-checkmark-svg {
@@ -80,7 +93,7 @@
 
     .navbar .logo-img {
       filter: none !important; /* Restore natural blue/white brand logo */
-      height: 100px !important;
+      height: 36px !important;
     }
 
     .nav-links a {
@@ -112,16 +125,50 @@
     /* ----------------------------------------------------
        PRODUCT SHOWCASE GRID (Inspired by Ace Blend)
        ---------------------------------------------------- */
+    .pdp-hero-section {
+      padding: 1rem 0 3rem;
+    }
+
     .pdp-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 3.5rem;
-      padding: 2.5rem 0;
+      gap: 1.5rem;
+      padding: 1rem 0;
     }
 
     @media (min-width: 992px) {
       .pdp-grid {
-        grid-template-columns: 1.1fr 0.9fr;
+        grid-template-columns: 1.05fr 0.95fr;
+        grid-template-areas:
+          "gallery info"
+          "extras  info"
+          "bar     bar";
+        grid-template-rows: auto 1fr auto;
+        column-gap: 3.5rem;
+        row-gap: 1.25rem;
+      }
+      .pdp-gallery-column { grid-area: gallery; }
+      .pdp-info-column { grid-area: info; }
+      .pdp-extras { grid-area: extras; align-self: start; }
+      .era-bar-wrap { grid-area: bar; }
+      .era-bar-wrap .era-card {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 0.9rem 1.25rem;
+      }
+      .era-bar-wrap .era-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.35rem;
+        flex-shrink: 0;
+      }
+      .era-bar-wrap .era-copy {
+        flex: 1;
+        margin: 0;
+      }
+      .era-bar-wrap .era-progress {
+        flex: 0 0 220px;
       }
     }
 
@@ -131,33 +178,37 @@
       min-width: 0;
     }
 
-    @media (min-width: 992px) {
-      .pdp-gallery-column {
-        position: sticky;
-        top: 130px;
-        align-self: start;
-      }
-    }
+
 
     .pdp-gallery-viewport {
       width: 100%;
       max-width: 600px;
       margin: 0 auto;
-      aspect-ratio: 1080 / 1060;
-      border-radius: 20px;
-      overflow: hidden;
-      border: 1px solid var(--color-border);
+      padding: 1.5rem 0 1rem;
       position: relative;
-      background-color: var(--color-truth-white);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+      display: grid;
+      place-items: center;
+      /* No frame: the cut-out box sits directly on the page blue */
+      background: radial-gradient(closest-side, rgba(77, 128, 255, 0.45), rgba(0, 51, 153, 0) 100%);
     }
 
     .pdp-gallery-viewport img {
-      width: 100%;
-      height: 100%;
+      width: auto;
+      height: auto;
+      max-height: min(540px, 62vh);
+      max-width: 100%;
       object-fit: contain;
-      transition: opacity 0.4s ease;
-      opacity: 1;
+      filter: drop-shadow(0 28px 32px rgba(0, 10, 40, 0.55)) drop-shadow(0 6px 10px rgba(0, 10, 40, 0.35));
+      animation: box-float 6s ease-in-out infinite;
+    }
+
+    @keyframes box-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pdp-gallery-viewport img { animation: none; }
     }
 
     .gallery-nav-btn {
@@ -1035,14 +1086,14 @@
       border-radius: 8px;
       overflow: hidden;
       flex-shrink: 0;
-      background-color: var(--color-truth-white);
+      background-color: var(--color-off-white);
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .cart-item-img img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
     }
 
     .cart-item-details {
@@ -1851,11 +1902,997 @@
     /* Mobile Overrides for responsive alignment and scaling */
     @media (max-width: 992px) {
       .navbar .logo-img {
-        height: 60px !important; /* Compact mobile navbar logo to prevent vertical overflow */
+        height: 30px !important;
       }
       .rhythm-section .container {
         padding: 0 1.25rem !important; /* Expand content margins on mobile viewports for somatic cards */
       }
+    }
+    /* ----------------------------------------------------
+       SIMPLE PDP SECTIONS
+       ---------------------------------------------------- */
+    .pdp-subline {
+      font-size: 17px;
+      line-height: 1.5;
+      color: var(--color-muted-slate);
+      margin: 0 0 1.5rem;
+      max-width: 34rem;
+    }
+    .pdp-facts-row {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.25rem;
+      padding: 0;
+      margin: 0;
+      font-size: 14px;
+      color: var(--color-muted-slate);
+    }
+    .pdp-facts-row li::before {
+      content: "✓";
+      color: var(--color-emerge);
+      font-weight: 700;
+      margin-right: 0.4rem;
+    }
+    .simple-section {
+      padding: 4.5rem 0;
+      border-top: 1px solid var(--color-border);
+    }
+    .simple-section-alt {
+      background-color: var(--color-off-white);
+    }
+    .simple-container {
+      max-width: 720px;
+    }
+    .simple-title {
+      font-family: var(--font-heading) !important;
+      font-size: clamp(28px, 4vw, 36px);
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 0 0.5rem;
+    }
+    .simple-lead {
+      color: var(--color-muted-slate);
+      font-size: 16px;
+      margin: 0 0 2rem;
+    }
+    .simple-note {
+      font-size: 13px;
+      color: var(--color-muted-slate);
+      margin-top: 1rem;
+      line-height: 1.5;
+    }
+    .simple-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 16px;
+    }
+    .simple-table th {
+      text-align: left;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-muted-slate);
+      padding: 0 0 0.75rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .simple-table td {
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--color-border);
+      color: #ffffff;
+    }
+    .simple-table th:last-child,
+    .simple-table td:last-child {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+    .simple-steps {
+      list-style: none;
+      padding: 0;
+      margin: 2rem 0 0;
+      display: grid;
+      gap: 1.5rem;
+    }
+    .simple-steps li {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .simple-steps strong {
+      font-size: 18px;
+      color: #ffffff;
+    }
+    .simple-steps p {
+      margin: 0.25rem 0 0;
+      color: var(--color-muted-slate);
+    }
+    .step-num {
+      flex: 0 0 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background-color: var(--color-first-light);
+      color: var(--color-deep-knowing);
+      font-weight: 800;
+    }
+    .simple-section .pdp-accordions-group {
+      gap: 0;
+      margin-top: 1.5rem;
+      border-top: 1px solid var(--color-border);
+    }
+    .simple-section .pdp-accordion-item,
+    .simple-section .pdp-accordion-item.open {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--color-border);
+      border-radius: 0;
+      box-shadow: none;
+    }
+    .simple-section .pdp-accordion-header {
+      padding: 1.25rem 0;
+      font-size: 17px;
+      color: #ffffff;
+    }
+    .simple-section .pdp-accordion-header:hover {
+      background: transparent;
+      color: var(--color-first-light);
+    }
+    .simple-section .pdp-accordion-icon {
+      font-size: 22px;
+      color: #ffffff;
+    }
+    .simple-section .pdp-accordion-body {
+      font-size: 15px;
+      color: var(--color-muted-slate);
+    }
+    .simple-section .pdp-accordion-item.open .pdp-accordion-body {
+      padding: 0 0 1.25rem;
+      border-top-color: transparent;
+    }
+    .pdp-accordion-body a {
+      color: var(--color-first-light);
+    }
+    /* ----------------------------------------------------
+       GEN-Z LAYER: sticker, ticker, manifesto, ritual
+       ---------------------------------------------------- */
+    .hero-sticker {
+      position: absolute;
+      top: 8%;
+      right: 4%;
+      z-index: 2;
+      transform: rotate(8deg);
+      background: var(--color-first-light);
+      color: var(--color-deep-knowing);
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: clamp(16px, 2vw, 22px);
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      box-shadow: 0 8px 20px rgba(0, 10, 40, 0.35);
+      white-space: nowrap;
+    }
+
+    .vibe-ticker-clip {
+      overflow: hidden;
+      padding: 1.5rem 0;
+    }
+    .vibe-ticker {
+      overflow: hidden;
+      background: var(--color-first-light);
+      color: var(--color-deep-knowing);
+      padding: 0.9rem 0;
+      transform: rotate(-1.5deg);
+      margin: 0 -2rem;
+      box-shadow: 0 10px 30px rgba(0, 10, 40, 0.3);
+    }
+    .vibe-ticker-track {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      width: max-content;
+      animation: ticker 28s linear infinite;
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: clamp(22px, 3vw, 32px);
+      white-space: nowrap;
+    }
+    .vibe-ticker-track i {
+      font-style: normal;
+      font-size: 0.8em;
+    }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .manifesto {
+      padding: 4.5rem 0 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .manifesto-inner {
+      max-width: 1060px;
+      position: relative;
+    }
+    .manifesto p {
+      margin: 0;
+      text-transform: lowercase;
+    }
+    .manifesto-big {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: clamp(40px, 7vw, 88px);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+      color: #ffffff;
+    }
+    .manifesto-mid {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: clamp(24px, 3.4vw, 40px);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      margin-top: 2rem !important;
+      max-width: 22ch;
+    }
+    .manifesto-soft {
+      font-size: clamp(17px, 1.8vw, 21px);
+      line-height: 1.5;
+      color: var(--color-muted-slate);
+      margin-top: 1.5rem !important;
+      max-width: 34ch;
+    }
+    .manifesto-close {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: clamp(36px, 6vw, 72px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--color-first-light);
+      margin-top: 0 !important;
+    }
+    .manifesto-close em {
+      color: #ffffff;
+    }
+    .manifesto-chips {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .manifesto-chips li {
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+    }
+    .manifesto-chips li:nth-child(odd) { transform: rotate(-2deg); }
+    .manifesto-chips li:nth-child(even) { transform: rotate(2deg); }
+    .manifesto-close-row {
+      display: flex;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 1rem 2rem;
+      margin-top: 2.75rem;
+    }
+    .manifesto-sticker {
+      transform: rotate(-6deg);
+      background: #ffffff;
+      color: var(--color-deep-knowing);
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: clamp(20px, 2.4vw, 28px);
+      padding: 0.55rem 1.15rem;
+      border-radius: 14px;
+      box-shadow: 0 12px 30px rgba(0, 10, 40, 0.35);
+      margin-bottom: 0.5rem;
+    }
+    .manifesto-tag {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-first-light);
+      border: 1px solid rgba(228, 255, 90, 0.5);
+      border-radius: 999px;
+      padding: 0.35rem 0.85rem;
+      margin-bottom: 2rem;
+    }
+    .manifesto em,
+    .ritual em {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+    .marker {
+      background: linear-gradient(transparent 58%, rgba(228, 255, 90, 0.85) 58%, rgba(228, 255, 90, 0.85) 92%, transparent 92%);
+      padding: 0 0.1em;
+      color: #ffffff;
+    }
+
+    .ritual {
+      padding: 5.5rem 0;
+      background-color: var(--color-off-white);
+      border-top: 1px solid var(--color-border);
+    }
+    .ritual-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+      gap: 4rem;
+      align-items: center;
+      max-width: 1040px;
+    }
+    .ritual-video-wrap {
+      position: relative;
+      max-width: 380px;
+      width: 100%;
+      justify-self: center;
+      transform: rotate(-2deg);
+    }
+    .ritual-video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
+      border-radius: 28px;
+      border: 6px solid #ffffff;
+      box-shadow: 0 30px 60px rgba(0, 10, 40, 0.5);
+      background: #1a1a1a;
+    }
+    .ritual-chip {
+      position: absolute;
+      left: 50%;
+      bottom: 1.25rem;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .ritual-title {
+      font-family: var(--font-heading) !important;
+      font-weight: 800;
+      font-size: clamp(40px, 5.5vw, 64px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: #ffffff;
+      margin: 0 0 0.75rem;
+    }
+    .ritual-title em {
+      color: var(--color-first-light);
+    }
+    .ritual-lead {
+      color: var(--color-muted-slate);
+      font-size: 17px;
+      margin: 0 0 2.25rem;
+    }
+    .ritual-steps {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      border-left: 2px dashed rgba(228, 255, 90, 0.4);
+    }
+    .ritual-steps li {
+      position: relative;
+      display: grid;
+      grid-template-columns: 84px 1fr;
+      gap: 1rem;
+      padding: 0 0 1.75rem 1.5rem;
+    }
+    .ritual-steps li:last-child {
+      padding-bottom: 0;
+    }
+    .ritual-steps li::before {
+      content: "";
+      position: absolute;
+      left: -7px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--color-first-light);
+      box-shadow: 0 0 0 4px rgba(228, 255, 90, 0.18);
+    }
+    .ritual-steps time {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--color-first-light);
+      padding-top: 3px;
+      font-variant-numeric: tabular-nums;
+    }
+    .ritual-steps strong {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 28px;
+      line-height: 1;
+      color: #ffffff;
+    }
+    .ritual-steps p {
+      margin: 0.35rem 0 0;
+      color: var(--color-muted-slate);
+      font-size: 15px;
+    }
+
+    @media (max-width: 860px) {
+      .ritual-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      .ritual-video-wrap {
+        max-width: 280px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .vibe-ticker-track { animation: none; }
+    }
+    /* Best value tag */
+    .pack-best-tag {
+      position: absolute;
+      top: -11px;
+      right: 10px;
+      background: var(--color-first-light);
+      color: var(--color-deep-knowing);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      padding: 3px 9px;
+      border-radius: 999px;
+      transform: rotate(3deg);
+      box-shadow: 0 4px 10px rgba(0, 10, 40, 0.25);
+      white-space: nowrap;
+    }
+
+    /* Sticky mobile add-to-cart bar */
+    .sticky-buy {
+      display: none;
+    }
+    @media (max-width: 991px) {
+      .sticky-buy {
+        position: fixed;
+        left: 12px;
+        right: 12px;
+        bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+        z-index: 1500;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.6rem 0.6rem 0.6rem 0.9rem;
+        background: rgba(0, 26, 77, 0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 18px;
+        box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4);
+        transform: translateY(140%);
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .sticky-buy.visible {
+        transform: translateY(0);
+      }
+      .sticky-buy img {
+        width: 32px;
+        height: auto;
+        flex-shrink: 0;
+      }
+      .sticky-buy-info {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.2;
+        min-width: 0;
+        flex: 1;
+      }
+      .sticky-buy-info strong {
+        font-size: 15px;
+        color: #ffffff;
+      }
+      .sticky-buy-info span {
+        font-size: 13px;
+        color: var(--color-muted-slate);
+      }
+      .sticky-buy button {
+        flex-shrink: 0;
+        background: var(--color-first-light);
+        color: var(--color-deep-knowing);
+        border: none;
+        border-radius: 12px;
+        padding: 0.8rem 1.2rem;
+        font-family: var(--font-body);
+        font-weight: 800;
+        font-size: 15px;
+        cursor: pointer;
+      }
+      footer.footer {
+        padding-bottom: 6rem;
+      }
+    }
+    /* Sold-out drop + offers */
+    .drop-card {
+      border: 1px dashed rgba(228, 255, 90, 0.55);
+      background: rgba(228, 255, 90, 0.06);
+      border-radius: 16px;
+      padding: 1rem 1.1rem;
+      margin: 0 0 1.75rem;
+      max-width: 34rem;
+    }
+    .drop-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-first-light);
+    }
+    .drop-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ff6b6b;
+      box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7);
+      animation: drop-pulse 1.8s infinite;
+    }
+    @keyframes drop-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(255, 107, 107, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); }
+    }
+    .drop-copy {
+      margin: 0.5rem 0 0;
+      font-size: 15px;
+      line-height: 1.55;
+      color: #ffffff;
+    }
+    .drop-copy em {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 1.15em;
+      color: var(--color-first-light);
+    }
+    .pack-was {
+      font-size: 13px;
+      font-weight: 500;
+      color: #999999;
+      margin-left: 0.25rem;
+    }
+    .trust-later-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      max-width: 600px;
+      padding: 1rem 1.1rem;
+      margin: -0.75rem 0 1.5rem;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--color-border);
+    }
+    .trust-later-card strong {
+      font-size: 15px;
+      color: #ffffff;
+    }
+    .trust-later-card p {
+      margin: 0.25rem 0 0;
+      font-size: 14px;
+      color: var(--color-muted-slate);
+    }
+    .code-chip {
+      display: inline-block;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--color-deep-knowing);
+      background: var(--color-first-light);
+      padding: 1px 7px;
+      border-radius: 6px;
+    }
+    .trust-later-btn {
+      flex-shrink: 0;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--color-first-light);
+      text-decoration: none;
+      border-bottom: 2px solid var(--color-first-light);
+      padding-bottom: 2px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .drop-dot { animation: none; }
+    }
+    /* ---------- Buy box link to game ---------- */
+    .win-link {
+      display: inline-block;
+      margin: -0.75rem 0 1.25rem;
+      font-size: 14px;
+      color: var(--color-muted-slate);
+      text-decoration: none;
+    }
+    .win-link span {
+      color: var(--color-first-light);
+      font-weight: 700;
+      border-bottom: 2px solid var(--color-first-light);
+    }
+
+    /* ---------- Sold-out era card ---------- */
+    .pdp-extras {
+      display: grid;
+      gap: 1rem;
+      max-width: 600px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .era-bar-wrap {
+      max-width: 600px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    @media (min-width: 992px) {
+      .era-bar-wrap { max-width: none; }
+    }
+    .era-card {
+      position: relative;
+      padding: 1.1rem 1.25rem 1rem;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(228, 255, 90, 0.12), rgba(51, 204, 153, 0.06));
+      border: 1px solid rgba(228, 255, 90, 0.35);
+    }
+    .era-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .era-badge {
+      display: inline-block;
+      background: var(--color-first-light);
+      color: var(--color-deep-knowing);
+      font-weight: 800;
+      font-size: 14px;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      transform: rotate(-3deg);
+    }
+    .era-batch {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      color: var(--color-muted-slate);
+      text-decoration: line-through;
+      text-decoration-color: #ff6b6b;
+      text-decoration-thickness: 2px;
+    }
+    .era-copy {
+      margin: 0.8rem 0 0.75rem;
+      font-size: 15px;
+      line-height: 1.55;
+      color: #ffffff;
+    }
+    .era-copy em {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 1.2em;
+      color: var(--color-first-light);
+    }
+    .era-bar {
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      overflow: hidden;
+    }
+    .era-bar span {
+      display: block;
+      height: 100%;
+      width: 72%;
+      border-radius: 999px;
+      background: repeating-linear-gradient(-45deg, var(--color-first-light) 0 10px, #cfe84d 10px 20px);
+      background-size: 28px 28px;
+      animation: era-stripes 1s linear infinite;
+    }
+    @keyframes era-stripes {
+      to { background-position: 28px 0; }
+    }
+    .era-foot {
+      margin: 0.6rem 0 0;
+      font-size: 13px;
+      color: var(--color-muted-slate);
+    }
+
+    /* ---------- Game card ---------- */
+    .game-card {
+      scroll-margin-top: 110px;
+      padding: 1.25rem;
+      border-radius: 20px;
+      background: var(--color-off-white);
+      border: 1px solid var(--color-border);
+      box-shadow: 0 14px 34px rgba(0, 10, 40, 0.3);
+    }
+    .game-eyebrow {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--color-muted-slate);
+    }
+    .game-title {
+      font-family: var(--font-heading) !important;
+      font-size: clamp(24px, 3vw, 30px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: #ffffff;
+      margin: 0.35rem 0 0.4rem;
+    }
+    .game-title em {
+      font-family: 'Instrument Serif', serif;
+      font-weight: 400;
+      color: var(--color-first-light);
+    }
+    .game-sub {
+      margin: 0 0 1rem;
+      font-size: 14px;
+      color: var(--color-muted-slate);
+    }
+    .game-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .game-btn {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 800;
+      border-radius: 12px;
+      padding: 0.75rem 1.1rem;
+      cursor: pointer;
+      text-decoration: none;
+      line-height: 1.2;
+    }
+    .game-btn-primary {
+      background: var(--color-first-light);
+      color: var(--color-deep-knowing);
+      border: none;
+    }
+    .game-btn-ghost {
+      background: transparent;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+    }
+    .game-btn:focus-visible {
+      outline: 3px solid #ffffff;
+      outline-offset: 2px;
+    }
+    .game-hud {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.5rem;
+      font-weight: 800;
+      color: var(--color-first-light);
+      font-variant-numeric: tabular-nums;
+    }
+    .game-hint {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-muted-slate);
+    }
+    #sheep-canvas {
+      display: block;
+      width: 100%;
+      height: 170px;
+      border-radius: 14px;
+      background: linear-gradient(#001a4d, #002b7a);
+      touch-action: manipulation;
+      cursor: pointer;
+    }
+    .game-code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      background: var(--color-first-light);
+      color: var(--color-deep-knowing);
+      padding: 0.1rem 0.5rem;
+      border-radius: 8px;
+      font-size: 0.85em;
+      white-space: nowrap;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .era-bar span { animation: none; }
+    }
+    /* ---------- What's inside: sticky-note board ---------- */
+    .inside-section {
+      padding: 4rem 0;
+      border-top: 1px solid var(--color-border);
+      scroll-margin-top: 90px;
+    }
+    .inside-board {
+      position: relative;
+      background-color: #fbf8ef;
+      background-image: radial-gradient(rgba(0, 51, 153, 0.16) 1.2px, transparent 1.2px);
+      background-size: 22px 22px;
+      border-radius: 22px;
+      padding: clamp(1.5rem, 4vw, 3rem);
+      color: #001a4d;
+      box-shadow: 0 30px 60px rgba(0, 10, 40, 0.35);
+      transform: rotate(-0.4deg);
+    }
+    .board-tape {
+      position: absolute;
+      top: -14px;
+      width: 120px;
+      height: 30px;
+      background: rgba(228, 255, 90, 0.75);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    }
+    .board-tape-l { left: 8%; transform: rotate(-6deg); }
+    .board-tape-r { right: 8%; transform: rotate(5deg); }
+    .board-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .board-kicker {
+      font-family: 'Caveat', cursive;
+      font-size: 24px;
+      font-weight: 700;
+      color: #207e59;
+      display: inline-block;
+      transform: rotate(-2deg);
+    }
+    .board-title {
+      font-family: var(--font-heading) !important;
+      font-weight: 800;
+      font-size: clamp(40px, 6vw, 72px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: #001a4d;
+      margin: 0.1rem 0 0;
+      text-transform: lowercase;
+    }
+    .board-title mark {
+      color: #001a4d;
+      background: linear-gradient(transparent 55%, rgba(228, 255, 90, 0.95) 55%, rgba(228, 255, 90, 0.95) 92%, transparent 92%);
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-weight: 400;
+      padding: 0 0.1em;
+    }
+    .board-stamp {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #d6336c;
+      border: 2px solid #d6336c;
+      border-radius: 10px;
+      padding: 0.5rem 0.75rem;
+      transform: rotate(6deg);
+      text-align: center;
+      line-height: 1.5;
+      opacity: 0.85;
+    }
+    .board-sub {
+      margin: 0.75rem 0 2rem;
+      font-size: 15px;
+      color: #4a5878;
+    }
+    .notes-grid {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.75rem 1.25rem;
+    }
+    .note {
+      position: relative;
+      padding: 1.6rem 1.1rem 1.1rem;
+      border-radius: 4px 4px 18px 4px;
+      box-shadow: 0 10px 18px rgba(0, 10, 40, 0.14), 0 2px 4px rgba(0, 10, 40, 0.08);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .note:nth-child(4n+1) { transform: rotate(-2.2deg); }
+    .note:nth-child(4n+2) { transform: rotate(1.6deg); }
+    .note:nth-child(4n+3) { transform: rotate(-1deg); }
+    .note:nth-child(4n+4) { transform: rotate(2.4deg); }
+    .note:hover {
+      transform: rotate(0) translateY(-4px);
+      box-shadow: 0 18px 28px rgba(0, 10, 40, 0.2);
+    }
+    .note-tape {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      width: 64px;
+      height: 20px;
+      transform: translateX(-50%) rotate(-3deg);
+      background: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    .note-yellow { background: #fff27a; }
+    .note-pink   { background: #ffc9e0; }
+    .note-mint   { background: #bff2da; }
+    .note-lilac  { background: #dcd0ff; }
+    .note-peach  { background: #ffd9b3; }
+    .note-sky    { background: #c9e6ff; }
+    .note-lime   { background: #E4FF5A; }
+    .note-card {
+      background: #ffffff;
+      background-image: repeating-linear-gradient(transparent 0 25px, rgba(0, 51, 153, 0.12) 25px 26px);
+      border-left: 3px solid #ff8fab;
+    }
+    .note-amt {
+      display: inline-block;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 26px;
+      letter-spacing: -0.03em;
+      color: #001a4d;
+      background: linear-gradient(transparent 60%, rgba(255, 255, 255, 0.75) 60%, rgba(255, 255, 255, 0.75) 92%, transparent 92%);
+      font-variant-numeric: tabular-nums;
+    }
+    .note-name {
+      font-family: var(--font-heading) !important;
+      font-size: 17px !important;
+      font-weight: 800;
+      line-height: 1.2;
+      color: #001a4d !important;
+      margin: 0.3rem 0 0.6rem;
+    }
+    .note-why {
+      margin: 0;
+      font-size: 13.5px;
+      line-height: 1.45;
+      color: #24345a;
+    }
+    .note-why span {
+      display: block;
+      font-family: 'Caveat', cursive;
+      font-size: 19px;
+      font-weight: 700;
+      color: #d6336c;
+      margin-bottom: 0.1rem;
+    }
+    .note-rules {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 0.75rem;
+      font-family: 'Caveat', cursive;
+      font-size: 21px;
+      font-weight: 700;
+      line-height: 26px;
+      color: #001a4d;
+    }
+    .note-rules li::before {
+      content: "✓ ";
+      color: #207e59;
+    }
+    @media (max-width: 991px) {
+      .notes-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 420px) {
+      .notes-grid { gap: 1.5rem 0.9rem; }
+      .note { padding: 1.4rem 0.85rem 0.9rem; }
+      .note-amt { font-size: 22px; }
+      .note-name { font-size: 15px !important; }
+      .note-why { font-size: 12.5px; }
+      .note-why span { font-size: 16px; white-space: nowrap; }
+      .note-rules { font-size: 17px; line-height: 22px; }
+      .board-stamp { display: none; }
     }
   </style>
 </head>
@@ -1866,7 +2903,7 @@
   <nav class="navbar">
     <div class="container navbar-container">
       <a href="/" class="brand">
-        <img src="/logo.png" alt="SuperState" class="logo-img">
+        <img src="/logo-wordmark.png" alt="SuperState" class="logo-img">
       </a>
       <ul class="nav-links">
         <li><a href="/">Home</a></li>
@@ -1876,8 +2913,8 @@
         <li><a href="/pages/contact/">Contact</a></li>
       </ul>
       <div style="display: flex; align-items: center; gap: 1rem;">
-        <a href="#buy-section" class="btn btn-primary nav-cta">Order Now</a>
-        <button class="cart-toggle-btn" onclick="openCartDrawer()" style="background: transparent; border: none; cursor: pointer; position: relative; color: var(--color-deep-knowing); display: flex; align-items: center; justify-content: center; padding: 5px; outline: none;" aria-label="Open Cart">
+        <a href="#buy-section" class="btn btn-primary nav-cta">Pre-book</a>
+        <button class="cart-toggle-btn" onclick="openCartDrawer()" style="min-width: 44px; min-height: 44px; justify-content: center; background: transparent; border: none; cursor: pointer; position: relative; color: var(--color-deep-knowing); display: flex; align-items: center; justify-content: center; padding: 5px; outline: none;" aria-label="Open Cart">
           <svg style="width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 2;" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
           </svg>
@@ -1892,7 +2929,7 @@
   <div class="mobile-drawer">
     <div class="mobile-drawer-header">
       <span class="brand">
-        <img src="/logo.png" alt="SuperState" class="logo-img">
+        <img src="/logo-wordmark.png" alt="SuperState" class="logo-img">
       </span>
       <button class="close-drawer" aria-label="Close Menu">✕</button>
     </div>
@@ -1909,21 +2946,15 @@
   </div>
 
   <!-- MAIN PRODUCT SECTION -->
-  <section style="padding: 2.5rem 0 5rem 0;">
+  <section class="pdp-hero-section">
     <div class="container">
       <div class="pdp-grid">
         
         <!-- COLUMN 1: STICKY GALLERY (Left) -->
         <div class="pdp-gallery-column">
           <div class="pdp-gallery-viewport">
-            <img id="main-gallery-img" src="/assets/Product%20Image%201.png" alt="SuperState Dark Mode Product Hero">
-            
-            <button class="gallery-nav-btn prev" onclick="navigateGallery(-1)">❮</button>
-            <button class="gallery-nav-btn next" onclick="navigateGallery(1)">❯</button>
-          </div>
-          
-          <div class="gallery-thumbnails-row" id="gallery-thumbs-container">
-            <!-- Thumbnails generated dynamically by JS -->
+            <span class="hero-sticker" aria-hidden="true">coffee, but for sleep ☾</span>
+            <img id="main-gallery-img" src="/assets/sleep-well-box.webp" alt="SuperState Sleep Well dark chocolate ritual box" width="763" height="1172" fetchpriority="high">
           </div>
 
         </div>
@@ -1931,20 +2962,16 @@
         <!-- COLUMN 2: PURCHASING PANEL (Right) -->
         <div class="pdp-info-column" id="buy-section">
           
-          <h1 class="product-headline" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Dark Mode</h1>
+          <h1 class="product-headline" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Sleep Well</h1>
           
-          <div class="rating-badge-row" style="margin-bottom: 1.5rem;">
-            <div class="stars-glow">★★★★★</div>
-            <div class="rating-divider"></div>
-            <div class="rating-text">4.9 Rating (6 Reviews)</div>
-          </div>
+          <p class="pdp-subline">A dark chocolate drink for your evenings. Mix one sachet, sip it 30 minutes before bed.</p>
           
           <div class="pdp-price-row" style="margin-bottom: 0.25rem;">
-            <div class="pdp-price-current" id="pdp-top-price">₹1,495</div>
+            <div class="pdp-price-current" id="pdp-top-price">₹149.50</div>
             <div class="pdp-price-original" id="pdp-top-original" style="display: none;">₹1,495</div>
             <div class="pdp-price-badge" id="pdp-top-discount" style="display: none;">0% OFF</div>
           </div>
-          <div class="pdp-tax-note" style="margin-bottom: 2rem;">MRP (Inclusive of all taxes)</div>
+          <div class="pdp-tax-note" style="margin-bottom: 2rem;">pre-book price · pay today, ships with the next drop · incl. taxes</div>
           
           <!-- Selected Flavour (Organic Cacao Only) Hidden Element for DOM bindings -->
           <span id="selected-flavour-lbl" style="display: none;">Organic Cacao</span>
@@ -1954,35 +2981,35 @@
             <div style="margin-bottom: 0.75rem;">
               <span class="selector-label" style="margin-bottom: 0px; text-transform: none; font-size: 18px; font-family: var(--font-body); font-weight: 700; letter-spacing: normal;">Select Pack Size</span>
               <span id="selected-pack-lbl" style="display: none;">Pack Of 5</span>
-              <div style="font-size: 14px; color: #cbd5e1; font-weight: 500; margin-top: 2px; font-family: var(--font-body);">Which one is best for you?</div>
             </div>
             <div class="supply-pack-stack">
               
               <!-- Pack Of 5 (Active default) -->
-              <div class="pack-pill-card active" onclick="selectPack('Pack Of 5', 299, 299, 60, 0, this)">
+              <div class="pack-pill-card active" onclick="selectPack('Pack Of 5', 149.50, 299, 30, 50, this)">
                 <div style="display: flex; align-items: center; gap: 0.5rem; width: 100%;">
                   <span style="font-weight: 700; font-size: 16px; color: #000000; font-family: var(--font-body);">Pack Of 5</span>
                 </div>
-                <div style="font-weight: 700; font-size: 18px; color: #000000; margin-top: 0.25rem;">₹ 299</div>
-                <div style="font-size: 13px; color: #777777; margin-top: 0.15rem; font-weight: 500;">₹ 60/serve</div>
+                <div style="font-weight: 700; font-size: 18px; color: #000000; margin-top: 0.25rem;">₹ 149.50 <s class="pack-was">₹299</s></div>
+                <div style="font-size: 13px; color: #777777; margin-top: 0.15rem; font-weight: 500;">₹ 30/serve</div>
               </div>
               
               <!-- Pack Of 15 -->
-              <div class="pack-pill-card" onclick="selectPack('Pack Of 15', 900, 900, 60, 0, this)">
+              <div class="pack-pill-card" onclick="selectPack('Pack Of 15', 450, 900, 30, 50, this)">
                 <div style="display: flex; align-items: center; gap: 0.5rem; width: 100%;">
                   <span style="font-weight: 700; font-size: 16px; color: #000000; font-family: var(--font-body);">Pack Of 15</span>
                 </div>
-                <div style="font-weight: 700; font-size: 18px; color: #000000; margin-top: 0.25rem;">₹ 900</div>
-                <div style="font-size: 13px; color: #777777; margin-top: 0.15rem; font-weight: 500;">₹ 60/serve</div>
+                <div style="font-weight: 700; font-size: 18px; color: #000000; margin-top: 0.25rem;">₹ 450 <s class="pack-was">₹900</s></div>
+                <div style="font-size: 13px; color: #777777; margin-top: 0.15rem; font-weight: 500;">₹ 30/serve</div>
               </div>
 
               <!-- Pack Of 30 -->
-              <div class="pack-pill-card" onclick="selectPack('Pack Of 30', 1500, 1500, 50, 0, this)">
+              <div class="pack-pill-card" onclick="selectPack('Pack Of 30', 750, 1500, 25, 50, this)">
+                <span class="pack-best-tag">best value ✶</span>
                 <div style="display: flex; align-items: center; gap: 0.5rem; width: 100%;">
                   <span style="font-weight: 700; font-size: 16px; color: #000000; font-family: var(--font-body);">Pack Of 30</span>
                 </div>
-                <div style="font-weight: 700; font-size: 18px; color: #000000; margin-top: 0.25rem;">₹ 1,500</div>
-                <div style="font-size: 13px; color: #777777; margin-top: 0.15rem; font-weight: 500;">₹ 50/serve</div>
+                <div style="font-weight: 700; font-size: 18px; color: #000000; margin-top: 0.25rem;">₹ 750 <s class="pack-was">₹1,500</s></div>
+                <div style="font-size: 13px; color: #777777; margin-top: 0.15rem; font-weight: 500;">₹ 25/serve</div>
               </div>
               
             </div>
@@ -1996,735 +3023,280 @@
               <button type="button" onclick="incrementQty()" style="flex: 1; height: 100%; border: none; background: transparent; font-size: 22px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #000000; outline: none; transition: background-color 0.2s;">+</button>
             </div>
             
-            <button onclick="triggerAddToCart()" style="flex: 1; height: 50px; background-color: #000000; color: #ffffff; border: none; border-radius: 8px; font-size: 18px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: opacity 0.2s; outline: none; font-family: var(--font-body);">
-              Add To Cart
+            <button id="prebook-btn" onclick="prebookCheckout(this)" style="flex: 1; height: 50px; background-color: #000000; color: #ffffff; border: none; border-radius: 8px; font-size: 18px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: opacity 0.2s; outline: none; font-family: var(--font-body);">
+              Pre-book · 50% off
             </button>
           </div>
+
+          <a href="#win" class="win-link">not ready to pay? 🎮 <span>play a 20-second game for 20% off</span></a>
+
+          <ul class="pdp-facts-row">
+            <li>Secure payment by Razorpay</li>
+            <li>Free shipping in India</li>
+            <li>No melatonin</li>
+          </ul>
           
         </div>
-        
+
+        <!-- SOLD-OUT BAR (spans both columns on desktop) -->
+        <div class="era-bar-wrap">
+          <div class="era-card">
+            <div class="era-top">
+              <span class="era-badge">sold out era 💅</span>
+              <span class="era-batch">batch 01</span>
+            </div>
+            <p class="era-copy">ok so… batch 01 got <strong>absolutely cleared.</strong> y'all ate it up way faster than we planned 🫠 we took notes, made it <em>even better</em>, and the next drop is loading:</p>
+            <div class="era-progress">
+              <div class="era-bar" role="img" aria-label="Next drop loading"><span></span></div>
+              <p class="era-foot">hold your horses 🐎 steady, steady.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- EXTRAS: win-your-code game -->
+        <div class="pdp-extras">
+          <div class="game-card" id="win">
+            <!-- intro -->
+            <div class="game-state" data-state="intro">
+              <span class="game-eyebrow">not ready to trust us yet? fair 🤝</span>
+              <h3 class="game-title">wanna <em>win</em> your 20% off?</h3>
+              <p class="game-sub">help a sleepy sheep jump 10 alarms and the code is yours. 20 seconds, max.</p>
+              <div class="game-actions">
+                <button type="button" class="game-btn game-btn-primary" data-action="play">yes, let's play 🐑</button>
+                <button type="button" class="game-btn game-btn-ghost" data-action="skip">nah, just give me the code</button>
+              </div>
+            </div>
+
+            <!-- playing -->
+            <div class="game-state" data-state="play" hidden>
+              <div class="game-hud"><span id="game-score">0 / 10</span><span class="game-hint">tap · click · space to jump</span></div>
+              <canvas id="sheep-canvas" aria-label="Sheep jump game. Press space or tap to jump."></canvas>
+            </div>
+
+            <!-- lost -->
+            <div class="game-state" data-state="lost" hidden>
+              <h3 class="game-title">oop, the alarm got you ⏰</h3>
+              <p class="game-sub">so close. run it back?</p>
+              <div class="game-actions">
+                <button type="button" class="game-btn game-btn-primary" data-action="play">try again</button>
+                <button type="button" class="game-btn game-btn-ghost" data-action="skip">just give me the code</button>
+              </div>
+            </div>
+
+            <!-- reveal -->
+            <div class="game-state" data-state="reveal" hidden>
+              <span class="game-eyebrow" id="reveal-eyebrow">you did that ✨</span>
+              <h3 class="game-title">your code: <span class="game-code" id="game-code">FIRSTNIGHT20</span></h3>
+              <p class="game-sub">20% off when we launch. drop your details so we can ping you the second it's live.</p>
+              <div class="game-actions">
+                <button type="button" class="game-btn game-btn-primary" data-action="copy">copy code</button>
+                <a href="/pages/waitlist/" class="game-btn game-btn-ghost">save my spot →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- FULL-WIDTH PRODUCT DETAILS SECTION -->
-  <section class="pdp-full-details-section" style="padding: 4rem 0; background-color: var(--color-blue-tint); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
-    <div class="container">
-      
-      <!-- 1. Expected Sleep Benefits Grid (Icon-based circular layout) -->
-      <div class="benefits-checklist-full" style="margin-bottom: 4rem;">
-        <h3 style="font-family: var(--font-heading) !important; color: #ffffff; font-size: 24px; font-weight: 700; margin-bottom: 2.5rem; text-align: center;">Sleep Benefits</h3>
-        
-        <div class="benefits-icons-container">
-          
-          <!-- Benefit 1: Fall Asleep Faster -->
-          <div class="benefit-icon-card">
-            <div class="benefit-icon-circle">
-              <!-- Crescent moon and stars SVG -->
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#001a4d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="#001a4d" fill-opacity="0.12"></path>
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                <path d="M19 3l.5 1.2.7.3-.7.3-.5 1.2-.5-1.2-.7-.3.7-.3z" fill="#001a4d" stroke="none"></path>
-                <path d="M14 1.5l.3.7.7.2-.7.2-.3.7-.3-.7-.7-.2.7-.2z" fill="#001a4d" stroke="none"></path>
-              </svg>
-            </div>
-            <strong class="benefit-icon-title">Fall Asleep Faster</strong>
-          </div>
-          
-          <!-- Benefit 2: Stay Asleep Longer -->
-          <div class="benefit-icon-card">
-            <div class="benefit-icon-circle">
-              <!-- Clock and moon SVG -->
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#001a4d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10" fill="#001a4d" fill-opacity="0.08"></circle>
-                <polyline points="12 6 12 12 15 15"></polyline>
-                <path d="M17 9A3.5 3.5 0 0 1 13.5 5.5 3 3 0 0 0 17 9z" fill="#001a4d" stroke="none"></path>
-              </svg>
-            </div>
-            <strong class="benefit-icon-title">Stay Asleep Longer</strong>
-          </div>
-          
-          <!-- Benefit 3: Improve Deep Sleep Quality -->
-          <div class="benefit-icon-card">
-            <div class="benefit-icon-circle">
-              <!-- Pillow and zZ SVG -->
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#001a4d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="7" width="18" height="11" rx="2" fill="#001a4d" fill-opacity="0.12"></rect>
-                <rect x="3" y="7" width="18" height="11" rx="2"></rect>
-                <path d="M3 12.5h18M6 7v11M18 7v11" opacity="0.25"></path>
-                <!-- zZ -->
-                <path d="M14 2h3l-3 3h3" stroke-width="1.5"></path>
-                <path d="M10 2.5h1.5l-1.5 1.5h1.5" stroke-width="1"></path>
-              </svg>
-            </div>
-            <strong class="benefit-icon-title">Improve Deep Sleep Quality</strong>
-          </div>
-          
-          <!-- Benefit 4: Activate Alpha Waves -->
-          <div class="benefit-icon-card">
-            <div class="benefit-icon-circle">
-              <!-- Neural waveform brainwave SVG -->
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#001a4d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M2 12c2.5-4 4.5-4 7 0s4.5 4 7 0 4.5-4 7 0" opacity="0.3"></path>
-                <path d="M2 12c1.5 6 3.5 6 5 0s3-10 5 0 3.5 6 5 0 3-10 5 0" stroke-width="2.5"></path>
-              </svg>
-            </div>
-            <strong class="benefit-icon-title">Activate Alpha Waves</strong>
-          </div>
-          
-          <!-- Benefit 5: Support Natural Sleep Cycles -->
-          <div class="benefit-icon-card">
-            <div class="benefit-icon-circle">
-              <!-- Pillow in circular loop SVG -->
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#001a4d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="8" y="10" width="8" height="5" rx="1" fill="#001a4d" fill-opacity="0.12"></rect>
-                <rect x="8" y="10" width="8" height="5" rx="1"></rect>
-                <path d="M21 12a9 9 0 0 1-17 4.5l1-1.5"></path>
-                <path d="M3 12A9 9 0 0 1 20 7.5l-1 1.5"></path>
-                <polyline points="21.5 10 21 13 18 12"></polyline>
-                <polyline points="2.5 14 3 11 6 12"></polyline>
-              </svg>
-            </div>
-            <strong class="benefit-icon-title">Support Natural Sleep Cycles</strong>
-          </div>
-          
-          <!-- Benefit 6: Wake Up Refreshed -->
-          <div class="benefit-icon-card">
-            <div class="benefit-icon-circle">
-              <!-- Stretching sunburst rising figure SVG -->
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#001a4d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M6 7.5L5 6m14 1.5L19 6M12 2v2M3.5 12H2m20 0h-1.5" opacity="0.6"></path>
-                <circle cx="12" cy="11" r="2.5" fill="#001a4d" fill-opacity="0.15"></circle>
-                <circle cx="12" cy="11" r="2.5"></circle>
-                <path d="M6 18c0-3 3-4 6-4s6 1 6 4" fill="#001a4d" fill-opacity="0.1"></path>
-                <path d="M6 18c0-3 3-4 6-4s6 1 6 4M8.5 14.5l3.5-3 3.5 3"></path>
-              </svg>
-            </div>
-            <strong class="benefit-icon-title">Wake Up Refreshed</strong>
-          </div>
-          
-        </div>
-      </div>
-      
-      <!-- 2. Badges & WhatsApp link -->
-      <div class="paylater-badge-card" style="background-color: var(--color-off-white); border: 1.5px solid var(--color-border); border-radius: 16px; padding: 1.5rem; margin-bottom: 3.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);">
-        <div class="trust-badges-grid" style="display: flex; gap: 0.75rem; margin-bottom: 0;">
-          <div class="trust-badge-card" style="background-color: rgba(255,255,255,0.08); color: #ffffff; font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid rgba(255,255,255,0.1);">FREE SHIPPING</div>
-          <div class="trust-badge-card" style="background-color: rgba(255,255,255,0.08); color: #ffffff; font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid rgba(255,255,255,0.1);">COD AVAILABLE</div>
-          <div class="trust-badge-card" style="background-color: rgba(255,255,255,0.08); color: #ffffff; font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.05em; border: 1px solid rgba(255,255,255,0.1);">FAST DISPATCH</div>
-        </div>
-        <a href="https://wa.me/919567309388" target="_blank" class="clinical-query-link" style="display: inline-flex; align-items: center; font-size: 13px; font-weight: 700; color: var(--color-first-light); text-decoration: none; border-bottom: 2px solid var(--color-first-light); padding-bottom: 2px; transition: opacity 0.2s;">
-          Clinical Query? WhatsApp Scientist ↗
-        </a>
-      </div>
-
-      <!-- 3. PDP Details (Nutritional Supplement Facts, Shipping & Exclusions, Lab Certificates) -->
-      <div class="pdp-accordions-group" style="display: flex; flex-direction: column; gap: 1rem; width: 100%;">
-        
-        <!-- Accordion 1: Supplement Facts -->
-        <div class="pdp-accordion-item">
-          <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
-            <span>Nutritional Supplement Facts</span>
-            <span class="pdp-accordion-icon">+</span>
-          </div>
-          <div class="pdp-accordion-body">
-            <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--color-muted-slate); margin-bottom: 0.5rem; letter-spacing: 0.02em;">
-              Serving Size: 1 sachet (10g) | Servings Per Pack: Based on Selected Supply
-            </div>
-            <table class="supplement-table-3d">
-              <thead>
-                <tr>
-                  <th>Active Compound</th>
-                  <th>Weight Per Serve</th>
-                  <th>Clinical Standard</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Magnesium L-Threonate</td>
-                  <td>2,000 mg</td>
-                  <td>Brain-Penetrating Rest</td>
-                </tr>
-                <tr>
-                  <td>Magnesium Bisglycinate</td>
-                  <td>1,000 mg</td>
-                  <td>Bioavailable Muscle Calm</td>
-                </tr>
-                <tr>
-                  <td>Glycine</td>
-                  <td>3,000 mg</td>
-                  <td>Core Body Temperature Drop</td>
-                </tr>
-                <tr>
-                  <td>L-Theanine</td>
-                  <td>200 mg</td>
-                  <td>Alpha Wave Anxiety-Relief</td>
-                </tr>
-                <tr>
-                  <td>Apigenin (Chamomile Extract)</td>
-                  <td>50 mg</td>
-                  <td>Non-Addictive Sleep Onset</td>
-                </tr>
-                <tr>
-                  <td>Tart Cherry Extract</td>
-                  <td>500 mg</td>
-                  <td>Phyto-Melatonin Booster</td>
-                </tr>
-                <tr>
-                  <td>Raw Cacao Powder</td>
-                  <td>3,000 mg</td>
-                  <td>Flavonoid Metabolic Carrier</td>
-                </tr>
-              </tbody>
-            </table>
-            <div style="font-size: 11px; font-style: italic; color: var(--color-muted-slate); margin-top: 1rem; line-height: 1.4;">
-              *Consult your physician before starting if pregnant, nursing or on active prescription medication. Bedtime sequence only.
-            </div>
-          </div>
-        </div>
-        
-        <!-- Accordion 2: Shipping & Policy -->
-        <div class="pdp-accordion-item">
-          <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
-            <span>Shipping & Delivery Policies</span>
-            <span class="pdp-accordion-icon">+</span>
-          </div>
-          <div class="pdp-accordion-body">
-            <p style="margin-bottom: 0.5rem;"><strong>Nationwide Free Delivery:</strong> Free shipping is provided across India on all subscriptions and orders.</p>
-            <p style="margin-bottom: 0.5rem;"><strong>Dispatch Timings:</strong> Dispatches within 24-48 hours. Delivered directly in 5-6 business days.</p>
-            <p><strong>Payment Modes:</strong> Cash on Delivery (COD), UPI, and major cards supported seamlessly. 10-day no-questions-asked refund policy applies.</p>
-          </div>
-        </div>
-        
-        <!-- Accordion 3: What's Stripped Out -->
-        <div class="pdp-accordion-item">
-          <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
-            <span>Formulation Integrity Exclusions</span>
-            <span class="pdp-accordion-icon">+</span>
-          </div>
-          <div class="pdp-accordion-body">
-            <ul style="padding-left: 1.25rem; list-style-type: square;">
-              <li style="margin-bottom: 0.25rem;"><strong>No Proprietary Blends</strong>: We disclose the exact clinical weight of every single active ingredient.</li>
-              <li style="margin-bottom: 0.25rem;"><strong>No Synthetic Melatonin</strong>: Avoiding synthetic hormonal dependencies or heavy morning grogginess.</li>
-              <li style="margin-bottom: 0.25rem;"><strong>Zero Preservatives</strong>: Sealed in individual airtight sachets to maintain formulation stability.</li>
-              <li style="margin-bottom: 0.25rem;"><strong>Zero Artificial Flavors</strong>: Relying strictly on clean, rich unrefined organic raw cacao taste.</li>
-              <li style="margin-bottom: 0.25rem;"><strong>Gluten-Free, Dairy-Free, Soy-Free</strong> and 100% Vegan Certified.</li>
-            </ul>
-          </div>
-        </div>
-        
-      </div>
-
-    </div>
-  </section>
-
-  <div class="pdp-marquee-bar">
-    <div class="pdp-marquee-content">
-      DEEP RESTORATIVE SLEEP · MAGNESIUM L-THREONATE · WAKE UP SHARP · NO PROPRIETARY BLENDS · CLINICALLY STUDIED DOSAGES · ZERO PRESERVATIVES · VEGAN CERTIFIED · 100% RAW CACAO BASE · DEEP RESTORATIVE SLEEP · MAGNESIUM L-THREONATE · WAKE UP SHARP · NO PROPRIETARY BLENDS · CLINICALLY STUDIED DOSAGES · ZERO PRESERVATIVES · VEGAN CERTIFIED · 100% RAW CACAO BASE ·
+  <!-- TICKER -->
+  <div class="vibe-ticker-clip" aria-hidden="true">
+  <div class="vibe-ticker">
+    <div class="vibe-ticker-track">
+      <span>batch 01 sold out</span><i>✶</i><span>coffee for sleep</span><i>☾</i><span>no melatonin</span><i>✶</i><span>real dark chocolate</span><i>☾</i><span>30 min before bed</span><i>✶</i>
+      <span>batch 01 sold out</span><i>✶</i><span>coffee for sleep</span><i>☾</i><span>no melatonin</span><i>✶</i><span>real dark chocolate</span><i>☾</i><span>30 min before bed</span><i>✶</i>
     </div>
   </div>
+  </div>
 
-  <!-- SOMATIC MUSCLE RELIEF (MAGNESIUM FOCUS) -->
-  <section class="rhythm-section" style="background-color: var(--color-off-white); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); padding: 4.5rem 0;">
-    <div class="container text-center" style="max-width: 1400px; margin: 0 auto; padding: 0 2.5rem;">
-      <span class="section-eyebrow" style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--color-first-light); letter-spacing: 0.15em; display: block; margin-bottom: 0.75rem;">SOMATIC MUSCLE RELIEF</span>
-      <h2 class="section-title" style="font-size: 38px; line-height: 1.2; color: #ffffff; margin-bottom: 1.5rem; font-family: var(--font-heading) !important; font-weight: 700 !important;">Not just for sleep. Crafted for physical relief.</h2>
-      <p class="section-desc" style="font-size: 16px; line-height: 1.7; color: var(--color-muted-slate); margin-bottom: 3.5rem; max-width: 800px; margin-left: auto; margin-right: auto; font-weight: 500;">
-        Muscle cramping, menstrual back fatigue, and senior leg spasms can completely ruin your nightly rest. Most standard sleep products ignore the body. 
-        <strong>Dark Mode</strong> does the opposite: by introducing a massive dose of highly bioavailable Magnesium Bisglycinate, it works directly on your skeletal muscle cells to ease cramping, halt period contractions, and soothe older adults' nighttime leg pain.
-      </p>
-      
-      <div class="rhythm-timeline" style="margin-top: 3.5rem; text-align: left; gap: 2.5rem;">
-        
-        <!-- Card 1: Period Relief -->
-        <div class="timeline-card" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 24px; padding: 2.5rem; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.06);" onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 16px 36px rgba(0, 51, 153, 0.08), 0 0 15px rgba(228, 255, 90, 0.2)'; this.style.borderColor='var(--color-first-light)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.06)'; this.style.borderColor='#e2e8f0'">
-          <div style="font-size: 11px; font-weight: 800; color: #003399; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem;">FOR MENSTRUAL REST</div>
-          <h3 style="font-size: 22px; color: #001a4d; font-weight: 750; margin-bottom: 0.75rem; font-family: var(--font-heading) !important; letter-spacing: -0.015em;">Relieve Period Cramps</h3>
-          <p style="font-size: 14px; line-height: 1.65; color: #475569; margin: 0; font-weight: 500;">
-            Menstrual pain is caused by spasms in smooth muscle tissues that trigger nightly distress. High-dose Magnesium Bisglycinate relaxes these muscle fibers, significantly dropping lower-back fatigue and physical contractions to clear your path to deep, uninterrupted sleep.
-          </p>
-        </div>
-        
-        <!-- Card 2: Older Adults -->
-        <div class="timeline-card" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 24px; padding: 2.5rem; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.06);" onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 16px 36px rgba(0, 51, 153, 0.08), 0 0 15px rgba(228, 255, 90, 0.2)'; this.style.borderColor='var(--color-first-light)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.06)'; this.style.borderColor='#e2e8f0'">
-          <div style="font-size: 11px; font-weight: 800; color: #003399; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem;">FOR SENIOR NOCTURNAL COMFORT</div>
-          <h3 style="font-size: 22px; color: #001a4d; font-weight: 750; margin-bottom: 0.75rem; font-family: var(--font-heading) !important; letter-spacing: -0.015em;">Stop Nighttime Leg Cramps</h3>
-          <p style="font-size: 14px; line-height: 1.65; color: #475569; margin: 0; font-weight: 500;">
-            Older adults frequently suffer from sudden, painful leg cramps and twitching muscles during deep sleep. Magnesium Bisglycinate regulates calcium flow and nerve signals, stopping nighttime spasms so seniors can cycle peacefully into deep, restorative slow-wave sleep.
-          </p>
-        </div>
-        
-        <!-- Card 3: Somatic Tension -->
-        <div class="timeline-card" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 24px; padding: 2.5rem; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.06);" onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 16px 36px rgba(0, 51, 153, 0.08), 0 0 15px rgba(228, 255, 90, 0.2)'; this.style.borderColor='var(--color-first-light)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.06)'; this.style.borderColor='#e2e8f0'">
-          <div style="font-size: 11px; font-weight: 800; color: #003399; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem;">FOR SOMATIC HEALING & REM</div>
-          <h3 style="font-size: 22px; color: #001a4d; font-weight: 750; margin-bottom: 0.75rem; font-family: var(--font-heading) !important; letter-spacing: -0.015em;">Relax Somatic Tension</h3>
-          <p style="font-size: 14px; line-height: 1.65; color: #475569; margin: 0; font-weight: 500;">
-            Daily stress and post-workout soreness lock muscle cells in a contracted state, keeping your body tense. Magnesium blocks excess calcium, letting muscle fibers fully stretch and drop in temperature to trigger immediate physical rest, delta waves, and overnight recovery.
-          </p>
-        </div>
+  <!-- MANIFESTO -->
+  <section class="manifesto">
+    <div class="container manifesto-inner">
+      <span class="manifesto-tag">real talk ✶</span>
+      <p class="manifesto-big">sleep is the <em class="marker">best supplement</em> in the whole world.</p>
+      <p class="manifesto-mid">there's almost nothing a good night's sleep can't fix.</p>
+      <p class="manifesto-soft">but deadlines, doomscrolling and 2am overthinking don't always let you have that luxury.</p>
+      <ul class="manifesto-chips" aria-hidden="true">
+        <li>📧 deadlines</li>
+        <li>📱 doomscrolling</li>
+        <li>🧠 2am overthinking</li>
+        <li>☕ one coffee too many</li>
+      </ul>
+      <div class="manifesto-close-row">
+        <p class="manifesto-close">so, <em>sleep well</em><br>with superstate<span class="moon"> ☾</span></p>
+        <span class="manifesto-sticker" aria-hidden="true">coffee, but for sleep.</span>
       </div>
     </div>
   </section>
 
-  <!-- THE MELATONIN-FREE PROMISE -->
-  <section class="personas-section" style="padding: 4.5rem 0; background-color: var(--color-off-white); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+  <!-- WHAT'S INSIDE: sticky-note board -->
+  <section class="inside-section" id="inside">
     <div class="container">
-      <div class="text-center" style="max-width: 700px; margin: 0 auto 4rem;">
-        <span class="section-eyebrow" style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--color-first-light); letter-spacing: 0.15em; display: block; margin-bottom: 0.75rem;">100% NON-HABIT FORMING</span>
-        <h2 class="section-title" style="font-size: 38px; color: #ffffff; font-family: var(--font-heading) !important; font-weight: 700 !important;">The Melatonin-Free Promise.</h2>
-        <p class="section-desc" style="font-size: 15.5px; color: var(--color-muted-slate); line-height: 1.65; margin-top: 1rem; font-weight: 500;">
-          Many sleep products rely on synthetic melatonin which can disrupt natural endocrine pathways, suppress REM sleep, and lead to morning drowsiness. We take the opposite approach.
-        </p>
-      </div>
-      
-      <div class="personas-grid">
-        <!-- Column 1: Melatonin -->
-        <div style="background: linear-gradient(135deg, #18090b 0%, #291014 100%); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 28px; padding: 3rem 2.5rem; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);" onmouseover="this.style.transform='translateY(-6px)'; this.style.borderColor='rgba(239, 68, 68, 0.7)'; this.style.boxShadow='0 20px 50px rgba(239, 68, 68, 0.2)';" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(239, 68, 68, 0.35)'; this.style.boxShadow='0 10px 40px rgba(0, 0, 0, 0.45)';">
+      <div class="inside-board">
+        <span class="board-tape board-tape-l" aria-hidden="true"></span>
+        <span class="board-tape board-tape-r" aria-hidden="true"></span>
+
+        <div class="board-head">
           <div>
-            <h3 style="font-size: 24px; color: #f87171; font-weight: 800; margin-bottom: 1.25rem; font-family: var(--font-heading) !important; letter-spacing: -0.02em;">Synthetic Melatonin</h3>
-            <p style="font-size: 15px; line-height: 1.75; color: #cbd5e1; margin-bottom: 1.5rem; font-weight: 500;">
-              Forces your brain into a state of artificial sedation by flooding your hormone receptors. Over time, this down-regulates your body's natural production, creating chemical dependencies, vivid nightmares, and heavy morning "grogginess."
-            </p>
+            <span class="board-kicker">the whole recipe. no secrets.</span>
+            <h2 class="board-title">what's <mark>inside</mark></h2>
           </div>
-          <div style="font-size: 11px; font-weight: 800; color: #f87171; text-transform: uppercase; letter-spacing: 0.1em; border-top: 1px solid rgba(239, 68, 68, 0.15); padding-top: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
-            <span style="display: inline-block; width: 6px; height: 6px; background-color: #f87171; border-radius: 50%;"></span>
-            RISK: HORMONE DISRUPTION & TOLERANCE
-          </div>
+          <span class="board-stamp">7 ingredients<br>0 proprietary blends</span>
         </div>
-        
-        <!-- Column 2: Dark Mode -->
-        <div style="background: linear-gradient(135deg, #020914 0%, #061229 100%); border: 2.5px solid var(--color-first-light); border-radius: 28px; padding: 3rem 2.5rem; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 12px 45px rgba(228, 255, 90, 0.15);" onmouseover="this.style.transform='translateY(-6px)'; this.style.borderColor='var(--color-first-light)'; this.style.boxShadow='0 22px 55px rgba(228, 255, 90, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--color-first-light)'; this.style.boxShadow='0 12px 45px rgba(228, 255, 90, 0.15)';">
-          <div>
-            <h3 style="font-size: 24px; color: var(--color-first-light); font-weight: 800; margin-bottom: 1.25rem; font-family: var(--font-heading) !important; letter-spacing: -0.02em; text-shadow: 0 0 10px rgba(228, 255, 90, 0.15);">The Dark Mode Approach</h3>
-            <p style="font-size: 15px; line-height: 1.75; color: #ffffff; margin-bottom: 1.5rem; font-weight: 500;">
-              Rather than introducing hormones, Dark Mode feeds your nervous system the vital raw minerals and amino acids (Magnesium Bisglycinate + L-Theanine + L-Glycine) it uses to naturally switch itself off. This supports your natural sleep cycles so you cycle peacefully into deep rest and wake up completely clean.
-            </p>
-          </div>
-          <div style="font-size: 11px; font-weight: 800; color: var(--color-first-light); text-transform: uppercase; letter-spacing: 0.1em; border-top: 1px solid rgba(228, 255, 90, 0.15); padding-top: 1.5rem; display: flex; align-items: center; gap: 0.5rem; text-shadow: 0 0 8px rgba(228, 255, 90, 0.15);">
-            <span style="display: inline-block; width: 6px; height: 6px; background-color: var(--color-first-light); border-radius: 50%; box-shadow: 0 0 6px var(--color-first-light);"></span>
-            BENEFIT: ENDOCRINE SYSTEM INTEGRITY & 100% RECOVERY
-          </div>
-        </div>
+        <p class="board-sub">every amount, per 10 g sachet. scribbled notes included 👇</p>
+
+        <ul class="notes-grid">
+        <li class="note note-yellow">
+          <span class="note-tape" aria-hidden="true"></span>
+          <span class="note-amt">3,000 mg</span>
+          <h3 class="note-name">organic raw cacao</h3>
+          <p class="note-why"><span>why it’s here →</span> the base. real dark chocolate, not “chocolate flavour”. the bit that makes this a treat 🍫</p>
+        </li>
+        <li class="note note-pink">
+          <span class="note-tape" aria-hidden="true"></span>
+          <span class="note-amt">3,000 mg</span>
+          <h3 class="note-name">glycine</h3>
+          <p class="note-why"><span>why it’s here →</span> an amino acid your body already makes. tastes lightly sweet, which is a nice bonus.</p>
+        </li>
+        <li class="note note-mint">
+          <span class="note-tape" aria-hidden="true"></span>
+          <span class="note-amt">2,000 mg</span>
+          <h3 class="note-name">magnesium L-threonate</h3>
+          <p class="note-why"><span>why it’s here →</span> magnesium bound to threonate. the fancy form, and we’re not shy about the dose.</p>
+        </li>
+        <li class="note note-lilac">
+          <span class="note-tape" aria-hidden="true"></span>
+          <span class="note-amt">1,000 mg</span>
+          <h3 class="note-name">magnesium bisglycinate</h3>
+          <p class="note-why"><span>why it’s here →</span> magnesium paired with glycine. we used two forms of magnesium, not one.</p>
+        </li>
+        <li class="note note-peach">
+          <span class="note-tape" aria-hidden="true"></span>
+          <span class="note-amt">500 mg</span>
+          <h3 class="note-name">tart cherry extract</h3>
+          <p class="note-why"><span>why it’s here →</span> from tart cherries. a little fruity edge hiding under the chocolate 🍒</p>
+        </li>
+        <li class="note note-sky">
+          <span class="note-tape" aria-hidden="true"></span>
+          <span class="note-amt">200 mg</span>
+          <h3 class="note-name">L-theanine</h3>
+          <p class="note-why"><span>why it’s here →</span> found naturally in tea leaves. yes, the same stuff in your chai ☕</p>
+        </li>
+        <li class="note note-lime">
+          <span class="note-tape" aria-hidden="true"></span>
+          <span class="note-amt">50 mg</span>
+          <h3 class="note-name">apigenin</h3>
+          <p class="note-why"><span>why it’s here →</span> a compound found in chamomile, the OG bedtime tea 🌼</p>
+        </li>
+        <li class="note note-card">
+          <span class="note-tape" aria-hidden="true"></span>
+          <h3 class="note-name">rules we made for ourselves</h3>
+          <ul class="note-rules">
+            <li>every amount on the label</li>
+            <li>no proprietary blends</li>
+            <li>no melatonin</li>
+          </ul>
+          <p class="note-why">full ingredient + allergen list is printed on the pack 📦</p>
+        </li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- THE SCIENCE STRIPPED BARE -->
-  <section class="science-section">
-    <div class="container">
-      <div class="text-center">
-        <span class="section-eyebrow">THE SCIENCE STRIPPED BARE</span>
-        <h2 class="section-title">Every dose has clinical logic.</h2>
-        <p class="section-desc">
-          No hidden proprietary blends. We disclose the exact clinical weight of every active compound.
-        </p>
+  <!-- HOW TO USE: THE 10PM RITUAL -->
+  <section class="ritual" id="how-to-use">
+    <div class="container ritual-grid">
+      <div class="ritual-video-wrap">
+        <video class="ritual-video" src="/assets/video/ritual.mp4" poster="/assets/video/ritual-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <span class="ritual-chip">● now playing: wind-down.mp4</span>
       </div>
-      <style>
-        .clinical-ingredients-container {
-          max-width: 1100px;
-          margin: 3.5rem auto 0;
-        }
-        .clinical-ingredients-row {
-          display: flex;
-          justify-content: center;
-          gap: 2rem 2.5rem;
-          flex-wrap: wrap;
-        }
-        .clinical-ingredients-row.row-top {
-          margin-bottom: 3rem;
-        }
-        .ingredient-clinical-card {
-          flex: 0 1 230px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-        }
-        .ingredient-img-box {
-          width: 190px;
-          height: 190px;
-          background-color: #ffffff;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          overflow: hidden;
-          margin-bottom: 1.25rem;
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 255, 255, 0.1);
-          border: 1px solid rgba(255, 255, 255, 0.15);
-          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
-        }
-        .ingredient-img-box img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .ingredient-clinical-card:hover .ingredient-img-box {
-          transform: translateY(-8px);
-          box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 15px rgba(228, 255, 90, 0.15);
-        }
-        .ingredient-clinical-card:hover .ingredient-img-box img {
-          transform: scale(1.05);
-        }
-        .ingredient-title-label {
-          font-family: var(--font-heading) !important;
-          font-size: 20px;
-          font-weight: 750;
-          color: #ffffff;
-          margin-top: 0px;
-          margin-bottom: 0.5rem;
-          letter-spacing: -0.015em;
-        }
-        .ingredient-desc-label {
-          font-family: var(--font-body);
-          font-size: 13.5px;
-          line-height: 1.5;
-          color: #cbd5e1;
-          max-width: 220px;
-          margin: 0;
-          font-weight: 500;
-        }
-        @media (max-width: 768px) {
-          .clinical-ingredients-row {
-            gap: 3rem 1.5rem !important;
-          }
-          .ingredient-clinical-card {
-            flex: 0 1 45% !important;
-          }
-        }
-        @media (max-width: 480px) {
-          .ingredient-clinical-card {
-            flex: 0 1 100% !important;
-            max-width: 280px;
-          }
-        }
-      </style>
 
-      <div class="clinical-ingredients-container">
-        <!-- Top Row (4 Items) -->
-        <div class="clinical-ingredients-row row-top">
-          <!-- Ingredient 1: Magnesium L-Threonate -->
-          <div class="ingredient-clinical-card">
-            <div class="ingredient-img-box">
-              <img src="/assets/magnesium_threonate_watchglass.png" alt="Magnesium L-Threonate">
-            </div>
-            <h3 class="ingredient-title-label">Magnesium L-Threonate</h3>
-            <div style="font-size: 11px; font-weight: 800; background: rgba(228, 255, 90, 0.15); color: var(--color-first-light); padding: 3px 10px; border-radius: 12px; display: inline-block; margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">2,000mg Dosage</div>
-            <p class="ingredient-desc-label">Quiets the central nervous system, helping you enter deep, restorative delta wave sleep.</p>
-          </div>
-          
-          <!-- Ingredient 2: Magnesium Bisglycinate -->
-          <div class="ingredient-clinical-card">
-            <div class="ingredient-img-box">
-              <img src="/assets/magnesium_bisglycinate_watchglass.png" alt="Magnesium Bisglycinate">
-            </div>
-            <h3 class="ingredient-title-label">Magnesium Bisglycinate</h3>
-            <div style="font-size: 11px; font-weight: 800; background: rgba(228, 255, 90, 0.15); color: var(--color-first-light); padding: 3px 10px; border-radius: 12px; display: inline-block; margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">1,000mg Dosage</div>
-            <p class="ingredient-desc-label">Relaxes your skeletal muscles, prevents nighttime cramps or tension, and drops body temp.</p>
-          </div>
-          
-          <!-- Ingredient 3: L-Theanine -->
-          <div class="ingredient-clinical-card">
-            <div class="ingredient-img-box" style="background-color: transparent; box-shadow: none; border: none;">
-              <img src="/assets/l_theanine_leaves.png" alt="L-Theanine" style="object-fit: contain;">
-            </div>
-            <h3 class="ingredient-title-label">L-Theanine</h3>
-            <div style="font-size: 11px; font-weight: 800; background: rgba(228, 255, 90, 0.15); color: var(--color-first-light); padding: 3px 10px; border-radius: 12px; display: inline-block; margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">200mg Dosage</div>
-            <p class="ingredient-desc-label">Quiets evening anxiety, racing thoughts, and mental chatter—without causing daytime sleepiness.</p>
-          </div>
-          
-          <!-- Ingredient 4: Organic Cocoa Base -->
-          <div class="ingredient-clinical-card">
-            <div class="ingredient-img-box">
-              <img src="/assets/cocoa_powder_watchglass.png" alt="Organic Raw Cocoa">
-            </div>
-            <h3 class="ingredient-title-label">Organic Raw Cocoa</h3>
-            <div style="font-size: 11px; font-weight: 800; background: rgba(228, 255, 90, 0.15); color: var(--color-first-light); padding: 3px 10px; border-radius: 12px; display: inline-block; margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">3,000mg Dosage</div>
-            <p class="ingredient-desc-label">Flavor-rich carrier base packed with dietary flavonoids that maximize bio-absorption rates.</p>
-          </div>
-        </div>
-        
-        <!-- Bottom Row (3 Items) -->
-        <div class="clinical-ingredients-row">
-          <!-- Ingredient 5: Apigenin -->
-          <div class="ingredient-clinical-card">
-            <div class="ingredient-img-box" style="background-color: transparent; box-shadow: none; border: none;">
-              <img src="/assets/apigenin.png" alt="Apigenin" style="object-fit: contain;">
-            </div>
-            <h3 class="ingredient-title-label">Apigenin</h3>
-            <div style="font-size: 11px; font-weight: 800; background: rgba(228, 255, 90, 0.15); color: var(--color-first-light); padding: 3px 10px; border-radius: 12px; display: inline-block; margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">50mg Dosage</div>
-            <p class="ingredient-desc-label">Binds to specific GABA receptors in the brain to trigger mental relaxation.</p>
-          </div>
-          
-          <!-- Ingredient 6: Tart Cherry Extract -->
-          <div class="ingredient-clinical-card">
-            <div class="ingredient-img-box" style="background-color: transparent; box-shadow: none; border: none;">
-              <img src="/assets/tart_cherry.png" alt="Tart Cherry Extract" style="object-fit: contain;">
-            </div>
-            <h3 class="ingredient-title-label">Tart Cherry Extract</h3>
-            <div style="font-size: 11px; font-weight: 800; background: rgba(228, 255, 90, 0.15); color: var(--color-first-light); padding: 3px 10px; border-radius: 12px; display: inline-block; margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">500mg Dosage</div>
-            <p class="ingredient-desc-label">Rich in organic phyto-melatonin, promoting a longer, more structured sleep cycle.</p>
-          </div>
-          
-          <!-- Ingredient 7: Glycine -->
-          <div class="ingredient-clinical-card">
-            <div class="ingredient-img-box">
-              <img src="/assets/glycine_watchglass.png" alt="Glycine">
-            </div>
-            <h3 class="ingredient-title-label">Glycine</h3>
-            <div style="font-size: 11px; font-weight: 800; background: rgba(228, 255, 90, 0.15); color: var(--color-first-light); padding: 3px 10px; border-radius: 12px; display: inline-block; margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">3,000mg Dosage</div>
-            <p class="ingredient-desc-label">Decreases core body heat, operating as a biological signal to trigger immediate sleep onset.</p>
-          </div>
-        </div>
+      <div class="ritual-copy">
+        <span class="manifesto-tag">how to use</span>
+        <h2 class="ritual-title">your <em>10pm</em> ritual.</h2>
+        <p class="ritual-lead">four steps. zero effort. it's giving main character bedtime.</p>
+
+        <ol class="ritual-steps">
+          <li>
+            <time>9:30 pm</time>
+            <div><strong>rip it.</strong><p>tear open one sachet. that's one serving.</p></div>
+          </li>
+          <li>
+            <time>9:31 pm</time>
+            <div><strong>stir it.</strong><p>into a mug of warm milk or water.</p></div>
+          </li>
+          <li>
+            <time>9:35 pm</time>
+            <div><strong>sip it slow.</strong><p>lights low, phone face-down, candle optional.</p></div>
+          </li>
+          <li>
+            <time>10:00 pm</time>
+            <div><strong>lights out.</strong><p>that's it. same time tomorrow?</p></div>
+          </li>
+        </ol>
       </div>
     </div>
   </section>
 
-  <!-- 3D SIDE-BY-SIDE COMPARISON TABLE -->
-  <section class="comp-section">
-    <div class="container">
-      <div class="text-center">
-        <h2 class="section-title">Why it beats regular supplements.</h2>
-      </div>
-      
-      <div class="comp-table-container">
-        <table class="comp-table-premium">
-          <thead>
-            <tr>
-              <th>Performance Standard</th>
-              <th>SuperState Dark Mode</th>
-              <th>Generic Magnesium</th>
-              <th>Synthetic Melatonin</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Crosses Blood-Brain Barrier?</td>
-              <td><span class="comp-status-check">✓</span> <span style="font-size: 11px; display: block; color: var(--color-root-state);">(L-Threonate)</span></td>
-              <td><span class="comp-status-cross">✗</span> <span style="font-size: 11px; display: block; color: var(--color-muted-slate);">(Insoluble oxides)</span></td>
-              <td><span class="comp-status-cross">✗</span> <span style="font-size: 11px; display: block; color: var(--color-muted-slate);">(Hormone only)</span></td>
-            </tr>
-            <tr>
-              <td>100% Disclosed Formulation?</td>
-              <td><span class="comp-status-check">✓</span> <span style="font-size: 11px; display: block; color: var(--color-root-state);">(Zero hidden blends)</span></td>
-              <td><span class="comp-status-cross">✗</span> <span style="font-size: 11px; display: block; color: var(--color-muted-slate);">(Proprietary mix)</span></td>
-              <td><span class="comp-status-cross">✗</span> <span style="font-size: 11px; display: block; color: var(--color-muted-slate);">(Hidden binders)</span></td>
-            </tr>
-            <tr>
-              <td>Delicious Bedtime Ritual?</td>
-              <td><span class="comp-status-check">✓</span> <span style="font-size: 11px; display: block; color: var(--color-root-state);">(Warm Cocoa)</span></td>
-              <td><span class="comp-status-cross">✗</span> <span style="font-size: 11px; display: block; color: var(--color-muted-slate);">(Boring pills)</span></td>
-              <td><span class="comp-status-cross">✗</span> <span style="font-size: 11px; display: block; color: var(--color-muted-slate);">(Chalky tablets)</span></td>
-            </tr>
-            <tr>
-              <td>Zero Next-Day Dependency?</td>
-              <td><span class="comp-status-check">✓</span> <span style="font-size: 11px; display: block; color: var(--color-root-state);">(100% natural)</span></td>
-              <td><span class="comp-status-check">✓</span> <span style="font-size: 11px; display: block; color: var(--color-root-state);">(Safe mineral)</span></td>
-              <td><span class="comp-status-cross">✗</span> <span style="font-size: 11px; display: block; color: var(--color-muted-slate);">(High tolerance)</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
+  <!-- FAQ -->
+  <section class="simple-section">
+    <div class="container simple-container">
+      <h2 class="simple-title">Questions</h2>
+      <div class="pdp-accordions-group">
 
-  <!-- CUSTOMER TESTIMONIALS -->
-  <section class="reviews-section">
-    <div class="container">
-      <div class="text-center">
-        <span class="section-eyebrow">MEMBER REVIEWS</span>
-        <h2 class="section-title">Real feedback. Honest rest.</h2>
-        <p class="section-desc">
-          How SuperState is helping high performers, builders, and athletes optimize their nightly recovery.
-        </p>
-      </div>
-      
-      <div class="reviews-grid">
-        <!-- Review 1 -->
-        <div class="review-card-3d">
-          <div>
-            <div class="review-meta-row">
-              <div class="review-stars">★★★★★</div>
-              <div class="review-verified-badge">Verified Buyer</div>
-            </div>
-            <p class="review-quote-body">
-              "I used to lie awake for hours with my mind racing about code deployment pipelines and next-day standups. Since making Dark Mode my 10 PM dark chocolate ritual, the wind-down is effortless. I drift off in minutes and wake up completely clear-headed at 7 AM with zero morning brain fog."
-            </p>
+        <div class="pdp-accordion-item">
+          <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
+            <span>Does it contain melatonin?</span>
+            <span class="pdp-accordion-icon">+</span>
           </div>
-          <div class="review-author-block">
-            <div class="review-author-name">Aditya R., 28</div>
-            <div class="review-author-sub">Software Engineer · Bangalore</div>
-          </div>
-        </div>
-        
-        <!-- Review 2 -->
-        <div class="review-card-3d">
-          <div>
-            <div class="review-meta-row">
-              <div class="review-stars">★★★★★</div>
-              <div class="review-verified-badge">Verified Buyer</div>
-            </div>
-            <p class="review-quote-body">
-              "As a startup founder, my daily cortisol and stress levels are constantly through the roof. I absolutely hated taking generic melatonin pills because they gave me a heavy, groggy hangover the next morning. Dark Mode is a total game-changer. Quietens the mental chatter and helps me wake up 100% charged."
-            </p>
-          </div>
-          <div class="review-author-block">
-            <div class="review-author-name">Sneha M., 31</div>
-            <div class="review-author-sub">Startup Founder · Mumbai</div>
+          <div class="pdp-accordion-body">
+            No. There is no melatonin and no other hormone in Sleep Well. The full list of ingredients is above.
           </div>
         </div>
 
-        <!-- Review 3 -->
-        <div class="review-card-3d">
-          <div>
-            <div class="review-meta-row">
-              <div class="review-stars">★★★★★</div>
-              <div class="review-verified-badge">Verified Buyer</div>
-            </div>
-            <p class="review-quote-body">
-              "I dreaded my periods because of lower back fatigue and intense cramps that made it impossible to sleep. A friend recommended Dark Mode for the high Magnesium Bisglycinate dose. It acts like a warm physical hug—relaxing my muscle spasms completely so I can sleep restfully throughout the night."
-            </p>
+        <div class="pdp-accordion-item">
+          <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
+            <span>Who should check with a doctor first?</span>
+            <span class="pdp-accordion-icon">+</span>
           </div>
-          <div class="review-author-block">
-            <div class="review-author-name">Pooja K., 26</div>
-            <div class="review-author-sub">Dancer · New Delhi</div>
+          <div class="pdp-accordion-body">
+            Please speak to your doctor before using it if you are pregnant or breastfeeding, take prescription medicine, or have a medical condition. Not for children.
           </div>
         </div>
 
-        <!-- Review 4 -->
-        <div class="review-card-3d">
-          <div>
-            <div class="review-meta-row">
-              <div class="review-stars">★★★★★</div>
-              <div class="review-verified-badge">Verified Buyer</div>
-            </div>
-            <p class="review-quote-body">
-              "At 64, sudden, painful leg cramps in the middle of the night were ruining my sleep. Since drinking this cacao ritual every night, my nighttime leg spasms have stopped entirely. It's safe, delicious, and helps me wake up completely refreshed."
-            </p>
+        <div class="pdp-accordion-item">
+          <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
+            <span>How does pre-booking work?</span>
+            <span class="pdp-accordion-icon">+</span>
           </div>
-          <div class="review-author-block">
-            <div class="review-author-name">Ramesh V., 64</div>
-            <div class="review-author-sub">Retired Professor · Pune</div>
+          <div class="pdp-accordion-body">
+            Pick your pack and pay today at 50% off (UPI or card, secured by Razorpay). Pick the 30-night pack and you also get a SuperState member card. Your order ships with the next drop. We'll WhatsApp you the dispatch date, and shipping is free across India.
           </div>
         </div>
 
-        <!-- Review 5 -->
-        <div class="review-card-3d">
-          <div>
-            <div class="review-meta-row">
-              <div class="review-stars">★★★★★</div>
-              <div class="review-verified-badge">Verified Buyer</div>
-            </div>
-            <p class="review-quote-body">
-              "Heavy strength training left my body tense and aching, making it hard to wind down. Dark Mode is the perfect post-workout nighttime recovery. The somatic relaxation from the magnesium and amino acids is instant. My muscles feel fully recovered by morning."
-            </p>
+        <div class="pdp-accordion-item">
+          <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
+            <span>I'm not ready to pay yet. Can I still get a discount?</span>
+            <span class="pdp-accordion-icon">+</span>
           </div>
-          <div class="review-author-block">
-            <div class="review-author-name">Kabir S., 34</div>
-            <div class="review-author-sub">CrossFit Athlete · Hyderabad</div>
+          <div class="pdp-accordion-body">
+            Of course. <a href="/pages/waitlist/">Join the list</a> and use code FIRSTNIGHT20 for 20% off when we launch. We'll let you know the moment it's live.
           </div>
         </div>
 
-        <!-- Review 6 -->
-        <div class="review-card-3d">
-          <div>
-            <div class="review-meta-row">
-              <div class="review-stars">★★★★★</div>
-              <div class="review-verified-badge">Verified Buyer</div>
-            </div>
-            <p class="review-quote-body">
-              "I had a terrible habit of midnight overthinking. The combination of L-Theanine and chamomile in this dark chocolate drink is amazing. Within 20 minutes, my brain goes into calm mode and I drift off naturally. Best D2C wellness product in India."
-            </p>
+        <div class="pdp-accordion-item">
+          <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
+            <span>Something else?</span>
+            <span class="pdp-accordion-icon">+</span>
           </div>
-          <div class="review-author-block">
-            <div class="review-author-name">Meera J., 29</div>
-            <div class="review-author-sub">UX Architect · Chennai</div>
+          <div class="pdp-accordion-body">
+            Message us on <a href="https://wa.me/919567309388" target="_blank" rel="noopener">WhatsApp</a> or email <a href="mailto:support@superstate.in">support@superstate.in</a>. A real person replies.
           </div>
         </div>
+
       </div>
-    </div>
-  </section>
-
-  <!-- TWO-COLUMN FAQ SECTION -->
-  <section class="faq-section">
-    <div class="container">
-      <div class="text-center">
-        <span class="section-eyebrow">ANY QUESTIONS?</span>
-        <h2 class="section-title">We have direct answers.</h2>
-      </div>
-      
-      <div class="faq-grid-split">
-        <!-- Col 1 -->
-        <div class="pdp-accordions-group">
-          
-          <div class="pdp-accordion-item">
-            <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
-              <span>What exactly is Dark Mode?</span>
-              <span class="pdp-accordion-icon">+</span>
-            </div>
-            <div class="pdp-accordion-body">
-              Dark Mode is a premium, open-label nighttime functional cocoa powder formulation containing Magnesium L-Threonate, Bisglycinate, L-Theanine, Apigenin, and Glycine. It acts as a delicious nightly dark chocolate ritual designed to switch off racing brain circuits and relax physical muscle cells.
-            </div>
-          </div>
-          
-          <div class="pdp-accordion-item">
-            <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
-              <span>Why fermented dark chocolate/raw cocoa base?</span>
-              <span class="pdp-accordion-icon">+</span>
-            </div>
-            <div class="pdp-accordion-body">
-              Cocoa is an elegant, organic carrier molecule. It is rich in natural tryptophan (the core building block of serotonin and melatonin) and mood-enhancing flavonoids. Using it as a warm beverage ritual triggers standard sensory relaxation signals, making it far superior to clinical pill-popping.
-            </div>
-          </div>
-          
-          <div class="pdp-accordion-item">
-            <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
-              <span>Is Magnesium L-Threonate better than standard salts?</span>
-              <span class="pdp-accordion-icon">+</span>
-            </div>
-            <div class="pdp-accordion-body">
-              Yes, absolutely. Standard magnesium salts (like oxide or citrate) are poorly absorbed and mostly trigger digestive purging. L-Threonate is the only form scientifically proven to cross the blood-brain barrier directly, rapidly increasing cellular magnesium density inside the central nervous system.
-            </div>
-          </div>
-          
-        </div>
-        
-        <!-- Col 2 -->
-        <div class="pdp-accordions-group">
-          
-          <div class="pdp-accordion-item">
-            <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
-              <span>Will it cause chemical dependency?</span>
-              <span class="pdp-accordion-icon">+</span>
-            </div>
-            <div class="pdp-accordion-body">
-              No. Unlike melatonin or prescription sleep sedatives, Dark Mode does not introduce synthetic hormones or block receptors. It only supplies natural minerals and amino acids your nervous system naturally utilizes to relax, ensuring zero chemical tolerance or withdrawal issues.
-            </div>
-          </div>
-          
-          <div class="pdp-accordion-item">
-            <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
-              <span>When should I take it?</span>
-              <span class="pdp-accordion-icon">+</span>
-            </div>
-            <div class="pdp-accordion-body">
-              We recommend preparing your Dark Mode chocolate ritual exactly 30 minutes before your planned sleep window. This gives the L-Theanine and Magnesium Glycinate plenty of time to drop muscle tension and transition brainwaves into relax mode.
-            </div>
-          </div>
-          
-          <div class="pdp-accordion-item">
-            <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
-              <span>Are there any synthetic ingredients or fillers?</span>
-              <span class="pdp-accordion-icon">+</span>
-            </div>
-            <div class="pdp-accordion-body">
-              None. Every dose is strictly unadulterated. We use unrefined low-GI coconut sugar for a light sweetness, 100% organic raw cacao, trace Himalayan sea salts, and direct active elements. There are no preservatives, anti-caking agents, or colorings.
-            </div>
-          </div>
-          
-        </div>
-      </div>
+      <p class="simple-note" style="margin-top: 2rem;">This is a food product and is not intended to diagnose, treat, cure or prevent any disease. Not for medicinal use.</p>
     </div>
   </section>
 
@@ -2734,7 +3306,7 @@
       <div class="footer-grid">
         <div>
           <a href="/" class="brand" style="display: block; margin-bottom: 1rem;">
-            <img src="/logo.png" alt="SuperState" class="logo-img">
+            <img src="/logo-wordmark.png" alt="SuperState" class="logo-img">
           </a>
           <div style="display: flex; gap: 0.75rem;">
             <a href="https://www.instagram.com/superstate.in/" class="social-icon" aria-label="Instagram"
@@ -2790,8 +3362,7 @@
         </div>
         <div>
           <h4>One honest email a week.</h4>
-          <p style="font-size: 14px; margin-bottom: 1rem; opacity: 0.8;">No fluff. Just science, sleep tips, and early
-            access.</p>
+          <p style="font-size: 14px; margin-bottom: 1rem; opacity: 0.8;">No fluff. Just updates and early access.</p>
           <form class="newsletter-form waitlist-form">
             <input type="email" placeholder="Your email" required>
             <button type="submit">Subscribe</button>
@@ -2800,10 +3371,20 @@
       </div>
       <div class="footer-bottom">
         <div>© 2025 SuperState | Privacy Policy | Terms | Shipping | Returns</div>
-        <div>FSSAI Licensed | Vegan Certified | Made in India</div>
+        <div>Made in India</div>
       </div>
     </div>
   </footer>
+
+  <!-- STICKY MOBILE ADD-TO-CART BAR -->
+  <div class="sticky-buy" id="sticky-buy" aria-hidden="true">
+    <img src="/assets/sleep-well-box.webp" alt="" width="32" height="49">
+    <div class="sticky-buy-info">
+      <strong>Sleep Well</strong>
+      <span id="sticky-buy-meta">Pack Of 5 · ₹149.50</span>
+    </div>
+    <button type="button" onclick="prebookCheckout(this)" tabindex="-1">Pre-book 50% off</button>
+  </div>
 
   <!-- INTERACTIVE SIDE-CART DRAWER WIDGET (HTML) -->
   <div class="cart-drawer-overlay" id="cart-overlay" onclick="closeCartDrawer(event)">
@@ -2833,7 +3414,7 @@
       <!-- Cart Footer Block -->
       <div class="cart-drawer-footer" id="cart-drawer-footer" style="display: none;">
         <div class="cart-coupon-box">
-          <input type="text" class="cart-coupon-input" id="cart-coupon-code" placeholder="Enter Promo Code (e.g. SLEEP20)">
+          <input type="text" class="cart-coupon-input" id="cart-coupon-code" placeholder="Enter Promo Code (e.g. FIRSTNIGHT20)">
           <button class="cart-coupon-btn" onclick="applyCoupon()">Apply</button>
         </div>
         
@@ -2867,70 +3448,6 @@
 
   <!-- INTERACTIVE FUNCTIONAL JAVASCRIPT -->
   <script>
-    // ----------------------------------------------------
-    // GALLERY IMAGES DATA
-    // ----------------------------------------------------
-    const galleryImages = [
-      { src: "/assets/Product%20Image%201.png", alt: "SuperState Dark Mode Product Image 1" },
-      { src: "/assets/Product%20Image%202.png", alt: "SuperState Dark Mode Product Image 2" },
-      { src: "/assets/Product%20Image%203.png", alt: "SuperState Dark Mode Product Image 3" },
-      { src: "/assets/Product%20Image%204.png", alt: "SuperState Dark Mode Product Image 4" },
-      { src: "/assets/Product%20Image%205.png", alt: "SuperState Dark Mode Product Image 5" }
-    ];
-    
-    let currentGalleryIndex = 0;
-    
-    // Generate thumbnails on load
-    function initGallery() {
-      const thumbsContainer = document.getElementById("gallery-thumbs-container");
-      thumbsContainer.innerHTML = "";
-      
-      galleryImages.forEach((imgData, index) => {
-        const thumbDiv = document.createElement("div");
-        thumbDiv.className = `gallery-thumb ${index === 0 ? 'active' : ''}`;
-        thumbDiv.setAttribute("onclick", `setGalleryImage(${index})`);
-        
-        const img = document.createElement("img");
-        img.src = imgData.src;
-        img.alt = imgData.alt;
-        
-        thumbDiv.appendChild(img);
-        thumbsContainer.appendChild(thumbDiv);
-      });
-    }
-    
-    function setGalleryImage(index) {
-      currentGalleryIndex = index;
-      const mainImg = document.getElementById("main-gallery-img");
-      
-      // Fade transition effect
-      mainImg.style.opacity = 0;
-      setTimeout(() => {
-        mainImg.src = galleryImages[index].src;
-        mainImg.alt = galleryImages[index].alt;
-        mainImg.style.opacity = 1;
-      }, 150);
-      
-      // Update active state in thumbnails
-      const thumbs = document.querySelectorAll(".gallery-thumb");
-      thumbs.forEach((thumb, idx) => {
-        if (idx === index) {
-          thumb.classList.add("active");
-          // Smooth scroll thumbnail into view if needed
-          thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-        } else {
-          thumb.classList.remove("active");
-        }
-      });
-    }
-    
-    function navigateGallery(direction) {
-      let newIndex = currentGalleryIndex + direction;
-      if (newIndex >= galleryImages.length) newIndex = 0;
-      if (newIndex < 0) newIndex = galleryImages.length - 1;
-      setGalleryImage(newIndex);
-    }
-    
     // ----------------------------------------------------
     // GALLERY EXTRA INFO TABS ENGINE
     // ----------------------------------------------------
@@ -2999,10 +3516,10 @@
     // ----------------------------------------------------
     let selectedFlavour = "Organic Cacao";
     let selectedPack = "Pack Of 5";
-    let currentPrice = 299;
+    let currentPrice = 149.5;
     let originalPrice = 299;
-    let currentServePrice = 60;
-    let discountPct = 0;
+    let currentServePrice = 30;
+    let discountPct = 50;
     let quantity = 1;
     
     function selectFlavour(flavour, element) {
@@ -3048,6 +3565,12 @@
       updateSummaryFeedback();
     }
     
+    function formatINR(n) {
+      return Number.isInteger(n)
+        ? n.toLocaleString('en-IN')
+        : n.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
     function updateSummaryFeedback() {
       const totalPrice = currentPrice * quantity;
       const totalOriginal = originalPrice * quantity;
@@ -3062,8 +3585,11 @@
       if (summaryServe) summaryServe.innerText = `₹${currentServePrice} / serving`;
       
       // Update top prices (displays single pack unit price)
+      const stickyMeta = document.getElementById("sticky-buy-meta");
+      if (stickyMeta) stickyMeta.innerText = `${selectedPack} · ₹${formatINR(currentPrice)}`;
+
       const topPrice = document.getElementById("pdp-top-price");
-      if (topPrice) topPrice.innerText = `₹${currentPrice.toLocaleString('en-IN')}`;
+      if (topPrice) topPrice.innerText = `₹${formatINR(currentPrice)}`;
       
       const topOriginal = document.getElementById("pdp-top-original");
       const topDiscount = document.getElementById("pdp-top-discount");
@@ -3092,7 +3618,7 @@
         cartItem.qty += quantity;
       } else {
         cartItem = {
-          name: "Dark Mode Cocoa Ritual",
+          name: "Sleep Well Cocoa Ritual",
           flavour: "Organic Cacao",
           pack: selectedPack,
           qty: quantity
@@ -3191,7 +3717,7 @@
       
       card.innerHTML = `
         <div class="cart-item-img">
-          <img src="/assets/Product%20Image%201.png" alt="Product Box Packaging">
+          <img src="/assets/sleep-well-box.webp" alt="Sleep Well box">
         </div>
         <div class="cart-item-details">
           <div>
@@ -3304,17 +3830,26 @@
     
     function applyCoupon() {
       const code = document.getElementById("cart-coupon-code").value.trim().toUpperCase();
-      if (code === "SLEEP20" || code === "SUPER20") {
+      if (code === "FIRSTNIGHT20") {
         isCouponApplied = true;
-        alert("Coupon Applied! You get a flat 20% discount on Dark Mode Cocoa Ritual!");
+        alert("Coupon Applied! You get a flat 20% discount on Sleep Well Cocoa Ritual!");
         recalcCartValues();
       } else if (code === "") {
         alert("Please enter a valid coupon code.");
       } else {
-        alert("Invalid coupon code! Try 'SLEEP20' for 20% off.");
+        alert("Invalid coupon code! Try 'FIRSTNIGHT20' for 20% off.");
       }
     }
     
+    // ----------------------------------------------------
+    // PRE-BOOK: send the selected pack to /pages/prebook/
+    // (payment happens there via Razorpay Standard Checkout)
+    // ----------------------------------------------------
+    function prebookCheckout() {
+      const params = new URLSearchParams({ pack: selectedPack, qty: String(quantity) });
+      window.location.href = `/pages/prebook/?${params.toString()}`;
+    }
+
     async function checkoutSecurely() {
       if (!cartItem) return;
 
@@ -3386,8 +3921,26 @@
     // INITIALIZATION & DYNAMIC LOOPS
     // ----------------------------------------------------
     window.addEventListener("DOMContentLoaded", () => {
-      initGallery();
       updateSummaryFeedback();
+
+      // Sticky add-to-cart bar: visible once the buy box scrolls out of view
+      const stickyBuy = document.getElementById("sticky-buy");
+      const buySection = document.getElementById("buy-section");
+      if (stickyBuy && buySection && "IntersectionObserver" in window) {
+        new IntersectionObserver(([entry]) => {
+          const show = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+          stickyBuy.classList.toggle("visible", show);
+          stickyBuy.setAttribute("aria-hidden", show ? "false" : "true");
+          stickyBuy.querySelector("button").tabIndex = show ? 0 : -1;
+        }).observe(buySection);
+      }
+
+      // Keep the ritual video still for people who prefer reduced motion
+      const ritualVideo = document.querySelector(".ritual-video");
+      if (ritualVideo && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        ritualVideo.removeAttribute("autoplay");
+        ritualVideo.pause();
+      }
       
       // Accordion responsive trigger: Make sure open accordions are correctly dimensioned
       document.querySelectorAll('.pdp-accordion-item.open').forEach(el => {
@@ -3398,6 +3951,194 @@
         }, 400);
       });
     });
+  </script>
+
+  <!-- SLEEPY SHEEP: win-your-code mini game -->
+  <script>
+    (() => {
+      const card = document.getElementById("win");
+      if (!card) return;
+
+      const CODE = "FIRSTNIGHT20";
+      const TARGET = 10;
+      const states = card.querySelectorAll(".game-state");
+      const canvas = document.getElementById("sheep-canvas");
+      const ctx = canvas.getContext("2d");
+      const scoreEl = document.getElementById("game-score");
+
+      let raf = null;
+      let game = null;
+
+      function show(name) {
+        states.forEach(el => { el.hidden = el.dataset.state !== name; });
+      }
+
+      function reveal(won) {
+        stop();
+        document.getElementById("reveal-eyebrow").textContent = won
+          ? "you did that ✨ 10/10 alarms dodged"
+          : "no games, no stress. here you go 💛";
+        show("reveal");
+      }
+
+      function sizeCanvas() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const w = canvas.clientWidth;
+        const h = canvas.clientHeight;
+        canvas.width = Math.round(w * dpr);
+        canvas.height = Math.round(h * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        return { w, h };
+      }
+
+      function start() {
+        show("play");
+        const { w, h } = sizeCanvas();
+        const ground = h - 28;
+        game = {
+          w, h, ground,
+          sheep: { x: 44, y: ground, vy: 0, size: 34 },
+          obstacles: [],
+          stars: Array.from({ length: 18 }, () => ({ x: Math.random() * w, y: Math.random() * (ground - 40), r: Math.random() * 1.4 + 0.4 })),
+          speed: 260,
+          nextSpawn: 1.1,
+          score: 0,
+          last: performance.now(),
+          over: false
+        };
+        scoreEl.textContent = `0 / ${TARGET}`;
+        window.addEventListener("keydown", onKey);
+        raf = requestAnimationFrame(loop);
+        canvas.focus({ preventScroll: true });
+      }
+
+      function stop() {
+        if (raf) cancelAnimationFrame(raf);
+        raf = null;
+        window.removeEventListener("keydown", onKey);
+      }
+
+      function jump() {
+        if (!game || game.over) return;
+        const s = game.sheep;
+        if (s.y >= game.ground - 0.5) s.vy = -540;
+      }
+
+      function onKey(e) {
+        if (e.code === "Space" || e.code === "ArrowUp") {
+          e.preventDefault();
+          jump();
+        }
+      }
+
+      function spawn() {
+        const kinds = ["⏰", "⏰", "☕", "📱"];
+        game.obstacles.push({ x: game.w + 20, kind: kinds[Math.floor(Math.random() * kinds.length)], size: 28, passed: false });
+        // gap shrinks a little as the game speeds up, but stays fair
+        game.nextSpawn = 0.95 + Math.random() * 0.8 - Math.min(game.score * 0.015, 0.15);
+      }
+
+      function loop(now) {
+        const dt = Math.min((now - game.last) / 1000, 0.033);
+        game.last = now;
+        update(dt);
+        draw();
+        if (!game.over) raf = requestAnimationFrame(loop);
+      }
+
+      function update(dt) {
+        const g = game, s = g.sheep;
+        g.speed += dt * 8;
+        s.vy += 1900 * dt;
+        s.y = Math.min(s.y + s.vy * dt, g.ground);
+        if (s.y === g.ground) s.vy = 0;
+
+        g.nextSpawn -= dt;
+        if (g.nextSpawn <= 0) spawn();
+
+        g.stars.forEach(st => { st.x -= g.speed * 0.08 * dt; if (st.x < 0) st.x += g.w; });
+
+        for (const o of g.obstacles) {
+          o.x -= g.speed * dt;
+          // forgiving hitbox
+          const hit = Math.abs(o.x - s.x) < (o.size + s.size) * 0.32 && s.y > g.ground - o.size * 0.75;
+          if (hit) {
+            g.over = true;
+            setTimeout(() => { stop(); show("lost"); }, 350);
+            return;
+          }
+          if (!o.passed && o.x < s.x - 10) {
+            o.passed = true;
+            g.score++;
+            scoreEl.textContent = `${g.score} / ${TARGET}`;
+            if (g.score >= TARGET) {
+              g.over = true;
+              setTimeout(() => reveal(true), 300);
+              return;
+            }
+          }
+        }
+        g.obstacles = g.obstacles.filter(o => o.x > -40);
+      }
+
+      function draw() {
+        const g = game, s = g.sheep;
+        ctx.clearRect(0, 0, g.w, g.h);
+
+        ctx.fillStyle = "rgba(255,255,255,0.7)";
+        g.stars.forEach(st => { ctx.beginPath(); ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2); ctx.fill(); });
+
+        ctx.font = "26px serif";
+        ctx.textBaseline = "alphabetic";
+        ctx.fillText("🌙", g.w - 48, 38);
+
+        ctx.strokeStyle = "rgba(228,255,90,0.6)";
+        ctx.setLineDash([6, 8]);
+        ctx.beginPath();
+        ctx.moveTo(0, g.ground + 4);
+        ctx.lineTo(g.w, g.ground + 4);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.textAlign = "center";
+        g.obstacles.forEach(o => {
+          ctx.font = `${o.size}px serif`;
+          ctx.fillText(o.kind, o.x, g.ground);
+        });
+
+        // sheep faces right
+        ctx.save();
+        ctx.translate(s.x, s.y);
+        ctx.scale(-1, 1);
+        ctx.font = `${s.size}px serif`;
+        ctx.fillText("🐑", 0, 0);
+        ctx.restore();
+        if (s.y < g.ground - 6) {
+          ctx.font = "13px serif";
+          ctx.fillText("z", s.x + 20, s.y - 30);
+        }
+        ctx.textAlign = "start";
+      }
+
+      canvas.tabIndex = 0;
+      canvas.addEventListener("pointerdown", e => { e.preventDefault(); jump(); });
+
+      card.addEventListener("click", async e => {
+        const btn = e.target.closest("[data-action]");
+        if (!btn) return;
+        const action = btn.dataset.action;
+        if (action === "play") start();
+        if (action === "skip") reveal(false);
+        if (action === "copy") {
+          try {
+            await navigator.clipboard.writeText(CODE);
+            btn.textContent = "copied ✓";
+          } catch (err) {
+            btn.textContent = CODE;
+          }
+        }
+      });
+    })();
   </script>
 
   <script src="../../main.js" type="module"></script>

@@ -1,4 +1,4 @@
-import { submitWaitlist, getSavedSubmission, clearSavedSubmission, resolveCoupon } from './services/waitlistService.js';
+import { submitWaitlist, getSavedSubmission, clearSavedSubmission, WAITLIST_CONFIG } from './services/waitlistService.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   /* ─── Elements ─────────────────────────────────────────────────────────── */
@@ -13,13 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const emailInput   = document.getElementById('wl-email');
   const phoneInput   = document.getElementById('wl-phone');
   const genderInput  = document.getElementById('wl-gender');
-  const codeInput    = document.getElementById('wl-code');
 
   const successName    = document.getElementById('wl-success-name');
   const successEmail   = document.getElementById('wl-success-email');
   const successDiscount = document.getElementById('wl-success-discount');
   const redoBtn         = document.getElementById('wl-redo-btn');
-  const codeApplied     = document.getElementById('code-applied');
+  const copyBtn         = document.getElementById('wl-copy-btn');
 
   /* ─── Restore existing submission ────────────────────────────────────── */
   const saved = getSavedSubmission();
@@ -38,14 +37,19 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ─── Real-time inline error clearing ───────────────────────────────── */
-  [nameInput, emailInput, phoneInput, codeInput].forEach(inp => {
+  [nameInput, emailInput, phoneInput].forEach(inp => {
     inp?.addEventListener('input', () => clearError(inp));
   });
 
-  /* ─── Live influencer code check ─────────────────────────────────────── */
-  codeInput?.addEventListener('input', () => {
-    const coupon = resolveCoupon(codeInput.value);
-    if (codeApplied) codeApplied.style.display = coupon.isInfluencer ? 'block' : 'none';
+  /* ─── Copy the code ──────────────────────────────────────────────────── */
+  copyBtn?.addEventListener('click', async () => {
+    const code = document.getElementById('wl-success-code')?.textContent || WAITLIST_CONFIG.EARLY_ACCESS_CODE;
+    try {
+      await navigator.clipboard.writeText(code);
+      copyBtn.textContent = 'copied ✓';
+    } catch (err) {
+      copyBtn.textContent = code;
+    }
   });
 
   /* ─── Form submit ────────────────────────────────────────────────────── */
@@ -60,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         email: emailInput?.value || '',
         phone: phoneInput?.value || '',
         gender: genderInput?.value || 'prefer_not_to_say',
-        promoCode: codeInput?.value || ''
+        promoCode: ''
       });
 
       if (res.success) {
@@ -80,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     clearSavedSubmission();
     form?.reset();
     clearAllErrors();
-    if (codeApplied) codeApplied.style.display = 'none';
+    if (copyBtn) copyBtn.textContent = 'copy';
     genderBtns.forEach(b => b.classList.remove('active'));
     genderBtns[0]?.classList.add('active');
     if (genderInput) genderInput.value = genderBtns[0]?.dataset.gender || 'male';
@@ -104,11 +108,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function clearAllErrors() {
-    [nameInput, emailInput, phoneInput, codeInput].forEach(i => i && clearError(i));
+    [nameInput, emailInput, phoneInput].forEach(i => i && clearError(i));
   }
 
   function showErrors(errors) {
-    const map = { name: nameInput, email: emailInput, phone: phoneInput, code: codeInput };
+    const map = { name: nameInput, email: emailInput, phone: phoneInput };
     let first = true;
     Object.entries(errors).forEach(([key, msg]) => {
       const inp = map[key];
@@ -125,7 +129,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (successName)     successName.textContent     = record.name?.split(' ')[0] || 'there';
     if (successEmail)    successEmail.textContent    = record.email || '';
-    if (successDiscount) successDiscount.textContent = record.discount || 10;
+    if (successDiscount) successDiscount.textContent = record.discount || 20;
+    const successCode = document.getElementById('wl-success-code');
+    if (successCode) successCode.textContent = record.promoCode || WAITLIST_CONFIG.EARLY_ACCESS_CODE;
 
     formCard.style.transition = 'opacity 0.3s, transform 0.3s';
     formCard.style.opacity = '0';

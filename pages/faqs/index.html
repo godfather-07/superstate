@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="only light" />
   <title>FAQs | SuperState</title>
   <meta name="description" content="Common questions. Honest answers. We don't hide behind vague answers. Ask us anything." />
   <link rel="stylesheet" href="../../style.css" />
@@ -20,6 +21,7 @@
     .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
     .faq-inner { padding-bottom: 1.5rem; color: #555; line-height: 1.6; }
     .faq-item.active .faq-icon { transform: rotate(45deg); }
+    .faq-inner a { color: var(--accent-brand); text-decoration: underline; }
   </style>
 </head>
 <body class="bg-primary">
@@ -27,7 +29,7 @@
   <nav class="navbar">
     <div class="container navbar-container">
       <a href="/" class="brand">
-        <img src="/logo.png" alt="SuperState" class="logo-img">
+        <img src="/logo-wordmark.png" alt="SuperState" class="logo-img">
       </a>
       <ul class="nav-links">
         <li><a href="/">Home</a></li>
@@ -45,7 +47,7 @@
   <div class="mobile-drawer">
     <div class="mobile-drawer-header">
       <span class="brand">
-        <img src="/logo.png" alt="SuperState" class="logo-img">
+        <img src="/logo-wordmark.png" alt="SuperState" class="logo-img">
       </span>
       <button class="close-drawer" aria-label="Close Menu">✕</button>
     </div>
@@ -71,87 +73,74 @@
   <section class="bg-white" style="border-radius: var(--border-radius) var(--border-radius) 0 0; padding-top: 4rem;">
     <div class="container" style="max-width: 800px;">
       
-      <!-- Category A -->
       <div class="faq-category fade-up">
-        <h2 class="faq-category-title">A. Product Basics</h2>
-        
+        <h2 class="faq-category-title">A. The basics</h2>
         <div class="faq-item">
-          <div class="faq-header">What is Dark Mode and how does it work? <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">Dark Mode is a daily, science-backed dark chocolate ritual designed to help you relax, fall asleep faster, and wake up refreshed. It works by providing clinical doses of ingredients like Magnesium L-Threonate and L-Theanine to calm the nervous system without acting as a sedative.</div></div>
+          <div class="faq-header">What is Sleep Well? <span class="faq-icon">+</span></div>
+          <div class="faq-content"><div class="faq-inner">A dark chocolate drink mix for your evenings. You stir one sachet into warm milk or water and sip it about 30 minutes before bed. Think of it as coffee, but for sleep.</div></div>
         </div>
         <div class="faq-item">
-          <div class="faq-header">Is this a sedative or sleep medication? <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">No. This is not a sedative. It is formulated to support your body's natural sleep-wake cycle naturally.</div></div>
+          <div class="faq-header">Is it a medicine or a sedative? <span class="faq-icon">+</span></div>
+          <div class="faq-content"><div class="faq-inner">No. Sleep Well is a food product, not a medicine. It contains no melatonin and no sedatives.</div></div>
         </div>
         <div class="faq-item">
           <div class="faq-header">What makes SuperState different? <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">Radical transparency. We don't use proprietary blends. Every ingredient is clearly listed with its clinical dosage and scientific rationale.</div></div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-header">Who is this product for? <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">Anyone who struggles to unwind at night, experiences racing thoughts before bed, or wakes up feeling groggy and tired.</div></div>
+          <div class="faq-content"><div class="faq-inner">No proprietary blends. Every ingredient and its exact amount is listed on the <a href="/products/sleep-well/#inside">product page</a> and printed on the pack.</div></div>
         </div>
         <div class="faq-item">
           <div class="faq-header">What does it taste like? <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">It tastes like a rich, premium dark chocolate drink. It’s naturally sweetened and acts as a soothing evening treat.</div></div>
+          <div class="faq-content"><div class="faq-inner">Like a rich dark chocolate drink.</div></div>
         </div>
       </div>
-
-      <!-- Category B -->
       <div class="faq-category fade-up">
-        <h2 class="faq-category-title">B. Ingredients & Safety</h2>
+        <h2 class="faq-category-title">B. Ingredients &amp; safety</h2>
         <div class="faq-item">
-          <div class="faq-header">What are the active ingredients and their doses? <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">Magnesium L-Threonate, L-Theanine, Apigenin, and Glycine in a dark chocolate base. We provide exact mg dosages on the label.</div></div>
+          <div class="faq-header">What's in it? <span class="faq-icon">+</span></div>
+          <div class="faq-content"><div class="faq-inner">Organic raw cacao, glycine, magnesium L-threonate, magnesium bisglycinate, tart cherry extract, L-theanine and apigenin (from chamomile). See the exact amount of each on the <a href="/products/sleep-well/#inside">product page</a>.</div></div>
         </div>
         <div class="faq-item">
-          <div class="faq-header">Are there any artificial additives or preservatives? <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">Zero. We use no artificial flavors, colors, or preservatives.</div></div>
+          <div class="faq-header">What about allergens? <span class="faq-icon">+</span></div>
+          <div class="faq-content"><div class="faq-inner">The full ingredient and allergen list is printed on the pack. If you have a food allergy, please check it before use.</div></div>
         </div>
         <div class="faq-item">
-          <div class="faq-header">Is it vegan? Is it gluten-free? <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">Yes, it is 100% vegan and naturally gluten-free.</div></div>
+          <div class="faq-header">Who should check with a doctor first? <span class="faq-icon">+</span></div>
+          <div class="faq-content"><div class="faq-inner">Please speak to your doctor before using Sleep Well if you are pregnant or breastfeeding, take prescription medicine, or have a medical condition. Not for children.</div></div>
         </div>
         <div class="faq-item">
-          <div class="faq-header">Where is it manufactured? <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">Proudly manufactured in an FSSAI-certified facility in Coimbatore, India.</div></div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-header">Do you have lab testing / certifications? <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">Yes. Every batch is third-party tested for purity and heavy metals, and we are FSSAI licensed.</div></div>
+          <div class="faq-header">Where is it made? <span class="faq-icon">+</span></div>
+          <div class="faq-content"><div class="faq-inner">In Coimbatore, India.</div></div>
         </div>
       </div>
-
-      <!-- Category C -->
       <div class="faq-category fade-up">
-        <h2 class="faq-category-title">C. Usage & Results</h2>
+        <h2 class="faq-category-title">C. Using it</h2>
         <div class="faq-item">
-          <div class="faq-header">When should I take it and how? <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">Mix one sachet into warm milk or water 30–60 minutes before you intend to sleep.</div></div>
+          <div class="faq-header">When and how do I have it? <span class="faq-icon">+</span></div>
+          <div class="faq-content"><div class="faq-inner">Stir one sachet into a cup of warm milk or water and drink it about 30 minutes before bed.</div></div>
         </div>
         <div class="faq-item">
-          <div class="faq-header">How long until I see results? <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">You may feel calmer on night one. Optimal results build over 7–14 days of consistent daily use.</div></div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-header">Is it safe to take every night long-term? <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">Yes. There are no dependencies formed, and the ingredients are safe for daily use.</div></div>
+          <div class="faq-header">How much should I have? <span class="faq-icon">+</span></div>
+          <div class="faq-content"><div class="faq-inner">One sachet a day. Please don't have more than that.</div></div>
         </div>
       </div>
-
-      <!-- Category D & E abbreviated for demo -->
       <div class="faq-category fade-up">
-        <h2 class="faq-category-title">D. Orders & Support</h2>
+        <h2 class="faq-category-title">D. Orders &amp; support</h2>
         <div class="faq-item">
-          <div class="faq-header">Do you offer COD? <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">Yes, Cash on Delivery is available across most pincodes in India.</div></div>
+          <div class="faq-header">How much does shipping cost? <span class="faq-icon">+</span></div>
+          <div class="faq-content"><div class="faq-inner">Shipping is free across India. Orders dispatch in 24–48 hours and usually arrive in 5–6 business days.</div></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-header">Do you offer cash on delivery? <span class="faq-icon">+</span></div>
+          <div class="faq-content"><div class="faq-inner">Yes, COD is available across most pincodes in India. You can also pay by UPI or card.</div></div>
         </div>
         <div class="faq-item">
           <div class="faq-header">What is your return policy? <span class="faq-icon">+</span></div>
           <div class="faq-content"><div class="faq-inner">We offer a 10-day no-questions-asked return policy. If you don't love it, we'll refund you.</div></div>
         </div>
+        <div class="faq-item">
+          <div class="faq-header">I have another question. <span class="faq-icon">+</span></div>
+          <div class="faq-content"><div class="faq-inner">Message us on <a href="https://wa.me/919567309388" target="_blank" rel="noopener">WhatsApp</a> or email <a href="mailto:support@superstate.in">support@superstate.in</a>. A real person replies.</div></div>
+        </div>
       </div>
-
     </div>
   </section>
 
@@ -161,7 +150,7 @@
       <div class="footer-grid">
         <div>
           <a href="/" class="brand" style="display: block; margin-bottom: 1rem;">
-            <img src="/logo.png" alt="SuperState" class="logo-img">
+            <img src="/logo-wordmark.png" alt="SuperState" class="logo-img">
           </a>
           <div style="display: flex; gap: 0.75rem;">
             <a href="https://www.instagram.com/superstate.in/" class="social-icon" aria-label="Instagram"
@@ -217,7 +206,7 @@
         </div>
         <div>
           <h4>One honest email a week.</h4>
-          <p style="font-size: 14px; margin-bottom: 1rem; opacity: 0.8;">No fluff. Just science, sleep tips, and early
+          <p style="font-size: 14px; margin-bottom: 1rem; opacity: 0.8;">No fluff. Just updates and early
             access.</p>
           <form class="newsletter-form waitlist-form">
             <input type="email" placeholder="Your email" required>
@@ -227,7 +216,7 @@
       </div>
       <div class="footer-bottom">
         <div>© 2025 SuperState | Privacy Policy | Terms | Shipping | Returns</div>
-        <div>FSSAI Licensed | Vegan Certified | Made in India</div>
+        <div>Made in India</div>
       </div>
     </div>
   </footer>

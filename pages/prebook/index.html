@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="only light" />
+  <meta name="theme-color" content="#003399" />
+  <title>Pre-book | SuperState Sleep Well</title>
+  <meta name="description" content="Pre-book SuperState Sleep Well at 50% off, pay securely with Razorpay, and get a SuperState member card with the 30-night pack." />
+  <meta name="robots" content="noindex" />
+  <meta property="og:title" content="I just got my SuperState card 🌙" />
+  <meta property="og:description" content="Pre-book Sleep Well at 50% off. Coffee, but for sleep." />
+  <meta property="og:image" content="https://superstate.in/assets/og-sleep-well.jpg" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Serif:ital@0;1&family=Caveat:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      color-scheme: only light;
+      --blue: #003399;
+      --deep: #002673;
+      --lime: #E4FF5A;
+      --mint: #33cc99;
+      --muted: #cbd5e1;
+      --line: rgba(255, 255, 255, 0.16);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      color: #ffffff;
+      background: radial-gradient(circle at 50% 0%, rgba(77, 128, 255, 0.5), rgba(0, 51, 153, 0) 55%), var(--blue);
+      min-height: 100vh;
+      overflow-x: clip;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    button { font-family: inherit; }
+    [hidden] { display: none !important; }
+
+    /* ---------- Header ---------- */
+    .pb-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 64px;
+      border-bottom: 1px solid var(--line);
+    }
+    .pb-nav a { display: inline-flex; align-items: center; min-height: 44px; }
+    .pb-nav img { height: 30px; width: auto; filter: brightness(0) invert(1); }
+
+    .pb-wrap {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 2.5rem 20px 4rem;
+    }
+
+    /* ---------- Step 1: reserve ---------- */
+    .pb-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--lime);
+      border: 1px solid rgba(228, 255, 90, 0.5);
+      border-radius: 999px;
+      padding: 0.35rem 0.85rem;
+      margin-bottom: 1.25rem;
+    }
+    .pb-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #ff6b6b;
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(255, 107, 107, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); }
+    }
+    .pb-h1 {
+      font-weight: 800;
+      font-size: clamp(40px, 6vw, 68px);
+      line-height: 0.95;
+      letter-spacing: -0.045em;
+      margin-bottom: 1rem;
+    }
+    .pb-h1 em {
+      font-family: 'Instrument Serif', serif;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      background: linear-gradient(transparent 60%, rgba(228, 255, 90, 0.85) 60%, rgba(228, 255, 90, 0.85) 92%, transparent 92%);
+      padding: 0 0.08em;
+      white-space: nowrap;
+    }
+    .pb-sub {
+      font-size: 17px;
+      line-height: 1.5;
+      color: var(--muted);
+      max-width: 34ch;
+      margin-bottom: 1.75rem;
+    }
+
+
+    .pb-card-form {
+      background: #ffffff;
+      color: #001a4d;
+      border-radius: 24px;
+      padding: clamp(1.25rem, 3vw, 2rem);
+      box-shadow: 0 30px 60px rgba(0, 10, 40, 0.35);
+    }
+    .pb-form-title {
+      font-weight: 800;
+      font-size: 24px;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.25rem;
+    }
+    .pb-form-sub { font-size: 14px; color: #4a5878; margin-bottom: 1.25rem; }
+    .pb-field { margin-bottom: 1rem; }
+    .pb-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #24345a;
+      margin-bottom: 0.4rem;
+    }
+    .pb-input {
+      width: 100%;
+      min-height: 50px;
+      padding: 0 1rem;
+      font-family: inherit;
+      font-size: 16px;
+      color: #001a4d;
+      background: #f4f6fc;
+      border: 2px solid #dfe5f3;
+      border-radius: 12px;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .pb-input:focus { border-color: var(--blue); background: #ffffff; }
+    .pb-input.err { border-color: #e53e3e; background: #fff8f8; }
+    .pb-err { display: block; min-height: 0; font-size: 13px; color: #c53030; margin-top: 0.3rem; }
+    .pb-err:empty { display: none; }
+    .pb-submit {
+      width: 100%;
+      min-height: 56px;
+      margin-top: 0.5rem;
+      border: none;
+      border-radius: 14px;
+      background: var(--blue);
+      color: #ffffff;
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.2s;
+    }
+    .pb-submit:hover { background: #002270; }
+    .pb-submit:active { transform: scale(0.98); }
+    .pb-submit:disabled { opacity: 0.7; cursor: wait; }
+
+    /* ---------- Step 2: card reveal ---------- */
+    .pb-done { text-align: center; }
+    .pb-done-kicker {
+      font-family: 'Caveat', cursive;
+      font-size: 28px;
+      color: var(--lime);
+      display: inline-block;
+      transform: rotate(-2deg);
+    }
+    .pb-done-h {
+      font-weight: 800;
+      font-size: clamp(36px, 6vw, 64px);
+      line-height: 0.95;
+      letter-spacing: -0.045em;
+      margin: 0.25rem 0 0.75rem;
+    }
+    .pb-done-h em { font-family: 'Instrument Serif', serif; font-weight: 400; color: var(--lime); }
+    .pb-done-sub { color: var(--muted); font-size: 17px; max-width: 36ch; margin: 0 auto 2rem; line-height: 1.5; }
+
+    .card-stage {
+      perspective: 1200px;
+      width: min(420px, 100%);
+      margin: 0 auto;
+    }
+    .ss-card {
+      --mx: 50%;
+      --my: 50%;
+      --rx: 0deg;
+      --ry: 0deg;
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1.586;
+      transform-style: preserve-3d;
+      transform: rotateX(var(--rx)) rotateY(calc(var(--ry) + 180deg));
+      transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+      cursor: grab;
+      touch-action: pan-y;
+    }
+    .ss-card.revealed { transform: rotateX(var(--rx)) rotateY(var(--ry)); }
+    .ss-card.tilting { transition: transform 0.12s linear; }
+    .ss-face {
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      overflow: hidden;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      box-shadow: 0 30px 60px rgba(0, 10, 40, 0.45), inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+    }
+    .ss-front {
+      padding: 6% 7%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: left;
+      color: #ffffff;
+      background:
+        radial-gradient(circle at 85% 15%, rgba(228, 255, 90, 0.35), transparent 40%),
+        radial-gradient(circle at 10% 100%, rgba(51, 204, 153, 0.35), transparent 45%),
+        linear-gradient(135deg, #0a3fbf 0%, #003399 45%, #001f66 100%);
+    }
+    .ss-front::before {
+      /* holographic sheen that follows the pointer */
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at var(--mx) var(--my), rgba(255, 255, 255, 0.45), transparent 35%),
+        conic-gradient(from 120deg at var(--mx) var(--my), rgba(228, 255, 90, 0.25), rgba(51, 204, 153, 0.2), rgba(157, 184, 255, 0.25), rgba(255, 143, 171, 0.2), rgba(228, 255, 90, 0.25));
+      mix-blend-mode: overlay;
+      pointer-events: none;
+    }
+    .ss-front::after {
+      /* faint moon watermark */
+      content: "☾";
+      position: absolute;
+      right: -2%;
+      bottom: -18%;
+      font-size: 220px;
+      line-height: 1;
+      color: rgba(255, 255, 255, 0.06);
+      pointer-events: none;
+    }
+    .ss-row { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: flex-start; }
+    .ss-logo { height: clamp(16px, 4.5vw, 22px); width: auto; filter: brightness(0) invert(1); }
+    .ss-tier {
+      font-size: clamp(10px, 2.6vw, 11px);
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #001a4d;
+      background: var(--lime);
+      padding: 0.25rem 0.55rem;
+      border-radius: 999px;
+    }
+    .ss-title {
+      position: relative;
+      z-index: 1;
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: clamp(16px, 4.6vw, 22px);
+      color: var(--lime);
+    }
+    .ss-number {
+      position: relative;
+      z-index: 1;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-weight: 700;
+      font-size: clamp(26px, 8vw, 40px);
+      letter-spacing: 0.06em;
+      line-height: 1;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+    }
+    .ss-bottom { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: flex-end; gap: 0.5rem; }
+    .ss-name {
+      font-weight: 800;
+      font-size: clamp(12px, 3.4vw, 15px);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .ss-meta {
+      font-size: clamp(10px, 2.6vw, 11px);
+      color: rgba(255, 255, 255, 0.75);
+      letter-spacing: 0.04em;
+      margin-top: 2px;
+    }
+    .ss-since { text-align: right; flex-shrink: 0; }
+    .ss-back {
+      transform: rotateY(180deg);
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #001f66, #003399);
+    }
+    .ss-back img { width: 48%; filter: brightness(0) invert(1); opacity: 0.9; }
+    .ss-back span {
+      position: absolute;
+      bottom: 10%;
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      color: var(--lime);
+      font-size: clamp(14px, 4vw, 18px);
+    }
+    .card-hint { font-size: 13px; color: var(--muted); margin-top: 1rem; }
+
+    .pb-club {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin: 1.75rem auto 0;
+      padding: 0.6rem 1rem 0.6rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--line);
+      font-size: 15px;
+    }
+    .pb-avatars { display: flex; }
+    .pb-avatars span {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: grid; place-items: center;
+      font-size: 14px;
+      border: 2px solid var(--blue);
+      margin-left: -8px;
+    }
+    .pb-avatars span:first-child { margin-left: 0; }
+    .pb-club strong { color: var(--lime); }
+
+    .pb-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin: 1.75rem 0 2.5rem;
+    }
+    .pb-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: 50px;
+      padding: 0 1.4rem;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 800;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+    }
+    .pb-btn-primary { background: var(--lime); color: #001a4d; }
+    .pb-btn-ghost { background: transparent; color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.35); }
+
+    .pb-steps {
+      list-style: none;
+      max-width: 520px;
+      margin: 0 auto;
+      text-align: left;
+      border-left: 2px dashed rgba(228, 255, 90, 0.45);
+    }
+    .pb-steps li {
+      position: relative;
+      padding: 0 0 1.4rem 1.5rem;
+    }
+    .pb-steps li:last-child { padding-bottom: 0; }
+    .pb-steps li::before {
+      content: "";
+      position: absolute;
+      left: -8px;
+      top: 4px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--blue);
+      border: 2px solid var(--lime);
+    }
+    .pb-steps li.done::before { background: var(--lime); }
+    .pb-steps strong { display: block; font-size: 17px; }
+    .pb-steps span { font-size: 14px; color: var(--muted); }
+    .pb-again { display: inline-block; margin-top: 2rem; font-size: 14px; color: var(--muted); background: none; border: none; text-decoration: underline; cursor: pointer; min-height: 44px; }
+
+    #confetti {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    .pb-foot {
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+      padding: 1.5rem 20px 2rem;
+      border-top: 1px solid var(--line);
+    }
+
+    /* ================= PRE-BOOK PAGE ================= */
+    .pb-btn:focus-visible, .pb-submit:focus-visible, .pv-pack:focus-visible, .pv-qty button:focus-visible { outline: 3px solid #ffffff; outline-offset: 3px; }
+
+    /* hero */
+    .pv-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 3rem;
+      align-items: center;
+      min-height: min(640px, calc(100vh - 64px));
+      padding-top: 2rem;
+      padding-bottom: 3rem;
+    }
+    .pv-card-word {
+      display: inline-block;
+      background: var(--lime);
+      color: #001a4d;
+      padding: 0 0.15em;
+      border-radius: 10px;
+      transform: rotate(-3deg);
+    }
+    .pv-stats {
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      justify-content: start;
+      gap: 0.5rem 1.75rem;
+      margin-bottom: 1.75rem;
+    }
+    .pv-stats strong { display: block; font-size: 30px; font-weight: 800; letter-spacing: -0.03em; color: var(--lime); line-height: 1; }
+    .pv-stats span { font-size: 13px; color: var(--muted); }
+    .pv-card-col { position: relative; text-align: center; }
+    .pv-note {
+      position: absolute;
+      top: -2.5rem;
+      left: 0;
+      font-family: 'Caveat', cursive;
+      font-size: 24px;
+      color: var(--lime);
+      transform: rotate(-6deg);
+      text-align: left;
+      line-height: 1.05;
+      z-index: 2;
+    }
+    .pv-card-col .card-stage { animation: pv-float 6s ease-in-out infinite; }
+    @keyframes pv-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .pv-number { opacity: 0.95; }
+    .pv-blink { animation: pv-blink 1.2s steps(2) infinite; }
+    @keyframes pv-blink { 50% { opacity: 0.25; } }
+    #pv-name.typing { color: var(--lime); }
+
+    /* ticker */
+    .pv-ticker { overflow: hidden; padding: 1.25rem 0; }
+    .pv-ticker-track {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      width: max-content;
+      padding: 0.85rem 0;
+      background: var(--lime);
+      color: var(--blue);
+      transform: rotate(-1.5deg);
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: clamp(20px, 2.6vw, 30px);
+      white-space: nowrap;
+      animation: pv-ticker 30s linear infinite;
+    }
+    .pv-ticker-track i { font-style: normal; font-size: 0.8em; }
+    @keyframes pv-ticker { from { transform: rotate(-1.5deg) translateX(0); } to { transform: rotate(-1.5deg) translateX(-50%); } }
+
+    /* perks */
+    .pv-perks-section { padding-top: 3.5rem; padding-bottom: 2.5rem; text-align: center; }
+    .pv-kicker {
+      display: inline-block;
+      font-family: 'Caveat', cursive;
+      font-size: 26px;
+      color: var(--lime);
+      transform: rotate(-2deg);
+    }
+    .pv-kicker-dark { color: #207e59; font-size: 22px; }
+    .pv-h2 {
+      font-weight: 800;
+      font-size: clamp(34px, 5vw, 60px);
+      line-height: 1;
+      letter-spacing: -0.045em;
+      margin: 0.25rem 0 2.25rem;
+    }
+    .pv-h2 em { font-family: 'Instrument Serif', serif; font-weight: 400; color: var(--lime); }
+    .pv-perks {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+      text-align: left;
+    }
+    .pv-perk {
+      position: relative;
+      padding: 1.4rem 1.2rem 1.25rem;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid var(--line);
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+    .pv-perk:hover { transform: translateY(-4px) rotate(-0.5deg); background: rgba(255, 255, 255, 0.11); }
+    .pv-perk-emoji { font-size: 30px; display: block; margin-bottom: 0.6rem; }
+    .pv-perk strong { display: block; font-size: 18px; font-weight: 800; margin-bottom: 0.35rem; }
+    .pv-perk p { font-size: 14px; line-height: 1.5; color: var(--muted); }
+
+    /* checkout */
+    .pv-checkout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 2rem;
+      align-items: start;
+      padding-top: 2.5rem;
+      padding-bottom: 3rem;
+      scroll-margin-top: 16px;
+    }
+    .pv-h3 { font-weight: 800; font-size: clamp(26px, 3.2vw, 34px); letter-spacing: -0.03em; margin: 0.1rem 0 1rem; }
+    .pv-packs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; }
+    .pv-pack {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.15rem;
+      padding: 1rem 0.9rem;
+      min-height: 96px;
+      border-radius: 16px;
+      border: 2px solid var(--line);
+      background: rgba(255, 255, 255, 0.06);
+      color: #ffffff;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    }
+    .pv-pack:hover { transform: translateY(-2px); }
+    .pv-pack[aria-checked="true"] { border-color: var(--lime); background: rgba(228, 255, 90, 0.12); }
+    .pv-pack-name { font-weight: 800; font-size: 16px; }
+    .pv-pack-price { font-weight: 800; font-size: 18px; color: var(--lime); }
+    .pv-pack-price s { font-weight: 500; font-size: 12px; color: var(--muted); margin-left: 0.25rem; }
+    .pv-pack-serve { font-size: 12.5px; color: var(--muted); }
+    .pv-best {
+      position: absolute;
+      top: -10px;
+      right: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #001a4d;
+      background: var(--lime);
+      padding: 2px 8px;
+      border-radius: 999px;
+      transform: rotate(3deg);
+    }
+    .pv-qty-row { display: flex; align-items: center; justify-content: space-between; margin: 1.25rem 0; font-weight: 700; }
+    .pv-qty { display: flex; align-items: center; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 12px; overflow: hidden; }
+    .pv-qty button { width: 46px; height: 46px; background: transparent; border: none; color: #ffffff; font-size: 22px; cursor: pointer; }
+    .pv-qty button:disabled { opacity: 0.35; cursor: default; }
+    .pv-qty output { min-width: 40px; text-align: center; font-weight: 800; font-size: 18px; font-variant-numeric: tabular-nums; }
+    .pv-bill {
+      border-radius: 18px;
+      padding: 1.1rem 1.2rem;
+      background: rgba(0, 20, 70, 0.35);
+      border: 1px dashed rgba(255, 255, 255, 0.28);
+      font-variant-numeric: tabular-nums;
+    }
+    .pv-bill-line { display: flex; justify-content: space-between; gap: 1rem; font-size: 15px; color: var(--muted); padding: 0.3rem 0; }
+    .pv-bill-off span:last-child { color: var(--mint); font-weight: 700; }
+    .pv-bill-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-top: 0.6rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--line);
+      font-weight: 800;
+      font-size: 18px;
+    }
+    .pv-bill-total span:last-child { font-size: 30px; color: var(--lime); letter-spacing: -0.02em; }
+    .pv-bill-total span:last-child.bump { animation: pv-bump 0.35s ease; }
+    @keyframes pv-bump { 40% { transform: scale(1.12); } }
+    .pv-ship-note { font-size: 13.5px; color: var(--muted); margin-top: 0.75rem; }
+    .pv-checkout .pb-card-form { position: sticky; top: 16px; }
+    .pv-trust {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      font-size: 13px;
+      color: #4a5878;
+    }
+    .pv-pay-chips { display: flex; gap: 0.35rem; }
+    .pv-pay-chips b { font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 6px; background: #eef1fa; color: #24345a; }
+
+    /* faq */
+    .pv-faq { max-width: 720px; padding-top: 1rem; padding-bottom: 4rem; }
+    .pv-faq details { border-bottom: 1px solid var(--line); }
+    .pv-faq summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 1.1rem 0;
+      font-weight: 700;
+      font-size: 17px;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .pv-faq summary::-webkit-details-marker { display: none; }
+    .pv-faq summary::after { content: "+"; font-size: 22px; transition: transform 0.2s; }
+    .pv-faq details[open] summary::after { transform: rotate(45deg); }
+    .pv-faq details p { padding: 0 0 1.1rem; color: var(--muted); font-size: 15px; line-height: 1.55; }
+    .pv-faq a { color: var(--lime); }
+
+    /* sticky pay bar (phones) */
+    .pv-sticky { display: none; }
+
+    @media (max-width: 960px) {
+      .pv-perks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 860px) {
+      .pv-hero {
+        grid-template-columns: 1fr;
+        min-height: 0;
+        gap: 2.25rem;
+        padding-top: 1.5rem;
+        text-align: center;
+      }
+      .pv-card-col { order: -1; padding-top: 2.25rem; }
+      .pv-note { left: 2%; top: -0.25rem; font-size: 21px; }
+      .pb-sub { margin-left: auto; margin-right: auto; }
+      .pv-stats { justify-content: center; gap: 0.5rem 1.25rem; }
+      .pv-stats strong { font-size: 24px; }
+      .pv-checkout { grid-template-columns: 1fr; gap: 1.5rem; }
+      .pv-checkout .pb-card-form { position: static; }
+      .pv-sticky {
+        position: fixed;
+        left: 12px;
+        right: 12px;
+        bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+        z-index: 40;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        padding: 0.6rem 0.6rem 0.6rem 1rem;
+        border-radius: 18px;
+        background: rgba(0, 26, 77, 0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4);
+        transform: translateY(150%);
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .pv-sticky.visible { transform: translateY(0); }
+      .pv-sticky-label { display: block; font-size: 12.5px; color: var(--muted); }
+      .pv-sticky strong { font-size: 20px; color: var(--lime); }
+      .pv-sticky button {
+        min-height: 48px;
+        padding: 0 1.25rem;
+        border: none;
+        border-radius: 12px;
+        background: var(--lime);
+        color: #001a4d;
+        font-weight: 800;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .pb-foot { padding-bottom: 6rem; }
+    }
+    @media (max-width: 420px) {
+      .pv-packs { gap: 0.5rem; }
+      .pv-pack { padding: 0.85rem 0.6rem; }
+      .pv-pack-name { font-size: 14px; }
+      .pv-pack-price { font-size: 16px; }
+      .pv-pack-price s { display: block; margin-left: 0; }
+      .pv-stats span { font-size: 12px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .pv-card-col .card-stage, .pv-blink, .pv-ticker-track { animation: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .ss-card, .ss-card.tilting { transition: none; }
+      .pb-dot { animation: none; }
+    }
+
+
+    /* ---------- card is a 30-night perk ---------- */
+    .pv-stage { position: relative; }
+    .ss-card.locked { filter: grayscale(0.85) brightness(0.6); }
+    .pv-lock {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 1rem;
+      text-align: center;
+      border-radius: 20px;
+      background: rgba(0, 20, 70, 0.35);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+    }
+    .pv-lock[hidden] { display: none; }
+    .pv-lock-icon { font-size: 34px; line-height: 1; }
+    .pv-lock strong { font-size: 18px; font-weight: 800; max-width: 20ch; line-height: 1.2; }
+    .pv-unlock {
+      min-height: 44px;
+      padding: 0 1.1rem;
+      border: none;
+      border-radius: 12px;
+      background: var(--lime);
+      color: #001a4d;
+      font-family: inherit;
+      font-weight: 800;
+      font-size: 15px;
+      cursor: pointer;
+    }
+    .pv-perks-sub { color: var(--muted); font-size: 16px; margin: -1.25rem auto 2rem; max-width: 46ch; }
+    #pv-card-val button {
+      background: none;
+      border: none;
+      padding: 0;
+      font: inherit;
+      font-weight: 700;
+      color: var(--lime);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
+    }
+    .pb-order-done {
+      width: min(420px, 100%);
+      margin: 0 auto;
+      padding: 1.75rem 1.5rem;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--line);
+    }
+    .pb-order-done[hidden] { display: none; }
+    .pb-order-tick {
+      width: 64px; height: 64px;
+      margin: 0 auto 1rem;
+      border-radius: 50%;
+      display: grid; place-items: center;
+      background: var(--lime);
+      color: #001a4d;
+      font-size: 32px;
+      font-weight: 800;
+    }
+    .pb-order-pack { font-weight: 800; font-size: 19px; }
+    .pb-order-paid { color: var(--lime); font-weight: 800; font-size: 28px; margin: 0.25rem 0 1.25rem; }
+    .pb-order-upsell { font-size: 14px; }
+  </style>
+</head>
+<body>
+  <header class="pb-nav">
+    <a href="/" aria-label="SuperState home"><img src="/logo-wordmark.png" alt="SuperState" width="640" height="135"></a>
+  </header>
+
+  <main>
+
+    <!-- STEP 1: the pre-book page -->
+    <div id="pb-reserve">
+
+      <!-- HERO: pitch + live card preview -->
+      <section class="pb-wrap pv-hero">
+        <div class="pv-copy">
+          <span class="pb-tag"><span class="pb-dot"></span> batch 02 · pre-booking open</span>
+          <h1 class="pb-h1">lock in <em>50% off.</em><br>get your <span class="pv-card-word">card.</span></h1>
+          <p class="pb-sub">batch 01 sold out. pay half today and your Sleep Well ships with the next drop. go for 30 nights and you also become a SuperState founding member, card and all.</p>
+          <div class="pv-stats">
+            <div><strong>50%</strong><span>off, pre-book only</span></div>
+            <div><strong id="pv-stat-members">27</strong><span>night owls already carded</span></div>
+            <div><strong>₹0</strong><span>shipping in India</span></div>
+          </div>
+          <a href="#checkout" class="pb-btn pb-btn-primary pv-jump">claim my card ↓</a>
+        </div>
+
+        <div class="pv-card-col">
+          <span class="pv-note" id="pv-note" aria-hidden="true">this is yours.<br>type your name ↓</span>
+          <div class="card-stage pv-stage">
+            <div class="pv-lock" id="pv-lock" hidden>
+              <span class="pv-lock-icon" aria-hidden="true">🔒</span>
+              <strong>the card comes with the 30-night pack</strong>
+              <button type="button" class="pv-unlock" data-unlock>switch to 30 nights →</button>
+            </div>
+            <div class="ss-card revealed" id="pv-card" role="img" aria-label="Preview of your SuperState member card">
+              <div class="ss-face ss-front">
+                <div class="ss-row">
+                  <img class="ss-logo" src="/logo-wordmark.png" alt="SuperState" width="640" height="135">
+                  <span class="ss-tier">founding member</span>
+                </div>
+                <span class="ss-title">night owl ☾</span>
+                <div class="ss-number pv-number">Nº <span class="pv-blink">···</span></div>
+                <div class="ss-bottom">
+                  <div style="min-width: 0;">
+                    <div class="ss-name" id="pv-name">YOUR NAME HERE</div>
+                    <div class="ss-meta" id="pv-meta">BATCH 02 · PACK OF 5</div>
+                  </div>
+                  <div class="ss-since">
+                    <div class="ss-meta">MEMBER SINCE</div>
+                    <div class="ss-name" id="pv-since">--/--</div>
+                  </div>
+                </div>
+              </div>
+              <div class="ss-face ss-back" aria-hidden="true">
+                <img src="/logo-wordmark.png" alt="" width="640" height="135">
+                <span>sleep well ☾</span>
+              </div>
+            </div>
+          </div>
+          <p class="card-hint" id="pv-hint">your member number drops the moment you pay ✨</p>
+        </div>
+      </section>
+
+      <!-- TICKER -->
+      <div class="pv-ticker" aria-hidden="true">
+        <div class="pv-ticker-track">
+          <span>batch 01 sold out</span><i>✶</i><span>coffee, but for sleep</span><i>☾</i><span>founding members only</span><i>✶</i><span>no melatonin</span><i>☾</i><span>50% off pre-book</span><i>✶</i>
+          <span>batch 01 sold out</span><i>✶</i><span>coffee, but for sleep</span><i>☾</i><span>founding members only</span><i>✶</i><span>no melatonin</span><i>☾</i><span>50% off pre-book</span><i>✶</i>
+        </div>
+      </div>
+
+      <!-- WHAT'S THE CARD -->
+      <section class="pb-wrap pv-perks-section">
+        <span class="pv-kicker">so… what's the SuperState card?</span>
+        <h2 class="pv-h2">only with the <em>30-night pack.</em></h2>
+        <p class="pv-perks-sub">go all in on 30 nights and you're a founding member. here's what that gets you.</p>
+        <ul class="pv-perks">
+          <li class="pv-perk">
+            <span class="pv-perk-emoji">#️⃣</span>
+            <strong>your number, forever</strong>
+            <p>every founding member gets a number in the order they joined. lower number, more OG.</p>
+          </li>
+          <li class="pv-perk">
+            <span class="pv-perk-emoji">💳</span>
+            <strong>a real card in your box</strong>
+            <p>a physical card with your name and number ships inside your first pack.</p>
+          </li>
+          <li class="pv-perk">
+            <span class="pv-perk-emoji">🔔</span>
+            <strong>first dibs on drops</strong>
+            <p>members hear about every new drop before anyone else does.</p>
+          </li>
+          <li class="pv-perk">
+            <span class="pv-perk-emoji">🌙</span>
+            <strong>for the ones who go all in</strong>
+            <p>the card is our thank-you to the 30-night crew. 5 and 15 packs still get 50% off, just no card.</p>
+          </li>
+        </ul>
+      </section>
+
+      <!-- CHECKOUT -->
+      <section class="pb-wrap pv-checkout" id="checkout">
+        <div class="pv-order">
+          <span class="pv-kicker">step 1</span>
+          <h2 class="pv-h3">pick your pack</h2>
+          <div class="pv-packs" role="radiogroup" aria-label="Pack size">
+            <button type="button" class="pv-pack" role="radio" data-pack="Pack Of 5"><span class="pv-pack-name">5 sachets</span><span class="pv-pack-price" data-for="Pack Of 5"></span><span class="pv-pack-serve">5 nights</span></button>
+            <button type="button" class="pv-pack" role="radio" data-pack="Pack Of 15"><span class="pv-pack-name">15 sachets</span><span class="pv-pack-price" data-for="Pack Of 15"></span><span class="pv-pack-serve">15 nights</span></button>
+            <button type="button" class="pv-pack" role="radio" data-pack="Pack Of 30"><span class="pv-best">best value ✶</span><span class="pv-pack-name">30 sachets</span><span class="pv-pack-price" data-for="Pack Of 30"></span><span class="pv-pack-serve">30 nights · + member card 💳</span></button>
+          </div>
+
+          <div class="pv-qty-row">
+            <span>how many?</span>
+            <div class="pv-qty">
+              <button type="button" id="pv-minus" aria-label="Fewer">−</button>
+              <output id="pv-qty" aria-live="polite">1</output>
+              <button type="button" id="pv-plus" aria-label="More">+</button>
+            </div>
+          </div>
+
+          <div class="pv-bill">
+            <div class="pv-bill-line"><span id="pv-line-label">Sleep Well · Pack Of 5 × 1</span><span id="pv-line-mrp">₹299</span></div>
+            <div class="pv-bill-line pv-bill-off"><span>pre-book discount (50%)</span><span id="pv-line-off">−₹149.50</span></div>
+            <div class="pv-bill-line"><span>shipping</span><span>FREE</span></div>
+            <div class="pv-bill-line" id="pv-card-line"><span>SuperState member card</span><span id="pv-card-val">included 💳</span></div>
+            <div class="pv-bill-total"><span>pay today</span><span id="pv-total">₹149.50</span></div>
+          </div>
+          <p class="pv-ship-note">ships with batch 02. we'll WhatsApp you the dispatch date.</p>
+        </div>
+
+        <div class="pb-card-form">
+          <span class="pv-kicker pv-kicker-dark">step 2</span>
+          <h2 class="pb-form-title">your details</h2>
+          <p class="pb-form-sub">we only use these for your order. (30-night pack: your name goes on the card.)</p>
+          <form id="pb-form" novalidate>
+            <div class="pb-field">
+              <label class="pb-label" for="pb-name">Name</label>
+              <input class="pb-input" id="pb-name" type="text" autocomplete="name" placeholder="Arjun Sharma" maxlength="40" required>
+              <span class="pb-err" id="pb-name-err"></span>
+            </div>
+            <div class="pb-field">
+              <label class="pb-label" for="pb-phone">WhatsApp number</label>
+              <input class="pb-input" id="pb-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="98765 43210" required>
+              <span class="pb-err" id="pb-phone-err"></span>
+            </div>
+            <div class="pb-field">
+              <label class="pb-label" for="pb-email">Email</label>
+              <input class="pb-input" id="pb-email" type="email" inputmode="email" autocomplete="email" placeholder="arjun@email.com" required>
+              <span class="pb-err" id="pb-email-err"></span>
+            </div>
+            <button class="pb-submit" id="pb-submit" type="submit">pay · 50% off →</button>
+            <span class="pb-err" id="pb-form-err" role="alert"></span>
+          </form>
+          <div class="pv-trust">
+            <span>🔒 secured by Razorpay</span>
+            <span class="pv-pay-chips"><b>UPI</b><b>Cards</b></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- MINI FAQ -->
+      <section class="pb-wrap pv-faq">
+        <h2 class="pv-h3">quick qs</h2>
+        <details><summary>when will it ship?</summary><p>with batch 02. we'll WhatsApp you the dispatch date as soon as it's packed. shipping is free across India.</p></details>
+        <details><summary>is my payment safe?</summary><p>payments run on Razorpay, India's most-used payment gateway. we never see your card or UPI details.</p></details>
+        <details><summary>what's in Sleep Well?</summary><p>organic raw cacao, glycine, two forms of magnesium, tart cherry, L-theanine and apigenin. every amount is on the <a href="/products/sleep-well/#inside">product page</a>. no melatonin.</p></details>
+        <details><summary>something else?</summary><p><a href="https://wa.me/919567309388">WhatsApp us</a>. a real person replies.</p></details>
+      </section>
+    </div>
+
+    <!-- STICKY PAY BAR (mobile) -->
+    <div class="pv-sticky" id="pv-sticky" aria-hidden="true">
+      <div><span class="pv-sticky-label" id="pv-sticky-label">Pack Of 5 × 1</span><strong id="pv-sticky-total">₹149.50</strong></div>
+      <button type="button" id="pv-sticky-btn" tabindex="-1">pay now →</button>
+    </div>
+
+    <!-- STEP 2: card reveal -->
+    <section id="pb-done" class="pb-wrap pb-done" hidden>
+      <span class="pb-done-kicker">you're in 🎉</span>
+      <h1 class="pb-done-h">welcome to the <em>night shift.</em></h1>
+      <p class="pb-done-sub" id="pb-done-sub">your spot is locked at 50% off. here's your SuperState card.</p>
+
+      <div class="pb-order-done" id="pb-order-done" hidden>
+        <div class="pb-order-tick" aria-hidden="true">✓</div>
+        <div class="pb-order-pack" id="pb-order-pack">Sleep Well · Pack Of 5 × 1</div>
+        <div class="pb-order-paid" id="pb-order-paid">₹149.50 paid</div>
+        <button type="button" class="pv-unlock pb-order-upsell" id="pb-order-upsell">next time, go 30 nights for the member card 💳</button>
+      </div>
+
+      <div id="pb-card-reveal">
+      <div class="card-stage">
+        <div class="ss-card" id="ss-card" role="img" aria-label="Your SuperState member card">
+          <div class="ss-face ss-front">
+            <div class="ss-row">
+              <img class="ss-logo" src="/logo-wordmark.png" alt="SuperState" width="640" height="135">
+              <span class="ss-tier">founding member</span>
+            </div>
+            <span class="ss-title">night owl ☾</span>
+            <div class="ss-number" id="ss-number">Nº 028</div>
+            <div class="ss-bottom">
+              <div style="min-width: 0;">
+                <div class="ss-name" id="ss-name">ARJUN SHARMA</div>
+                <div class="ss-meta" id="ss-meta">BATCH 02 · PACK OF 5</div>
+              </div>
+              <div class="ss-since">
+                <div class="ss-meta">MEMBER SINCE</div>
+                <div class="ss-name" id="ss-since">10/26</div>
+              </div>
+            </div>
+          </div>
+          <div class="ss-face ss-back" aria-hidden="true">
+            <img src="/logo-wordmark.png" alt="" width="640" height="135">
+            <span>sleep well ☾</span>
+          </div>
+        </div>
+      </div>
+      <p class="card-hint">move your mouse or drag your finger over it ✨</p>
+
+      <div class="pb-club">
+        <span class="pb-avatars" aria-hidden="true">
+          <span style="background:#E4FF5A">🌙</span><span style="background:#bff2da">🦉</span><span style="background:#ffc9e0">✨</span>
+        </span>
+        <span id="pb-club-text"><strong>27 night owls</strong> from batch 01 already have theirs</span>
+      </div>
+      </div>
+
+      <div class="pb-actions">
+        <a class="pb-btn pb-btn-primary" id="pb-share" href="#" target="_blank" rel="noopener">share on WhatsApp</a>
+        <a class="pb-btn pb-btn-ghost" href="/">back to home</a>
+      </div>
+
+      <ol class="pb-steps">
+        <li class="done"><strong>paid &amp; locked in</strong><span id="pb-step1">Pack Of 5 × 1 · ₹149.50 paid (50% off)</span><span id="pb-payid" style="display:block; font-size:12px; opacity:0.8;"></span></li>
+        <li><strong>updates on WhatsApp</strong><span>we'll message <b id="pb-step2-phone">your number</b> when the next drop is packed and shipped</span></li>
+        <li><strong>ships with the next drop</strong><span id="pb-step3">free shipping across India. your physical card comes in the box</span></li>
+      </ol>
+
+      <button type="button" class="pb-again" id="pb-again">pre-book another pack</button>
+    </section>
+  </main>
+
+  <footer class="pb-foot">© SuperState · Made in India · questions? <a href="https://wa.me/919567309388">WhatsApp us</a></footer>
+
+  <canvas id="confetti" aria-hidden="true"></canvas>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="../../src/prebook.js" type="module"></script>
+</body>
+</html>

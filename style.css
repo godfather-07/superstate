@@ -91,9 +91,24 @@ body {
   background-color: var(--bg-primary);
   line-height: 1.7;
   font-size: 17px;
+}
+
+/* Scrolling: keep the page itself as the only scroller.
+   overflow-x: hidden on both html and body turns body into its own
+   scroll box (stuck wheel scrolling, broken sticky navbar, janky iOS).
+   `clip` hides sideways overflow without creating a scroll container. */
+html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
-  /* Prevents stray horizontal scrollbars and extra space on the right */
+}
+
+body {
+  overflow-x: clip;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 /* Typography Base */
@@ -462,23 +477,35 @@ section {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 105px;
-  /* Increased just a tad for the perfect vertical balance */
+  height: 84px;
 }
 
 @media (max-width: 992px) {
   .navbar-container {
-    height: 80px;
+    height: 64px;
+    position: relative;
+  }
+
+  /* centre the logo in the mobile bar; menu/cart stay on the right */
+  .navbar-container > .brand {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .navbar-container > :last-child {
+    margin-left: auto;
   }
 }
 
 @media (min-width: 1440px) {
   .navbar-container {
-    height: 130px;
+    height: 92px;
   }
 
   .logo-img {
-    height: 170px;
+    height: 40px;
   }
 }
 
@@ -487,23 +514,24 @@ section {
   align-items: center;
 }
 
+/* logo-wordmark.png is the trimmed wordmark (640x135), so these heights
+   are the real visible logo size */
 .logo-img {
-  height: 130px;
+  height: 36px;
   width: auto;
   transition: transform 0.3s ease;
 }
 
 /* Footer logo adjustment for dark background */
 .footer .logo-img {
-  mix-blend-mode: screen;
-  filter: grayscale(1) invert(1) brightness(2);
-  /* Makes the logo light/white on dark bg */
-  height: 80px;
+  filter: brightness(0) invert(1);
+  /* Makes the logo white on the dark footer */
+  height: 32px;
 }
 
 @media (max-width: 992px) {
   .logo-img {
-    height: 90px;
+    height: 32px;
   }
 }
 
@@ -534,10 +562,16 @@ section {
 }
 
 .mobile-menu-btn {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-right: -10px;
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: 26px;
+  line-height: 1;
   cursor: pointer;
 }
 
@@ -665,6 +699,8 @@ section {
   outline: none;
   width: 100%;
   font-family: var(--font-body);
+  font-size: 16px;
+  /* 16px stops iOS zooming in when the field is tapped */
 }
 
 .newsletter-form button {
@@ -736,6 +772,27 @@ section {
 
 
 /* WhatsApp Button */
+/* On phones the bubble waits until you've scrolled past the hero,
+   so it never covers the headline or the main button */
+@media (max-width: 768px) {
+  .whatsapp-float {
+    width: 52px !important;
+    height: 52px !important;
+    right: 16px !important;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+    opacity: 0;
+    transform: scale(0.6);
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  body.scrolled-past-hero .whatsapp-float {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+  }
+}
+
 .whatsapp-float {
   position: fixed;
   bottom: 2rem;
@@ -904,8 +961,8 @@ section {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.05);
   color: var(--accent-secondary);
@@ -1362,6 +1419,19 @@ section {
   }
 }
 
+/* Mobile basics: comfortable tap target for the logo link, no iOS input zoom */
+.brand {
+  min-height: 44px;
+}
+
+@media (max-width: 768px) {
+  input,
+  select,
+  textarea {
+    font-size: max(16px, 1em);
+  }
+}
+
 /* Mobile Responsiveness Gutters and Logo */
 @media (max-width: 768px) {
   :root {
@@ -1370,8 +1440,7 @@ section {
   }
 
   .logo-img {
-    height: 60px !important;
-    /* Compact navbar logo size to prevent vertical overflow */
+    height: 30px !important;
   }
 }
 
@@ -1882,4 +1951,14 @@ section {
 }
 
 
-
+
+
+/* ==========================================================================
+   COLOUR SCHEME
+   The site is designed light-only. `only light` tells browsers not to
+   switch or auto-darken it when the device is in dark mode.
+   ========================================================================== */
+:root {
+  color-scheme: only light;
+}
+
