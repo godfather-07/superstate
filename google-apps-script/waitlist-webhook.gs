@@ -5,7 +5,8 @@
  * 1. Open the "Influencer Waitlist Responses" sheet.
  * 2. Extensions menu -> Apps Script.
  * 3. In Code.gs, select ALL existing text (Ctrl/Cmd+A) and delete it first,
- *    then paste this whole file in. (Google seeds new script files with a
+ *    then paste this whole file in. Keep it to ONE file: if you have other
+ *    .gs files (e.g. Untitled.gs) with their own doPost, delete them. (Google seeds new script files with a
  *    stub `function myFunction() {}` - leaving that in causes a syntax error.)
  * 4. Save, then Deploy -> New deployment -> type "Web app".
  *      - Execute as: Me
@@ -27,6 +28,13 @@ const PREBOOK_HEADERS = ['Timestamp', 'Member No.', 'Name', 'Phone', 'Email', 'P
 const MEMBER_OFFSET = 27;
 
 function doPost(e) {
+  // doPost runs when the website sends data. Pressing "Run" in the editor
+  // calls it with no request, so explain instead of crashing.
+  if (!e || !e.parameter) {
+    Logger.log('doPost only runs when the website sends data. To test, pick ' +
+      '"testAppend" or "testPrebook" in the function dropdown and press Run.');
+    return json({ result: 'error', message: 'no request data' });
+  }
   const data = e.parameter;
   if (data.type === 'prebook') return handlePrebook(data);
 
@@ -57,6 +65,18 @@ function handlePrebook(data) {
     const ss = SpreadsheetApp.getActiveSpreadsheet();
     const sheet = ss.getSheetByName(PREBOOK_SHEET_NAME) || ss.insertSheet(PREBOOK_SHEET_NAME);
     if (sheet.getLastRow() === 0) sheet.appendRow(PREBOOK_HEADERS);
+
+    // The same payment can arrive twice (browser confirmation + Razorpay
+    // webhook). If this order is already logged, return its member number.
+    if (data.orderId && sheet.getLastRow() > 1) {
+      const orderIdCol = PREBOOK_HEADERS.indexOf('Razorpay Order ID') + 1;
+      const rows = sheet.getRange(2, 1, sheet.getLastRow() - 1, orderIdCol).getValues();
+      for (const row of rows) {
+        if (row[orderIdCol - 1] === data.orderId) {
+          return json({ result: 'duplicate', memberNumber: row[1] });
+        }
+      }
+    }
 
     const memberNumber = MEMBER_OFFSET + sheet.getLastRow(); // header row counts as 1 -> first pre-booker is #28
     sheet.appendRow([
@@ -112,6 +132,21 @@ function testAppend() {
     parameter: {
       name: 'Test', email: 'test@example.com', phone: '1234567890',
       gender: 'male', promoCode: 'FIRSTNIGHT20', discount: '20', isInfluencer: 'false'
+    }
+  });
+  Logger.log('doPost returned: ' + result.getContent());
+}
+
+/**
+ * Diagnostic only - run manually to add a test row to the "Prebooks" tab and
+ * confirm member numbers work. Delete the test row from the sheet afterwards.
+ */
+function testPrebook() {
+  const result = doPost({
+    parameter: {
+      type: 'prebook', name: 'Test Prebook', phone: '9999999999', email: 'test@example.com',
+      pack: 'Pack Of 30', qty: '1', fullPrice: '1500', prebookPrice: '750',
+      paymentStatus: 'TEST - delete me', orderId: 'order_TEST_' + Date.now(), paymentId: 'pay_TEST'
     }
   });
   Logger.log('doPost returned: ' + result.getContent());
