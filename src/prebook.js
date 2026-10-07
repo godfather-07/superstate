@@ -14,8 +14,9 @@ let price = priceFor(pack, qty);
 
 const rupees = n => `₹${formatINR(n)}`;
 
-// The 30-night pack gets the gold edition member card
-const isGoldPack = p => p === 'Pack Of 30';
+// The SuperState member card is a perk of the 30-night pack only
+const CARD_PACK = 'Pack Of 30';
+const hasCard = p => p === CARD_PACK;
 
 // prices on the pack buttons
 document.querySelectorAll('.pv-pack-price').forEach(el => {
@@ -38,7 +39,12 @@ function renderOrder(animate) {
   total.textContent = rupees(price.pre);
   if (animate && !reduceMotion) { total.classList.remove('bump'); void total.offsetWidth; total.classList.add('bump'); }
   $('pv-meta').textContent = `BATCH 02 · ${pack.toUpperCase()}${qty > 1 ? ` × ${qty}` : ''}`;
-  $('pv-card').classList.toggle('gold', isGoldPack(pack));
+  const carded = hasCard(pack);
+  $('pv-card').classList.toggle('locked', !carded);
+  $('pv-lock').hidden = carded;
+  $('pv-note').innerHTML = carded ? 'this is yours.<br>type your name ↓' : 'want this?<br>pick 30 nights ↓';
+  $('pv-hint').textContent = carded ? 'your member number drops the moment you pay ✨' : 'the member card is a 30-night pack perk';
+  $('pv-card-val').innerHTML = carded ? 'included 💳' : '<button type="button" data-unlock>add with 30 nights →</button>';
   $('pv-sticky-label').textContent = `${pack} × ${qty}`;
   $('pv-sticky-total').textContent = rupees(price.pre);
   if (!submitBtn.disabled) submitBtn.textContent = payLabel();
@@ -49,6 +55,12 @@ document.querySelectorAll('.pv-pack').forEach(btn => btn.addEventListener('click
   pack = btn.dataset.pack;
   renderOrder(true);
 }));
+// "switch to 30 nights" buttons (card lock, bill line)
+document.addEventListener('click', e => {
+  if (!e.target.closest('[data-unlock]')) return;
+  pack = CARD_PACK;
+  renderOrder(true);
+});
 $('pv-minus').addEventListener('click', () => { if (qty > 1) { qty--; renderOrder(true); } });
 $('pv-plus').addEventListener('click', () => { if (qty < 20) { qty++; renderOrder(true); } });
 
@@ -218,6 +230,10 @@ $('pb-again').addEventListener('click', () => {
   clearSavedPrebook();
   location.href = '/products/sleep-well/#buy-section';
 });
+$('pb-order-upsell').addEventListener('click', () => {
+  clearSavedPrebook();
+  location.href = `/pages/prebook/?pack=${encodeURIComponent(CARD_PACK)}&qty=1#checkout`;
+});
 
 /* ---------- Card reveal ---------- */
 function showCard(r, celebrate) {
@@ -231,9 +247,18 @@ function showCard(r, celebrate) {
   $('ss-name').textContent = r.name.toUpperCase();
   $('ss-number').textContent = r.memberId;
   $('ss-meta').textContent = `BATCH 02 · ${r.pack.toUpperCase()}${r.qty > 1 ? ` × ${r.qty}` : ''}`;
-  $('ss-card').classList.toggle('gold', isGoldPack(r.pack));
   $('ss-since').textContent = `${String(since.getMonth() + 1).padStart(2, '0')}/${String(since.getFullYear()).slice(-2)}`;
-  $('pb-done-sub').textContent = `${first}, you're paid up at 50% off. here's your SuperState card.`;
+  const carded = hasCard(r.pack);
+  $('pb-card-reveal').hidden = !carded;
+  $('pb-order-done').hidden = carded;
+  $('pb-order-pack').textContent = `Sleep Well · ${r.pack} × ${r.qty}`;
+  $('pb-order-paid').textContent = `₹${formatINR(r.prebookPrice)} paid`;
+  $('pb-step3').textContent = carded
+    ? 'free shipping across India. your physical card comes in the box'
+    : 'free shipping across India';
+  $('pb-done-sub').textContent = carded
+    ? `${first}, you're paid up at 50% off. here's your SuperState card.`
+    : `${first}, you're paid up at 50% off. your Sleep Well ships with batch 02.`;
   $('pb-step1').textContent = `${r.pack} × ${r.qty} · ₹${formatINR(r.prebookPrice)} paid (50% off)`;
   $('pb-step2-phone').textContent = `+91 ${r.phone.slice(0, 5)} ${r.phone.slice(5)}`;
   $('pb-payid').textContent = r.paymentId ? `payment ID ${r.paymentId}` : '';
@@ -243,13 +268,15 @@ function showCard(r, celebrate) {
     ? `you're <strong>member ${r.memberId}</strong>. <strong>${others} night owls</strong> from batch 01 got theirs first`
     : `<strong>${others} night owls</strong> from batch 01 already have theirs`;
 
-  const shareText = `just got my SuperState card ☾ (${r.memberId}). pre-booked Sleep Well at 50% off, coffee but for sleep → https://superstate.in/products/sleep-well/`;
+  const shareText = carded
+    ? `just got my SuperState card ☾ (${r.memberId}). pre-booked Sleep Well at 50% off, coffee but for sleep → https://superstate.in/products/sleep-well/`
+    : `just pre-booked Sleep Well at 50% off ☾ coffee, but for sleep → https://superstate.in/products/sleep-well/`;
   const share = $('pb-share');
   share.href = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
   if (navigator.share) {
     share.addEventListener('click', e => {
       e.preventDefault();
-      navigator.share({ title: 'My SuperState card', text: shareText }).catch(() => {});
+      navigator.share({ title: carded ? 'My SuperState card' : 'SuperState Sleep Well', text: shareText }).catch(() => {});
     }, { once: true });
   }
 
@@ -259,7 +286,7 @@ function showCard(r, celebrate) {
   } else {
     card.classList.add('revealed');
   }
-  enableTilt(card);
+  if (carded) enableTilt(card);
 }
 
 /* ---------- Holographic tilt ---------- */

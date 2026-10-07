@@ -7,7 +7,7 @@
  * client), so nobody can change what they pay by editing the request.
  */
 
-import { getRazorpay, getKeys, sendJson, readJson, razorpayErrorStatus } from './_lib/razorpay.js';
+import { getRazorpay, getKeys, sendJson, readJson, razorpayErrorStatus, missingKeysMessage } from './_lib/razorpay.js';
 import { priceFor } from '../src/shared/packs.js';
 
 const MIN_AMOUNT_PAISE = 100;
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
   const razorpay = getRazorpay();
   if (!razorpay) {
     console.error('create-order: RAZORPAY_KEY_ID / RAZORPAY_KEY_SECRET not set');
-    return sendJson(res, 500, { error: 'Payments are not configured yet.' });
+    return sendJson(res, 500, { error: missingKeysMessage() });
   }
 
   const body = await readJson(req);

@@ -9,7 +9,7 @@
  */
 
 import crypto from 'node:crypto';
-import { getKeys, getRazorpay, sendJson, readJson } from './_lib/razorpay.js';
+import { getKeys, getRazorpay, sendJson, readJson, missingKeysMessage } from './_lib/razorpay.js';
 
 const DEFAULT_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxhS7lMkCtr6ClWnCTr4vg0STeSdXis1Tr3prD5KljXsBfZ_II9t9UGO6aJxMrXTMxJ/exec';
 
@@ -29,7 +29,7 @@ export default async function handler(req, res) {
   const keys = getKeys();
   if (!keys) {
     console.error('verify-payment: RAZORPAY_KEY_ID / RAZORPAY_KEY_SECRET not set');
-    return sendJson(res, 500, { error: 'Payments are not configured yet.' });
+    return sendJson(res, 500, { error: missingKeysMessage() });
   }
 
   const body = await readJson(req);

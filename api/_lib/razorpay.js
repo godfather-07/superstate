@@ -15,6 +15,13 @@ export function getKeys() {
   return { keyId, keySecret };
 }
 
+// Human-readable reason the keys aren't usable here (names only, never values).
+export function missingKeysMessage() {
+  const missing = ['RAZORPAY_KEY_ID', 'RAZORPAY_KEY_SECRET'].filter(n => !(process.env[n] || '').trim());
+  const where = process.env.VERCEL_ENV ? `Vercel ${process.env.VERCEL_ENV}` : 'this server';
+  return `Payments are not configured yet: ${missing.join(' and ')} not set for ${where}.`;
+}
+
 let client = null;
 export function getRazorpay() {
   const keys = getKeys();
