@@ -1,6 +1,6 @@
 /**
  * POST /api/create-order
- * Body: { pack, qty, name, phone, email }
+ * Body: { pack, qty, name, phone, email, address, pincode, city, state }
  * Returns: { order_id, amount, currency, key_id }
  *
  * The amount is computed here from the pack table (never taken from the
@@ -27,7 +27,7 @@ export default async function handler(req, res) {
   const body = await readJson(req);
   if (!body) return sendJson(res, 400, { error: 'Invalid JSON body.' });
 
-  const { pack, name = '', phone = '', email = '' } = body;
+  const { pack, name = '', phone = '', email = '', address = '', pincode = '', city = '', state = '' } = body;
   const price = priceFor(pack, Number(body.qty));
   if (!price) return sendJson(res, 400, { error: 'Unknown pack or quantity.' });
   if (price.prePaise < MIN_AMOUNT_PAISE) {
@@ -47,6 +47,10 @@ export default async function handler(req, res) {
         name: String(name).slice(0, 80),
         phone: String(phone).replace(/\D/g, '').slice(-10),
         email: String(email).slice(0, 120),
+        address: String(address).slice(0, 200),
+        pincode: String(pincode).replace(/\D/g, '').slice(0, 6),
+        city: String(city).slice(0, 40),
+        state: String(state).slice(0, 40),
         full_price: String(price.full)
       }
     });

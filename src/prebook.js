@@ -81,7 +81,7 @@ if (saved && !params.get('pack')) showCard(saved, false);
 
 /* ---------- Form ---------- */
 const form = $('pb-form');
-const fields = ['name', 'phone', 'email'];
+const fields = ['name', 'phone', 'email', 'address', 'pincode', 'city', 'state'];
 
 fields.forEach(f => $(`pb-${f}`).addEventListener('input', () => setError(f, '')));
 
@@ -125,7 +125,11 @@ form.addEventListener('submit', async e => {
   const details = {
     name: $('pb-name').value.trim(),
     phone: $('pb-phone').value,
-    email: $('pb-email').value.trim().toLowerCase()
+    email: $('pb-email').value.trim().toLowerCase(),
+    address: $('pb-address').value.trim().replace(/\s+/g, ' '),
+    pincode: $('pb-pincode').value.replace(/\D/g, ''),
+    city: $('pb-city').value.trim(),
+    state: $('pb-state').value.trim()
   };
   const check = validatePrebook(details);
   if (!check.isValid) {
@@ -223,7 +227,7 @@ function setError(field, msg) {
   const el = $(`pb-${field}-err`);
   if (el) el.textContent = msg;
   const input = $(`pb-${field}`);
-  if (input && input.tagName === 'INPUT') input.classList.toggle('err', !!msg);
+  if (input && (input.tagName === 'INPUT' || input.tagName === 'TEXTAREA')) input.classList.toggle('err', !!msg);
 }
 
 $('pb-again').addEventListener('click', () => {

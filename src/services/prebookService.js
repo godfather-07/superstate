@@ -25,12 +25,16 @@ export function formatINR(n) {
     : n.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
-export function validatePrebook({ name, phone, email }) {
+export function validatePrebook({ name, phone, email, address, pincode, city, state }) {
   const errors = {};
   if (!name || name.trim().length < 2) errors.name = 'Please enter your name.';
   const digits = (phone || '').replace(/\D/g, '').replace(/^91(?=\d{10}$)/, '');
   if (!/^[6-9]\d{9}$/.test(digits)) errors.phone = 'Enter a 10-digit WhatsApp number.';
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) errors.email = 'Enter a valid email address.';
+  if (!address || address.trim().length < 8) errors.address = 'Enter your full delivery address.';
+  if (!/^[1-9]\d{5}$/.test(String(pincode || '').trim())) errors.pincode = 'Enter a 6-digit pincode.';
+  if (!city || city.trim().length < 2) errors.city = 'Enter your city.';
+  if (!state || state.trim().length < 2) errors.state = 'Enter your state.';
   return { isValid: Object.keys(errors).length === 0, errors, phone: digits };
 }
 
