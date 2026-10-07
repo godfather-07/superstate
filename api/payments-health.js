@@ -25,6 +25,7 @@ export default function handler(req, res) {
     deployment_url: process.env.VERCEL_URL || null,
     RAZORPAY_KEY_ID: id ? `set (${mode} key)` : 'MISSING',
     RAZORPAY_KEY_SECRET: secret ? `set (${secret.length} chars)` : 'MISSING',
+    RAZORPAY_WEBHOOK_SECRET: (process.env.RAZORPAY_WEBHOOK_SECRET || '').trim() ? 'set' : 'MISSING (optional, but recommended for live)',
     razorpay_variable_names_seen: similarNames
   });
 }

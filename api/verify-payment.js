@@ -10,8 +10,7 @@
 
 import crypto from 'node:crypto';
 import { getKeys, getRazorpay, sendJson, readJson, missingKeysMessage } from './_lib/razorpay.js';
-
-const DEFAULT_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxhS7lMkCtr6ClWnCTr4vg0STeSdXis1Tr3prD5KljXsBfZ_II9t9UGO6aJxMrXTMxJ/exec';
+import { logPaidPrebook } from './_lib/sheet.js';
 
 export function isValidSignature(orderId, paymentId, signature, secret) {
   const expected = crypto.createHmac('sha256', secret).update(`${orderId}|${paymentId}`).digest('hex');
@@ -55,26 +54,4 @@ export default async function handler(req, res) {
   }
 
   return sendJson(res, 200, { verified: true, member_number: memberNumber });
-}
-
-async function logPaidPrebook(order, paymentId) {
-  const url = process.env.SHEET_WEBHOOK_URL || process.env.VITE_WAITLIST_SHEET_URL || DEFAULT_SHEET_URL;
-  const n = order.notes || {};
-  const form = new URLSearchParams({
-    type: 'prebook',
-    name: n.name || '',
-    phone: n.phone || '',
-    email: n.email || '',
-    pack: n.pack || '',
-    qty: n.qty || '',
-    fullPrice: n.full_price || '',
-    prebookPrice: String(order.amount / 100),
-    paymentStatus: 'Paid',
-    orderId: order.id,
-    paymentId
-  });
-  const res = await fetch(url, { method: 'POST', body: form, redirect: 'follow' });
-  const data = await res.json().catch(() => ({}));
-  const num = Number(data.memberNumber);
-  return Number.isInteger(num) && num > 0 ? num : null;
 }

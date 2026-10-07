@@ -58,6 +58,18 @@ function handlePrebook(data) {
     const sheet = ss.getSheetByName(PREBOOK_SHEET_NAME) || ss.insertSheet(PREBOOK_SHEET_NAME);
     if (sheet.getLastRow() === 0) sheet.appendRow(PREBOOK_HEADERS);
 
+    // The same payment can arrive twice (browser confirmation + Razorpay
+    // webhook). If this order is already logged, return its member number.
+    if (data.orderId && sheet.getLastRow() > 1) {
+      const orderIdCol = PREBOOK_HEADERS.indexOf('Razorpay Order ID') + 1;
+      const rows = sheet.getRange(2, 1, sheet.getLastRow() - 1, orderIdCol).getValues();
+      for (const row of rows) {
+        if (row[orderIdCol - 1] === data.orderId) {
+          return json({ result: 'duplicate', memberNumber: row[1] });
+        }
+      }
+    }
+
     const memberNumber = MEMBER_OFFSET + sheet.getLastRow(); // header row counts as 1 -> first pre-booker is #28
     sheet.appendRow([
       new Date(),
