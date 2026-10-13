@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/pages/get-plan", "destination": "/pages/waitlist/", "permanent": true },
+    { "source": "/pages/get-plan/(.*)", "destination": "/pages/waitlist/", "permanent": true }
+  ]
+}
