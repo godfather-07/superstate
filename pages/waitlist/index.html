@@ -226,6 +226,25 @@
     }
 
 
+    /* Optional creator code, tucked behind a link */
+    .wl-code-toggle {
+      display: inline-block;
+      margin: -0.4rem 0 1.35rem;
+      padding: 0;
+      background: none;
+      border: 0;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
+    }
+    .wl-code-toggle[hidden], #wl-code-group[hidden] { display: none; }
+    .wl-code-input { text-transform: uppercase; letter-spacing: .06em; }
+    .wl-code-input::placeholder { text-transform: none; letter-spacing: 0; }
+
     /* Two inputs side by side */
     .wl-row {
       display: grid;
@@ -560,6 +579,13 @@
           <label class="wl-label" for="wl-email">Email Address</label>
           <input class="wl-input" id="wl-email" type="email" placeholder="arjun@email.com" autocomplete="email" required />
           <span class="wl-err" id="email-err"></span>
+        </div>
+
+        <button type="button" class="wl-code-toggle" id="wl-code-toggle" aria-expanded="false" aria-controls="wl-code-group">have a creator code?</button>
+        <div class="wl-group" id="wl-code-group" hidden>
+          <label class="wl-label" for="wl-code">Creator code <span class="wl-opt">(optional)</span></label>
+          <input class="wl-input wl-code-input" id="wl-code" type="text" placeholder="e.g. ABHIJITH30" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="24" />
+          <span class="wl-err" id="code-err"></span>
         </div>
 
         <div class="wl-group">
