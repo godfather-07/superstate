@@ -1,3 +1,5 @@
+import './src/prebookNudge.js';
+
 // Mobile Menu Toggle
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const mobileDrawer = document.querySelector('.mobile-drawer');

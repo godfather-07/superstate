@@ -40,7 +40,6 @@ export default defineConfig(({ mode }) => {
           faqs: resolve(__dirname, 'pages/faqs/index.html'),
           contact: resolve(__dirname, 'pages/contact/index.html'),
           waitlist: resolve(__dirname, 'pages/waitlist/index.html'),
-          getPlan: resolve(__dirname, 'pages/get-plan/index.html'),
           prebook: resolve(__dirname, 'pages/prebook/index.html'),
         },
       },
