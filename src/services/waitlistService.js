@@ -15,7 +15,8 @@ export const WAITLIST_CONFIG = {
   EARLY_ACCESS_CODE: 'FIRSTNIGHT20',
   EARLY_ACCESS_DISCOUNT: 20,
   CREATOR_CODES: {
-    ABHIJITH30: 30
+    ABHIJITH30: 30,
+    ABHIMANYU30: 30
   },
   STORAGE_KEY_USER: 'superstate_waitlist_user',
   STORAGE_KEY_ALL: 'superstate_waitlist_submissions',
