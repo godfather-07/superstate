@@ -13,6 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const emailInput   = document.getElementById('wl-email');
   const phoneInput   = document.getElementById('wl-phone');
   const genderInput  = document.getElementById('wl-gender');
+  const codeInput    = document.getElementById('wl-code');
+  const codeGroup    = document.getElementById('wl-code-group');
+  const codeToggle   = document.getElementById('wl-code-toggle');
 
   const successName    = document.getElementById('wl-success-name');
   const successEmail   = document.getElementById('wl-success-email');
@@ -37,9 +40,25 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ─── Real-time inline error clearing ───────────────────────────────── */
-  [nameInput, emailInput, phoneInput].forEach(inp => {
+  [nameInput, emailInput, phoneInput, codeInput].forEach(inp => {
     inp?.addEventListener('input', () => clearError(inp));
   });
+
+  /* ─── Creator code (hidden until asked for) ──────────────────────────── */
+  function openCodeField(focus) {
+    if (!codeGroup || !codeToggle) return;
+    codeGroup.hidden = false;
+    codeToggle.hidden = true;
+    codeToggle.setAttribute('aria-expanded', 'true');
+    if (focus) codeInput?.focus();
+  }
+  function closeCodeField() {
+    if (!codeGroup || !codeToggle) return;
+    codeGroup.hidden = true;
+    codeToggle.hidden = false;
+    codeToggle.setAttribute('aria-expanded', 'false');
+  }
+  codeToggle?.addEventListener('click', () => openCodeField(true));
 
   /* ─── Copy the code ──────────────────────────────────────────────────── */
   copyBtn?.addEventListener('click', async () => {
@@ -64,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         email: emailInput?.value || '',
         phone: phoneInput?.value || '',
         gender: genderInput?.value || 'prefer_not_to_say',
-        promoCode: ''
+        promoCode: codeInput?.value || ''
       });
 
       if (res.success) {
@@ -84,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     clearSavedSubmission();
     form?.reset();
     clearAllErrors();
+    closeCodeField();
     if (copyBtn) copyBtn.textContent = 'copy';
     genderBtns.forEach(b => b.classList.remove('active'));
     genderBtns[0]?.classList.add('active');
@@ -108,11 +128,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function clearAllErrors() {
-    [nameInput, emailInput, phoneInput].forEach(i => i && clearError(i));
+    [nameInput, emailInput, phoneInput, codeInput].forEach(i => i && clearError(i));
   }
 
   function showErrors(errors) {
-    const map = { name: nameInput, email: emailInput, phone: phoneInput };
+    const map = { name: nameInput, email: emailInput, phone: phoneInput, code: codeInput };
+    if (errors.code) openCodeField(false);
     let first = true;
     Object.entries(errors).forEach(([key, msg]) => {
       const inp = map[key];

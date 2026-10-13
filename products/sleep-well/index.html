@@ -2520,9 +2520,31 @@
       .drop-dot { animation: none; }
     }
     /* ---------- Buy box link to game ---------- */
+    /* Waitlist: the free option, right under the pre-book button */
+    .waitlist-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      width: 100%;
+      max-width: 600px;
+      margin: -1rem 0 1.25rem;
+      padding: 0.8rem 1rem;
+      border: 2px solid #000000;
+      border-radius: 8px;
+      background: #ffffff;
+      color: #000000;
+      text-decoration: none;
+      font-family: var(--font-body);
+      transition: background-color 0.2s;
+    }
+    .waitlist-cta:hover { background: #f4f6fc; }
+    .waitlist-cta b { font-size: 16px; font-weight: 700; }
+    .waitlist-cta small { display: block; font-size: 13px; color: #4a5878; font-weight: 500; margin-top: 0.1rem; }
+    .waitlist-cta i { font-style: normal; font-size: 20px; font-weight: 700; }
     .win-link {
       display: inline-block;
-      margin: -0.75rem 0 1.25rem;
+      margin: -0.25rem 0 1.25rem;
       font-size: 14px;
       color: var(--color-muted-slate);
       text-decoration: none;
@@ -2580,6 +2602,7 @@
       text-decoration-color: #ff6b6b;
       text-decoration-thickness: 2px;
     }
+    .era-link { color: inherit; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
     .era-copy {
       margin: 0.8rem 0 0.75rem;
       font-size: 15px;
@@ -3060,7 +3083,12 @@
             </button>
           </div>
 
-          <a href="#win" class="win-link">not ready to pay? 🎮 <span>play a 20-second game for 20% off</span></a>
+          <a href="/pages/waitlist/" class="waitlist-cta">
+            <span><b>not ready to pay? join the waitlist</b><small>free · 20% off at launch · got a creator code? use it there</small></span>
+            <i aria-hidden="true">→</i>
+          </a>
+
+          <a href="#win" class="win-link">or 🎮 <span>win your 20% in a 20-second game</span></a>
 
           <ul class="pdp-facts-row">
             <li>Secure payment by Razorpay</li>
@@ -3080,7 +3108,7 @@
             <p class="era-copy">ok so… batch 01 got <strong>absolutely cleared.</strong> y'all ate it up way faster than we planned 🫠 we took notes, made it <em>even better</em>, and the next drop is loading:</p>
             <div class="era-progress">
               <div class="era-bar" role="img" aria-label="Next drop loading"><span></span></div>
-              <p class="era-foot">hold your horses 🐎 steady, steady.</p>
+              <p class="era-foot">hold your horses 🐎 steady, steady. <a href="/pages/waitlist/" class="era-link">get on the waitlist →</a></p>
             </div>
           </div>
         </div>
@@ -3122,7 +3150,7 @@
               <p class="game-sub">20% off when we launch. drop your details so we can ping you the second it's live.</p>
               <div class="game-actions">
                 <button type="button" class="game-btn game-btn-primary" data-action="copy">copy code</button>
-                <a href="/pages/waitlist/" class="game-btn game-btn-ghost">save my spot →</a>
+                <a href="/pages/waitlist/" class="game-btn game-btn-ghost">join the waitlist →</a>
               </div>
             </div>
           </div>

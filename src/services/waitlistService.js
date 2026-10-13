@@ -1,15 +1,23 @@
 /**
  * Superstate Waitlist Service
  *
- * COUPON LOGIC: one code for everyone. Every signup gets FIRSTNIGHT20
- * (20% off at launch); there is no code field on the form.
- * The sheet keeps its Promo Code / Discount / Is Influencer columns so the
- * existing Apps Script keeps working.
+ * COUPON LOGIC:
+ * - No code entered → FIRSTNIGHT20 (20% off at launch)
+ * - A code listed in CREATOR_CODES → that code and its discount
+ *   (logged with Is Influencer = TRUE so you can see who brought whom)
+ * - Any other code → rejected as invalid
+ *
+ * TO ADD A CREATOR CODE: add it to CREATOR_CODES below, and create the same
+ * code with the same % in Shopify so it works at checkout.
  */
 
 export const WAITLIST_CONFIG = {
   EARLY_ACCESS_CODE: 'FIRSTNIGHT20',
   EARLY_ACCESS_DISCOUNT: 20,
+  CREATOR_CODES: {
+    ABHIJITH30: 30,
+    ABHIMANYU30: 30
+  },
   STORAGE_KEY_USER: 'superstate_waitlist_user',
   STORAGE_KEY_ALL: 'superstate_waitlist_submissions',
   SIMULATE_LATENCY_MS: 900,
@@ -20,13 +28,20 @@ export const WAITLIST_CONFIG = {
     || 'https://script.google.com/macros/s/AKfycbxhS7lMkCtr6ClWnCTr4vg0STeSdXis1Tr3prD5KljXsBfZ_II9t9UGO6aJxMrXTMxJ/exec'
 };
 
-export function resolveCoupon() {
-  return {
-    code: WAITLIST_CONFIG.EARLY_ACCESS_CODE,
-    discount: WAITLIST_CONFIG.EARLY_ACCESS_DISCOUNT,
-    isInfluencer: false,
-    isValid: true
-  };
+export function resolveCoupon(enteredCode) {
+  const code = (enteredCode || '').trim().toUpperCase();
+  if (!code) {
+    return {
+      code: WAITLIST_CONFIG.EARLY_ACCESS_CODE,
+      discount: WAITLIST_CONFIG.EARLY_ACCESS_DISCOUNT,
+      isInfluencer: false,
+      isValid: true
+    };
+  }
+  if (Object.prototype.hasOwnProperty.call(WAITLIST_CONFIG.CREATOR_CODES, code)) {
+    return { code, discount: WAITLIST_CONFIG.CREATOR_CODES[code], isInfluencer: true, isValid: true };
+  }
+  return { code, discount: 0, isInfluencer: false, isValid: false };
 }
 
 export function validateForm({ name, email, phone }, coupon) {
@@ -40,7 +55,7 @@ export function validateForm({ name, email, phone }, coupon) {
     if (!/^\d{7,15}$/.test(clean)) errors.phone = 'Enter a valid phone number.';
   }
   if (coupon && !coupon.isValid) {
-    errors.code = 'Invalid code. Leave blank for the standard discount.';
+    errors.code = `That code isn't valid. Leave it blank for ${WAITLIST_CONFIG.EARLY_ACCESS_DISCOUNT}% off with ${WAITLIST_CONFIG.EARLY_ACCESS_CODE}.`;
   }
   return { isValid: Object.keys(errors).length === 0, errors };
 }
