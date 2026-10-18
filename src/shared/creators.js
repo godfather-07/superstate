@@ -6,20 +6,28 @@
  *   price); it is only saved as "Referred By" so you can see which creator
  *   drove paid pre-books.
  *
- * TO ADD A CREATOR: add their code here (uppercase) with their waitlist %,
- * and create the same code with the same % in Shopify.
+ * - Pre-book via a creator: the order also comes with a creator gift package
+ *   (shown on the pre-book page; "Referred By" in the sheet = ship the gift).
+ *
+ * TO ADD A CREATOR: add their code here (uppercase) with their display name
+ * and waitlist %, and create the same code with the same % in Shopify.
  * Creator links: https://www.superstate.in/?ref=CODE (works on any page).
  */
-export const CREATOR_CODES = {
-  ABHIJITH30: 30,
-  ABHIMANYU30: 30,
-  FAIHA30: 30
+export const CREATORS = {
+  ABHIJITH30: { name: 'Abhijith', discount: 30 },
+  ABHIMANYU30: { name: 'Abhimanyu', discount: 30 },
+  FAIHA30: { name: 'Faiha', discount: 30 }
 };
 
 // Returns the code in canonical form if it's a known creator code, else null.
 export function normalizeCreatorCode(code) {
   const c = String(code || '').trim().toUpperCase();
-  return Object.prototype.hasOwnProperty.call(CREATOR_CODES, c) ? c : null;
+  return Object.prototype.hasOwnProperty.call(CREATORS, c) ? c : null;
+}
+
+export function creatorName(code) {
+  const c = normalizeCreatorCode(code);
+  return c ? CREATORS[c].name : null;
 }
 
 /* Remembering a creator link (?ref=CODE or ?code=CODE) across pages */

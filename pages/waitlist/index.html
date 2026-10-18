@@ -482,6 +482,30 @@
 
 
     /* ── Minimal coupon ticket on the success card ─────────────────────── */
+    /* Pre-book upsell on the success card */
+    .wl-upsell {
+      margin: 0 0 1.5rem;
+      padding: 1.25rem 1.25rem 1.1rem;
+      border-radius: 18px;
+      background: #003399;
+      color: #ffffff;
+      text-align: left;
+    }
+    .wl-upsell-tag {
+      display: inline-block; padding: .22rem .6rem; border-radius: 999px;
+      background: #E4FF5A; color: #001a4d;
+      font-size: 12px; font-weight: 800; letter-spacing: .02em;
+    }
+    .wl-upsell-h { margin: .65rem 0 .3rem; font-size: 20px; line-height: 1.2; font-weight: 800; color: #ffffff; }
+    .wl-upsell-h em { font-style: normal; color: #E4FF5A; }
+    .wl-upsell-p { margin: 0 0 1rem; font-size: 14.5px; line-height: 1.5; color: #d5ddf3; }
+    .wl-upsell-cta {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 48px; border-radius: 12px;
+      background: #E4FF5A; color: #001a4d; text-decoration: none;
+      font-size: 16px; font-weight: 800;
+    }
+    .wl-upsell-cta:hover { filter: brightness(.97); }
     .wl-coupon {
       margin: 0 auto 1.75rem;
       max-width: 320px;
@@ -631,6 +655,13 @@
           <strong class="wl-coupon-code" id="wl-success-code">FIRSTNIGHT20</strong>
           <button type="button" class="wl-coupon-copy" id="wl-copy-btn">copy</button>
         </div>
+      </div>
+
+      <div class="wl-upsell" id="wl-upsell">
+        <span class="wl-upsell-tag" id="wl-upsell-tag">want it cheaper?</span>
+        <p class="wl-upsell-h" id="wl-upsell-h">skip the wait. <em>pre-book at 50% off.</em></p>
+        <p class="wl-upsell-p" id="wl-upsell-p">30 nights for ₹750 instead of ₹1,500, plus your SuperState member card. pay now, ships with the next drop.</p>
+        <a class="wl-upsell-cta" id="wl-upsell-cta" href="/pages/prebook/?pack=Pack%20Of%2030&amp;qty=1">pre-book at 50% off →</a>
       </div>
 
       <a href="https://www.superstate.in" class="wl-back-link">

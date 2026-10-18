@@ -1,5 +1,5 @@
 import { submitWaitlist, getSavedSubmission, clearSavedSubmission, WAITLIST_CONFIG } from './services/waitlistService.js';
-import { captureRefFromUrl, getStoredRef } from './shared/creators.js';
+import { captureRefFromUrl, getStoredRef, creatorName } from './shared/creators.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   /* ─── Elements ─────────────────────────────────────────────────────────── */
@@ -158,6 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (successDiscount) successDiscount.textContent = record.discount || 20;
     const successCode = document.getElementById('wl-success-code');
     if (successCode) successCode.textContent = record.promoCode || WAITLIST_CONFIG.EARLY_ACCESS_CODE;
+    renderUpsell(record.isInfluencer ? record.promoCode : null);
 
     formCard.style.transition = 'opacity 0.3s, transform 0.3s';
     formCard.style.opacity = '0';
@@ -169,6 +170,29 @@ document.addEventListener('DOMContentLoaded', () => {
       requestAnimationFrame(() => successCard.classList.add('visible'));
       successCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }, 280);
+  }
+
+  // Point everyone to the pre-book; creator followers also get the gift pitch
+  function renderUpsell(code) {
+    const cta = document.getElementById('wl-upsell-cta');
+    if (!cta) return;
+    const name = creatorName(code);
+    const base = '/pages/prebook/?pack=Pack%20Of%2030&qty=1';
+    if (name) {
+      document.getElementById('wl-upsell-tag').textContent = `🎁 for ${name}'s followers`;
+      document.getElementById('wl-upsell-h').innerHTML = `pre-book now and get a <em>free gift package.</em>`;
+      document.getElementById('wl-upsell-p').textContent =
+        `because ${name} sent you, your pre-book comes with a special package of SuperState gifts. other pre-bookers don't get this. plus 50% off: 30 nights for ₹750 instead of ₹1,500.`;
+      cta.textContent = 'pre-book with my gift →';
+      cta.href = `${base}&ref=${encodeURIComponent(code)}`;
+    } else {
+      document.getElementById('wl-upsell-tag').textContent = 'want it cheaper?';
+      document.getElementById('wl-upsell-h').innerHTML = 'skip the wait. <em>pre-book at 50% off.</em>';
+      document.getElementById('wl-upsell-p').textContent =
+        '30 nights for ₹750 instead of ₹1,500, plus your SuperState member card. pay now, ships with the next drop.';
+      cta.textContent = 'pre-book at 50% off →';
+      cta.href = base;
+    }
   }
 
   function showForm() {

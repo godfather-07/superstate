@@ -431,6 +431,20 @@
       padding-top: 2rem;
       padding-bottom: 3rem;
     }
+    .pv-gift {
+      display: flex; gap: .85rem; align-items: flex-start;
+      margin: 0 0 1.5rem; padding: 1rem 1.1rem;
+      border-radius: 16px;
+      background: rgba(228, 255, 90, 0.12);
+      border: 2px solid var(--lime);
+      color: #ffffff;
+    }
+    .pv-gift[hidden] { display: none; }
+    .pv-gift-icon { font-size: 28px; line-height: 1; }
+    .pv-gift strong { display: block; font-size: 17px; color: var(--lime); margin-bottom: .2rem; }
+    .pv-gift p { margin: 0; font-size: 14.5px; line-height: 1.5; color: #e2e8f5; }
+    .pv-bill-gift span:last-child { color: var(--lime); font-weight: 700; }
+    #pv-gift-line[hidden] { display: none; }
     .pv-card-word {
       display: inline-block;
       background: var(--lime);
@@ -795,6 +809,13 @@
           <span class="pb-tag"><span class="pb-dot"></span> batch 02 · pre-booking open</span>
           <h1 class="pb-h1">lock in <em>50% off.</em><br>get your <span class="pv-card-word">card.</span></h1>
           <p class="pb-sub">batch 01 sold out. pay half today and your Sleep Well ships with the next drop. go for 30 nights and you also become a SuperState founding member, card and all.</p>
+          <div class="pv-gift" id="pv-gift" hidden>
+            <span class="pv-gift-icon" aria-hidden="true">🎁</span>
+            <div>
+              <strong id="pv-gift-title">a gift from your creator</strong>
+              <p id="pv-gift-text">because you're part of their community, your pre-book comes with a special package of SuperState gifts. other pre-bookers don't get this.</p>
+            </div>
+          </div>
           <div class="pv-stats">
             <div><strong>50%</strong><span>off, pre-book only</span></div>
             <div><strong id="pv-stat-members">27</strong><span>night owls already carded</span></div>
@@ -901,6 +922,7 @@
             <div class="pv-bill-line"><span id="pv-line-label">Sleep Well · Pack Of 5 × 1</span><span id="pv-line-mrp">₹299</span></div>
             <div class="pv-bill-line pv-bill-off"><span>pre-book discount (50%)</span><span id="pv-line-off">−₹149.50</span></div>
             <div class="pv-bill-line"><span>shipping</span><span>FREE</span></div>
+            <div class="pv-bill-line pv-bill-gift" id="pv-gift-line" hidden><span id="pv-gift-line-label">creator gift package</span><span>FREE 🎁</span></div>
             <div class="pv-bill-line" id="pv-card-line"><span>SuperState member card</span><span id="pv-card-val">included 💳</span></div>
             <div class="pv-bill-total"><span>pay today</span><span id="pv-total">₹149.50</span></div>
           </div>
@@ -954,7 +976,7 @@
               <label class="pb-label" for="pb-ref">Creator code <span style="text-transform:none;letter-spacing:0;font-weight:500;color:#4a5878">(optional)</span></label>
               <input class="pb-input pb-ref-input" id="pb-ref" type="text" placeholder="e.g. ABHIJITH30" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="24">
               <span class="pb-err" id="pb-ref-err"></span>
-              <span class="pb-ref-note" id="pb-ref-note">no extra discount (50% is already our best price). it just tells us who to thank 💛</span>
+              <span class="pb-ref-note" id="pb-ref-note">followers of our creators get a free SuperState gift package with their pre-book 🎁</span>
             </div>
             <button class="pb-submit" id="pb-submit" type="submit">pay · 50% off →</button>
             <span class="pb-err" id="pb-form-err" role="alert"></span>
