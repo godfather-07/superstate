@@ -16,7 +16,9 @@
 export const CREATORS = {
   ABHIJITH30: { name: 'Abhijith', discount: 30 },
   ABHIMANYU30: { name: 'Abhimanyu', discount: 30 },
-  FAIHA30: { name: 'Faiha', discount: 30 }
+  FAIHA30: { name: 'Faiha', discount: 30 },
+  KRISHNA30: { name: 'Krishna', discount: 30 },
+  SALIH30: { name: 'Salih', discount: 30 }
 };
 
 // Returns the code in canonical form if it's a known creator code, else null.
