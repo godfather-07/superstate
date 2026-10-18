@@ -3,14 +3,14 @@
  *
  * COUPON LOGIC:
  * - No code entered → FIRSTNIGHT20 (20% off at launch)
- * - A code listed in CREATOR_CODES → that code and its discount
+ * - A code listed in CREATORS (src/shared/creators.js) → that code and its discount
  *   (logged with Is Influencer = TRUE so you can see who brought whom)
  * - Any other code → rejected as invalid
  *
  * TO ADD A CREATOR CODE: add it to src/shared/creators.js.
  */
 
-import { CREATOR_CODES, normalizeCreatorCode } from '../shared/creators.js';
+import { CREATORS, normalizeCreatorCode } from '../shared/creators.js';
 
 export const WAITLIST_CONFIG = {
   EARLY_ACCESS_CODE: 'FIRSTNIGHT20',
@@ -37,7 +37,7 @@ export function resolveCoupon(enteredCode) {
   }
   const creator = normalizeCreatorCode(code);
   if (creator) {
-    return { code: creator, discount: CREATOR_CODES[creator], isInfluencer: true, isValid: true };
+    return { code: creator, discount: CREATORS[creator].discount, isInfluencer: true, isValid: true };
   }
   return { code, discount: 0, isInfluencer: false, isValid: false };
 }

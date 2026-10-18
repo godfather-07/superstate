@@ -2,7 +2,7 @@ import {
   PREBOOK_CONFIG, PACKS, priceFor, formatINR, validatePrebook, getSavedPrebook, clearSavedPrebook,
   savePrebook, memberIdFor, createOrder, verifyPayment
 } from './services/prebookService.js';
-import { normalizeCreatorCode, captureRefFromUrl, getStoredRef } from './shared/creators.js';
+import { normalizeCreatorCode, captureRefFromUrl, getStoredRef, creatorName } from './shared/creators.js';
 
 const $ = id => document.getElementById(id);
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -99,10 +99,22 @@ function openRef(focus) {
   if (focus) refInput.focus();
 }
 refToggle.addEventListener('click', () => openRef(true));
+// Creator followers get a gift package with their pre-book
+function renderGift(code) {
+  const name = creatorName(code);
+  $('pv-gift').hidden = !name;
+  $('pv-gift-line').hidden = !name;
+  if (!name) return;
+  $('pv-gift-title').textContent = `because you follow ${name} 🎁`;
+  $('pv-gift-text').textContent = `unlike other pre-book customers, your order comes with a special package of SuperState gifts, just for ${name}'s community.`;
+  $('pv-gift-line-label').textContent = `${name}'s gift package`;
+}
+refInput.addEventListener('input', () => renderGift(refInput.value));
+renderGift(linkRef);
 if (linkRef) {
   refInput.value = linkRef;
   openRef(false);
-  $('pb-ref-note').innerHTML = `<span class="pb-ref-ok">✓ sent by ${linkRef}</span>. no extra discount (50% is already our best price), we just want to thank them 💛`;
+  $('pb-ref-note').innerHTML = `<span class="pb-ref-ok">✓ sent by ${creatorName(linkRef)} (${linkRef})</span>. your gift package is added to this order 🎁`;
 }
 
 const submitBtn = $('pb-submit');
