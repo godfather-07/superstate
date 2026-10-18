@@ -3,6 +3,9 @@ import {
   savePrebook, memberIdFor, createOrder, verifyPayment
 } from './services/prebookService.js';
 import { normalizeCreatorCode, captureRefFromUrl, getStoredRef, creatorName } from './shared/creators.js';
+import { initPixel, track } from './shared/pixel.js';
+
+initPixel();
 
 const $ = id => document.getElementById(id);
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -14,6 +17,7 @@ let qty = Math.min(Math.max(parseInt(params.get('qty'), 10) || 1, 1), 20);
 let price = priceFor(pack, qty);
 // Creator who sent this visitor (from ?ref= on this or an earlier page)
 const linkRef = captureRefFromUrl() || getStoredRef();
+track('InitiateCheckout', { content_name: 'Sleep Well', content_ids: ['sleep-well'], currency: 'INR', value: price.pre, creator: linkRef || undefined });
 
 const rupees = n => `₹${formatINR(n)}`;
 
@@ -193,6 +197,8 @@ form.addEventListener('submit', async e => {
     return;
   }
 
+  track('AddPaymentInfo', { content_name: `Sleep Well · ${pack}`, content_ids: ['sleep-well'], currency: 'INR', value: price.pre, num_items: qty, creator: ref || undefined });
+
   // 2. Razorpay checkout modal
   const rzp = new window.Razorpay({
     key: order.data.key_id, // public Key ID, sent by our server with each order
@@ -242,6 +248,11 @@ form.addEventListener('submit', async e => {
         memberId: memberIdFor(memberNumber, details.phone)
       };
       savePrebook(record);
+      // eventID = Razorpay payment id, so a future server-side (CAPI) event can be de-duplicated
+      track('Purchase', {
+        content_name: `Sleep Well · ${pack}`, content_ids: ['sleep-well'], content_type: 'product',
+        currency: 'INR', value: price.pre, num_items: qty, creator: ref || undefined
+      }, { eventID: response.razorpay_payment_id });
       setBusy(false);
       showCard(record, true);
     },

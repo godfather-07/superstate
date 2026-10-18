@@ -1,5 +1,18 @@
 import './src/prebookNudge.js';
-import { captureRefFromUrl } from './src/shared/creators.js';
+import { captureRefFromUrl, getStoredRef } from './src/shared/creators.js';
+import { initPixel, track } from './src/shared/pixel.js';
+
+initPixel();
+if (location.pathname.startsWith('/products/sleep-well')) {
+  const creator = getStoredRef() || undefined;
+  track('ViewContent', { content_name: 'Sleep Well', content_type: 'product', content_ids: ['sleep-well'], creator });
+  // product page "Pre-book" buttons (main button + sticky bar)
+  document.addEventListener('click', e => {
+    if (e.target.closest('[onclick*="prebookCheckout"]')) {
+      track('InitiateCheckout', { content_name: 'Sleep Well', content_ids: ['sleep-well'], currency: 'INR', creator });
+    }
+  }, true);
+}
 
 // Remember a creator link (?ref=CODE) so the waitlist / pre-book can credit them
 captureRefFromUrl();
