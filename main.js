@@ -2,6 +2,9 @@ import './src/prebookNudge.js';
 import { captureRefFromUrl, getStoredRef } from './src/shared/creators.js';
 import { initPixel, track } from './src/shared/pixel.js';
 
+// Remember a creator link (?ref=CODE) so the waitlist / pre-book can credit them
+captureRefFromUrl();
+
 initPixel();
 if (location.pathname.startsWith('/products/sleep-well')) {
   const creator = getStoredRef() || undefined;
@@ -13,9 +16,6 @@ if (location.pathname.startsWith('/products/sleep-well')) {
     }
   }, true);
 }
-
-// Remember a creator link (?ref=CODE) so the waitlist / pre-book can credit them
-captureRefFromUrl();
 
 // Mobile Menu Toggle
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');

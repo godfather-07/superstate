@@ -1,8 +1,9 @@
 /**
  * Meta (Facebook / Instagram) Pixel.
  *
- * The Pixel ID is public (it's visible in every site's page source), so it
- * lives here rather than in a secret. Leave it empty and the pixel stays off.
+ * Pixel IDs are public (they're visible in every site's page source), so they
+ * live here rather than in a secret. Every ID listed gets every event; leave
+ * the list empty and the pixel stays off.
  *
  * Events sent:
  * - PageView          every page
@@ -12,9 +13,14 @@
  * - Purchase          payment verified by our server (value in INR)
  * - Lead              waitlist signup
  * Creator codes ride along as `creator` so ads can be split by creator.
+ *
+ * Every event is ALSO pushed to Google Tag Manager's dataLayer (GTM-TGW85RP2)
+ * as `ss_<Event>` (e.g. ss_Purchase, ss_Lead) with the same values, so GA4,
+ * Google Ads etc. can be set up in GTM without code changes.
+ * Don't add the Meta pixel inside GTM too: that would double-count.
  */
 
-export const META_PIXEL_ID = '1380597944288890';
+export const META_PIXEL_IDS = ['1380597944288890', '2385448578867386'];
 
 function load() {
   if (window.fbq) return;
@@ -29,16 +35,20 @@ function load() {
 
 // Call once per page. Safe to call more than once.
 export function initPixel() {
-  if (!META_PIXEL_ID || window.__ssPixelReady) return;
+  if (!META_PIXEL_IDS.length || window.__ssPixelReady) return;
   window.__ssPixelReady = true;
   load();
-  window.fbq('init', META_PIXEL_ID);
+  META_PIXEL_IDS.forEach(id => window.fbq('init', id));
   window.fbq('track', 'PageView');
 }
 
 // track('Purchase', { value: 750, currency: 'INR' }, { eventID: 'pay_123' })
 export function track(event, params = {}, options) {
-  if (!META_PIXEL_ID || typeof window.fbq !== 'function') return;
+  try {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: `ss_${event}`, ...params, event_id: options && options.eventID });
+  } catch (e) { /* ignore */ }
+  if (!META_PIXEL_IDS.length || typeof window.fbq !== 'function') return;
   try {
     if (options) window.fbq('track', event, params, options);
     else window.fbq('track', event, params);
