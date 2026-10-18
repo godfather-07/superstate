@@ -7,17 +7,14 @@
  *   (logged with Is Influencer = TRUE so you can see who brought whom)
  * - Any other code → rejected as invalid
  *
- * TO ADD A CREATOR CODE: add it to CREATOR_CODES below, and create the same
- * code with the same % in Shopify so it works at checkout.
+ * TO ADD A CREATOR CODE: add it to src/shared/creators.js.
  */
+
+import { CREATOR_CODES, normalizeCreatorCode } from '../shared/creators.js';
 
 export const WAITLIST_CONFIG = {
   EARLY_ACCESS_CODE: 'FIRSTNIGHT20',
   EARLY_ACCESS_DISCOUNT: 20,
-  CREATOR_CODES: {
-    ABHIJITH30: 30,
-    ABHIMANYU30: 30
-  },
   STORAGE_KEY_USER: 'superstate_waitlist_user',
   STORAGE_KEY_ALL: 'superstate_waitlist_submissions',
   SIMULATE_LATENCY_MS: 900,
@@ -38,8 +35,9 @@ export function resolveCoupon(enteredCode) {
       isValid: true
     };
   }
-  if (Object.prototype.hasOwnProperty.call(WAITLIST_CONFIG.CREATOR_CODES, code)) {
-    return { code, discount: WAITLIST_CONFIG.CREATOR_CODES[code], isInfluencer: true, isValid: true };
+  const creator = normalizeCreatorCode(code);
+  if (creator) {
+    return { code: creator, discount: CREATOR_CODES[creator], isInfluencer: true, isValid: true };
   }
   return { code, discount: 0, isInfluencer: false, isValid: false };
 }

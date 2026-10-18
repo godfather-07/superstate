@@ -1,4 +1,8 @@
 import './src/prebookNudge.js';
+import { captureRefFromUrl } from './src/shared/creators.js';
+
+// Remember a creator link (?ref=CODE) so the waitlist / pre-book can credit them
+captureRefFromUrl();
 
 // Mobile Menu Toggle
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');

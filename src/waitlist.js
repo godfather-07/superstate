@@ -1,4 +1,5 @@
 import { submitWaitlist, getSavedSubmission, clearSavedSubmission, WAITLIST_CONFIG } from './services/waitlistService.js';
+import { captureRefFromUrl, getStoredRef } from './shared/creators.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   /* ─── Elements ─────────────────────────────────────────────────────────── */
@@ -59,6 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
     codeToggle.setAttribute('aria-expanded', 'false');
   }
   codeToggle?.addEventListener('click', () => openCodeField(true));
+
+  // Came from a creator's link? Fill their code in for them.
+  const refCode = captureRefFromUrl() || getStoredRef();
+  if (refCode && codeInput) { codeInput.value = refCode; openCodeField(false); }
 
   /* ─── Copy the code ──────────────────────────────────────────────────── */
   copyBtn?.addEventListener('click', async () => {
