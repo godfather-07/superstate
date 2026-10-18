@@ -1,5 +1,6 @@
 import { submitWaitlist, getSavedSubmission, clearSavedSubmission, WAITLIST_CONFIG } from './services/waitlistService.js';
 import { captureRefFromUrl, getStoredRef, creatorName } from './shared/creators.js';
+import { track } from './shared/pixel.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   /* ─── Elements ─────────────────────────────────────────────────────────── */
@@ -92,6 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       if (res.success) {
+        track('Lead', { content_name: 'Waitlist', creator: res.record.isInfluencer ? res.record.promoCode : undefined });
         showSuccess(res.record, false);
       } else if (res.errors) {
         showErrors(res.errors);
