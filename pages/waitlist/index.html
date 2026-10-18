@@ -346,35 +346,196 @@
     /* ── SUCCESS card ──────────────────────────────────────────────────── */
     .wl-success {
       display: none;
+      position: relative;
+      overflow: hidden;
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity .5s cubic-bezier(.16,1,.3,1), transform .5s cubic-bezier(.16,1,.3,1);
-      background: #fff;
-      border: 2px solid var(--green);
+      transform: translateY(20px) scale(.98);
+      transition: opacity .5s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
+      background: #ffffff;
       border-radius: 28px;
-      padding: 3.5rem 3rem;
       text-align: center;
-      box-shadow: var(--shadow);
+      box-shadow: 0 24px 60px rgba(0,51,153,.16);
     }
-    .wl-success.visible { opacity: 1; transform: translateY(0); }
+    .wl-success.visible { opacity: 1; transform: none; }
 
-    .wl-success-icon {
-      width: 72px; height: 72px;
-      background: var(--green);
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      margin: 0 auto 1.5rem;
-      box-shadow: 0 0 0 14px rgba(32,126,89,.1), 0 8px 24px rgba(32,126,89,.3);
+    /* blue celebration header */
+    .wl-s-top {
+      position: relative;
+      padding: 2.5rem 2rem 4.5rem;
+      background:
+        radial-gradient(120% 80% at 50% -10%, #2a5fd6 0%, transparent 60%),
+        #003399;
+      color: #ffffff;
     }
-
+    .wl-s-top::after { /* little moon + stars doodle */
+      content: '☾  ✶  ·  ✶';
+      position: absolute; top: 1rem; right: 1.25rem;
+      font-size: 14px; letter-spacing: .2em; color: rgba(228,255,90,.55);
+    }
+    .wl-s-pill {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .35rem .8rem; border-radius: 999px;
+      background: rgba(228,255,90,.14); border: 1px solid rgba(228,255,90,.5);
+      color: var(--lime); font-size: 13px; font-weight: 800; letter-spacing: .02em;
+    }
+    .wl-s-pill b {
+      display: grid; place-items: center; width: 18px; height: 18px; border-radius: 50%;
+      background: var(--lime); color: #003399; font-size: 11px;
+    }
     .wl-success-h {
+      margin: 1rem 0 .5rem;
       font-family: 'Lora', serif;
-      font-size: clamp(28px, 4vw, 38px);
+      font-size: clamp(32px, 6vw, 44px);
       font-weight: 600;
-      margin-bottom: .6rem;
+      line-height: 1.05;
+      letter-spacing: -.02em;
+      color: #ffffff;
     }
-    .wl-success-p { font-size: 16px; color: var(--muted); margin-bottom: 1.75rem; line-height: 1.55; }
+    .wl-success-h em {
+      font-style: italic;
+      background: var(--lime); color: #001a4d;
+      padding: 0 .18em; border-radius: 10px;
+      display: inline-block; transform: rotate(-2deg);
+    }
+    .wl-success-p { font-size: 15.5px; color: #d5ddf3; line-height: 1.55; max-width: 380px; margin: 0 auto; }
+    .wl-success-p strong { color: #ffffff; word-break: break-all; }
+
+    .wl-s-body { padding: 0 2rem 2rem; }
+
+    /* ticket-style coupon, overlapping the header */
+    .wl-coupon {
+      position: relative;
+      max-width: 380px;
+      margin: -3rem auto 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: stretch;
+      background: var(--lime);
+      color: #001a4d;
+      border-radius: 18px;
+      box-shadow: 0 14px 30px rgba(0,26,77,.22);
+      text-align: left;
+      transform: rotate(-1.5deg);
+      animation: wl-ticket-in .7s .25s cubic-bezier(.2,1.4,.4,1) both;
+    }
+    .wl-coupon::before, .wl-coupon::after { /* punched notches */
+      content: ''; position: absolute; right: 104px;
+      width: 18px; height: 18px; border-radius: 50%; background: #ffffff;
+      transform: translateX(50%);
+    }
+    .wl-coupon::before { top: -9px; background: #003399; } /* sits over the blue header */
+    .wl-coupon::after { bottom: -9px; }
+    .wl-coupon-main { padding: 1rem 1.1rem 1rem 1.25rem; min-width: 0; }
+    .wl-coupon-label {
+      display: block;
+      font-size: 11.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+      color: #24345a; margin-bottom: .2rem;
+    }
+    .wl-coupon-code {
+      display: block;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: clamp(20px, 6vw, 26px);
+      letter-spacing: .04em;
+      color: #003399;
+      overflow-wrap: anywhere;
+    }
+    .wl-coupon-off {
+      display: block; margin-top: .15rem;
+      font-size: 13px; font-weight: 700; color: #24345a;
+    }
+    .wl-coupon-side {
+      width: 104px;
+      border-left: 2px dashed rgba(0,26,77,.35);
+      display: grid; place-items: center;
+      padding: .75rem;
+    }
+    .wl-coupon-pct { display: block; white-space: nowrap; font-size: 30px; font-weight: 800; line-height: 1; color: #003399; }
+    .wl-coupon-pct small { font-size: 14px; }
+    .wl-coupon-copy {
+      margin-top: .45rem;
+      min-height: 34px;
+      padding: 0 .8rem;
+      border: none;
+      border-radius: 999px;
+      background: #003399;
+      color: #ffffff;
+      font-family: inherit;
+      font-weight: 800;
+      font-size: 12.5px;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: transform .15s;
+    }
+    .wl-coupon-copy:hover { transform: scale(1.05); }
+    @keyframes wl-ticket-in {
+      from { opacity: 0; transform: translateY(18px) rotate(-6deg) scale(.9); }
+      to   { opacity: 1; transform: rotate(-1.5deg); }
+    }
+
+    /* pre-book upsell */
+    .wl-upsell {
+      position: relative;
+      max-width: 420px;
+      margin: 0 auto 1.5rem;
+      padding: 1.35rem 1.25rem 1.2rem;
+      border-radius: 20px;
+      background: linear-gradient(160deg, #0a2a7a 0%, #001a4d 100%);
+      color: #ffffff;
+      text-align: left;
+      overflow: hidden;
+    }
+    .wl-upsell::before { /* soft lime glow */
+      content: ''; position: absolute; width: 220px; height: 220px; right: -80px; top: -90px;
+      background: radial-gradient(circle, rgba(228,255,90,.28), transparent 65%);
+      pointer-events: none;
+    }
+    .wl-upsell-row { display: flex; gap: .9rem; align-items: flex-start; position: relative; }
+    .wl-upsell-icon {
+      flex: 0 0 auto;
+      display: grid; place-items: center;
+      width: 52px; height: 52px; border-radius: 16px;
+      background: rgba(228,255,90,.14); border: 1px solid rgba(228,255,90,.4);
+      font-size: 28px;
+      animation: wl-wiggle 2.6s 1s ease-in-out infinite;
+    }
+    @keyframes wl-wiggle {
+      0%, 80%, 100% { transform: rotate(0); }
+      84% { transform: rotate(-12deg) scale(1.08); }
+      88% { transform: rotate(10deg) scale(1.08); }
+      92% { transform: rotate(-6deg); }
+      96% { transform: rotate(4deg); }
+    }
+    .wl-upsell-tag {
+      display: inline-block; padding: .22rem .6rem; border-radius: 999px;
+      background: var(--lime); color: #001a4d;
+      font-size: 12px; font-weight: 800; letter-spacing: .02em;
+    }
+    .wl-upsell-h { margin: .55rem 0 .3rem; font-size: 20px; line-height: 1.2; font-weight: 800; color: #ffffff; }
+    .wl-upsell-h em { font-style: normal; color: var(--lime); }
+    .wl-upsell-p { margin: 0; font-size: 14px; line-height: 1.5; color: #c9d4f0; }
+    .wl-upsell-perks {
+      list-style: none; position: relative;
+      display: flex; flex-wrap: wrap; gap: .4rem;
+      margin: .9rem 0 1rem;
+    }
+    .wl-upsell-perks li {
+      padding: .3rem .6rem; border-radius: 999px;
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14);
+      font-size: 12.5px; font-weight: 700; color: #ffffff;
+    }
+    .wl-upsell-perks li.hot { background: rgba(228,255,90,.16); border-color: rgba(228,255,90,.55); color: var(--lime); }
+    .wl-upsell-cta {
+      position: relative;
+      display: flex; align-items: center; justify-content: center; gap: .4rem;
+      min-height: 52px; border-radius: 14px;
+      background: var(--lime); color: #001a4d; text-decoration: none;
+      font-size: 16.5px; font-weight: 800;
+      box-shadow: 0 8px 20px rgba(228,255,90,.25);
+      transition: transform .15s;
+    }
+    .wl-upsell-cta:hover { transform: translateY(-2px); }
+    .wl-upsell-cta i { font-style: normal; transition: transform .2s; }
+    .wl-upsell-cta:hover i { transform: translateX(4px); }
 
     .wl-back-link {
       display: inline-flex;
@@ -382,7 +543,7 @@
       gap: .4rem;
       font-size: 15px;
       font-weight: 700;
-      color: var(--green);
+      color: var(--navy);
       text-decoration: none;
       transition: gap .2s;
     }
@@ -390,7 +551,7 @@
 
     .wl-redo-btn {
       display: block;
-      margin: 1rem auto 0;
+      margin: .9rem auto 0;
       background: none;
       border: none;
       font-family: 'Bricolage Grotesque', sans-serif;
@@ -402,6 +563,30 @@
       cursor: pointer;
     }
     .wl-redo-btn:hover { color: var(--navy); }
+
+    /* confetti */
+    .wl-confetti { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 2; }
+    .wl-confetti i {
+      position: absolute; top: -12px; width: 8px; height: 14px; border-radius: 2px;
+      animation: wl-fall linear forwards;
+    }
+    @keyframes wl-fall {
+      to { transform: translate3d(var(--dx), 560px, 0) rotate(var(--rot)); opacity: 0; }
+    }
+
+    @media (max-width: 540px) {
+      .wl-s-top { padding: 2.25rem 1.25rem 4.25rem; }
+      .wl-s-body { padding: 0 1rem 1.5rem; }
+      .wl-coupon { grid-template-columns: 1fr 92px; }
+      .wl-coupon-side { width: 92px; padding: .6rem .4rem; }
+      .wl-coupon-pct { font-size: 25px; }
+      .wl-coupon-pct small { font-size: 12px; }
+      .wl-coupon::before, .wl-coupon::after { right: 92px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .wl-coupon, .wl-upsell-icon { animation: none; }
+      .wl-confetti { display: none; }
+    }
 
     /* ── Reviews marquee ───────────────────────────────────────────────── */
     .wl-reviews-section {
@@ -481,73 +666,6 @@
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
 
-    /* ── Minimal coupon ticket on the success card ─────────────────────── */
-    /* Pre-book upsell on the success card */
-    .wl-upsell {
-      margin: 0 0 1.5rem;
-      padding: 1.25rem 1.25rem 1.1rem;
-      border-radius: 18px;
-      background: #003399;
-      color: #ffffff;
-      text-align: left;
-    }
-    .wl-upsell-tag {
-      display: inline-block; padding: .22rem .6rem; border-radius: 999px;
-      background: #E4FF5A; color: #001a4d;
-      font-size: 12px; font-weight: 800; letter-spacing: .02em;
-    }
-    .wl-upsell-h { margin: .65rem 0 .3rem; font-size: 20px; line-height: 1.2; font-weight: 800; color: #ffffff; }
-    .wl-upsell-h em { font-style: normal; color: #E4FF5A; }
-    .wl-upsell-p { margin: 0 0 1rem; font-size: 14.5px; line-height: 1.5; color: #d5ddf3; }
-    .wl-upsell-cta {
-      display: flex; align-items: center; justify-content: center;
-      min-height: 48px; border-radius: 12px;
-      background: #E4FF5A; color: #001a4d; text-decoration: none;
-      font-size: 16px; font-weight: 800;
-    }
-    .wl-upsell-cta:hover { filter: brightness(.97); }
-    .wl-coupon {
-      margin: 0 auto 1.75rem;
-      max-width: 320px;
-      border: 2px dashed var(--navy);
-      border-radius: 14px;
-      padding: 1rem;
-      text-align: center;
-    }
-    .wl-coupon-label {
-      display: block;
-      font-size: 12.5px;
-      font-weight: 700;
-      color: var(--muted);
-      margin-bottom: 0.35rem;
-    }
-    .wl-coupon-row {
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0.75rem;
-    }
-    .wl-coupon-code {
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-size: clamp(20px, 6.2vw, 28px);
-      letter-spacing: 0.04em;
-      color: var(--navy);
-      min-width: 0;
-    }
-    .wl-coupon-copy {
-      min-height: 44px;
-      padding: 0 1rem;
-      border: none;
-      border-radius: 10px;
-      background: var(--lime);
-      color: var(--navy);
-      font-family: inherit;
-      font-weight: 800;
-      font-size: 14px;
-      white-space: nowrap;
-      flex-shrink: 0;
-      cursor: pointer;
-    }
   </style>
   <link rel="canonical" href="https://www.superstate.in/pages/waitlist/" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -637,41 +755,56 @@
     </div>
 
     <!-- Success card -->
-    <div class="wl-success" id="wl-success-card">
-      <div class="wl-success-icon">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="20 6 9 17 4 12"/>
-        </svg>
+    <div class="wl-success" id="wl-success-card" aria-live="polite">
+      <div class="wl-confetti" id="wl-confetti" aria-hidden="true"></div>
+
+      <div class="wl-s-top">
+        <span class="wl-s-pill" id="wl-success-pill"><b>✓</b> you're on the list</span>
+        <h2 class="wl-success-h">you're in, <em id="wl-success-name">friend</em>.</h2>
+        <p class="wl-success-p">we'll ping <strong id="wl-success-email"></strong> the second Sleep Well drops. here's your code 👇</p>
       </div>
 
-      <h2 class="wl-success-h">Thank you, <span id="wl-success-name">friend</span>! 🎉</h2>
-      <p class="wl-success-p">
-        We'll ping <strong id="wl-success-email"></strong> the moment Sleep Well drops.
-      </p>
-
-      <div class="wl-coupon">
-        <span class="wl-coupon-label">your code · <span id="wl-success-discount">20</span>% off at launch</span>
-        <div class="wl-coupon-row">
-          <strong class="wl-coupon-code" id="wl-success-code">FIRSTNIGHT20</strong>
-          <button type="button" class="wl-coupon-copy" id="wl-copy-btn">copy</button>
+      <div class="wl-s-body">
+        <div class="wl-coupon">
+          <div class="wl-coupon-main">
+            <span class="wl-coupon-label">your launch code</span>
+            <strong class="wl-coupon-code" id="wl-success-code">FIRSTNIGHT20</strong>
+            <span class="wl-coupon-off" id="wl-coupon-off">use it at checkout on launch day</span>
+          </div>
+          <div class="wl-coupon-side">
+            <div>
+              <span class="wl-coupon-pct"><span id="wl-success-discount">20</span><small>% off</small></span>
+              <button type="button" class="wl-coupon-copy" id="wl-copy-btn">copy</button>
+            </div>
+          </div>
         </div>
+
+        <div class="wl-upsell" id="wl-upsell">
+          <div class="wl-upsell-row">
+            <span class="wl-upsell-icon" id="wl-upsell-icon" aria-hidden="true">⚡</span>
+            <div>
+              <span class="wl-upsell-tag" id="wl-upsell-tag">want it cheaper?</span>
+              <p class="wl-upsell-h" id="wl-upsell-h">skip the wait. <em>pre-book at 50% off.</em></p>
+              <p class="wl-upsell-p" id="wl-upsell-p">pay now, ships with the next drop.</p>
+            </div>
+          </div>
+          <ul class="wl-upsell-perks" id="wl-upsell-perks">
+            <li class="hot">50% off</li>
+            <li>30 nights · ₹750 <s>₹1,500</s></li>
+            <li>member card 💳</li>
+          </ul>
+          <a class="wl-upsell-cta" id="wl-upsell-cta" href="/pages/prebook/?pack=Pack%20Of%2030&amp;qty=1"><span id="wl-upsell-cta-text">pre-book at 50% off</span> <i>→</i></a>
+        </div>
+
+        <a href="https://www.superstate.in" class="wl-back-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <path d="M19 12H5"/><polyline points="12 5 5 12 12 19"/>
+          </svg>
+          Back to Superstate
+        </a>
+
+        <button type="button" class="wl-redo-btn" id="wl-redo-btn">Join the waitlist again</button>
       </div>
-
-      <div class="wl-upsell" id="wl-upsell">
-        <span class="wl-upsell-tag" id="wl-upsell-tag">want it cheaper?</span>
-        <p class="wl-upsell-h" id="wl-upsell-h">skip the wait. <em>pre-book at 50% off.</em></p>
-        <p class="wl-upsell-p" id="wl-upsell-p">30 nights for ₹750 instead of ₹1,500, plus your SuperState member card. pay now, ships with the next drop.</p>
-        <a class="wl-upsell-cta" id="wl-upsell-cta" href="/pages/prebook/?pack=Pack%20Of%2030&amp;qty=1">pre-book at 50% off →</a>
-      </div>
-
-      <a href="https://www.superstate.in" class="wl-back-link">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-          <path d="M19 12H5"/><polyline points="12 5 5 12 12 19"/>
-        </svg>
-        Back to Superstate
-      </a>
-
-      <button type="button" class="wl-redo-btn" id="wl-redo-btn">Join the waitlist again</button>
     </div>
   </section>
 

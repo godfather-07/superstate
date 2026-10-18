@@ -168,6 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
       formCard.style.display = 'none';
       successCard.style.display = 'block';
       requestAnimationFrame(() => successCard.classList.add('visible'));
+      if (!alreadyJoined) confetti();
       successCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }, 280);
   }
@@ -176,23 +177,50 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderUpsell(code) {
     const cta = document.getElementById('wl-upsell-cta');
     if (!cta) return;
+    const set = (id, prop, v) => { const el = document.getElementById(id); if (el) el[prop] = v; };
     const name = creatorName(code);
     const base = '/pages/prebook/?pack=Pack%20Of%2030&qty=1';
     if (name) {
-      document.getElementById('wl-upsell-tag').textContent = `🎁 for ${name}'s followers`;
-      document.getElementById('wl-upsell-h').innerHTML = `pre-book now and get a <em>free gift package.</em>`;
-      document.getElementById('wl-upsell-p').textContent =
-        `because ${name} sent you, your pre-book comes with a special package of SuperState gifts. other pre-bookers don't get this. plus 50% off: 30 nights for ₹750 instead of ₹1,500.`;
-      cta.textContent = 'pre-book with my gift →';
+      set('wl-success-pill', 'innerHTML', `<b>✓</b> ${name}'s crew 💛`);
+      set('wl-coupon-off', 'textContent', `${name}'s code · use it on launch day`);
+      set('wl-upsell-icon', 'textContent', '🎁');
+      set('wl-upsell-tag', 'textContent', `only for ${name}'s followers`);
+      set('wl-upsell-h', 'innerHTML', 'pre-book now, get a <em>free gift package.</em>');
+      set('wl-upsell-p', 'textContent', `because ${name} sent you, your pre-book comes with a special package of SuperState gifts. other pre-bookers don't get this.`);
+      set('wl-upsell-perks', 'innerHTML', '<li class="hot">free gift package 🎁</li><li class="hot">50% off</li><li>30 nights · ₹750 <s>₹1,500</s></li><li>member card 💳</li>');
+      set('wl-upsell-cta-text', 'textContent', 'pre-book with my gift');
       cta.href = `${base}&ref=${encodeURIComponent(code)}`;
     } else {
-      document.getElementById('wl-upsell-tag').textContent = 'want it cheaper?';
-      document.getElementById('wl-upsell-h').innerHTML = 'skip the wait. <em>pre-book at 50% off.</em>';
-      document.getElementById('wl-upsell-p').textContent =
-        '30 nights for ₹750 instead of ₹1,500, plus your SuperState member card. pay now, ships with the next drop.';
-      cta.textContent = 'pre-book at 50% off →';
+      set('wl-success-pill', 'innerHTML', "<b>✓</b> you're on the list");
+      set('wl-coupon-off', 'textContent', 'use it at checkout on launch day');
+      set('wl-upsell-icon', 'textContent', '⚡');
+      set('wl-upsell-tag', 'textContent', 'want it cheaper?');
+      set('wl-upsell-h', 'innerHTML', 'skip the wait. <em>pre-book at 50% off.</em>');
+      set('wl-upsell-p', 'textContent', 'pay now, ships with the next drop.');
+      set('wl-upsell-perks', 'innerHTML', '<li class="hot">50% off</li><li>30 nights · ₹750 <s>₹1,500</s></li><li>member card 💳</li>');
+      set('wl-upsell-cta-text', 'textContent', 'pre-book at 50% off');
       cta.href = base;
     }
+  }
+
+  // Brand-colour confetti burst over the success card
+  function confetti() {
+    const box = document.getElementById('wl-confetti');
+    if (!box || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    box.innerHTML = '';
+    const colors = ['#E4FF5A', '#ffffff', '#33cc99', '#7aa2ff', '#E4FF5A'];
+    for (let i = 0; i < 70; i++) {
+      const p = document.createElement('i');
+      p.style.left = `${Math.random() * 100}%`;
+      p.style.background = colors[i % colors.length];
+      p.style.setProperty('--dx', `${(Math.random() - 0.5) * 160}px`);
+      p.style.setProperty('--rot', `${Math.random() * 720 - 360}deg`);
+      p.style.animationDuration = `${1.6 + Math.random() * 1.4}s`;
+      p.style.animationDelay = `${Math.random() * 0.4}s`;
+      if (i % 3 === 0) { p.style.width = '10px'; p.style.height = '10px'; p.style.borderRadius = '50%'; }
+      box.appendChild(p);
+    }
+    setTimeout(() => { box.innerHTML = ''; }, 3600);
   }
 
   function showForm() {
