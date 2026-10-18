@@ -1,8 +1,9 @@
 /**
  * Meta (Facebook / Instagram) Pixel.
  *
- * The Pixel ID is public (it's visible in every site's page source), so it
- * lives here rather than in a secret. Leave it empty and the pixel stays off.
+ * Pixel IDs are public (they're visible in every site's page source), so they
+ * live here rather than in a secret. Every ID listed gets every event; leave
+ * the list empty and the pixel stays off.
  *
  * Events sent:
  * - PageView          every page
@@ -14,7 +15,7 @@
  * Creator codes ride along as `creator` so ads can be split by creator.
  */
 
-export const META_PIXEL_ID = '1380597944288890';
+export const META_PIXEL_IDS = ['1380597944288890', '2385448578867386'];
 
 function load() {
   if (window.fbq) return;
@@ -29,16 +30,16 @@ function load() {
 
 // Call once per page. Safe to call more than once.
 export function initPixel() {
-  if (!META_PIXEL_ID || window.__ssPixelReady) return;
+  if (!META_PIXEL_IDS.length || window.__ssPixelReady) return;
   window.__ssPixelReady = true;
   load();
-  window.fbq('init', META_PIXEL_ID);
+  META_PIXEL_IDS.forEach(id => window.fbq('init', id));
   window.fbq('track', 'PageView');
 }
 
 // track('Purchase', { value: 750, currency: 'INR' }, { eventID: 'pay_123' })
 export function track(event, params = {}, options) {
-  if (!META_PIXEL_ID || typeof window.fbq !== 'function') return;
+  if (!META_PIXEL_IDS.length || typeof window.fbq !== 'function') return;
   try {
     if (options) window.fbq('track', event, params, options);
     else window.fbq('track', event, params);
