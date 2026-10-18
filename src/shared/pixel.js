@@ -13,6 +13,11 @@
  * - Purchase          payment verified by our server (value in INR)
  * - Lead              waitlist signup
  * Creator codes ride along as `creator` so ads can be split by creator.
+ *
+ * Every event is ALSO pushed to Google Tag Manager's dataLayer (GTM-TGW85RP2)
+ * as `ss_<Event>` (e.g. ss_Purchase, ss_Lead) with the same values, so GA4,
+ * Google Ads etc. can be set up in GTM without code changes.
+ * Don't add the Meta pixel inside GTM too: that would double-count.
  */
 
 export const META_PIXEL_IDS = ['1380597944288890', '2385448578867386'];
@@ -39,6 +44,10 @@ export function initPixel() {
 
 // track('Purchase', { value: 750, currency: 'INR' }, { eventID: 'pay_123' })
 export function track(event, params = {}, options) {
+  try {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: `ss_${event}`, ...params, event_id: options && options.eventID });
+  } catch (e) { /* ignore */ }
   if (!META_PIXEL_IDS.length || typeof window.fbq !== 'function') return;
   try {
     if (options) window.fbq('track', event, params, options);
