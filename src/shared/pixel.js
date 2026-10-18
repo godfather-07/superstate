@@ -14,7 +14,7 @@
  * Creator codes ride along as `creator` so ads can be split by creator.
  */
 
-export const META_PIXEL_ID = '';
+export const META_PIXEL_ID = '1380597944288890';
 
 function load() {
   if (window.fbq) return;
