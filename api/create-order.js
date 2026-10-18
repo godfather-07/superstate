@@ -1,6 +1,7 @@
 /**
  * POST /api/create-order
- * Body: { pack, qty, name, phone, email, address, pincode, city, state }
+ * Body: { pack, qty, name, phone, email, address, pincode, city, state, ref }
+ * ref = optional creator code; attribution only, it never changes the price.
  * Returns: { order_id, amount, currency, key_id }
  *
  * The amount is computed here from the pack table (never taken from the
@@ -9,6 +10,7 @@
 
 import { getRazorpay, getKeys, sendJson, readJson, razorpayErrorStatus, missingKeysMessage } from './_lib/razorpay.js';
 import { priceFor } from '../src/shared/packs.js';
+import { normalizeCreatorCode } from '../src/shared/creators.js';
 
 const MIN_AMOUNT_PAISE = 100;
 
@@ -30,6 +32,8 @@ export default async function handler(req, res) {
   const { pack, name = '', phone = '', email = '', address = '', pincode = '', city = '', state = '' } = body;
   const price = priceFor(pack, Number(body.qty));
   if (!price) return sendJson(res, 400, { error: 'Unknown pack or quantity.' });
+  const ref = body.ref ? normalizeCreatorCode(body.ref) : '';
+  if (ref === null) return sendJson(res, 400, { error: "We don't know that creator code." });
   if (price.prePaise < MIN_AMOUNT_PAISE) {
     return sendJson(res, 400, { error: 'Amount must be at least ₹1.' });
   }
@@ -51,6 +55,7 @@ export default async function handler(req, res) {
         pincode: String(pincode).replace(/\D/g, '').slice(0, 6),
         city: String(city).slice(0, 40),
         state: String(state).slice(0, 40),
+        ref,
         full_price: String(price.full)
       }
     });

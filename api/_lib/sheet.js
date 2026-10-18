@@ -20,6 +20,7 @@ export async function logPaidPrebook(order, paymentId) {
     pincode: n.pincode || '',
     city: n.city || '',
     state: n.state || '',
+    referredBy: n.ref || '',
     pack: n.pack || '',
     qty: n.qty || '',
     fullPrice: n.full_price || '',

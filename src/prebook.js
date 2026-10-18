@@ -2,6 +2,7 @@ import {
   PREBOOK_CONFIG, PACKS, priceFor, formatINR, validatePrebook, getSavedPrebook, clearSavedPrebook,
   savePrebook, memberIdFor, createOrder, verifyPayment
 } from './services/prebookService.js';
+import { normalizeCreatorCode, captureRefFromUrl, getStoredRef } from './shared/creators.js';
 
 const $ = id => document.getElementById(id);
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -11,6 +12,8 @@ const params = new URLSearchParams(location.search);
 let pack = PACKS[params.get('pack')] ? params.get('pack') : 'Pack Of 5';
 let qty = Math.min(Math.max(parseInt(params.get('qty'), 10) || 1, 1), 20);
 let price = priceFor(pack, qty);
+// Creator who sent this visitor (from ?ref= on this or an earlier page)
+const linkRef = captureRefFromUrl() || getStoredRef();
 
 const rupees = n => `₹${formatINR(n)}`;
 
@@ -48,7 +51,7 @@ function renderOrder(animate) {
   $('pv-sticky-label').textContent = `${pack} × ${qty}`;
   $('pv-sticky-total').textContent = rupees(price.pre);
   if (!submitBtn.disabled) submitBtn.textContent = payLabel();
-  history.replaceState(null, '', `?pack=${encodeURIComponent(pack)}&qty=${qty}`);
+  history.replaceState(null, '', `?pack=${encodeURIComponent(pack)}&qty=${qty}${linkRef ? `&ref=${linkRef}` : ''}`);
 }
 
 document.querySelectorAll('.pv-pack').forEach(btn => btn.addEventListener('click', () => {
@@ -81,9 +84,26 @@ if (saved && !params.get('pack')) showCard(saved, false);
 
 /* ---------- Form ---------- */
 const form = $('pb-form');
-const fields = ['name', 'phone', 'email', 'address', 'pincode', 'city', 'state'];
+const fields = ['name', 'phone', 'email', 'address', 'pincode', 'city', 'state', 'ref'];
 
 fields.forEach(f => $(`pb-${f}`).addEventListener('input', () => setError(f, '')));
+
+/* ---------- Creator code (attribution only, never a discount) ---------- */
+const refInput = $('pb-ref');
+const refGroup = $('pb-ref-group');
+const refToggle = $('pb-ref-toggle');
+function openRef(focus) {
+  refGroup.hidden = false;
+  refToggle.hidden = true;
+  refToggle.setAttribute('aria-expanded', 'true');
+  if (focus) refInput.focus();
+}
+refToggle.addEventListener('click', () => openRef(true));
+if (linkRef) {
+  refInput.value = linkRef;
+  openRef(false);
+  $('pb-ref-note').innerHTML = `<span class="pb-ref-ok">✓ sent by ${linkRef}</span>. no extra discount (50% is already our best price), we just want to thank them 💛`;
+}
 
 const submitBtn = $('pb-submit');
 const payLabel = () => `pay ${rupees(price.pre)} · 50% off →`;
@@ -132,6 +152,13 @@ form.addEventListener('submit', async e => {
     state: $('pb-state').value.trim()
   };
   const check = validatePrebook(details);
+  const refRaw = refInput.value.trim();
+  const ref = refRaw ? normalizeCreatorCode(refRaw) : '';
+  if (ref === null) {
+    check.isValid = false;
+    check.errors.ref = "We don't know that code. Check the spelling or leave it blank.";
+    openRef(false);
+  }
   if (!check.isValid) {
     const firstBad = fields.find(f => check.errors[f]);
     Object.entries(check.errors).forEach(([k, msg]) => setError(k, msg));
@@ -147,7 +174,7 @@ form.addEventListener('submit', async e => {
 
   // 1. Server creates the order (and decides the amount)
   setBusy(true, 'opening secure payment…');
-  const order = await createOrder({ ...details, pack, qty });
+  const order = await createOrder({ ...details, ref, pack, qty });
   if (!order.ok) {
     setBusy(false);
     setError('form', order.data.error || 'Could not start the payment. Please try again.');

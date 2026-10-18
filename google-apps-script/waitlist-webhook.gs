@@ -23,7 +23,7 @@ const HEADERS = ['Timestamp', 'Name', 'Email', 'Phone', 'Gender', 'Promo Code', 
 
 // Pre-bookings (no payment yet) go to their own tab.
 const PREBOOK_SHEET_NAME = 'Prebooks';
-const PREBOOK_HEADERS = ['Timestamp', 'Member No.', 'Name', 'Phone', 'Email', 'Pack', 'Qty', 'Full Price', 'Pre-book Price', 'Payment Status', 'Razorpay Order ID', 'Razorpay Payment ID', 'Address', 'Pincode', 'City', 'State'];
+const PREBOOK_HEADERS = ['Timestamp', 'Member No.', 'Name', 'Phone', 'Email', 'Pack', 'Qty', 'Full Price', 'Pre-book Price', 'Payment Status', 'Razorpay Order ID', 'Razorpay Payment ID', 'Address', 'Pincode', 'City', 'State', 'Referred By'];
 // Batch 01 customers already hold cards #1-#27, so pre-bookers start at #28.
 const MEMBER_OFFSET = 27;
 
@@ -98,7 +98,8 @@ function handlePrebook(data) {
       data.address || '',
       data.pincode || '',
       data.city || '',
-      data.state || ''
+      data.state || '',
+      data.referredBy || ''
     ]);
     return json({ result: 'success', memberNumber: memberNumber });
   } finally {
@@ -154,7 +155,7 @@ function testPrebook() {
       type: 'prebook', name: 'Test Prebook', phone: '9999999999', email: 'test@example.com',
       pack: 'Pack Of 30', qty: '1', fullPrice: '1500', prebookPrice: '750',
       paymentStatus: 'TEST - delete me', orderId: 'order_TEST_' + Date.now(), paymentId: 'pay_TEST',
-      address: '12 Test Street, Indiranagar', pincode: '560038', city: 'Bengaluru', state: 'Karnataka'
+      address: '12 Test Street, Indiranagar', pincode: '560038', city: 'Bengaluru', state: 'Karnataka', referredBy: 'ABHIJITH30'
     }
   });
   Logger.log('doPost returned: ' + result.getContent());
