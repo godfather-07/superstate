@@ -109,9 +109,9 @@ function build() {
   el.innerHTML = `
     <button type="button" class="ss-nudge-close" aria-label="Close">✕</button>
     <span class="ss-nudge-badge">batch 02 · pre-book open</span>
-    <p class="ss-nudge-title" id="ss-nudge-title">batch 01 sold out. <em>lock 50% off</em> the next drop.</p>
-    <p class="ss-nudge-sub">30 nights of Sleep Well for ₹750 <s>₹1,500</s>, plus your SuperState member card. pay now, ships with the next drop.</p>
-    <a class="ss-nudge-cta" href="${NUDGE.HREF}">pre-book at 50% off →</a>
+    <p class="ss-nudge-title" id="ss-nudge-title">batch 01 sold out. <em>skip the queue</em> for the next drop.</p>
+    <p class="ss-nudge-sub">pre-book now and your Sleep Well is reserved from the very first boxes. 30 nights comes with your SuperState member card.</p>
+    <a class="ss-nudge-cta" href="${NUDGE.HREF}">pre-book now →</a>
     <button type="button" class="ss-nudge-later">maybe later</button>
   `;
   return el;

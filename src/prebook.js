@@ -28,7 +28,7 @@ const hasCard = p => p === CARD_PACK;
 // prices on the pack buttons
 document.querySelectorAll('.pv-pack-price').forEach(el => {
   const p = priceFor(el.dataset.for, 1);
-  el.innerHTML = `${rupees(p.pre)} <s>${rupees(p.full)}</s>`;
+  el.innerHTML = p.pre < p.full ? `${rupees(p.pre)} <s>${rupees(p.full)}</s>` : rupees(p.pre);
 });
 
 function renderOrder(animate) {
@@ -42,6 +42,7 @@ function renderOrder(animate) {
   $('pv-line-label').textContent = `Sleep Well · ${pack} × ${qty}`;
   $('pv-line-mrp').textContent = rupees(price.full);
   $('pv-line-off').textContent = `−${rupees(price.full - price.pre)}`;
+  $('pv-line-off').closest('.pv-bill-line').hidden = price.pre >= price.full;
   const total = $('pv-total');
   total.textContent = rupees(price.pre);
   if (animate && !reduceMotion) { total.classList.remove('bump'); void total.offsetWidth; total.classList.add('bump'); }
@@ -122,7 +123,7 @@ if (linkRef) {
 }
 
 const submitBtn = $('pb-submit');
-const payLabel = () => `pay ${rupees(price.pre)} · 50% off →`;
+const payLabel = () => `pay ${rupees(price.pre)} →`;
 
 function setBusy(on, label) {
   submitBtn.disabled = on;
@@ -206,7 +207,7 @@ form.addEventListener('submit', async e => {
     amount: order.data.amount,
     currency: order.data.currency,
     name: 'SuperState',
-    description: `Sleep Well · ${pack} × ${qty} (pre-book, 50% off)`,
+    description: `Sleep Well · ${pack} × ${qty} (pre-book, batch 02)`,
     image: `${location.origin}/logo-wordmark.png`,
     prefill: { name: details.name, email: details.email, contact: `+91${details.phone}` },
     notes: { pack, qty: String(qty) },
@@ -259,7 +260,7 @@ form.addEventListener('submit', async e => {
     modal: {
       ondismiss: () => {
         setBusy(false);
-        setError('form', 'Payment cancelled. Your 50% off is still here whenever you’re ready.');
+        setError('form', 'Payment cancelled. Your spot in batch 02 is still here whenever you’re ready.');
       }
     }
   });
@@ -311,9 +312,9 @@ function showCard(r, celebrate) {
     ? 'free shipping across India. your physical card comes in the box'
     : 'free shipping across India';
   $('pb-done-sub').textContent = carded
-    ? `${first}, you're paid up at 50% off. here's your SuperState card.`
-    : `${first}, you're paid up at 50% off. your Sleep Well ships with batch 02.`;
-  $('pb-step1').textContent = `${r.pack} × ${r.qty} · ₹${formatINR(r.prebookPrice)} paid (50% off)`;
+    ? `${first}, you're paid up and first in line. here's your SuperState card.`
+    : `${first}, you're paid up and first in line. your Sleep Well ships with batch 02.`;
+  $('pb-step1').textContent = `${r.pack} × ${r.qty} · ₹${formatINR(r.prebookPrice)} paid`;
   $('pb-step2-phone').textContent = `+91 ${r.phone.slice(0, 5)} ${r.phone.slice(5)}`;
   $('pb-payid').textContent = r.paymentId ? `payment ID ${r.paymentId}` : '';
 
@@ -323,8 +324,8 @@ function showCard(r, celebrate) {
     : `<strong>${others} night owls</strong> from batch 01 already have theirs`;
 
   const shareText = carded
-    ? `just got my SuperState card ☾ (${r.memberId}). pre-booked Sleep Well at 50% off, coffee but for sleep → https://superstate.in/products/sleep-well/`
-    : `just pre-booked Sleep Well at 50% off ☾ coffee, but for sleep → https://superstate.in/products/sleep-well/`;
+    ? `just got my SuperState card ☾ (${r.memberId}). pre-booked Sleep Well from batch 02, coffee but for sleep → https://superstate.in/products/sleep-well/`
+    : `just pre-booked Sleep Well from batch 02 ☾ coffee, but for sleep → https://superstate.in/products/sleep-well/`;
   const share = $('pb-share');
   share.href = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
   if (navigator.share) {
