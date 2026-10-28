@@ -151,25 +151,41 @@
 
       <div class="home-hero-visual">
         <svg class="hero-art" viewBox="0 0 600 600" aria-hidden="true">
-          <circle class="hero-orbit" cx="300" cy="300" r="240" fill="none" stroke="rgba(228,255,90,.35)" stroke-width="2" stroke-dasharray="3 12"/>
-          <circle cx="300" cy="300" r="170" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/>
-          <g class="hero-moon"><path d="M118 96a52 52 0 1 0 58 74 42 42 0 1 1-58-74z" fill="#E4FF5A"/></g>
-          <g class="hero-stars" fill="#ffffff">
-            <path d="M488 92l5 13 13 5-13 5-5 13-5-13-13-5 13-5z"/>
-            <path d="M530 210l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" opacity=".7"/>
-            <path d="M74 330l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" opacity=".6"/>
-            <circle cx="430" cy="60" r="3"/><circle cx="560" cy="330" r="2.5"/><circle cx="60" cy="230" r="2.5"/><circle cx="210" cy="40" r="2"/>
+          <defs>
+            <radialGradient id="ha-moon" cx="42%" cy="38%" r="65%">
+              <stop offset="0" stop-color="#F7FFC9"/><stop offset=".6" stop-color="#E4FF5A"/><stop offset="1" stop-color="#C9E83A"/>
+            </radialGradient>
+            <radialGradient id="ha-glow" cx="50%" cy="50%" r="50%">
+              <stop offset=".55" stop-color="#E4FF5A" stop-opacity=".35"/><stop offset="1" stop-color="#E4FF5A" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <circle cx="300" cy="300" r="290" fill="url(#ha-glow)" class="ha-pulse"/>
+          <circle cx="300" cy="300" r="200" fill="url(#ha-moon)"/>
+          <g fill="#B8D42E" opacity=".45">
+            <circle cx="214" cy="232" r="22"/><circle cx="392" cy="398" r="30"/><circle cx="380" cy="210" r="11"/><circle cx="230" cy="402" r="13"/>
           </g>
-          <g class="hero-zzz" fill="#ffffff" font-family="Bricolage Grotesque, sans-serif" font-weight="800">
-            <text x="452" y="168" font-size="30">z</text><text x="478" y="140" font-size="22" opacity=".8">z</text><text x="498" y="118" font-size="16" opacity=".6">z</text>
+          <circle cx="300" cy="300" r="246" fill="none" stroke="rgba(228,255,90,.5)" stroke-width="1.5" stroke-dasharray="2 10" class="ha-ring"/>
+          <g class="ha-steam" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity=".85">
+            <path d="M262 88c-14-16 14-26 0-44"/><path d="M300 78c-14-16 14-26 0-44"/><path d="M338 88c-14-16 14-26 0-44"/>
+          </g>
+          <g class="ha-bean ha-bean-a" transform="translate(92 410) rotate(-30)">
+            <ellipse rx="26" ry="16" fill="#5B3A29"/><path d="M-20 0c10-7 30-7 40 0" fill="none" stroke="#8A5A3F" stroke-width="3" stroke-linecap="round"/>
+          </g>
+          <g class="ha-bean ha-bean-b" transform="translate(520 150) rotate(25)">
+            <ellipse rx="20" ry="12" fill="#5B3A29"/><path d="M-15 0c8-5 22-5 30 0" fill="none" stroke="#8A5A3F" stroke-width="3" stroke-linecap="round"/>
+          </g>
+          <g class="ha-bean ha-bean-c" transform="translate(500 470) rotate(60)">
+            <ellipse rx="15" ry="9" fill="#5B3A29"/>
+          </g>
+          <g class="ha-twinkle" fill="#ffffff">
+            <path d="M96 140l5 13 13 5-13 5-5 13-5-13-13-5 13-5z"/>
+            <path d="M540 300l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" opacity=".7"/>
+            <circle cx="150" cy="70" r="3"/><circle cx="470" cy="60" r="2.5"/><circle cx="60" cy="300" r="2.5"/>
           </g>
         </svg>
-        <span class="hero-chip hero-chip-a" aria-hidden="true">🍫 real cacao</span>
-        <span class="hero-chip hero-chip-b" aria-hidden="true">🧲 2× magnesium</span>
-        <span class="hero-chip hero-chip-c" aria-hidden="true">🚫 no melatonin</span>
         <span class="home-sticker" aria-hidden="true">coffee, but for sleep ☾</span>
         <a href="/products/sleep-well/" class="home-hero-link" aria-label="Shop Sleep Well">
-          <img src="/assets/sleep-well-box.webp" alt="SuperState Sleep Well box" width="763" height="1172" fetchpriority="high">
+          <img src="/assets/sleep-well-pouch.webp" alt="SuperState Sleep Well pouch" width="349" height="548" fetchpriority="high">
         </a>
       </div>
 
@@ -301,38 +317,25 @@
     }
     .hero-art { position: absolute; left: 50%; top: 50%; width: min(620px, 118%); transform: translate(-50%, -50%); z-index: 0; pointer-events: none; overflow: visible; }
     .home-hero-visual .home-hero-link { position: relative; z-index: 1; }
-    .hero-orbit { transform-origin: 300px 300px; animation: hero-spin 60s linear infinite; }
-    .hero-moon { animation: hero-bob 7s ease-in-out infinite; }
-    .hero-stars { animation: hero-twinkle 3s ease-in-out infinite; }
-    .hero-zzz text { animation: hero-z 3s ease-in-out infinite; }
-    .hero-zzz text:nth-child(2) { animation-delay: .4s; }
-    .hero-zzz text:nth-child(3) { animation-delay: .8s; }
+    .ha-ring { transform-origin: 300px 300px; animation: hero-spin 80s linear infinite; }
+    .ha-pulse { transform-origin: 300px 300px; animation: ha-pulse 6s ease-in-out infinite; }
+    .ha-steam path { animation: ha-steam 3.2s ease-in-out infinite; }
+    .ha-steam path:nth-child(2) { animation-delay: .5s; }
+    .ha-steam path:nth-child(3) { animation-delay: 1s; }
+    .ha-bean { animation: ha-drift 7s ease-in-out infinite; }
+    .ha-bean-b { animation-delay: 1.5s; } .ha-bean-c { animation-delay: 3s; }
+    .ha-twinkle { animation: hero-twinkle 3s ease-in-out infinite; }
     @keyframes hero-spin { to { transform: rotate(360deg); } }
-    @keyframes hero-bob { 50% { transform: translateY(8px); } }
     @keyframes hero-twinkle { 50% { opacity: .45; } }
-    @keyframes hero-z { 0%, 100% { opacity: .2; transform: translateY(4px); } 50% { opacity: 1; transform: none; } }
-    .hero-chip {
-      position: absolute; z-index: 2; padding: .45rem .8rem; border-radius: 999px;
-      background: rgba(255, 255, 255, .12); border: 1px solid rgba(255, 255, 255, .28);
-      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-      color: #ffffff; font-family: 'Bricolage Grotesque', sans-serif; font-size: 13.5px; font-weight: 700; white-space: nowrap;
-      box-shadow: 0 8px 20px rgba(0, 10, 40, .25); animation: home-float 6s ease-in-out infinite;
-    }
-    .hero-chip-a { top: 12%; right: 2%; animation-delay: .5s; }
-    .hero-chip-b { top: 46%; right: -4%; animation-delay: 1.4s; }
-    .hero-chip-c { top: 30%; left: 0; animation-delay: 2.1s; }
-    @media (max-width: 860px) {
-      .hero-art { width: 360px; }
-      .hero-chip { font-size: 11.5px; padding: .35rem .6rem; }
-      .hero-chip-a { top: 6%; right: 4%; }
-      .hero-chip-b { top: 52%; right: 2%; }
-      .hero-chip-c { display: none; }
-    }
-    @media (prefers-reduced-motion: reduce) { .hero-orbit, .hero-moon, .hero-stars, .hero-zzz text, .hero-chip { animation: none; } }
+    @keyframes ha-pulse { 50% { transform: scale(1.05); opacity: .75; } }
+    @keyframes ha-steam { 0% { opacity: 0; transform: translateY(10px); } 40% { opacity: .9; } 100% { opacity: 0; transform: translateY(-14px); } }
+    @keyframes ha-drift { 50% { translate: 0 -10px; } }
+    @media (max-width: 860px) { .hero-art { width: 330px; } }
+    @media (prefers-reduced-motion: reduce) { .ha-ring, .ha-pulse, .ha-steam path, .ha-bean, .ha-twinkle { animation: none; } }
     .home-sticker {
       position: absolute;
-      bottom: 16%;
-      left: 4%;
+      top: 14%;
+      left: 2%;
       z-index: 2;
       transform: rotate(-6deg);
       background: #E4FF5A;
@@ -357,11 +360,13 @@
         order: -1;
       }
       .home-hero-visual img {
-        max-height: min(220px, 28vh);
+        max-height: min(240px, 30vh);
       }
       .home-sticker {
-        left: 2%;
-        bottom: 10%;
+        top: auto;
+        left: 0;
+        bottom: 2%;
+        font-size: 14px;
       }
       .home-pill {
         margin-bottom: 1rem;
