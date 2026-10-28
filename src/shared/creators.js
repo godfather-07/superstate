@@ -1,16 +1,14 @@
 /**
  * Creator codes, shared by the browser and the /api functions.
  *
- * - Waitlist: a creator code gives that % off at launch (instead of FIRSTNIGHT20).
- * - Pre-book: a creator code gives NO discount; it is only saved as
- *   "Referred By" so you can see which creator drove paid pre-books.
- *
- * - Pre-book via a creator: the order also comes with a creator gift package
- *   (shown on the pre-book page; "Referred By" in the sheet = ship the gift).
+ * A creator code at checkout gives that creator's % off (instead of the 20%
+ * launch code), plus a creator gift package in the box. It is saved as
+ * "Referred By" so you can see which creator drove which orders.
  *
  * TO ADD A CREATOR: add their code here (uppercase) with their display name
- * and waitlist %, and create the same code with the same % in Shopify.
- * Creator links: https://www.superstate.in/?ref=CODE (works on any page).
+ * and %, and create the same code with the same % in Shopify if you use it there.
+ * Creator links: https://www.superstate.in/?ref=CODE (works on any page and
+ * fills the code in at checkout).
  */
 export const CREATORS = {
   ABHIJITH30: { name: 'Abhijith', discount: 30 },

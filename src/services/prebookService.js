@@ -1,7 +1,8 @@
 /**
  * Superstate Pre-book Service
  *
- * Pre-booking = pay today (full price) via Razorpay Standard Checkout.
+ * Checkout = pay today via Razorpay Standard Checkout (launch sale: 20% off
+ * for everyone, 30% with a creator code; see src/shared/packs.js).
  *   1. POST /api/create-order   -> server prices the pack and creates the order
  *   2. Razorpay modal           -> customer pays
  *   3. POST /api/verify-payment -> server checks the signature, logs the paid
@@ -9,15 +10,15 @@
  * The Key Secret only ever lives on the server (api/).
  */
 
-import { PACKS, priceFor } from '../shared/packs.js';
+import { PACKS, priceFor, discountFor, LAUNCH_CODE, LAUNCH_DISCOUNT_PCT, GIFT_PACK } from '../shared/packs.js';
 
 export const PREBOOK_CONFIG = {
   // Batch 01 customers who already have a card. Keep this number true.
   BATCH01_MEMBERS: 27,
-  STORAGE_KEY: 'superstate_prebook'
+  STORAGE_KEY: 'superstate_order'
 };
 
-export { PACKS, priceFor };
+export { PACKS, priceFor, discountFor, LAUNCH_CODE, LAUNCH_DISCOUNT_PCT, GIFT_PACK };
 
 export function formatINR(n) {
   return Number.isInteger(n)

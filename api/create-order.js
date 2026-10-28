@@ -1,7 +1,8 @@
 /**
  * POST /api/create-order
- * Body: { pack, qty, name, phone, email, address, pincode, city, state, ref }
- * ref = optional creator code; attribution only, it never changes the price.
+ * Body: { pack, qty, name, phone, email, address, pincode, city, state, code }
+ * code = discount code. Blank or FIRSTNIGHT20 = 20% off (everyone); a creator
+ * code = 30% off and is saved as `ref` (Referred By) for the creator gift.
  * Returns: { order_id, amount, currency, key_id }
  *
  * The amount is computed here from the pack table (never taken from the
@@ -9,8 +10,7 @@
  */
 
 import { getRazorpay, getKeys, sendJson, readJson, razorpayErrorStatus, missingKeysMessage } from './_lib/razorpay.js';
-import { priceFor } from '../src/shared/packs.js';
-import { normalizeCreatorCode } from '../src/shared/creators.js';
+import { priceFor, discountFor } from '../src/shared/packs.js';
 
 const MIN_AMOUNT_PAISE = 100;
 
@@ -30,10 +30,13 @@ export default async function handler(req, res) {
   if (!body) return sendJson(res, 400, { error: 'Invalid JSON body.' });
 
   const { pack, name = '', phone = '', email = '', address = '', pincode = '', city = '', state = '' } = body;
-  const price = priceFor(pack, Number(body.qty));
+  // Blank code = FIRSTNIGHT20 (20% for everyone); a creator code = 30%.
+  // `ref` is accepted too, for links made before the launch sale.
+  const code = body.code || body.ref || '';
+  if (!discountFor(code)) return sendJson(res, 400, { error: "We don't know that code." });
+  const price = priceFor(pack, Number(body.qty), code);
   if (!price) return sendJson(res, 400, { error: 'Unknown pack or quantity.' });
-  const ref = body.ref ? normalizeCreatorCode(body.ref) : '';
-  if (ref === null) return sendJson(res, 400, { error: "We don't know that creator code." });
+  const ref = price.creator || '';
   if (price.prePaise < MIN_AMOUNT_PAISE) {
     return sendJson(res, 400, { error: 'Amount must be at least ₹1.' });
   }
@@ -44,6 +47,7 @@ export default async function handler(req, res) {
       currency: 'INR',
       receipt: `prebook_${Date.now()}`,
       // Kept on the order so verify-payment can trust them later.
+      // type stays 'prebook' so the webhook and the sheet's Prebooks tab keep working.
       notes: {
         type: 'prebook',
         pack,
@@ -56,6 +60,7 @@ export default async function handler(req, res) {
         city: String(city).slice(0, 40),
         state: String(state).slice(0, 40),
         ref,
+        discount_code: price.code,
         full_price: String(price.full)
       }
     });

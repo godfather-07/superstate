@@ -1,12 +1,12 @@
 /**
- * Pre-book nudge: a small, dismissible card that points visitors to the
- * pre-book page. Bottom-right card on desktop, bottom sheet on phones
+ * Launch-sale nudge: a small, dismissible card that points visitors to the
+ * checkout. Bottom-right card on desktop, bottom sheet on phones
  * (no full-screen popup, so it doesn't block reading or hurt mobile SEO).
  *
  * Shows once per visit, after NUDGE.DELAY_MS on the page, after scrolling
  * NUDGE.SCROLL_PCT of it, or when the mouse heads for the tab bar (desktop),
- * whichever comes first. Never shows on the product, pre-book or waitlist
- * pages, to people who already pre-booked, or for NUDGE.SNOOZE_DAYS after
+ * whichever comes first. Never shows on the product or checkout pages, to
+ * people who already ordered, or for NUDGE.SNOOZE_DAYS after
  * someone closes it.
  */
 
@@ -16,8 +16,8 @@ const NUDGE = {
   SNOOZE_DAYS: 3,
   SNOOZE_KEY: 'superstate_nudge_snoozed_at',
   SESSION_KEY: 'superstate_nudge_shown',
-  PREBOOK_KEY: 'superstate_prebook', // set by the pre-book page after payment
-  SKIP_PATHS: ['/products/', '/pages/prebook', '/pages/waitlist'],
+  PREBOOK_KEY: 'superstate_order', // set by the checkout page after payment
+  SKIP_PATHS: ['/products/', '/pages/prebook'],
   HREF: '/pages/prebook/?pack=Pack%20Of%2030&qty=1'
 };
 
@@ -108,10 +108,10 @@ function build() {
   el.setAttribute('aria-labelledby', 'ss-nudge-title');
   el.innerHTML = `
     <button type="button" class="ss-nudge-close" aria-label="Close">✕</button>
-    <span class="ss-nudge-badge">batch 02 · pre-book open</span>
-    <p class="ss-nudge-title" id="ss-nudge-title">batch 01 sold out. <em>skip the queue</em> for the next drop.</p>
-    <p class="ss-nudge-sub">pre-book now and your Sleep Well is reserved from the very first boxes. 30 nights comes with your SuperState member card.</p>
-    <a class="ss-nudge-cta" href="${NUDGE.HREF}">pre-book now →</a>
+    <span class="ss-nudge-badge">launch sale · 20% off</span>
+    <p class="ss-nudge-title" id="ss-nudge-title">Sleep Well is live. <em>20% off</em> for launch.</p>
+    <p class="ss-nudge-sub">coffee, but for sleep. 30 nights for ₹1,200 <s>₹1,500</s>, with a SuperState gift in the box. ships in 5–7 days.</p>
+    <a class="ss-nudge-cta" href="${NUDGE.HREF}">shop the launch →</a>
     <button type="button" class="ss-nudge-later">maybe later</button>
   `;
   return el;

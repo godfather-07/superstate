@@ -8,14 +8,13 @@
  * Events sent:
  * - PageView          every page
  * - ViewContent       product page
- * - InitiateCheckout  pre-book page opened / product page "Pre-book" button
- * - AddPaymentInfo    "pay" pressed on the pre-book page (Razorpay opens)
- * - Purchase          payment verified by our server (value in INR)
- * - Lead              waitlist signup
+ * - InitiateCheckout  checkout page opened / product page "Buy now" button
+ * - AddPaymentInfo    "pay" pressed on the checkout page (Razorpay opens)
+ * - Purchase          payment verified by our server (value in INR, coupon)
  * Creator codes ride along as `creator` so ads can be split by creator.
  *
  * Every event is ALSO pushed to Google Tag Manager's dataLayer (GTM-TGW85RP2)
- * as `ss_<Event>` (e.g. ss_Purchase, ss_Lead) with the same values, so GA4,
+ * as `ss_<Event>` (e.g. ss_Purchase) with the same values, so GA4,
  * Google Ads etc. can be set up in GTM without code changes.
  * Don't add the Meta pixel inside GTM too: that would double-count.
  */

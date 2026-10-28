@@ -20,7 +20,7 @@
   <meta property="og:site_name" content="SuperState" />
   <meta property="og:url" content="https://www.superstate.in/products/sleep-well/" />
   <meta property="og:title" content="Sleep Well by SuperState: coffee, but for sleep ☾" />
-  <meta property="og:description" content="Batch 01 sold out. Pre-book the next drop, or join the waitlist for 20% off with code FIRSTNIGHT20." />
+  <meta property="og:description" content="Sleep Well is live. 20% off for launch, 30% with a creator code. Free shipping across India." />
   <meta property="og:image" content="https://www.superstate.in/assets/og-sleep-well.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -30,7 +30,7 @@
   <!-- Fonts & Core Stylesheet -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Lora:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Lora:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&family=Caveat:wght@500;700&family=Inter:wght@500..800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../style.css" />
   <link rel="icon" href="/favicon.ico?v=2" sizes="48x48" />
   <link rel="icon" type="image/png" sizes="512x512" href="/favicon-s.png?v=2" />
@@ -460,11 +460,19 @@
       margin-bottom: 0.75rem;
     }
 
+    /* Numbers: clean, Apple-style figures (SF Pro on Apple devices, Inter elsewhere) */
+    .num, .pdp-price-current, .pdp-price-original, .pack-price, .note-amt, #sticky-buy-meta, #pdp-qty-input {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif !important;
+      font-variant-numeric: tabular-nums lining-nums;
+      font-feature-settings: 'tnum' 1, 'lnum' 1;
+      letter-spacing: -0.025em;
+    }
+
     .pdp-price-current {
-      font-size: clamp(32px, 3.5vw, 42px);
-      font-weight: 800;
+      font-size: clamp(34px, 3.6vw, 44px);
+      font-weight: 700;
       color: #ffffff;
-      font-family: var(--font-heading);
+      letter-spacing: -0.035em !important;
     }
 
     .pdp-price-original {
@@ -2527,28 +2535,18 @@
       .drop-dot { animation: none; }
     }
     /* ---------- Buy box link to game ---------- */
-    /* Waitlist: the free option, right under the pre-book button */
-    .waitlist-cta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      width: 100%;
+    .launch-note {
       max-width: 600px;
       margin: -1rem 0 1.25rem;
       padding: 0.8rem 1rem;
-      border: 2px solid #000000;
-      border-radius: 8px;
-      background: #ffffff;
-      color: #000000;
-      text-decoration: none;
-      font-family: var(--font-body);
-      transition: background-color 0.2s;
+      border-radius: 10px;
+      background: rgba(228, 255, 90, 0.12);
+      border: 1px solid rgba(228, 255, 90, 0.45);
+      color: #ffffff;
+      font-size: 14px;
+      line-height: 1.5;
     }
-    .waitlist-cta:hover { background: #f4f6fc; }
-    .waitlist-cta b { font-size: 16px; font-weight: 700; }
-    .waitlist-cta small { display: block; font-size: 13px; color: #4a5878; font-weight: 500; margin-top: 0.1rem; }
-    .waitlist-cta i { font-style: normal; font-size: 20px; font-weight: 700; }
+    .launch-note b { color: var(--color-first-light); }
     .win-link {
       display: inline-block;
       margin: -0.25rem 0 1.25rem;
@@ -2870,13 +2868,78 @@
     }
     .note-amt {
       display: inline-block;
-      font-family: var(--font-heading);
-      font-weight: 800;
+      font-weight: 700;
       font-size: 26px;
       letter-spacing: -0.03em;
       color: #001a4d;
       background: linear-gradient(transparent 60%, rgba(255, 255, 255, 0.75) 60%, rgba(255, 255, 255, 0.75) 92%, transparent 92%);
-      font-variant-numeric: tabular-nums;
+    }
+    .note-job {
+      margin: 0.55rem 0 0;
+      padding-top: 0.5rem;
+      border-top: 1.5px dashed rgba(0, 26, 77, 0.25);
+      font-size: 13.5px;
+      line-height: 1.4;
+      font-weight: 600;
+      color: #001a4d;
+    }
+    .note-job b { color: #e0336e; font-weight: 800; }
+    .board-goal {
+      margin-top: 2rem;
+      padding: 1.5rem 1.5rem 1.4rem;
+      border-radius: 18px;
+      background: #003399;
+      color: #ffffff;
+      text-align: center;
+      transform: rotate(-0.6deg);
+      box-shadow: 0 14px 30px rgba(0, 26, 77, 0.22);
+    }
+    .board-goal-kicker {
+      display: inline-block;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: var(--color-first-light);
+      color: #001a4d;
+      font-size: 12.5px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .board-goal-title {
+      margin: 0.7rem auto 1rem;
+      max-width: 640px;
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(26px, 3.4vw, 38px);
+      line-height: 1.1;
+      color: #ffffff;
+    }
+    .board-goal-title mark { background: var(--color-first-light); color: #001a4d; padding: 0 0.15em; border-radius: 6px; white-space: nowrap; }
+    .pack-price .pack-was { display: block; margin: 0.1rem 0 0; font-size: 13px; font-weight: 500; }
+    .board-goal-math {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 0.45rem 0.5rem;
+    }
+    .board-goal-math li {
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 14px;
+      color: #d5ddf3;
+    }
+    .board-goal-math li b { color: #ffffff; font-weight: 800; }
+    .board-goal-math li.op { padding: 0; background: none; border: 0; font-size: 20px; font-weight: 800; color: var(--color-first-light); }
+    .board-goal-math li.res { background: var(--color-first-light); border-color: var(--color-first-light); }
+    .board-goal-math li.res b { color: #001a4d; }
+    @media (max-width: 600px) {
+      .board-goal { padding: 1.25rem 1rem; }
+      .board-goal-math { flex-direction: column; }
     }
     .note-name {
       font-family: var(--font-heading) !important;
@@ -2946,10 +3009,10 @@
   "offers": {
     "@type": "AggregateOffer",
     "priceCurrency": "INR",
-    "lowPrice": "299",
-    "highPrice": "1500",
+    "lowPrice": "239.20",
+    "highPrice": "1200",
     "offerCount": 3,
-    "availability": "https://schema.org/PreOrder",
+    "availability": "https://schema.org/InStock",
     "url": "https://www.superstate.in/pages/prebook/",
     "seller": {
       "@id": "https://www.superstate.in/#organization"
@@ -2980,12 +3043,12 @@
       <ul class="nav-links">
         <li><a href="/">Home</a></li>
         <li><a href="/pages/our-story/">Our Story</a></li>
-        <li><a href="/pages/waitlist/">Waitlist</a></li>
+        <li><a href="/products/sleep-well/">Shop</a></li>
         <li><a href="/pages/faqs/">FAQs</a></li>
         <li><a href="/pages/contact/">Contact</a></li>
       </ul>
       <div style="display: flex; align-items: center; gap: 1rem;">
-        <a href="#buy-section" class="btn btn-primary nav-cta">Pre-book</a>
+        <a href="#buy-section" class="btn btn-primary nav-cta">Buy now</a>
         <button class="cart-toggle-btn" onclick="openCartDrawer()" style="min-width: 44px; min-height: 44px; justify-content: center; background: transparent; border: none; cursor: pointer; position: relative; color: var(--color-deep-knowing); display: flex; align-items: center; justify-content: center; padding: 5px; outline: none;" aria-label="Open Cart">
           <svg style="width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 2;" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
@@ -3008,7 +3071,7 @@
     <ul class="mobile-nav-links">
       <li><a href="/">Home</a></li>
       <li><a href="/pages/our-story/">Our Story</a></li>
-      <li><a href="/pages/waitlist/">Waitlist</a></li>
+      <li><a href="/products/sleep-well/">Shop</a></li>
       <li><a href="/pages/faqs/">FAQs</a></li>
       <li><a href="/pages/contact/">Contact</a></li>
     </ul>
@@ -3039,11 +3102,11 @@
           <p class="pdp-subline">A dark chocolate drink for your evenings. Mix one sachet, sip it 30 minutes before bed.</p>
           
           <div class="pdp-price-row" style="margin-bottom: 0.25rem;">
-            <div class="pdp-price-current" id="pdp-top-price">₹299</div>
-            <div class="pdp-price-original" id="pdp-top-original" style="display: none;">₹1,495</div>
-            <div class="pdp-price-badge" id="pdp-top-discount" style="display: none;">0% OFF</div>
+            <div class="pdp-price-current" id="pdp-top-price">₹239.20</div>
+            <div class="pdp-price-original" id="pdp-top-original">₹299</div>
+            <div class="pdp-price-badge" id="pdp-top-discount">20% OFF</div>
           </div>
-          <div class="pdp-tax-note" style="margin-bottom: 2rem;">pre-book price · pay today, ships with the next drop · incl. taxes</div>
+          <div class="pdp-tax-note" style="margin-bottom: 2rem;">launch price · 20% off for everyone · 30% with a creator code · incl. taxes</div>
           
           <!-- Selected Flavour (Organic Cacao Only) Hidden Element for DOM bindings -->
           <span id="selected-flavour-lbl" style="display: none;">Organic Cacao</span>
@@ -3057,31 +3120,31 @@
             <div class="supply-pack-stack">
               
               <!-- Pack Of 5 (Active default) -->
-              <div class="pack-pill-card active" onclick="selectPack('Pack Of 5', 299, 299, 60, 0, this)">
+              <div class="pack-pill-card active" onclick="selectPack('Pack Of 5', 239.2, 299, 48, 20, this)">
                 <div style="display: flex; align-items: center; gap: 0.5rem; width: 100%;">
                   <span style="font-weight: 700; font-size: 16px; color: #000000; font-family: var(--font-body);">Pack Of 5</span>
                 </div>
-                <div style="font-weight: 700; font-size: 18px; color: #000000; margin-top: 0.25rem;">₹ 299</div>
-                <div style="font-size: 13px; color: #777777; margin-top: 0.15rem; font-weight: 500;">₹ 60/serve</div>
+                <div class="pack-price" style="font-weight: 700; font-size: 18px; color: #000000; margin-top: 0.25rem;">₹239.20 <s class="pack-was">₹299</s></div>
+                <div style="font-size: 13px; color: #777777; margin-top: 0.15rem; font-weight: 500;">₹48/serve</div>
               </div>
               
               <!-- Pack Of 15 -->
-              <div class="pack-pill-card" onclick="selectPack('Pack Of 15', 900, 900, 60, 0, this)">
+              <div class="pack-pill-card" onclick="selectPack('Pack Of 15', 720, 900, 48, 20, this)">
                 <div style="display: flex; align-items: center; gap: 0.5rem; width: 100%;">
                   <span style="font-weight: 700; font-size: 16px; color: #000000; font-family: var(--font-body);">Pack Of 15</span>
                 </div>
-                <div style="font-weight: 700; font-size: 18px; color: #000000; margin-top: 0.25rem;">₹ 900</div>
-                <div style="font-size: 13px; color: #777777; margin-top: 0.15rem; font-weight: 500;">₹ 60/serve</div>
+                <div class="pack-price" style="font-weight: 700; font-size: 18px; color: #000000; margin-top: 0.25rem;">₹720 <s class="pack-was">₹900</s></div>
+                <div style="font-size: 13px; color: #777777; margin-top: 0.15rem; font-weight: 500;">₹48/serve</div>
               </div>
 
               <!-- Pack Of 30 -->
-              <div class="pack-pill-card" onclick="selectPack('Pack Of 30', 1500, 1500, 50, 0, this)">
+              <div class="pack-pill-card" onclick="selectPack('Pack Of 30', 1200, 1500, 40, 20, this)">
                 <span class="pack-best-tag">best value ✶</span>
                 <div style="display: flex; align-items: center; gap: 0.5rem; width: 100%;">
                   <span style="font-weight: 700; font-size: 16px; color: #000000; font-family: var(--font-body);">Pack Of 30</span>
                 </div>
-                <div style="font-weight: 700; font-size: 18px; color: #000000; margin-top: 0.25rem;">₹ 1,500</div>
-                <div style="font-size: 13px; color: #777777; margin-top: 0.15rem; font-weight: 500;">₹ 50/serve</div>
+                <div class="pack-price" style="font-weight: 700; font-size: 18px; color: #000000; margin-top: 0.25rem;">₹1,200 <s class="pack-was">₹1,500</s></div>
+                <div style="font-size: 13px; color: #777777; margin-top: 0.15rem; font-weight: 500;">₹40/serve · + gift 🎁</div>
               </div>
               
             </div>
@@ -3096,16 +3159,11 @@
             </div>
             
             <button id="prebook-btn" onclick="prebookCheckout(this)" style="flex: 1; height: 50px; background-color: #000000; color: #ffffff; border: none; border-radius: 8px; font-size: 18px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: opacity 0.2s; outline: none; font-family: var(--font-body);">
-              Pre-book now
+              Buy now · 20% off
             </button>
           </div>
 
-          <a href="/pages/waitlist/" class="waitlist-cta">
-            <span><b>not ready to pay? join the waitlist</b><small>free · 20% off at launch · got a creator code? use it there</small></span>
-            <i aria-hidden="true">→</i>
-          </a>
-
-          <a href="#win" class="win-link">or 🎮 <span>win your 20% in a 20-second game</span></a>
+          <p class="launch-note">🎉 <b>launch sale:</b> 20% off is applied automatically at checkout. a creator sent you? use their code at checkout for <b>30% off + a free gift</b>.</p>
 
           <ul class="pdp-facts-row">
             <li>Secure payment by Razorpay</li>
@@ -3115,17 +3173,16 @@
           
         </div>
 
-        <!-- SOLD-OUT BAR (spans both columns on desktop) -->
+        <!-- LAUNCH BAR (spans both columns on desktop) -->
         <div class="era-bar-wrap">
           <div class="era-card">
             <div class="era-top">
-              <span class="era-badge">sold out era 💅</span>
-              <span class="era-batch">batch 01</span>
+              <span class="era-badge">launch sale is live 🎉</span>
+              <span class="era-batch">batch 02</span>
             </div>
-            <p class="era-copy">ok so… batch 01 got <strong>absolutely cleared.</strong> y'all ate it up way faster than we planned 🫠 we took notes, made it <em>even better</em>, and the next drop is loading:</p>
+            <p class="era-copy">ok so… batch 01 got <strong>absolutely cleared.</strong> y'all ate it up way faster than we planned 🫠 we took notes, made it <em>even better</em>, and it's <strong>shipping now</strong>.</p>
             <div class="era-progress">
-              <div class="era-bar" role="img" aria-label="Next drop loading"><span></span></div>
-              <p class="era-foot">hold your horses 🐎 steady, steady. <a href="/pages/waitlist/" class="era-link">get on the waitlist →</a></p>
+              <p class="era-foot">20% off for everyone · 30% with a creator code · ships in 5–7 days. <a href="#buy-section" class="era-link">grab yours →</a></p>
             </div>
           </div>
         </div>
@@ -3135,9 +3192,9 @@
           <div class="game-card" id="win">
             <!-- intro -->
             <div class="game-state" data-state="intro">
-              <span class="game-eyebrow">not ready to trust us yet? fair 🤝</span>
-              <h3 class="game-title">wanna <em>win</em> your 20% off?</h3>
-              <p class="game-sub">help a sleepy sheep jump 10 alarms and the code is yours. 20 seconds, max.</p>
+              <span class="game-eyebrow">while you're here 🐑</span>
+              <h3 class="game-title">wanna <em>play</em> for your 20%?</h3>
+              <p class="game-sub">help a sleepy sheep jump 10 alarms. (spoiler: the 20% is already applied at checkout, but winning it feels better 😌)</p>
               <div class="game-actions">
                 <button type="button" class="game-btn game-btn-primary" data-action="play">yes, let's play 🐑</button>
                 <button type="button" class="game-btn game-btn-ghost" data-action="skip">nah, just give me the code</button>
@@ -3164,10 +3221,10 @@
             <div class="game-state" data-state="reveal" hidden>
               <span class="game-eyebrow" id="reveal-eyebrow">you did that ✨</span>
               <h3 class="game-title">your code: <span class="game-code" id="game-code">FIRSTNIGHT20</span></h3>
-              <p class="game-sub">20% off when we launch. drop your details so we can ping you the second it's live.</p>
+              <p class="game-sub">20% off, already applied at checkout. go treat yourself to better nights.</p>
               <div class="game-actions">
-                <button type="button" class="game-btn game-btn-primary" data-action="copy">copy code</button>
-                <a href="/pages/waitlist/" class="game-btn game-btn-ghost">join the waitlist →</a>
+                <a href="#buy-section" class="game-btn game-btn-primary">buy now · 20% off →</a>
+                <button type="button" class="game-btn game-btn-ghost" data-action="copy">copy code</button>
               </div>
             </div>
           </div>
@@ -3181,8 +3238,8 @@
   <div class="vibe-ticker-clip" aria-hidden="true">
   <div class="vibe-ticker">
     <div class="vibe-ticker-track">
-      <span>batch 01 sold out</span><i>✶</i><span>coffee for sleep</span><i>☾</i><span>no melatonin</span><i>✶</i><span>real dark chocolate</span><i>☾</i><span>30 min before bed</span><i>✶</i>
-      <span>batch 01 sold out</span><i>✶</i><span>coffee for sleep</span><i>☾</i><span>no melatonin</span><i>✶</i><span>real dark chocolate</span><i>☾</i><span>30 min before bed</span><i>✶</i>
+      <span>launch sale live</span><i>✶</i><span>coffee for sleep</span><i>☾</i><span>no melatonin</span><i>✶</i><span>real dark chocolate</span><i>☾</i><span>30 min before bed</span><i>✶</i>
+      <span>launch sale live</span><i>✶</i><span>coffee for sleep</span><i>☾</i><span>no melatonin</span><i>✶</i><span>real dark chocolate</span><i>☾</i><span>30 min before bed</span><i>✶</i>
     </div>
   </div>
   </div>
@@ -3229,42 +3286,49 @@
           <span class="note-amt">3,000 mg</span>
           <h3 class="note-name">organic raw cacao</h3>
           <p class="note-why"><span>why it’s here →</span> the base. real dark chocolate, not “chocolate flavour”. the bit that makes this a treat 🍫</p>
+          <p class="note-job"><b>the job:</b> makes bedtime something you actually look forward to.</p>
         </li>
         <li class="note note-pink">
           <span class="note-tape" aria-hidden="true"></span>
           <span class="note-amt">3,000 mg</span>
           <h3 class="note-name">glycine</h3>
           <p class="note-why"><span>why it’s here →</span> an amino acid your body already makes. tastes lightly sweet, which is a nice bonus.</p>
+          <p class="note-job"><b>the job:</b> helps your body ease into wind-down mode.</p>
         </li>
         <li class="note note-mint">
           <span class="note-tape" aria-hidden="true"></span>
           <span class="note-amt">2,000 mg</span>
           <h3 class="note-name">magnesium L-threonate</h3>
           <p class="note-why"><span>why it’s here →</span> magnesium bound to threonate. the fancy form, and we’re not shy about the dose.</p>
+          <p class="note-job"><b>the job:</b> the calm-mind magnesium.</p>
         </li>
         <li class="note note-lilac">
           <span class="note-tape" aria-hidden="true"></span>
           <span class="note-amt">1,000 mg</span>
           <h3 class="note-name">magnesium bisglycinate</h3>
           <p class="note-why"><span>why it’s here →</span> magnesium paired with glycine. we used two forms of magnesium, not one.</p>
+          <p class="note-job"><b>the job:</b> the relaxed-body magnesium.</p>
         </li>
         <li class="note note-peach">
           <span class="note-tape" aria-hidden="true"></span>
           <span class="note-amt">500 mg</span>
           <h3 class="note-name">tart cherry extract</h3>
           <p class="note-why"><span>why it’s here →</span> from tart cherries. a little fruity edge hiding under the chocolate 🍒</p>
+          <p class="note-job"><b>the job:</b> a natural night-time partner for the rest of the mix.</p>
         </li>
         <li class="note note-sky">
           <span class="note-tape" aria-hidden="true"></span>
           <span class="note-amt">200 mg</span>
           <h3 class="note-name">L-theanine</h3>
           <p class="note-why"><span>why it’s here →</span> found naturally in tea leaves. yes, the same stuff in your chai ☕</p>
+          <p class="note-job"><b>the job:</b> calm, not drowsy. turns down the mental chatter.</p>
         </li>
         <li class="note note-lime">
           <span class="note-tape" aria-hidden="true"></span>
           <span class="note-amt">50 mg</span>
           <h3 class="note-name">apigenin</h3>
           <p class="note-why"><span>why it’s here →</span> a compound found in chamomile, the OG bedtime tea 🌼</p>
+          <p class="note-job"><b>the job:</b> the chamomile cue that it’s time to switch off.</p>
         </li>
         <li class="note note-card">
           <span class="note-tape" aria-hidden="true"></span>
@@ -3277,6 +3341,22 @@
           <p class="note-why">full ingredient + allergen list is printed on the pack 📦</p>
         </li>
         </ul>
+
+        <div class="board-goal">
+          <span class="board-goal-kicker">🎯 the end goal</span>
+          <p class="board-goal-title">one warm mug that tells your body <mark>it's bedtime.</mark></p>
+          <ul class="board-goal-math">
+            <li><b>🍫 cacao</b> makes it a ritual</li>
+            <li class="op" aria-hidden="true">+</li>
+            <li><b>🧘 glycine + 2× magnesium</b> help you unwind</li>
+            <li class="op" aria-hidden="true">+</li>
+            <li><b>🍵 L-theanine + 🌼 apigenin</b> help your mind switch off</li>
+            <li class="op" aria-hidden="true">+</li>
+            <li><b>🍒 tart cherry</b> rounds out the night</li>
+            <li class="op" aria-hidden="true">=</li>
+            <li class="res"><b>😴 drift off easier, wake up fresh</b></li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -3344,21 +3424,21 @@
 
         <div class="pdp-accordion-item">
           <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
-            <span>How does pre-booking work?</span>
+            <span>When will my order ship?</span>
             <span class="pdp-accordion-icon">+</span>
           </div>
           <div class="pdp-accordion-body">
-            Pick your pack and pay today (UPI or card, secured by Razorpay). Pre-booking reserves your Sleep Well from the very first boxes of the next drop. Pick the 30-night pack and you also get a SuperState member card. Your order ships with the next drop. We'll WhatsApp you the dispatch date, and shipping is free across India.
+            Within 5–7 working days. Pay with UPI or card (secured by Razorpay) and we'll WhatsApp you the tracking link once it's on its way. Shipping is free across India, and every 30-night pack comes with a SuperState gift in the box.
           </div>
         </div>
 
         <div class="pdp-accordion-item">
           <div class="pdp-accordion-header" onclick="toggleAccordion(this)">
-            <span>I'm not ready to pay yet. Can I still get a discount?</span>
+            <span>Do you have discount codes?</span>
             <span class="pdp-accordion-icon">+</span>
           </div>
           <div class="pdp-accordion-body">
-            Of course. <a href="/pages/waitlist/">Join the list</a> and use code FIRSTNIGHT20 for 20% off when we launch. We'll let you know the moment it's live.
+            For launch, everyone gets 20% off with FIRSTNIGHT20, applied automatically at checkout. If a creator sent you, use their code instead for 30% off plus a free gift package.
           </div>
         </div>
 
@@ -3426,7 +3506,7 @@
             <li><a href="/pages/our-story/">Our Story</a></li>
             <li><a href="/products/sleep-well/">Product</a></li>
             <li><a href="/pages/faqs/">FAQs</a></li>
-            <li><a href="/pages/waitlist/">Waitlist</a></li>
+            <li><a href="/products/sleep-well/">Shop</a></li>
             <li><a href="/pages/contact/">Contact</a></li>
           </ul>
         </div>
@@ -3458,9 +3538,9 @@
     <img src="/assets/sleep-well-box.webp" alt="" width="32" height="49">
     <div class="sticky-buy-info">
       <strong>Sleep Well</strong>
-      <span id="sticky-buy-meta">Pack Of 5 · ₹299</span>
+      <span id="sticky-buy-meta">Pack Of 5 · ₹239.20</span>
     </div>
-    <button type="button" onclick="prebookCheckout(this)" tabindex="-1">Pre-book now</button>
+    <button type="button" onclick="prebookCheckout(this)" tabindex="-1">Buy now · 20% off</button>
   </div>
 
   <!-- INTERACTIVE SIDE-CART DRAWER WIDGET (HTML) -->
@@ -3593,10 +3673,10 @@
     // ----------------------------------------------------
     let selectedFlavour = "Organic Cacao";
     let selectedPack = "Pack Of 5";
-    let currentPrice = 299;
+    let currentPrice = 239.2;
     let originalPrice = 299;
-    let currentServePrice = 60;
-    let discountPct = 0;
+    let currentServePrice = 48;
+    let discountPct = 20;
     let quantity = 1;
     
     function selectFlavour(flavour, element) {
@@ -3673,7 +3753,7 @@
       if (topOriginal && topDiscount) {
         if (originalPrice > currentPrice) {
           topOriginal.style.display = "inline-block";
-          topOriginal.innerText = `₹${originalPrice.toLocaleString('en-IN')}`;
+          topOriginal.innerText = `₹${formatINR(originalPrice)}`;
           topDiscount.style.display = "inline-block";
           topDiscount.innerText = `${discountPct}% OFF`;
         } else {
