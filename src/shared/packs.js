@@ -10,7 +10,9 @@ export const PACKS = {
   'Pack Of 30': { price: 1500, serves: 30 }
 };
 
-export const PREBOOK_DISCOUNT_PCT = 50;
+// Pre-book is full price; the perks are first-in-line stock, the member card
+// (30-night pack) and the creator gift package. Set a % here to bring a discount back.
+export const PREBOOK_DISCOUNT_PCT = 0;
 export const MAX_QTY = 20;
 
 // Returns rupee amounts plus the paise amount Razorpay needs, or null if the

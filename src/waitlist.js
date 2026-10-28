@@ -189,18 +189,18 @@ document.addEventListener('DOMContentLoaded', () => {
       set('wl-upsell-tag', 'textContent', `only for ${name}'s followers`);
       set('wl-upsell-h', 'innerHTML', 'pre-book now, get a <em>free gift package.</em>');
       set('wl-upsell-p', 'textContent', `because ${name} sent you, your pre-book comes with a special package of SuperState gifts. other pre-bookers don't get this.`);
-      set('wl-upsell-perks', 'innerHTML', '<li class="hot">free gift package 🎁</li><li class="hot">50% off</li><li>30 nights · ₹750 <s>₹1,500</s></li><li>member card 💳</li>');
+      set('wl-upsell-perks', 'innerHTML', '<li class="hot">free gift package 🎁</li><li class="hot">first in line</li><li>30 nights · ₹1,500</li><li>member card 💳</li>');
       set('wl-upsell-cta-text', 'textContent', 'pre-book with my gift');
       cta.href = `${base}&ref=${encodeURIComponent(code)}`;
     } else {
       set('wl-success-pill', 'innerHTML', "<b>✓</b> you're on the list");
       set('wl-coupon-off', 'textContent', 'use it at checkout on launch day');
       set('wl-upsell-icon', 'textContent', '⚡');
-      set('wl-upsell-tag', 'textContent', 'want it cheaper?');
-      set('wl-upsell-h', 'innerHTML', 'skip the wait. <em>pre-book at 50% off.</em>');
-      set('wl-upsell-p', 'textContent', 'pay now, ships with the next drop.');
-      set('wl-upsell-perks', 'innerHTML', '<li class="hot">50% off</li><li>30 nights · ₹750 <s>₹1,500</s></li><li>member card 💳</li>');
-      set('wl-upsell-cta-text', 'textContent', 'pre-book at 50% off');
+      set('wl-upsell-tag', 'textContent', "don't want to wait?");
+      set('wl-upsell-h', 'innerHTML', 'skip the queue. <em>pre-book batch 02.</em>');
+      set('wl-upsell-p', 'textContent', 'pre-book now and your Sleep Well is reserved from the very first boxes of the next drop.');
+      set('wl-upsell-perks', 'innerHTML', '<li class="hot">first in line</li><li>30 nights · ₹1,500</li><li>member card 💳</li>');
+      set('wl-upsell-cta-text', 'textContent', 'pre-book now');
       cta.href = base;
     }
   }

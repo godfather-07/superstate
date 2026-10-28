@@ -2,9 +2,8 @@
  * Creator codes, shared by the browser and the /api functions.
  *
  * - Waitlist: a creator code gives that % off at launch (instead of FIRSTNIGHT20).
- * - Pre-book: a creator code gives NO extra discount (50% is already the best
- *   price); it is only saved as "Referred By" so you can see which creator
- *   drove paid pre-books.
+ * - Pre-book: a creator code gives NO discount; it is only saved as
+ *   "Referred By" so you can see which creator drove paid pre-books.
  *
  * - Pre-book via a creator: the order also comes with a creator gift package
  *   (shown on the pre-book page; "Referred By" in the sheet = ship the gift).

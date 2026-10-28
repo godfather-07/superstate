@@ -1,7 +1,7 @@
 /**
  * Superstate Pre-book Service
  *
- * Pre-booking = pay today at 50% off via Razorpay Standard Checkout.
+ * Pre-booking = pay today (full price) via Razorpay Standard Checkout.
  *   1. POST /api/create-order   -> server prices the pack and creates the order
  *   2. Razorpay modal           -> customer pays
  *   3. POST /api/verify-payment -> server checks the signature, logs the paid

@@ -13,10 +13,10 @@
   <meta name="color-scheme" content="only light" />
   <meta name="theme-color" content="#003399" />
   <title>Pre-book | SuperState Sleep Well</title>
-  <meta name="description" content="Pre-book SuperState Sleep Well at 50% off, pay securely with Razorpay, and get a SuperState member card with the 30-night pack." />
+  <meta name="description" content="Pre-book SuperState Sleep Well from batch 02, pay securely with Razorpay, and get a SuperState member card with the 30-night pack." />
   <meta name="robots" content="noindex" />
   <meta property="og:title" content="I just got my SuperState card 🌙" />
-  <meta property="og:description" content="Pre-book Sleep Well at 50% off. Coffee, but for sleep." />
+  <meta property="og:description" content="Pre-book Sleep Well from batch 02. Coffee, but for sleep." />
   <meta property="og:image" content="https://www.superstate.in/assets/og-sleep-well.jpg" />
   <link rel="icon" href="/favicon.ico?v=2" sizes="48x48" />
   <link rel="icon" type="image/png" sizes="512x512" href="/favicon-s.png?v=2" />
@@ -606,6 +606,7 @@
       font-variant-numeric: tabular-nums;
     }
     .pv-bill-line { display: flex; justify-content: space-between; gap: 1rem; font-size: 15px; color: var(--muted); padding: 0.3rem 0; }
+    .pv-bill-line[hidden] { display: none; }
     .pv-bill-off span:last-child { color: var(--mint); font-weight: 700; }
     .pv-bill-total {
       display: flex;
@@ -824,8 +825,8 @@
       <section class="pb-wrap pv-hero">
         <div class="pv-copy">
           <span class="pb-tag"><span class="pb-dot"></span> batch 02 · pre-booking open</span>
-          <h1 class="pb-h1">lock in <em>50% off.</em><br>get your <span class="pv-card-word">card.</span></h1>
-          <p class="pb-sub">batch 01 sold out. pay half today and your Sleep Well ships with the next drop. go for 30 nights and you also become a SuperState founding member, card and all.</p>
+          <h1 class="pb-h1">skip the queue.<br>get your <span class="pv-card-word">card.</span></h1>
+          <p class="pb-sub">batch 01 sold out. pre-book today and your Sleep Well is reserved from the very first boxes of the next drop. go for 30 nights and you also become a SuperState founding member, card and all.</p>
           <div class="pv-gift" id="pv-gift" hidden>
             <span class="pv-gift-icon" aria-hidden="true">🎁</span>
             <div>
@@ -834,7 +835,7 @@
             </div>
           </div>
           <div class="pv-stats">
-            <div><strong>50%</strong><span>off, pre-book only</span></div>
+            <div><strong>1st</strong><span>in line for batch 02</span></div>
             <div><strong id="pv-stat-members">27</strong><span>night owls already carded</span></div>
             <div><strong>₹0</strong><span>shipping in India</span></div>
           </div>
@@ -881,8 +882,8 @@
       <!-- TICKER -->
       <div class="pv-ticker" aria-hidden="true">
         <div class="pv-ticker-track">
-          <span>batch 01 sold out</span><i>✶</i><span>coffee, but for sleep</span><i>☾</i><span>founding members only</span><i>✶</i><span>no melatonin</span><i>☾</i><span>50% off pre-book</span><i>✶</i>
-          <span>batch 01 sold out</span><i>✶</i><span>coffee, but for sleep</span><i>☾</i><span>founding members only</span><i>✶</i><span>no melatonin</span><i>☾</i><span>50% off pre-book</span><i>✶</i>
+          <span>batch 01 sold out</span><i>✶</i><span>coffee, but for sleep</span><i>☾</i><span>founding members only</span><i>✶</i><span>no melatonin</span><i>☾</i><span>first in line for batch 02</span><i>✶</i>
+          <span>batch 01 sold out</span><i>✶</i><span>coffee, but for sleep</span><i>☾</i><span>founding members only</span><i>✶</i><span>no melatonin</span><i>☾</i><span>first in line for batch 02</span><i>✶</i>
         </div>
       </div>
 
@@ -910,7 +911,7 @@
           <li class="pv-perk">
             <span class="pv-perk-emoji">🌙</span>
             <strong>for the ones who go all in</strong>
-            <p>the card is our thank-you to the 30-night crew. 5 and 15 packs still get 50% off, just no card.</p>
+            <p>the card is our thank-you to the 30-night crew. 5 and 15 packs still skip the queue, just no card.</p>
           </li>
         </ul>
       </section>
@@ -937,11 +938,11 @@
 
           <div class="pv-bill">
             <div class="pv-bill-line"><span id="pv-line-label">Sleep Well · Pack Of 5 × 1</span><span id="pv-line-mrp">₹299</span></div>
-            <div class="pv-bill-line pv-bill-off"><span>pre-book discount (50%)</span><span id="pv-line-off">−₹149.50</span></div>
+            <div class="pv-bill-line pv-bill-off" hidden><span>pre-book discount</span><span id="pv-line-off">−₹0</span></div>
             <div class="pv-bill-line"><span>shipping</span><span>FREE</span></div>
             <div class="pv-bill-line pv-bill-gift" id="pv-gift-line" hidden><span id="pv-gift-line-label">creator gift package</span><span>FREE 🎁</span></div>
             <div class="pv-bill-line" id="pv-card-line"><span>SuperState member card</span><span id="pv-card-val">included 💳</span></div>
-            <div class="pv-bill-total"><span>pay today</span><span id="pv-total">₹149.50</span></div>
+            <div class="pv-bill-total"><span>pay today</span><span id="pv-total">₹299</span></div>
           </div>
           <p class="pv-ship-note">ships with batch 02. we'll WhatsApp you the dispatch date.</p>
         </div>
@@ -995,7 +996,7 @@
               <span class="pb-err" id="pb-ref-err"></span>
               <span class="pb-ref-note" id="pb-ref-note">followers of our creators get a free SuperState gift package with their pre-book 🎁</span>
             </div>
-            <button class="pb-submit" id="pb-submit" type="submit">pay · 50% off →</button>
+            <button class="pb-submit" id="pb-submit" type="submit">pay →</button>
             <span class="pb-err" id="pb-form-err" role="alert"></span>
           </form>
           <div class="pv-trust">
@@ -1017,7 +1018,7 @@
 
     <!-- STICKY PAY BAR (mobile) -->
     <div class="pv-sticky" id="pv-sticky" aria-hidden="true">
-      <div><span class="pv-sticky-label" id="pv-sticky-label">Pack Of 5 × 1</span><strong id="pv-sticky-total">₹149.50</strong></div>
+      <div><span class="pv-sticky-label" id="pv-sticky-label">Pack Of 5 × 1</span><strong id="pv-sticky-total">₹299</strong></div>
       <button type="button" id="pv-sticky-btn" tabindex="-1">pay now →</button>
     </div>
 
@@ -1025,12 +1026,12 @@
     <section id="pb-done" class="pb-wrap pb-done" hidden>
       <span class="pb-done-kicker">you're in 🎉</span>
       <h1 class="pb-done-h">welcome to the <em>night shift.</em></h1>
-      <p class="pb-done-sub" id="pb-done-sub">your spot is locked at 50% off. here's your SuperState card.</p>
+      <p class="pb-done-sub" id="pb-done-sub">your spot in batch 02 is locked. here's your SuperState card.</p>
 
       <div class="pb-order-done" id="pb-order-done" hidden>
         <div class="pb-order-tick" aria-hidden="true">✓</div>
         <div class="pb-order-pack" id="pb-order-pack">Sleep Well · Pack Of 5 × 1</div>
-        <div class="pb-order-paid" id="pb-order-paid">₹149.50 paid</div>
+        <div class="pb-order-paid" id="pb-order-paid">₹299 paid</div>
         <button type="button" class="pv-unlock pb-order-upsell" id="pb-order-upsell">next time, go 30 nights for the member card 💳</button>
       </div>
 
@@ -1077,7 +1078,7 @@
       </div>
 
       <ol class="pb-steps">
-        <li class="done"><strong>paid &amp; locked in</strong><span id="pb-step1">Pack Of 5 × 1 · ₹149.50 paid (50% off)</span><span id="pb-payid" style="display:block; font-size:12px; opacity:0.8;"></span></li>
+        <li class="done"><strong>paid &amp; locked in</strong><span id="pb-step1">Pack Of 5 × 1 · ₹299 paid</span><span id="pb-payid" style="display:block; font-size:12px; opacity:0.8;"></span></li>
         <li><strong>updates on WhatsApp</strong><span>we'll message <b id="pb-step2-phone">your number</b> when the next drop is packed and shipped</span></li>
         <li><strong>ships with the next drop</strong><span id="pb-step3">free shipping across India. your physical card comes in the box</span></li>
       </ol>
