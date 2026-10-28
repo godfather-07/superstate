@@ -14,11 +14,11 @@
 const REELS = [
   { name: 'Abhimanyu', handle: 'abhimanyuu._p', code: 'ABHIMANYU30', url: 'https://www.instagram.com/abhimanyuu._p/reel/DeZV2_LMjYW/',
     video: '/assets/reels/abhimanyu-preview.mp4', poster: '/assets/reels/abhimanyu-poster.jpg' },
-  { name: 'Hridya', url: null, full: '/assets/reels/hridya-full.mp4',
+  { name: 'Hridya', handle: '_luttu_', url: 'https://www.instagram.com/_luttu_/reel/De9TEsnSyXo/',
     video: '/assets/reels/hridya-preview.mp4', poster: '/assets/reels/hridya-poster.jpg' },
   { name: 'Shreya', handle: 'dietician.shreya', url: 'https://www.instagram.com/dietician.shreya/reel/DeCD1C7TZxE/',
     video: '/assets/reels/shreya-preview.mp4', poster: '/assets/reels/shreya-poster.jpg' },
-  { name: 'Shanavas', url: null, full: '/assets/reels/shanavas-full.mp4',
+  { name: 'Shamnas', handle: 'sham_shoven', code: 'SHAMNAS30', url: 'https://www.instagram.com/p/DetKVM7vVpa/',
     video: '/assets/reels/shanavas-preview.mp4', poster: '/assets/reels/shanavas-poster.jpg' }
 ];
 
