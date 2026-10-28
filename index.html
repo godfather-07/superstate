@@ -146,7 +146,9 @@
 
       <div class="home-hero-visual">
         <span class="home-sticker" aria-hidden="true">coffee, but for sleep ☾</span>
-        <img src="/assets/sleep-well-box.webp" alt="SuperState Sleep Well box" width="763" height="1172" fetchpriority="high">
+        <a href="/products/sleep-well/" class="home-hero-link" aria-label="Shop Sleep Well">
+          <img src="/assets/sleep-well-box.webp" alt="SuperState Sleep Well box" width="763" height="1172" fetchpriority="high">
+        </a>
       </div>
 
     </div>
@@ -256,6 +258,8 @@
       text-underline-offset: 5px;
       text-decoration-color: rgba(255, 255, 255, 0.5);
     }
+    .home-hero-link { display: block; cursor: pointer; transition: transform .25s ease; }
+    .home-hero-link:hover { transform: scale(1.02); }
     .home-hero-visual {
       position: relative;
       display: flex;
@@ -792,7 +796,9 @@
         </div>
       </div>
       <div class="first-product-visual">
-        <img src="/assets/sleep-well-box.webp" alt="SuperState Sleep Well box" width="763" height="1172" loading="lazy">
+        <a href="/products/sleep-well/" class="home-hero-link" aria-label="Shop Sleep Well">
+          <img src="/assets/sleep-well-box.webp" alt="SuperState Sleep Well box" width="763" height="1172" loading="lazy">
+        </a>
       </div>
     </div>
   </section>
