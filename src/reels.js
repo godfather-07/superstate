@@ -2,41 +2,73 @@
  * Product page "they tried it first" row: creator reels + customer reviews in
  * one auto-scrolling strip. Clicking a reel opens it on Instagram.
  *
- * VIDEOS: Instagram doesn't let embedded reels autoplay. To make a reel
- * autoplay here, put its MP4 in public/assets/reels/ and set `video` below
- * (e.g. '/assets/reels/abhimanyu.mp4'). Without a file the card shows the
- * Instagram embed instead.
+ * VIDEOS: `video` is a short silent preview loop (public/assets/reels/) that
+ * autoplays while on screen. Tapping a card opens `url` (the Instagram reel);
+ * if there's no reel link yet, it plays `full` (with sound) in a pop-up.
+ * Cards with only `embed` (no video file) show the Instagram embed instead.
  *
  * REVIEWS: real customer words only, with their OK to show them.
  * { quote: '...', name: 'Anakha', place: 'Trivandrum', pack: '30 nights' }
  */
 
 const REELS = [
-  { url: 'https://www.instagram.com/p/DetKVM7vVpa/', embed: 'https://www.instagram.com/p/DetKVM7vVpa/embed/', handle: null, video: null },
-  { url: 'https://www.instagram.com/abhimanyuu._p/reel/DeZV2_LMjYW/', embed: 'https://www.instagram.com/reel/DeZV2_LMjYW/embed/', handle: 'abhimanyuu._p', code: 'ABHIMANYU30', video: null },
-  { url: 'https://www.instagram.com/dietician.shreya/reel/DeCD1C7TZxE/', embed: 'https://www.instagram.com/reel/DeCD1C7TZxE/embed/', handle: 'dietician.shreya', video: null },
-  { url: 'https://www.instagram.com/_luttu_/reel/De9TEsnSyXo/', embed: 'https://www.instagram.com/reel/De9TEsnSyXo/embed/', handle: '_luttu_', video: null }
+  { name: 'Abhimanyu', handle: 'abhimanyuu._p', code: 'ABHIMANYU30', url: 'https://www.instagram.com/abhimanyuu._p/reel/DeZV2_LMjYW/',
+    video: '/assets/reels/abhimanyu-preview.mp4', poster: '/assets/reels/abhimanyu-poster.jpg' },
+  { name: 'Hridya', url: null, full: '/assets/reels/hridya-full.mp4',
+    video: '/assets/reels/hridya-preview.mp4', poster: '/assets/reels/hridya-poster.jpg' },
+  { name: 'Shreya', handle: 'dietician.shreya', url: 'https://www.instagram.com/dietician.shreya/reel/DeCD1C7TZxE/',
+    video: '/assets/reels/shreya-preview.mp4', poster: '/assets/reels/shreya-poster.jpg' },
+  { name: 'Shanavas', url: null, full: '/assets/reels/shanavas-full.mp4',
+    video: '/assets/reels/shanavas-preview.mp4', poster: '/assets/reels/shanavas-poster.jpg' }
 ];
 
 const REVIEWS = [];
 
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-function reelCard(r) {
-  const who = r.handle ? `@${r.handle}` : 'on Instagram';
+function reelCard(r, i) {
+  const who = r.handle ? `@${r.handle}` : (r.name || 'on Instagram');
   const media = r.video
-    ? `<video src="${r.video}" muted loop playsinline preload="metadata" aria-hidden="true"></video>`
+    ? `<video src="${r.video}" poster="${r.poster || ''}" muted loop playsinline preload="none" aria-hidden="true"></video>`
     : `<iframe src="${r.embed}" title="Sleep Well reel ${esc(who)}" loading="lazy" scrolling="no" allow="encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" tabindex="-1"></iframe>`;
+  const open = r.url
+    ? `<a class="reel-link" href="${r.url}" target="_blank" rel="noopener" aria-label="Watch ${esc(r.name || who)}'s reel on Instagram"><span class="reel-play" aria-hidden="true">▶ watch on Instagram</span></a>`
+    : `<button type="button" class="reel-link" data-full="${i}" aria-label="Play ${esc(r.name || who)}'s video with sound"><span class="reel-play" aria-hidden="true">▶ tap for sound</span></button>`;
+  const label = r.url
+    ? `<a class="reel-handle" href="${r.url}" target="_blank" rel="noopener">${esc(r.name ? `${r.name} · ${who}` : who)} ↗</a>`
+    : `<span class="reel-handle">${esc(r.name || who)}</span>`;
   const code = r.code
     ? `<a class="reel-code" href="/pages/prebook/?pack=Pack%20Of%2030&amp;qty=1&amp;ref=${r.code}">use code ${r.code} · 30% off →</a>`
     : '';
   return `<li class="reel-card">
     <div class="reel-frame">
       ${media}
-      <a class="reel-link" href="${r.url}" target="_blank" rel="noopener" aria-label="Watch ${esc(who)}'s reel on Instagram"><span class="reel-play" aria-hidden="true">▶ watch reel</span></a>
+      ${open}
     </div>
-    <div class="reel-meta"><a class="reel-handle" href="${r.url}" target="_blank" rel="noopener">${esc(who)} ↗</a>${code}</div>
+    <div class="reel-meta">${label}${code}</div>
   </li>`;
+}
+
+// Full video with sound, for reels without an Instagram link yet
+function playFull(r) {
+  let dlg = document.getElementById('reel-modal');
+  if (!dlg) {
+    dlg = document.createElement('dialog');
+    dlg.id = 'reel-modal';
+    dlg.className = 'reel-modal';
+    dlg.innerHTML = '<button type="button" class="reel-modal-x" aria-label="Close">✕</button><video controls playsinline></video>';
+    document.body.appendChild(dlg);
+    const v = dlg.querySelector('video');
+    const close = () => { v.pause(); dlg.close(); };
+    dlg.querySelector('.reel-modal-x').addEventListener('click', close);
+    dlg.addEventListener('click', e => { if (e.target === dlg) close(); });
+    dlg.addEventListener('close', () => v.pause());
+  }
+  const v = dlg.querySelector('video');
+  v.src = r.full;
+  v.poster = r.poster || '';
+  if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', '');
+  v.play().catch(() => {});
 }
 
 function reviewCard(v) {
@@ -68,11 +100,15 @@ export function initReels() {
   const cards = [];
   const n = Math.max(REELS.length, REVIEWS.length);
   for (let i = 0; i < n; i++) {
-    if (REELS[i]) cards.push(reelCard(REELS[i]));
+    if (REELS[i]) cards.push(reelCard(REELS[i], i));
     if (REVIEWS[i]) cards.push(reviewCard(REVIEWS[i]));
   }
   cards.push(tagCard);
   row.innerHTML = cards.join('');
+  row.addEventListener('click', e => {
+    const btn = e.target.closest('[data-full]');
+    if (btn) playFull(REELS[Number(btn.dataset.full)]);
+  });
 
   // MP4 reels: play only while on screen (saves data), muted + looping
   const videos = row.querySelectorAll('video');

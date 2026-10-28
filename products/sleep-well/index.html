@@ -2768,7 +2768,11 @@
       box-shadow: 0 16px 34px rgba(0, 10, 40, 0.35);
     }
     .reel-frame iframe, .reel-frame video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; }
-    .reel-link { position: absolute; inset: 0; z-index: 2; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 1rem; text-decoration: none; }
+    .reel-link { position: absolute; inset: 0; z-index: 2; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 1rem; text-decoration: none; border: 0; background: transparent; cursor: pointer; font: inherit; width: 100%; }
+    .reel-modal { padding: 0; border: 0; border-radius: 18px; background: #000; max-width: min(420px, 92vw); width: 100%; overflow: hidden; }
+    .reel-modal::backdrop { background: rgba(0, 10, 40, 0.8); }
+    .reel-modal video { display: block; width: 100%; max-height: 86vh; background: #000; }
+    .reel-modal-x { position: absolute; top: 10px; right: 10px; z-index: 2; width: 36px; height: 36px; border: 0; border-radius: 50%; background: rgba(255,255,255,0.9); color: #001a4d; font-size: 16px; cursor: pointer; }
     .reel-play {
       padding: 0.45rem 0.9rem; border-radius: 999px;
       background: rgba(0, 26, 77, 0.78); color: #ffffff; font-size: 13px; font-weight: 800;
@@ -3434,7 +3438,6 @@
         <noscript>
           <li class="reel-card"><a class="reel-handle" href="https://www.instagram.com/abhimanyuu._p/reel/DeZV2_LMjYW/">@abhimanyuu._p on Instagram ↗</a></li>
           <li class="reel-card"><a class="reel-handle" href="https://www.instagram.com/dietician.shreya/reel/DeCD1C7TZxE/">@dietician.shreya on Instagram ↗</a></li>
-          <li class="reel-card"><a class="reel-handle" href="https://www.instagram.com/_luttu_/reel/De9TEsnSyXo/">@_luttu_ on Instagram ↗</a></li>
         </noscript>
       </ul>
     </div>
