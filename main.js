@@ -25,15 +25,21 @@ const mobileDrawer = document.querySelector('.mobile-drawer');
 const closeDrawerBtn = document.querySelector('.close-drawer');
 
 if (mobileMenuBtn && mobileDrawer && closeDrawerBtn) {
-  mobileMenuBtn.addEventListener('click', () => {
+  const openDrawer = () => {
     mobileDrawer.classList.add('open');
+    mobileDrawer.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-  });
-
-  closeDrawerBtn.addEventListener('click', () => {
+  };
+  const closeDrawer = () => {
     mobileDrawer.classList.remove('open');
+    mobileDrawer.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
-  });
+  };
+  mobileMenuBtn.addEventListener('click', openDrawer);
+  closeDrawerBtn.addEventListener('click', closeDrawer);
+  // close when a link is tapped (incl. same-page links like #buy-section) or on Esc
+  mobileDrawer.addEventListener('click', e => { if (e.target.closest('a')) closeDrawer(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
 }
 
 // Hide navbar on scroll down, show on scroll up
