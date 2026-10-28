@@ -2754,17 +2754,42 @@
     .reels-sub { margin: 0 auto; max-width: 520px; color: #cbd5e1; font-size: 16px; line-height: 1.5; }
     .reels-row {
       list-style: none; margin: 0; padding: 0.5rem 0.25rem 1rem;
-      display: grid; grid-auto-flow: column; grid-auto-columns: minmax(260px, 1fr);
-      gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch; scrollbar-width: thin;
+      display: grid; grid-auto-flow: column; grid-auto-columns: 270px;
+      gap: 1rem; overflow-x: auto;
+      -webkit-overflow-scrolling: touch; scrollbar-width: none;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
+              mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
     }
-    .reel-card { scroll-snap-align: start; display: flex; flex-direction: column; gap: 0.6rem; }
+    .reels-row::-webkit-scrollbar { display: none; }
+    .reel-card { display: flex; flex-direction: column; gap: 0.6rem; }
     .reel-frame {
       position: relative; border-radius: 18px; overflow: hidden;
       background: #ffffff; aspect-ratio: 9 / 16.6;
       box-shadow: 0 16px 34px rgba(0, 10, 40, 0.35);
     }
-    .reel-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .reel-frame iframe, .reel-frame video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; }
+    .reel-link { position: absolute; inset: 0; z-index: 2; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 1rem; text-decoration: none; }
+    .reel-play {
+      padding: 0.45rem 0.9rem; border-radius: 999px;
+      background: rgba(0, 26, 77, 0.78); color: #ffffff; font-size: 13px; font-weight: 800;
+      opacity: 0; transform: translateY(6px); transition: opacity 0.2s, transform 0.2s;
+    }
+    .reel-link:hover .reel-play, .reel-link:focus-visible .reel-play { opacity: 1; transform: none; }
+    @media (hover: none) { .reel-play { opacity: 1; transform: none; } }
+    .review-frame {
+      margin: 0; display: flex; flex-direction: column; justify-content: center; gap: 0.9rem;
+      padding: 1.5rem 1.25rem; background: #fbf8ef; color: #001a4d;
+    }
+    .review-mark { font-family: 'Instrument Serif', serif; font-size: 64px; line-height: 0.6; color: #003399; }
+    .review-frame blockquote { margin: 0; font-size: 18px; line-height: 1.45; font-weight: 600; }
+    .review-frame figcaption { font-size: 14px; color: #4a5878; }
+    .review-frame figcaption span { display: block; margin-top: 0.2rem; font-size: 12.5px; }
+    .review-cta { background: linear-gradient(160deg, #0a2a7a, #001a4d); color: #ffffff; text-align: left; }
+    .review-cta .review-mark { font-family: inherit; font-size: 40px; line-height: 1; }
+    .review-cta-h { margin: 0; font-size: 30px; font-weight: 800; line-height: 1.05; }
+    .review-cta-h em { font-family: 'Instrument Serif', serif; font-weight: 400; color: var(--color-first-light); }
+    .review-cta p { margin: 0; font-size: 15px; line-height: 1.5; color: #d5ddf3; }
+    .review-cta .reel-code { align-self: flex-start; }
     .reel-meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.4rem; }
     .reel-handle { color: #ffffff; font-weight: 700; font-size: 14px; text-decoration: none; }
     .reel-handle:hover { text-decoration: underline; }
@@ -2774,7 +2799,7 @@
       color: var(--color-first-light); font-size: 12.5px; font-weight: 800; text-decoration: none;
     }
     @media (max-width: 700px) {
-      .reels-row { grid-auto-columns: 78%; margin: 0 -16px; padding-left: 16px; padding-right: 16px; scroll-padding-left: 16px; }
+      .reels-row { grid-auto-columns: 72%; margin: 0 -16px; padding-left: 16px; padding-right: 16px; }
     }
 
     /* ---------- What's inside: sticky-note board ---------- */
@@ -3405,43 +3430,12 @@
         <h2 class="reels-title">they tried it <em>first.</em></h2>
         <p class="reels-sub">creators we sent Sleep Well to, trying it in their own words.</p>
       </div>
-      <ul class="reels-row">
-          <li class="reel-card">
-            <div class="reel-frame">
-              <iframe src="https://www.instagram.com/p/DetKVM7vVpa/embed/" title="Sleep Well reel on Instagram" loading="lazy" scrolling="no" allowtransparency="true" allow="encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-            </div>
-            <div class="reel-meta">
-              <a class="reel-handle" href="https://www.instagram.com/p/DetKVM7vVpa/" target="_blank" rel="noopener">on Instagram ↗</a>
-              
-            </div>
-          </li>
-          <li class="reel-card">
-            <div class="reel-frame">
-              <iframe src="https://www.instagram.com/reel/DeZV2_LMjYW/embed/" title="Sleep Well reel @abhimanyuu._p" loading="lazy" scrolling="no" allowtransparency="true" allow="encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-            </div>
-            <div class="reel-meta">
-              <a class="reel-handle" href="https://www.instagram.com/abhimanyuu._p/reel/DeZV2_LMjYW/" target="_blank" rel="noopener">@abhimanyuu._p ↗</a>
-              <a class="reel-code" href="/pages/prebook/?pack=Pack%20Of%2030&amp;qty=1&amp;ref=ABHIMANYU30">use code ABHIMANYU30 · 30% off →</a>
-            </div>
-          </li>
-          <li class="reel-card">
-            <div class="reel-frame">
-              <iframe src="https://www.instagram.com/reel/DeCD1C7TZxE/embed/" title="Sleep Well reel @dietician.shreya" loading="lazy" scrolling="no" allowtransparency="true" allow="encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-            </div>
-            <div class="reel-meta">
-              <a class="reel-handle" href="https://www.instagram.com/dietician.shreya/reel/DeCD1C7TZxE/" target="_blank" rel="noopener">@dietician.shreya ↗</a>
-              
-            </div>
-          </li>
-          <li class="reel-card">
-            <div class="reel-frame">
-              <iframe src="https://www.instagram.com/reel/De9TEsnSyXo/embed/" title="Sleep Well reel @_luttu_" loading="lazy" scrolling="no" allowtransparency="true" allow="encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-            </div>
-            <div class="reel-meta">
-              <a class="reel-handle" href="https://www.instagram.com/_luttu_/reel/De9TEsnSyXo/" target="_blank" rel="noopener">@_luttu_ ↗</a>
-              
-            </div>
-          </li>
+      <ul class="reels-row" id="reels-row" aria-label="Creator reels and reviews">
+        <noscript>
+          <li class="reel-card"><a class="reel-handle" href="https://www.instagram.com/abhimanyuu._p/reel/DeZV2_LMjYW/">@abhimanyuu._p on Instagram ↗</a></li>
+          <li class="reel-card"><a class="reel-handle" href="https://www.instagram.com/dietician.shreya/reel/DeCD1C7TZxE/">@dietician.shreya on Instagram ↗</a></li>
+          <li class="reel-card"><a class="reel-handle" href="https://www.instagram.com/_luttu_/reel/De9TEsnSyXo/">@_luttu_ on Instagram ↗</a></li>
+        </noscript>
       </ul>
     </div>
   </section>

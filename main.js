@@ -1,11 +1,13 @@
 import './src/prebookNudge.js';
 import { captureRefFromUrl, getStoredRef } from './src/shared/creators.js';
 import { initPixel, track } from './src/shared/pixel.js';
+import { initReels } from './src/reels.js';
 
 // Remember a creator link (?ref=CODE) so checkout can apply their code
 captureRefFromUrl();
 
 initPixel();
+initReels();
 if (location.pathname.startsWith('/products/sleep-well')) {
   const creator = getStoredRef() || undefined;
   track('ViewContent', { content_name: 'Sleep Well', content_type: 'product', content_ids: ['sleep-well'], creator });
