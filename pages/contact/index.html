@@ -119,6 +119,16 @@
         grid-template-columns: 1fr 1fr;
       }
     }
+    .cf-opt { font-weight: 500; color: #64748b; text-transform: none; letter-spacing: 0; }
+    .cf-err { display: block; min-height: 0; margin-top: .3rem; font-size: 13px; color: #c53030; }
+    .cf-err:empty { display: none; }
+    .cf-bad { border-color: #e53e3e !important; }
+    .cf-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .cf-status { margin: 0 0 1rem; font-size: 14.5px; text-align: center; }
+    .cf-status:empty { display: none; }
+    .cf-status.ok { color: #1f7a4d; font-weight: 700; }
+    .cf-status.bad { color: #c53030; }
+    .cf-status a { color: inherit; text-decoration: underline; }
   </style>
   <link rel="canonical" href="https://www.superstate.in/pages/contact/" />
   <meta property="og:type" content="website" />
@@ -230,48 +240,54 @@
 
         <!-- Right: Contact Form -->
         <div class="contact-form-container">
-          <form id="contact-form">
+          <form id="contact-form" novalidate>
             <div class="contact-form-grid">
               <div class="form-group" style="grid-column: 1 / -1;">
-                <label class="form-label">Name</label>
-                <input type="text" class="form-input" required placeholder="Jane Doe">
+                <label class="form-label" for="cf-name">Name</label>
+                <input id="cf-name" name="name" type="text" class="form-input" required autocomplete="name" maxlength="80" placeholder="Jane Doe">
+                <span class="cf-err" data-for="name"></span>
               </div>
 
               <div class="form-group">
-                <label class="form-label">Email</label>
-                <input type="email" class="form-input" required placeholder="jane@example.com">
+                <label class="form-label" for="cf-email">Email</label>
+                <input id="cf-email" name="email" type="email" class="form-input" required autocomplete="email" placeholder="jane@example.com">
+                <span class="cf-err" data-for="email"></span>
               </div>
 
               <div class="form-group">
-                <label class="form-label">Phone</label>
-                <input type="tel" class="form-input" required pattern="[0-9]{10}" maxlength="10"
-                  title="Please enter a valid 10-digit mobile number" placeholder="9876543210">
+                <label class="form-label" for="cf-phone">Phone <span class="cf-opt">(optional)</span></label>
+                <input id="cf-phone" name="phone" type="tel" class="form-input" inputmode="tel" autocomplete="tel" maxlength="14" placeholder="9876543210">
+                <span class="cf-err" data-for="phone"></span>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="form-label">Reason for reaching out</label>
-              <select class="form-select" required>
-                <option value="" disabled selected>Select a reason...</option>
+              <label class="form-label" for="cf-reason">Reason for reaching out</label>
+              <select id="cf-reason" name="reason" class="form-select" required>
+                <option value="general" selected>General question</option>
                 <option value="order">Order issue</option>
                 <option value="product">Product question</option>
-                <option value="general">General inquiry</option>
-                <option value="media">Media / Press</option>
+                <option value="collab">Creator / collab</option>
+                <option value="media">Media / press</option>
               </select>
             </div>
 
             <div class="form-group">
-              <label class="form-label">Order ID</label>
-              <input type="text" class="form-input" required placeholder="#SS10045">
+              <label class="form-label" for="cf-order">Order number <span class="cf-opt">(if you have one)</span></label>
+              <input id="cf-order" name="orderId" type="text" class="form-input" maxlength="60" placeholder="Nº 028 or your payment ID">
             </div>
 
             <div class="form-group">
-              <label class="form-label">Message</label>
-              <textarea class="form-textarea" required placeholder="How can we help you today?"></textarea>
+              <label class="form-label" for="cf-message">Message</label>
+              <textarea id="cf-message" name="message" class="form-textarea" required maxlength="2000" placeholder="How can we help you today?"></textarea>
+              <span class="cf-err" data-for="message"></span>
             </div>
 
-            <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 1.5rem;">Send
-              Message</button>
+            <!-- honeypot: hidden from people, bots fill it in -->
+            <div class="cf-hp" aria-hidden="true"><label>Website <input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
+
+            <button type="submit" class="btn btn-primary" id="cf-submit" style="width: 100%; margin-bottom: .75rem;">Send message</button>
+            <p class="cf-status" id="cf-status" role="status" aria-live="polite"></p>
 
             <div style="text-align: center;">
               <a href="https://wa.me/919567309388"
@@ -343,17 +359,47 @@
 
   <script src="../../main.js" type="module"></script>
   <script>
-    document.getElementById('contact-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const btn = e.target.querySelector('button');
-      btn.textContent = 'Message Sent!';
-      btn.style.backgroundColor = 'var(--success)';
-      setTimeout(() => {
-        btn.textContent = 'Send Message';
-        btn.style.backgroundColor = '';
-        e.target.reset();
-      }, 3000);
-    });
+    (function () {
+      var form = document.getElementById('contact-form');
+      var btn = document.getElementById('cf-submit');
+      var status = document.getElementById('cf-status');
+      function setErr(name, msg) {
+        var el = form.querySelector('.cf-err[data-for="' + name + '"]');
+        if (el) el.textContent = msg || '';
+        var input = form.elements[name];
+        if (input) input.classList.toggle('cf-bad', !!msg);
+      }
+      form.addEventListener('input', function (e) { if (e.target.name) setErr(e.target.name, ''); });
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        ['name', 'email', 'phone', 'message'].forEach(function (n) { setErr(n, ''); });
+        status.className = 'cf-status'; status.textContent = '';
+        var data = {};
+        ['name', 'email', 'phone', 'reason', 'orderId', 'message', 'website'].forEach(function (n) { data[n] = form.elements[n].value; });
+        var bad = false;
+        if (data.name.trim().length < 2) { setErr('name', 'Please enter your name.'); bad = true; }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim())) { setErr('email', 'Enter a valid email address.'); bad = true; }
+        if (data.message.trim().length < 5) { setErr('message', 'Tell us a little more.'); bad = true; }
+        if (bad) return;
+        btn.disabled = true; btn.textContent = 'Sending…';
+        try {
+          var res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+          var out = await res.json().catch(function () { return {}; });
+          if (!res.ok) {
+            if (out.errors) Object.keys(out.errors).forEach(function (k) { setErr(k, out.errors[k]); });
+            throw new Error(out.error || 'failed');
+          }
+          form.reset();
+          status.className = 'cf-status ok';
+          status.textContent = '✓ Got it! A real person will reply soon, usually within a few hours.';
+        } catch (err) {
+          status.className = 'cf-status bad';
+          status.innerHTML = 'We couldn\'t send that right now. Please <a href="https://wa.me/919567309388">WhatsApp us</a> instead.';
+        } finally {
+          btn.disabled = false; btn.textContent = 'Send message';
+        }
+      });
+    })();
   </script>
 </body>
 
