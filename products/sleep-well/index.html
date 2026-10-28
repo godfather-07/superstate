@@ -413,12 +413,29 @@
 
 
     .product-headline {
-      font-family: var(--font-heading);
-      font-size: clamp(30px, 3.51vw, 44px);
-      line-height: 1.05;
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(44px, 5vw, 64px);
+      line-height: 0.95;
+      letter-spacing: -0.01em;
       color: #ffffff;
       margin-bottom: 0.5rem;
-      font-weight: 700;
+    }
+    .product-headline em {
+      font-style: italic;
+      color: #E4FF5A;
+      position: relative;
+      white-space: nowrap;
+    }
+    .product-headline em::after {
+      content: '';
+      position: absolute; left: 0; right: -2%; bottom: -0.02em; height: 0.06em;
+      background: #E4FF5A; opacity: 0.9; border-radius: 999px; transform: rotate(-1.5deg);
+    }
+    @media (max-width: 767px) {
+      .product-headline { text-align: center; font-size: 48px; }
+      .pdp-subline { text-align: center; }
     }
 
     .product-tagline {
@@ -3200,7 +3217,7 @@
         <!-- COLUMN 2: PURCHASING PANEL (Right) -->
         <div class="pdp-info-column" id="buy-section">
           
-          <h1 class="product-headline" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Sleep Well</h1>
+          <h1 class="product-headline" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Sleep <em>Well</em></h1>
           
           <p class="pdp-subline">A dark chocolate drink for your evenings. Mix one sachet, sip it 30 minutes before bed.</p>
           
