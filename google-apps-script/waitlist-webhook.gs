@@ -1,5 +1,9 @@
 /**
- * Superstate Waitlist -> Google Sheets webhook.
+ * Superstate -> Google Sheets webhook (orders + old waitlist).
+ *
+ * SCRIPT_VERSION below is shown when you open the web app URL in a browser.
+ * If the browser shows an older version (or no version at all), the live
+ * deployment is still running old code: do "Updating an existing deployment".
  *
  * Setup (one-time):
  * 1. Open the "Influencer Waitlist Responses" sheet.
@@ -18,14 +22,28 @@
  *   Deploy -> Manage deployments -> pencil icon -> Version: "New version" -> Deploy.
  */
 
+const SCRIPT_VERSION = '2026-10-28 launch-sale';
+
 const SHEET_NAME = 'Sheet1';
 const HEADERS = ['Timestamp', 'Name', 'Email', 'Phone', 'Gender', 'Promo Code', 'Discount', 'Is Influencer'];
 
-// Pre-bookings (no payment yet) go to their own tab.
+// Paid orders go to their own tab (named "Prebooks" from the pre-book days;
+// the website still sends type=prebook, so keep the name).
 const PREBOOK_SHEET_NAME = 'Prebooks';
-const PREBOOK_HEADERS = ['Timestamp', 'Member No.', 'Name', 'Phone', 'Email', 'Pack', 'Qty', 'Full Price', 'Pre-book Price', 'Payment Status', 'Razorpay Order ID', 'Razorpay Payment ID', 'Address', 'Pincode', 'City', 'State', 'Referred By', 'Discount Code'];
-// Batch 01 customers already hold cards #1-#27, so pre-bookers start at #28.
+const PREBOOK_HEADERS = ['Timestamp', 'Order No.', 'Name', 'Phone', 'Email', 'Pack', 'Qty', 'Full Price', 'Paid (after discount)', 'Payment Status', 'Razorpay Order ID', 'Razorpay Payment ID', 'Address', 'Pincode', 'City', 'State', 'Referred By', 'Discount Code'];
+// Order numbers continue from batch 01 (#1-#27), so new orders start at #28.
 const MEMBER_OFFSET = 27;
+
+// Open the web app URL in a browser to check which code is live.
+function doGet() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  return json({
+    ok: true,
+    version: SCRIPT_VERSION,
+    sheet: ss ? ss.getName() : 'NOT BOUND',
+    tabs: ss ? ss.getSheets().map(sh => sh.getName()) : []
+  });
+}
 
 function doPost(e) {
   // doPost runs when the website sends data. Pressing "Run" in the editor
@@ -58,7 +76,7 @@ function doPost(e) {
 }
 
 function handlePrebook(data) {
-  // Lock so two people pre-booking at the same moment never get the same number.
+  // Lock so two people ordering at the same moment never get the same number.
   const lock = LockService.getScriptLock();
   lock.waitLock(10000);
   try {
@@ -81,7 +99,7 @@ function handlePrebook(data) {
       }
     }
 
-    const memberNumber = MEMBER_OFFSET + sheet.getLastRow(); // header row counts as 1 -> first pre-booker is #28
+    const memberNumber = MEMBER_OFFSET + sheet.getLastRow(); // header row counts as 1 -> first order is #28
     sheet.appendRow([
       new Date(),
       memberNumber,
@@ -147,14 +165,14 @@ function testAppend() {
 }
 
 /**
- * Diagnostic only - run manually to add a test row to the "Prebooks" tab and
- * confirm member numbers work. Delete the test row from the sheet afterwards.
+ * Diagnostic only - run manually to add a test order row to the "Prebooks"
+ * tab and confirm all 18 columns fill in. Delete the test row from the sheet afterwards.
  */
 function testPrebook() {
   const result = doPost({
     parameter: {
       type: 'prebook', name: 'Test Prebook', phone: '9999999999', email: 'test@example.com',
-      pack: 'Pack Of 30', qty: '1', fullPrice: '1500', prebookPrice: '750',
+      pack: 'Pack Of 30', qty: '1', fullPrice: '1500', prebookPrice: '1050',
       paymentStatus: 'TEST - delete me', orderId: 'order_TEST_' + Date.now(), paymentId: 'pay_TEST',
       address: '12 Test Street, Indiranagar', pincode: '560038', city: 'Bengaluru', state: 'Karnataka', referredBy: 'ABHIJITH30', discountCode: 'ABHIJITH30'
     }
