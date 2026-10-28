@@ -89,8 +89,8 @@ body {
   font-family: var(--font-body);
   color: var(--text-primary);
   background-color: var(--bg-primary);
-  line-height: 1.7;
-  font-size: 17px;
+  line-height: 1.65;
+  font-size: 16px;
 }
 
 /* Scrolling: keep the page itself as the only scroller.
@@ -132,7 +132,7 @@ h6 {
 }
 
 h1 {
-  font-size: 42px;
+  font-size: 33px;
   font-family: var(--font-heading);
   font-weight: 600;
   letter-spacing: -0.04em;
@@ -155,12 +155,12 @@ h2 {
 
 @media (min-width: 768px) {
   h1 {
-    font-size: 84px;
+    font-size: 66px;
     line-height: 0.95;
   }
 
   h2 {
-    font-size: 64px;
+    font-size: 50px;
     line-height: 1;
   }
 
@@ -264,11 +264,11 @@ section {
   }
 
   h1 {
-    font-size: 84px;
+    font-size: 66px;
   }
 
   h2 {
-    font-size: 56px;
+    font-size: 44px;
   }
 
   .nav-links a {
@@ -548,8 +548,7 @@ section {
 }
 
 .nav-links a {
-  font-size: 18px;
-  /* Increased for better legibility */
+  font-size: 16px;
   font-weight: 600;
 }
 
@@ -842,7 +841,7 @@ section {
   justify-content: center;
   color: var(--accent-secondary);
   font-family: var(--font-heading);
-  font-size: 48px;
+  font-size: 37px;
 }
 
 .icon-placeholder {
@@ -1674,7 +1673,7 @@ section {
 
 .coupon-code-val {
   font-family: var(--font-heading);
-  font-size: clamp(32px, 5vw, 48px);
+  font-size: clamp(25px, 3.9vw, 37px);
   font-weight: 800;
   letter-spacing: 3px;
   color: #ffffff;
