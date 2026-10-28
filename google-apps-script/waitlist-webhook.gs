@@ -22,7 +22,7 @@
  *   Deploy -> Manage deployments -> pencil icon -> Version: "New version" -> Deploy.
  */
 
-const SCRIPT_VERSION = '2026-10-28 launch-sale';
+const SCRIPT_VERSION = '2026-10-28 contact-form';
 
 const SHEET_NAME = 'Sheet1';
 const HEADERS = ['Timestamp', 'Name', 'Email', 'Phone', 'Gender', 'Promo Code', 'Discount', 'Is Influencer'];
@@ -31,6 +31,10 @@ const HEADERS = ['Timestamp', 'Name', 'Email', 'Phone', 'Gender', 'Promo Code', 
 // the website still sends type=prebook, so keep the name).
 const PREBOOK_SHEET_NAME = 'Prebooks';
 const PREBOOK_HEADERS = ['Timestamp', 'Order No.', 'Name', 'Phone', 'Email', 'Pack', 'Qty', 'Full Price', 'Paid (after discount)', 'Payment Status', 'Razorpay Order ID', 'Razorpay Payment ID', 'Address', 'Pincode', 'City', 'State', 'Referred By', 'Discount Code'];
+// Contact-form messages from the website's Contact page.
+const MESSAGES_SHEET_NAME = 'Messages';
+const MESSAGES_HEADERS = ['Timestamp', 'Name', 'Email', 'Phone', 'Reason', 'Order ID', 'Message', 'Status'];
+
 // Order numbers continue from batch 01 (#1-#27), so new orders start at #28.
 const MEMBER_OFFSET = 27;
 
@@ -55,6 +59,7 @@ function doPost(e) {
   }
   const data = e.parameter;
   if (data.type === 'prebook') return handlePrebook(data);
+  if (data.type === 'contact') return handleContact(data);
 
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME)
     || SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
@@ -126,6 +131,23 @@ function handlePrebook(data) {
   }
 }
 
+function handleContact(data) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = ss.getSheetByName(MESSAGES_SHEET_NAME) || ss.insertSheet(MESSAGES_SHEET_NAME);
+  if (sheet.getLastRow() === 0) sheet.appendRow(MESSAGES_HEADERS);
+  sheet.appendRow([
+    new Date(),
+    data.name || '',
+    data.email || '',
+    data.phone || '',
+    data.reason || '',
+    data.orderId || '',
+    data.message || '',
+    'New'
+  ]);
+  return json({ result: 'success' });
+}
+
 function json(obj) {
   return ContentService
     .createTextOutput(JSON.stringify(obj))
@@ -175,6 +197,20 @@ function testPrebook() {
       pack: 'Pack Of 30', qty: '1', fullPrice: '1500', prebookPrice: '1050',
       paymentStatus: 'TEST - delete me', orderId: 'order_TEST_' + Date.now(), paymentId: 'pay_TEST',
       address: '12 Test Street, Indiranagar', pincode: '560038', city: 'Bengaluru', state: 'Karnataka', referredBy: 'ABHIJITH30', discountCode: 'ABHIJITH30'
+    }
+  });
+  Logger.log('doPost returned: ' + result.getContent());
+}
+
+/**
+ * Diagnostic only - run manually to add a test row to the "Messages" tab.
+ * Delete the test row afterwards.
+ */
+function testContact() {
+  const result = doPost({
+    parameter: {
+      type: 'contact', name: 'Test Message', email: 'test@example.com', phone: '9999999999',
+      reason: 'product', orderId: '', message: 'TEST - delete me'
     }
   });
   Logger.log('doPost returned: ' + result.getContent());

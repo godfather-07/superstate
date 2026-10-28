@@ -35,3 +35,13 @@ export async function logPaidPrebook(order, paymentId) {
   const num = Number(data.memberNumber);
   return Number.isInteger(num) && num > 0 ? num : null;
 }
+
+// Saves a contact-form message to the "Messages" tab. Throws if the sheet
+// didn't confirm, so the form can tell the visitor to use WhatsApp instead.
+export async function logContactMessage(msg) {
+  const url = process.env.SHEET_WEBHOOK_URL || process.env.VITE_WAITLIST_SHEET_URL || DEFAULT_SHEET_URL;
+  const form = new URLSearchParams({ type: 'contact', ...msg });
+  const res = await fetch(url, { method: 'POST', body: form, redirect: 'follow' });
+  const data = await res.json().catch(() => ({}));
+  if (data.result !== 'success') throw new Error(`sheet replied ${res.status} ${data.result || ''}`.trim());
+}
