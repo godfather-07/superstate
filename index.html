@@ -21,7 +21,7 @@
   <meta property="og:site_name" content="SuperState" />
   <meta property="og:url" content="https://www.superstate.in/" />
   <meta property="og:title" content="SuperState | Health, simplified." />
-  <meta property="og:description" content="Batch 01 of Sleep Well sold out. Pre-book the next drop. Coffee, but for sleep ☾" />
+  <meta property="og:description" content="Sleep Well is live: coffee, but for sleep ☾ 20% off for launch." />
   <meta property="og:image" content="https://www.superstate.in/assets/og-sleep-well.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -100,7 +100,7 @@
       <ul class="nav-links">
         <li><a href="/">Home</a></li>
         <li><a href="/pages/our-story/">Our Story</a></li>
-        <li><a href="/pages/waitlist/">Waitlist</a></li>
+        <li><a href="/products/sleep-well/">Shop</a></li>
         <li><a href="/pages/faqs/">FAQs</a></li>
         <li><a href="/pages/contact/">Contact</a></li>
       </ul>
@@ -120,7 +120,7 @@
     <ul class="mobile-nav-links">
       <li><a href="/">Home</a></li>
       <li><a href="/pages/our-story/">Our Story</a></li>
-      <li><a href="/pages/waitlist/">Waitlist</a></li>
+      <li><a href="/products/sleep-well/">Shop</a></li>
       <li><a href="/pages/faqs/">FAQs</a></li>
       <li><a href="/pages/contact/">Contact</a></li>
     </ul>
@@ -135,11 +135,11 @@
     <div class="container home-hero-grid">
 
       <div class="home-hero-copy">
-        <span class="home-pill"><span class="home-pill-dot"></span> batch 01 sold out 💅 next drop loading</span>
+        <span class="home-pill"><span class="home-pill-dot"></span> sleep well is live 🎉 20% off for launch</span>
         <h1 class="home-h1">Health,<br><em>simplified.</em></h1>
         <p class="home-sub">we make health simple in a world that makes it <span class="home-mark">complicated.</span></p>
         <div class="home-ctas">
-          <a href="/products/sleep-well/" class="home-btn home-btn-primary">Pre-book batch 02</a>
+          <a href="/products/sleep-well/" class="home-btn home-btn-primary">Shop Sleep Well · 20% off</a>
           <a href="/pages/our-story/" class="home-btn home-btn-ghost">our story →</a>
         </div>
       </div>
@@ -781,14 +781,14 @@
   <section class="first-product fade-up">
     <div class="container first-product-grid">
       <div class="first-product-copy">
-        <span class="fp-tag">batch 01 sold out ✶ next drop soon</span>
+        <span class="fp-tag">launch sale live ✶ 20% off</span>
         <h2 class="fp-title">sleep is the <em>best supplement</em> in the whole world.</h2>
-        <p class="fp-text fp-text-short">batch 01 sold out. the next drop lands soon, so hold your horses 🐎</p>
-        <p class="fp-text fp-text-long">so we started with the night. sleep well is a dark chocolate drink you mix and sip 30 minutes before bed. our first batch sold out way faster than we planned, so we made it even better. the next drop lands soon, so hold your horses 🐎</p>
+        <p class="fp-text fp-text-short">batch 01 sold out fast. batch 02 is better, and it's shipping now 🐎</p>
+        <p class="fp-text fp-text-long">so we started with the night. sleep well is a dark chocolate drink you mix and sip 30 minutes before bed. our first batch sold out way faster than we planned, so we made it even better. batch 02 is shipping now 🐎</p>
         <p class="fp-coffee"><em>coffee, but for sleep ☾</em></p>
         <div class="fp-offers">
-          <a href="/products/sleep-well/" class="btn fp-btn">Pre-book batch 02 →</a>
-          <a href="/pages/waitlist/" class="fp-link">or get 20% off with <span>FIRSTNIGHT20</span></a>
+          <a href="/products/sleep-well/" class="btn fp-btn">Shop now →</a>
+          <a href="/products/sleep-well/" class="fp-link">20% off for launch with <span>FIRSTNIGHT20</span></a>
         </div>
       </div>
       <div class="first-product-visual">
@@ -954,7 +954,7 @@
             <li><a href="/pages/our-story/">Our Story</a></li>
             <li><a href="/products/sleep-well/">Product</a></li>
             <li><a href="/pages/faqs/">FAQs</a></li>
-            <li><a href="/pages/waitlist/">Waitlist</a></li>
+            <li><a href="/products/sleep-well/">Shop</a></li>
             <li><a href="/pages/contact/">Contact</a></li>
           </ul>
         </div>
@@ -992,564 +992,7 @@
   </a>
 
 
-  <!-- DYNAMIC INTERACTIVE WAITLIST POP-UP -->
-  <div id="waitlist-popup-overlay" class="popup-overlay">
-    <div class="popup-modal">
-      <button class="popup-close-btn" id="popup-close-btn" aria-label="Close modal">&times;</button>
-      
-      <!-- Primary / Signup State (Horizontal Grid Layout) -->
-      <div id="popup-signup-state" class="popup-signup-grid">
-        <!-- Left Column: Copy -->
-        <div class="popup-copy-col">
-          <span class="popup-eyebrow">Exclusively for Early Members</span>
-          <h3 class="popup-title">Make health simple.</h3>
-          <ul class="popup-bullets">
-            <li>Join the waitlist for our upcoming premium product launch</li>
-            <li>Get our weekly, high-value, fluff-free newsletter</li>
-            <li>No noise, just science</li>
-          </ul>
-          <div class="popup-features">
-            <span>✓ 100% Transparent</span>
-            <span>✓ Early Access Pricing</span>
-            <span>✓ Zero Spam</span>
-          </div>
-        </div>
-        
-        <!-- Right Column: Form Fields -->
-        <div class="popup-form-col">
-          <form id="popup-waitlist-form" class="popup-form" style="margin-bottom: 0;">
-            <div class="popup-input-wrap">
-              <input type="text" id="popup-name-input" placeholder="Your full name" required autocomplete="name">
-            </div>
-            <div class="popup-input-wrap">
-              <input type="email" id="popup-email-input" placeholder="Enter your email address" required autocomplete="email">
-            </div>
-            <div class="popup-input-wrap">
-              <input type="tel" id="popup-phone-input" placeholder="Your phone number" required autocomplete="tel">
-            </div>
-            
-            <div class="popup-gender-container" style="margin-bottom: 0.6rem; text-align: left;">
-              <div style="font-size: 11px; font-weight: 800; color: rgba(255, 255, 255, 0.4); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.3rem;">Identity / Gender</div>
-              <div class="gender-segmented-control" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 3px; display: flex; position: relative; height: 38px; cursor: pointer; user-select: none;">
-                <div class="gender-slide-bg" style="position: absolute; top: 3px; left: 3px; width: calc(50% - 6px); height: calc(100% - 6px); background: #003399; border-radius: 9px; box-shadow: 0 0 10px rgba(0, 51, 153, 0.5); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease; z-index: 1;"></div>
-                <button type="button" class="gender-btn active" data-gender="male">Male</button>
-                <button type="button" class="gender-btn" data-gender="female">Female</button>
-              </div>
-              <input type="hidden" id="popup-gender-input" value="male">
-            </div>
-
-            <button type="submit" class="popup-submit-btn" style="margin-top: 0.25rem;">
-              <span>Join the Waitlist</span>
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </button>
-          </form>
-        </div>
-      </div>
-      
-      <!-- Success State (Initially Hidden) -->
-      <div id="popup-success-state" style="display: none; text-align: center; animation: popupScaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
-        <div class="success-icon-circle">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-        </div>
-        <h3 class="popup-title" style="margin-top: 1rem; margin-bottom: 0.5rem;">You're on the list!</h3>
-        <p class="popup-text" style="margin-bottom: 1.25rem;">
-          We've reserved your spot. Early access pricing and raw, honest health science will arrive in your inbox soon. Welcome to SuperState.
-        </p>
-        <button type="button" id="popup-success-close-btn" class="popup-success-btn">Got it</button>
-        
-        <!-- Interactive Sparkling Confetti -->
-        <div class="success-sparkles">
-          <span style="top: 10%; left: 20%; animation-delay: 0.1s;">✦</span>
-          <span style="top: 20%; left: 80%; animation-delay: 0.3s;">✦</span>
-          <span style="top: 70%; left: 15%; animation-delay: 0.5s;">✦</span>
-          <span style="top: 60%; left: 85%; animation-delay: 0.2s;">✦</span>
-          <span style="top: 40%; left: 50%; animation-delay: 0.4s;">✦</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <style>
-    /* Popup styling */
-    .popup-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 26, 73, 0.5); /* Soft dark navy tint overlay */
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      z-index: 99999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.4s ease, visibility 0.4s ease;
-      padding: 1.5rem;
-      overflow-y: auto; /* Enable vertical scroll if viewport is extremely short */
-    }
-    
-    .popup-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-    
-    .popup-modal {
-      background: linear-gradient(135deg, #001a4d 0%, #000c24 100%); /* Premium space navy to black gradient */
-      border: 2px solid rgba(228, 255, 90, 0.25); /* Glowing yellow-green subtle border */
-      box-shadow: 0 25px 60px rgba(0, 51, 153, 0.45), 0 0 30px rgba(228, 255, 90, 0.15);
-      border-radius: 28px;
-      width: 100%;
-      max-width: 820px; /* Wider for premium horizontal grid */
-      padding: 2.25rem 2.5rem 2rem;
-      position: relative;
-      transform: scale(0.9) translateY(20px);
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      color: #ffffff;
-      overflow: hidden;
-      margin: auto; /* Enable vertical centering and correct overflow behavior */
-    }
-    
-    .popup-modal ::selection {
-      background-color: rgba(228, 255, 90, 0.25);
-      color: #000000;
-    }
-    
-    .popup-signup-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.1fr;
-      gap: 2.5rem;
-      align-items: start;
-    }
-    
-    .popup-copy-col {
-      display: flex;
-      flex-direction: column;
-      text-align: left;
-    }
-    
-    .popup-overlay.active .popup-modal {
-      transform: scale(1) translateY(0);
-    }
-    
-    .popup-close-btn {
-      position: absolute;
-      top: 1.25rem;
-      right: 1.25rem;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 20px;
-      line-height: 1;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: grid;
-      place-items: center;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      outline: none;
-      z-index: 10;
-    }
-    
-    .popup-close-btn:hover {
-      background: rgba(228, 255, 90, 0.15);
-      border-color: #E4FF5A; /* Custom Yellow-Green */
-      color: #E4FF5A;
-      transform: rotate(90deg) scale(1.05);
-    }
-    
-    .popup-eyebrow {
-      font-size: 11px;
-      font-weight: 800;
-      color: #E4FF5A; /* Custom Yellow-Green */
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      display: block;
-      margin-bottom: 0.75rem;
-    }
-    
-    .popup-title {
-      font-family: 'Lora', serif !important;
-      font-size: 28px;
-      font-weight: 600;
-      line-height: 1.2;
-      margin: 0 0 0.75rem;
-      letter-spacing: -0.015em;
-    }
-    
-    .popup-text {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 14.5px;
-      line-height: 1.65;
-      color: #cbd5e1; /* Light Slate grey readable */
-      margin: 0 0 1rem;
-      font-weight: 500;
-    }
-    
-    .popup-bullets {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 1.5rem 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-      text-align: left;
-    }
-    
-    .popup-bullets li {
-      position: relative;
-      padding-left: 1.25rem;
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 14px;
-      line-height: 1.5;
-      color: #cbd5e1;
-      font-weight: 500;
-    }
-    
-    .popup-bullets li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      top: -1px;
-      color: #E4FF5A; /* Neon Yellow-Green */
-      font-size: 18px;
-      line-height: 1.2;
-    }
-    
-    .popup-form {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      margin-bottom: 2rem;
-    }
-    
-    .popup-input-wrap input {
-      width: 100%;
-      padding: 0.7rem 1.05rem;
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 14.5px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 14px;
-      color: #ffffff;
-      outline: none;
-      transition: all 0.3s ease;
-    }
-    
-    .popup-input-wrap input::placeholder {
-      color: rgba(255, 255, 255, 0.4);
-    }
-    
-    .popup-input-wrap input:focus {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: #E4FF5A; /* Custom Yellow-Green focus */
-      box-shadow: 0 0 0 3px rgba(228, 255, 90, 0.15);
-    }
-    
-    .gender-btn {
-      flex: 1;
-      border: none;
-      background: transparent;
-      color: rgba(255, 255, 255, 0.5);
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-      cursor: pointer;
-      position: relative;
-      z-index: 2;
-      outline: none;
-      transition: color 0.3s ease;
-    }
-    
-    .gender-btn.active {
-      color: #ffffff;
-    }
-    
-    .gender-segmented-control.female-active .gender-btn[data-gender="female"].active {
-      color: #000000;
-    }
-    
-    .gender-btn:not(.active):hover {
-      color: rgba(255, 255, 255, 0.85);
-    }
-    
-    .popup-submit-btn {
-      width: 100%;
-      padding: 0.85rem;
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 16px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      background-color: #003399; /* Deep Primary Blue */
-      border: 2px solid #003399;
-      color: #ffffff;
-      border-radius: 14px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      box-shadow: 3px 3px 0 #E4FF5A; /* Pop brand accent yellow-green drop-shadow */
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    
-    .popup-submit-btn:hover {
-      background: linear-gradient(135deg, #E4FF5A 0%, #F0FF66 100%); /* Vibrant Yellow-Green Gradient */
-      border-color: #E4FF5A;
-      color: #000000; /* High Contrast Black text */
-      box-shadow: 3px 3px 0 #003399;
-      transform: translateY(-2px);
-    }
-    
-    .popup-submit-btn:active {
-      transform: translateY(1px);
-    }
-    
-    .popup-features {
-      display: flex;
-      justify-content: space-between;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding-top: 1.25rem;
-      font-size: 11px;
-      font-weight: 700;
-      color: rgba(255, 255, 255, 0.5);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    
-    /* Success state styles */
-    .success-icon-circle {
-      width: 72px;
-      height: 72px;
-      background: rgba(228, 255, 90, 0.1);
-      border: 2.5px solid #E4FF5A; /* Custom Yellow-Green checkmark border */
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      color: #E4FF5A; /* Custom Yellow-Green checkmark color */
-      margin: 0 auto;
-      box-shadow: 0 0 20px rgba(228, 255, 90, 0.3);
-    }
-    
-    .success-icon-circle svg {
-      width: 32px;
-      height: 32px;
-    }
-    
-    .popup-success-btn {
-      width: 100%;
-      padding: 0.8rem;
-      background: transparent;
-      border: 2px solid rgba(255, 255, 255, 0.15);
-      color: #ffffff;
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      border-radius: 14px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    
-    .popup-success-btn:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.3);
-    }
-    
-    @media (max-width: 768px) {
-      .popup-modal {
-        max-width: 440px;
-        padding: 2rem 1.5rem 1.75rem;
-      }
-      .popup-signup-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-      .popup-features {
-        display: none;
-      }
-    }
-    
-    /* Success sparkles micro-animation */
-    .success-sparkles {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
-    
-    .success-sparkles span {
-      position: absolute;
-      color: #E4FF5A; /* Custom Yellow-Green sparkles */
-      font-size: 20px;
-      opacity: 0;
-      animation: sparkleAnim 1.8s ease-in-out infinite;
-    }
-    
-    @keyframes sparkleAnim {
-      0% { transform: scale(0.3) rotate(0deg); opacity: 0; }
-      50% { opacity: 0.8; transform: scale(1.1) rotate(180deg); }
-      100% { transform: scale(0.3) rotate(360deg); opacity: 0; }
-    }
-    
-    @keyframes popupScaleIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
-  </style>
   
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const popupOverlay = document.getElementById('waitlist-popup-overlay');
-      const closeBtn = document.getElementById('popup-close-btn');
-      const form = document.getElementById('popup-waitlist-form');
-      const nameInput = document.getElementById('popup-name-input');
-      const emailInput = document.getElementById('popup-email-input');
-      const phoneInput = document.getElementById('popup-phone-input');
-      const genderInput = document.getElementById('popup-gender-input');
-      const genderButtons = document.querySelectorAll('.gender-btn');
-      const genderSlideBg = document.querySelector('.gender-slide-bg');
-      const signupState = document.getElementById('popup-signup-state');
-      const successState = document.getElementById('popup-success-state');
-      const successCloseBtn = document.getElementById('popup-success-close-btn');
-
-      // Gender Selector Segmented Control Slider Logic
-      genderButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          genderButtons.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          
-          const gender = btn.getAttribute('data-gender');
-          genderInput.value = gender;
-          
-          const control = document.querySelector('.gender-segmented-control');
-          if (gender === 'female') {
-            control.classList.add('female-active');
-            genderSlideBg.style.transform = 'translateX(100%)';
-            genderSlideBg.style.background = 'linear-gradient(135deg, #E4FF5A 0%, #F0FF66 100%)'; // Slid to female (Yellow-Green Gradient)
-            genderSlideBg.style.boxShadow = '0 0 10px rgba(228, 255, 90, 0.5)';
-          } else {
-            control.classList.remove('female-active');
-            genderSlideBg.style.transform = 'translateX(0)';
-            genderSlideBg.style.background = '#003399'; // Slid to male (Blue)
-            genderSlideBg.style.boxShadow = '0 0 10px rgba(0, 51, 153, 0.5)';
-          }
-        });
-      });
-      
-      // Delay before popup triggers (e.g. 4 seconds)
-      const popupDelay = 4000;
-      
-      // Check if user has already signed up or dismissed it
-      const hasSignedUp = localStorage.getItem('superstate_waitlist_signed');
-      const hasDismissed = localStorage.getItem('superstate_popup_dismissed');
-      
-      if (!hasSignedUp && !hasDismissed) {
-        setTimeout(() => {
-          popupOverlay.classList.add('active');
-        }, popupDelay);
-      }
-      
-      // Close popup logic
-      function closePopup() {
-        popupOverlay.classList.remove('active');
-        localStorage.setItem('superstate_popup_dismissed', 'true');
-      }
-      
-      closeBtn.addEventListener('click', closePopup);
-      successCloseBtn.addEventListener('click', () => {
-        popupOverlay.classList.remove('active');
-      });
-      
-      // Close on clicking overlay outside the modal
-      popupOverlay.addEventListener('click', (e) => {
-        if (e.target === popupOverlay) {
-          closePopup();
-        }
-      });
-      
-      // Form Submission Logic
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const name = nameInput.value.trim();
-        const email = emailInput.value.trim();
-        const phone = phoneInput.value.trim();
-        const gender = genderInput.value;
-        
-        if (name && email && phone) {
-          const submitBtn = form.querySelector('.popup-submit-btn');
-          const submitSpan = submitBtn.querySelector('span');
-          
-          submitBtn.disabled = true;
-          submitSpan.textContent = 'Joining...';
-          
-          // Google Apps Script Web App URL for your Google Sheet!
-          // Replace 'YOUR_DEPLOYED_WEBAPP_URL_HERE' with your deployed Apps Script URL!
-          const webAppUrl = 'https://script.google.com/macros/s/AKfycbwf-v_WQn9YgTOvwd2qhuVa275u2O1d0ctNbKyN4MMY-4E9nirP0_QnY9a5t4HtRfGI/exec';
-          
-          const submitToSheet = () => {
-            // Save member credentials to localStorage
-            localStorage.setItem('superstate_waitlist_signed', 'true');
-            localStorage.setItem('superstate_waitlist_name', name);
-            localStorage.setItem('superstate_waitlist_email', email);
-            localStorage.setItem('superstate_waitlist_phone', phone);
-            localStorage.setItem('superstate_waitlist_gender', gender);
-            localStorage.removeItem('superstate_popup_dismissed'); // Ensure no interference
-            
-            // Switch to success state with micro-animation
-            signupState.style.display = 'none';
-            successState.style.display = 'block';
-            
-            // Re-sync other waitlist forms on the home page if any
-            document.querySelectorAll('.waitlist-form').forEach(wf => {
-              wf.reset();
-              const wfBtn = wf.querySelector('button');
-              if (wfBtn) {
-                wfBtn.textContent = 'Joined!';
-                wfBtn.style.backgroundColor = 'var(--success)';
-                wfBtn.style.color = 'white';
-              }
-            });
-          };
-
-          if (webAppUrl && webAppUrl !== 'YOUR_DEPLOYED_WEBAPP_URL_HERE') {
-            // Create form data payload
-            const formData = new FormData();
-            formData.append('name', name);
-            formData.append('email', email);
-            formData.append('phone', phone);
-            formData.append('gender', gender);
-            
-            fetch(webAppUrl, {
-              method: 'POST',
-              mode: 'no-cors', // Standard for Apps Script redirects to prevent CORS preflight blocking
-              body: formData
-            })
-            .then(() => {
-              submitToSheet();
-            })
-            .catch((err) => {
-              console.error('Google Sheet submission failed, falling back to local simulation:', err);
-              submitToSheet();
-            });
-          } else {
-            // Fallback to local simulation instantly
-            setTimeout(submitToSheet, 1000);
-          }
-        }
-      });
-    });
-  </script>
 
   <script src="./main.js" type="module"></script>
 </body>

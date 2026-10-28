@@ -39,7 +39,6 @@ export default defineConfig(({ mode }) => {
           story: resolve(__dirname, 'pages/our-story/index.html'),
           faqs: resolve(__dirname, 'pages/faqs/index.html'),
           contact: resolve(__dirname, 'pages/contact/index.html'),
-          waitlist: resolve(__dirname, 'pages/waitlist/index.html'),
           prebook: resolve(__dirname, 'pages/prebook/index.html'),
         },
       },

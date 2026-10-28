@@ -21,6 +21,7 @@ export async function logPaidPrebook(order, paymentId) {
     city: n.city || '',
     state: n.state || '',
     referredBy: n.ref || '',
+    discountCode: n.discount_code || '',
     pack: n.pack || '',
     qty: n.qty || '',
     fullPrice: n.full_price || '',

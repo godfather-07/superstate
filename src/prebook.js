@@ -1,129 +1,105 @@
 import {
-  PREBOOK_CONFIG, PACKS, priceFor, formatINR, validatePrebook, getSavedPrebook, clearSavedPrebook,
-  savePrebook, memberIdFor, createOrder, verifyPayment
+  PACKS, priceFor, discountFor, LAUNCH_CODE, GIFT_PACK, formatINR, validatePrebook,
+  getSavedPrebook, clearSavedPrebook, savePrebook, memberIdFor, createOrder, verifyPayment
 } from './services/prebookService.js';
-import { normalizeCreatorCode, captureRefFromUrl, getStoredRef, creatorName } from './shared/creators.js';
+import { captureRefFromUrl, getStoredRef, creatorName } from './shared/creators.js';
 import { initPixel, track } from './shared/pixel.js';
 
 initPixel();
 
 const $ = id => document.getElementById(id);
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const rupees = n => `₹${formatINR(n)}`;
 
-/* ---------- Pack + price (from the product page link, editable here) ---------- */
+/* ---------- Pack, quantity and discount code ---------- */
 const params = new URLSearchParams(location.search);
 let pack = PACKS[params.get('pack')] ? params.get('pack') : 'Pack Of 5';
 let qty = Math.min(Math.max(parseInt(params.get('qty'), 10) || 1, 1), 20);
-let price = priceFor(pack, qty);
-// Creator who sent this visitor (from ?ref= on this or an earlier page)
+// A creator link (?ref= on this or an earlier page) pre-fills their code.
 const linkRef = captureRefFromUrl() || getStoredRef();
-track('InitiateCheckout', { content_name: 'Sleep Well', content_ids: ['sleep-well'], currency: 'INR', value: price.pre, creator: linkRef || undefined });
+const refInput = $('pb-ref');
+if (linkRef) refInput.value = linkRef;
 
-const rupees = n => `₹${formatINR(n)}`;
+// The code we price with: the typed one if valid, else the launch code.
+const typedCode = () => refInput.value.trim();
+const activeDiscount = () => discountFor(typedCode()) || discountFor(LAUNCH_CODE);
+let price = priceFor(pack, qty, activeDiscount().code);
+track('InitiateCheckout', { content_name: 'Sleep Well', content_ids: ['sleep-well'], currency: 'INR', value: price.pre, creator: activeDiscount().creator || undefined });
 
-// The SuperState member card is a perk of the 30-night pack only
-const CARD_PACK = 'Pack Of 30';
-const hasCard = p => p === CARD_PACK;
-
-// prices on the pack buttons
-document.querySelectorAll('.pv-pack-price').forEach(el => {
-  const p = priceFor(el.dataset.for, 1);
-  el.innerHTML = p.pre < p.full ? `${rupees(p.pre)} <s>${rupees(p.full)}</s>` : rupees(p.pre);
-});
+const submitBtn = $('pb-submit');
+const payLabel = () => `pay ${rupees(price.pre)} →`;
 
 function renderOrder(animate) {
-  price = priceFor(pack, qty);
+  const d = activeDiscount();
+  price = priceFor(pack, qty, d.code);
+
   document.querySelectorAll('.pv-pack').forEach(btn => {
     btn.setAttribute('aria-checked', String(btn.dataset.pack === pack));
+  });
+  document.querySelectorAll('.pv-pack-price').forEach(el => {
+    const p = priceFor(el.dataset.for, 1, d.code);
+    el.innerHTML = `${rupees(p.pre)} <s>${rupees(p.full)}</s>`;
   });
   $('pv-qty').textContent = qty;
   $('pv-minus').disabled = qty <= 1;
   $('pv-plus').disabled = qty >= 20;
+
   $('pv-line-label').textContent = `Sleep Well · ${pack} × ${qty}`;
   $('pv-line-mrp').textContent = rupees(price.full);
-  $('pv-line-off').textContent = `−${rupees(price.full - price.pre)}`;
-  $('pv-line-off').closest('.pv-bill-line').hidden = price.pre >= price.full;
+  $('pv-line-off-label').textContent = d.creator
+    ? `${creatorName(d.code)}'s code · ${d.code} (${d.pct}%)`
+    : `launch discount · ${d.code} (${d.pct}%)`;
+  $('pv-line-off').textContent = `−${rupees(price.off)}`;
+  $('pv-pack-gift-line').hidden = pack !== GIFT_PACK;
   const total = $('pv-total');
   total.textContent = rupees(price.pre);
   if (animate && !reduceMotion) { total.classList.remove('bump'); void total.offsetWidth; total.classList.add('bump'); }
-  $('pv-meta').textContent = `BATCH 02 · ${pack.toUpperCase()}${qty > 1 ? ` × ${qty}` : ''}`;
-  const carded = hasCard(pack);
-  $('pv-card').classList.toggle('locked', !carded);
-  $('pv-lock').hidden = carded;
-  $('pv-note').innerHTML = carded ? 'this is yours.<br>type your name ↓' : 'want this?<br>pick 30 nights ↓';
-  $('pv-hint').textContent = carded ? 'your member number drops the moment you pay ✨' : 'the member card is a 30-night pack perk';
-  $('pv-card-val').innerHTML = carded ? 'included 💳' : '<button type="button" data-unlock>add with 30 nights →</button>';
+  $('pv-saved').innerHTML = `you save <b class="num">${rupees(price.off)}</b>`;
+  $('pv-badge').textContent = `−${d.pct}%`;
+
   $('pv-sticky-label').textContent = `${pack} × ${qty}`;
   $('pv-sticky-total').textContent = rupees(price.pre);
   if (!submitBtn.disabled) submitBtn.textContent = payLabel();
-  history.replaceState(null, '', `?pack=${encodeURIComponent(pack)}&qty=${qty}${linkRef ? `&ref=${linkRef}` : ''}`);
+  renderGift(d);
+  history.replaceState(null, '', `?pack=${encodeURIComponent(pack)}&qty=${qty}${d.creator ? `&ref=${d.creator}` : ''}`);
+}
+
+// Creator followers get a gift package with their order
+function renderGift(d) {
+  const name = d.creator ? creatorName(d.creator) : null;
+  $('pv-gift').hidden = !name;
+  $('pv-gift-line').hidden = !name;
+  const note = $('pb-ref-note');
+  const raw = typedCode();
+  if (raw && !discountFor(raw)) {
+    note.innerHTML = `we don't know <b>${raw.toUpperCase().replace(/[^A-Z0-9]/g, '')}</b>. you still get 20% off with ${LAUNCH_CODE}.`;
+  } else if (name) {
+    note.innerHTML = `<span class="pb-ref-ok">✓ ${d.code} applied: ${d.pct}% off + ${name}'s gift package 🎁</span>`;
+  } else {
+    note.innerHTML = `<span class="pb-ref-ok">✓ ${LAUNCH_CODE} applied: 20% off.</span> got a creator's code? type it here for 30% off + a free gift 🎁`;
+  }
+  if (!name) return;
+  $('pv-gift-title').textContent = `because you follow ${name} 🎁`;
+  $('pv-gift-text').textContent = `you get ${d.pct}% off, and your order comes with a special package of SuperState gifts, just for ${name}'s community.`;
+  $('pv-gift-line-label').textContent = `${name}'s gift package`;
 }
 
 document.querySelectorAll('.pv-pack').forEach(btn => btn.addEventListener('click', () => {
   pack = btn.dataset.pack;
   renderOrder(true);
 }));
-// "switch to 30 nights" buttons (card lock, bill line)
-document.addEventListener('click', e => {
-  if (!e.target.closest('[data-unlock]')) return;
-  pack = CARD_PACK;
-  renderOrder(true);
-});
 $('pv-minus').addEventListener('click', () => { if (qty > 1) { qty--; renderOrder(true); } });
 $('pv-plus').addEventListener('click', () => { if (qty < 20) { qty++; renderOrder(true); } });
+refInput.addEventListener('input', () => { setError('ref', ''); renderOrder(true); });
 
-// live card preview
-const now = new Date();
-$('pv-since').textContent = `${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getFullYear()).slice(-2)}`;
-$('pv-stat-members').textContent = PREBOOK_CONFIG.BATCH01_MEMBERS;
-$('pb-name').addEventListener('input', e => {
-  const v = e.target.value.trim();
-  $('pv-name').textContent = v ? v.toUpperCase() : 'YOUR NAME HERE';
-  $('pv-name').classList.toggle('typing', !!v);
-});
-enableTilt($('pv-card'));
-
-/* ---------- Returning visitor: show their card straight away ---------- */
+/* ---------- Returning customer: show their last order ---------- */
 const saved = getSavedPrebook();
-if (saved && !params.get('pack')) showCard(saved, false);
+if (saved && saved.paid && !params.get('pack')) showDone(saved, false);
 
 /* ---------- Form ---------- */
 const form = $('pb-form');
 const fields = ['name', 'phone', 'email', 'address', 'pincode', 'city', 'state', 'ref'];
-
 fields.forEach(f => $(`pb-${f}`).addEventListener('input', () => setError(f, '')));
-
-/* ---------- Creator code (attribution only, never a discount) ---------- */
-const refInput = $('pb-ref');
-const refGroup = $('pb-ref-group');
-const refToggle = $('pb-ref-toggle');
-function openRef(focus) {
-  refGroup.hidden = false;
-  refToggle.hidden = true;
-  refToggle.setAttribute('aria-expanded', 'true');
-  if (focus) refInput.focus();
-}
-refToggle.addEventListener('click', () => openRef(true));
-// Creator followers get a gift package with their pre-book
-function renderGift(code) {
-  const name = creatorName(code);
-  $('pv-gift').hidden = !name;
-  $('pv-gift-line').hidden = !name;
-  if (!name) return;
-  $('pv-gift-title').textContent = `because you follow ${name} 🎁`;
-  $('pv-gift-text').textContent = `unlike other pre-book customers, your order comes with a special package of SuperState gifts, just for ${name}'s community.`;
-  $('pv-gift-line-label').textContent = `${name}'s gift package`;
-}
-refInput.addEventListener('input', () => renderGift(refInput.value));
-renderGift(linkRef);
-if (linkRef) {
-  refInput.value = linkRef;
-  openRef(false);
-  $('pb-ref-note').innerHTML = `<span class="pb-ref-ok">✓ sent by ${creatorName(linkRef)} (${linkRef})</span>. your gift package is added to this order 🎁`;
-}
-
-const submitBtn = $('pb-submit');
-const payLabel = () => `pay ${rupees(price.pre)} →`;
 
 function setBusy(on, label) {
   submitBtn.disabled = on;
@@ -169,12 +145,10 @@ form.addEventListener('submit', async e => {
     state: $('pb-state').value.trim()
   };
   const check = validatePrebook(details);
-  const refRaw = refInput.value.trim();
-  const ref = refRaw ? normalizeCreatorCode(refRaw) : '';
-  if (ref === null) {
+  const d = discountFor(typedCode());
+  if (!d) {
     check.isValid = false;
-    check.errors.ref = "We don't know that code. Check the spelling or leave it blank.";
-    openRef(false);
+    check.errors.ref = `We don't know that code. Clear it to use ${LAUNCH_CODE} (20% off).`;
   }
   if (!check.isValid) {
     const firstBad = fields.find(f => check.errors[f]);
@@ -189,16 +163,17 @@ form.addEventListener('submit', async e => {
     return;
   }
 
-  // 1. Server creates the order (and decides the amount)
+  // 1. Server creates the order (and decides the amount, including the discount)
   setBusy(true, 'opening secure payment…');
-  const order = await createOrder({ ...details, ref, pack, qty });
+  const order = await createOrder({ ...details, code: d.code, pack, qty });
   if (!order.ok) {
     setBusy(false);
     setError('form', order.data.error || 'Could not start the payment. Please try again.');
     return;
   }
 
-  track('AddPaymentInfo', { content_name: `Sleep Well · ${pack}`, content_ids: ['sleep-well'], currency: 'INR', value: price.pre, num_items: qty, creator: ref || undefined });
+  const creator = d.creator || undefined;
+  track('AddPaymentInfo', { content_name: `Sleep Well · ${pack}`, content_ids: ['sleep-well'], currency: 'INR', value: price.pre, num_items: qty, creator });
 
   // 2. Razorpay checkout modal
   const rzp = new window.Razorpay({
@@ -207,7 +182,7 @@ form.addEventListener('submit', async e => {
     amount: order.data.amount,
     currency: order.data.currency,
     name: 'SuperState',
-    description: `Sleep Well · ${pack} × ${qty} (pre-book, batch 02)`,
+    description: `Sleep Well · ${pack} × ${qty} (${d.code}, ${d.pct}% off)`,
     image: `${location.origin}/logo-wordmark.png`,
     prefill: { name: details.name, email: details.email, contact: `+91${details.phone}` },
     notes: { pack, qty: String(qty) },
@@ -234,33 +209,37 @@ form.addEventListener('submit', async e => {
         setError('form', `We couldn't confirm this payment. If money left your account, WhatsApp us with ID ${response.razorpay_payment_id} and we'll sort it out.`);
         return;
       }
-      const memberNumber = result.data.member_number || null;
+      const orderNumber = result.data.member_number || null;
       const record = {
         ...details,
         pack,
         qty,
+        code: d.code,
+        pct: d.pct,
+        creator: d.creator,
         fullPrice: price.full,
         prebookPrice: price.pre,
+        saved: price.off,
         paid: true,
         paymentId: response.razorpay_payment_id,
         orderId: response.razorpay_order_id,
         submittedAt: new Date().toISOString(),
-        memberNumber,
-        memberId: memberIdFor(memberNumber, details.phone)
+        orderNumber,
+        orderLabel: memberIdFor(orderNumber, details.phone)
       };
       savePrebook(record);
       // eventID = Razorpay payment id, so a future server-side (CAPI) event can be de-duplicated
       track('Purchase', {
         content_name: `Sleep Well · ${pack}`, content_ids: ['sleep-well'], content_type: 'product',
-        currency: 'INR', value: price.pre, num_items: qty, creator: ref || undefined
+        currency: 'INR', value: price.pre, num_items: qty, creator, coupon: d.code
       }, { eventID: response.razorpay_payment_id });
       setBusy(false);
-      showCard(record, true);
+      showDone(record, true);
     },
     modal: {
       ondismiss: () => {
         setBusy(false);
-        setError('form', 'Payment cancelled. Your spot in batch 02 is still here whenever you’re ready.');
+        setError('form', 'Payment cancelled. Your launch discount is still here whenever you’re ready.');
       }
     }
   });
@@ -285,100 +264,41 @@ $('pb-again').addEventListener('click', () => {
   clearSavedPrebook();
   location.href = '/products/sleep-well/#buy-section';
 });
-$('pb-order-upsell').addEventListener('click', () => {
-  clearSavedPrebook();
-  location.href = `/pages/prebook/?pack=${encodeURIComponent(CARD_PACK)}&qty=1#checkout`;
-});
 
-/* ---------- Card reveal ---------- */
-function showCard(r, celebrate) {
+/* ---------- Order confirmed ---------- */
+function showDone(r, celebrate) {
   $('pb-reserve').hidden = true;
   $('pb-done').hidden = false;
   $('pv-sticky').classList.remove('visible');
   window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
 
   const first = r.name.split(' ')[0];
-  const since = new Date(r.submittedAt || Date.now());
-  $('ss-name').textContent = r.name.toUpperCase();
-  $('ss-number').textContent = r.memberId;
-  $('ss-meta').textContent = `BATCH 02 · ${r.pack.toUpperCase()}${r.qty > 1 ? ` × ${r.qty}` : ''}`;
-  $('ss-since').textContent = `${String(since.getMonth() + 1).padStart(2, '0')}/${String(since.getFullYear()).slice(-2)}`;
-  const carded = hasCard(r.pack);
-  $('pb-card-reveal').hidden = !carded;
-  $('pb-order-done').hidden = carded;
+  const name = r.creator ? creatorName(r.creator) : null;
+  $('pb-done-sub').textContent = `${first}, your Sleep Well ships in 5–7 working days.`;
+  $('pb-order-no').textContent = r.orderLabel ? `order ${r.orderLabel}` : '';
   $('pb-order-pack').textContent = `Sleep Well · ${r.pack} × ${r.qty}`;
   $('pb-order-paid').textContent = `₹${formatINR(r.prebookPrice)} paid`;
-  $('pb-step3').textContent = carded
-    ? 'free shipping across India. your physical card comes in the box'
-    : 'free shipping across India';
-  $('pb-done-sub').textContent = carded
-    ? `${first}, you're paid up and first in line. here's your SuperState card.`
-    : `${first}, you're paid up and first in line. your Sleep Well ships with batch 02.`;
+  $('pb-order-saved').textContent = r.saved ? `you saved ₹${formatINR(r.saved)} with ${r.code}` : '';
+  const gifts = [];
+  if (r.pack === GIFT_PACK) gifts.push('🎁 SuperState gift (30-night pack) in your box');
+  if (name) gifts.push(`🎁 ${name}'s gift package in your box`);
+  $('pb-order-gifts').innerHTML = gifts.map(g => `<li>${g}</li>`).join('');
   $('pb-step1').textContent = `${r.pack} × ${r.qty} · ₹${formatINR(r.prebookPrice)} paid`;
   $('pb-step2-phone').textContent = `+91 ${r.phone.slice(0, 5)} ${r.phone.slice(5)}`;
   $('pb-payid').textContent = r.paymentId ? `payment ID ${r.paymentId}` : '';
+  $('pb-step3').textContent = gifts.length ? 'free shipping across India. your gift comes in the same box' : 'free shipping across India';
 
-  const others = PREBOOK_CONFIG.BATCH01_MEMBERS;
-  $('pb-club-text').innerHTML = r.memberNumber
-    ? `you're <strong>member ${r.memberId}</strong>. <strong>${others} night owls</strong> from batch 01 got theirs first`
-    : `<strong>${others} night owls</strong> from batch 01 already have theirs`;
-
-  const shareText = carded
-    ? `just got my SuperState card ☾ (${r.memberId}). pre-booked Sleep Well from batch 02, coffee but for sleep → https://superstate.in/products/sleep-well/`
-    : `just pre-booked Sleep Well from batch 02 ☾ coffee, but for sleep → https://superstate.in/products/sleep-well/`;
+  const shareText = `just got SuperState Sleep Well ☾ coffee, but for sleep. 20% off for launch → https://superstate.in/products/sleep-well/`;
   const share = $('pb-share');
   share.href = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
   if (navigator.share) {
     share.addEventListener('click', e => {
       e.preventDefault();
-      navigator.share({ title: carded ? 'My SuperState card' : 'SuperState Sleep Well', text: shareText }).catch(() => {});
+      navigator.share({ title: 'SuperState Sleep Well', text: shareText }).catch(() => {});
     }, { once: true });
   }
 
-  const card = $('ss-card');
-  if (celebrate && !reduceMotion) {
-    setTimeout(() => { card.classList.add('revealed'); burst(); }, 450);
-  } else {
-    card.classList.add('revealed');
-  }
-  if (carded) enableTilt(card);
-}
-
-/* ---------- Holographic tilt ---------- */
-function enableTilt(card) {
-  if (reduceMotion) return;
-  const move = (x, y) => {
-    const r = card.getBoundingClientRect();
-    const px = Math.min(Math.max((x - r.left) / r.width, 0), 1);
-    const py = Math.min(Math.max((y - r.top) / r.height, 0), 1);
-    card.classList.add('tilting');
-    card.style.setProperty('--mx', `${px * 100}%`);
-    card.style.setProperty('--my', `${py * 100}%`);
-    card.style.setProperty('--ry', `${(px - 0.5) * 22}deg`);
-    card.style.setProperty('--rx', `${(0.5 - py) * 16}deg`);
-  };
-  const reset = () => {
-    card.classList.remove('tilting');
-    card.style.setProperty('--rx', '0deg');
-    card.style.setProperty('--ry', '0deg');
-    card.style.setProperty('--mx', '50%');
-    card.style.setProperty('--my', '50%');
-  };
-  card.addEventListener('pointermove', e => move(e.clientX, e.clientY));
-  card.addEventListener('pointerleave', reset);
-  card.addEventListener('pointerup', reset);
-
-  // gentle idle shimmer so it feels alive on phones too
-  let t = 0;
-  const idle = () => {
-    if (!card.classList.contains('tilting')) {
-      t += 0.012;
-      card.style.setProperty('--mx', `${50 + Math.sin(t) * 30}%`);
-      card.style.setProperty('--my', `${50 + Math.cos(t * 0.8) * 20}%`);
-    }
-    requestAnimationFrame(idle);
-  };
-  requestAnimationFrame(idle);
+  if (celebrate && !reduceMotion) setTimeout(burst, 350);
 }
 
 /* ---------- Confetti ---------- */
