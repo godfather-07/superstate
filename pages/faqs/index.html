@@ -33,6 +33,46 @@
     .faq-item.active .faq-icon { transform: rotate(45deg); }
     .faq-inner a { color: var(--accent-brand); text-decoration: underline; }
   </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    .fq-wrap { max-width: 820px; margin: 0 auto; padding: 0 20px; }
+    .fq-hero { padding: 8rem 0 3rem; text-align: center; background: radial-gradient(120% 90% at 50% 0%, #2a5fd6 0%, #003399 55%); color: #fff; }
+    .fq-kicker { display: inline-block; padding: .3rem .8rem; border-radius: 999px; background: #E4FF5A; color: #001a4d; font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+    .fq-hero h1 { margin: .9rem 0 .6rem; font-size: clamp(34px, 5vw, 52px); line-height: 1.05; color: #fff; }
+    .fq-hero h1 em { font-family: 'Instrument Serif', serif; font-weight: 400; color: #E4FF5A; }
+    .fq-hero p { margin: 0 auto 1.5rem; max-width: 520px; font-size: 16.5px; line-height: 1.55; color: #d5ddf3; }
+    .fq-search { display: flex; align-items: center; gap: .6rem; max-width: 520px; margin: 0 auto 1.25rem; padding: 0 1rem; border-radius: 14px; background: #fff; box-shadow: 0 12px 30px rgba(0, 10, 40, .25); }
+    .fq-search input { flex: 1; min-width: 0; height: 52px; border: 0; outline: none; font: inherit; font-size: 16px; color: #001a4d; background: transparent; }
+    .fq-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; }
+    .fq-chip { display: inline-flex; align-items: center; gap: .35rem; padding: .45rem .85rem; border-radius: 999px; border: 1px solid rgba(255,255,255,.3); background: rgba(255,255,255,.08); color: #fff; font-size: 14px; font-weight: 700; text-decoration: none; transition: background .2s; }
+    .fq-chip:hover { background: rgba(228,255,90,.18); border-color: #E4FF5A; }
+    .fq-main { padding: 3rem 0 5rem; }
+    .fq-group { margin: 0 0 2.25rem; padding: 0; scroll-margin-top: 90px; }
+    .fq-group[hidden] { display: none; }
+    .fq-group-h { display: flex; align-items: center; gap: .6rem; margin: 0 0 .9rem; font-size: 22px; color: #001a4d; }
+    .fq-emoji { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; background: #E4FF5A; font-size: 19px; }
+    .fq-item { margin-bottom: .6rem; border-radius: 14px; background: #fff; border: 1px solid rgba(0, 26, 77, .1); box-shadow: 0 4px 14px rgba(0, 26, 77, .04); transition: border-color .2s, box-shadow .2s; }
+    .fq-item[hidden] { display: none; }
+    .fq-item[open] { border-color: #003399; box-shadow: 0 10px 26px rgba(0, 51, 153, .12); }
+    .fq-item summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.05rem 1.2rem; cursor: pointer; font-size: 16.5px; font-weight: 700; color: #001a4d; }
+    .fq-item summary::-webkit-details-marker { display: none; }
+    .fq-plus { position: relative; flex: 0 0 26px; width: 26px; height: 26px; border-radius: 50%; background: #eef2ff; transition: transform .25s, background .2s; }
+    .fq-plus::before, .fq-plus::after { content: ''; position: absolute; left: 50%; top: 50%; width: 11px; height: 2px; background: #003399; transform: translate(-50%, -50%); border-radius: 2px; }
+    .fq-plus::after { transform: translate(-50%, -50%) rotate(90deg); }
+    .fq-item[open] .fq-plus { transform: rotate(45deg); background: #E4FF5A; }
+    .fq-a { padding: 0 1.2rem 1.15rem; font-size: 15.5px; line-height: 1.65; color: #334155; }
+    .fq-a a { color: #003399; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+    .fq-empty { text-align: center; color: #4a5878; }
+    .fq-empty a { color: #003399; font-weight: 700; }
+    .fq-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 2.5rem; padding: 1.5rem; border-radius: 20px; background: #003399; color: #fff; }
+    .fq-cta strong { display: block; font-size: 22px; }
+    .fq-cta p { margin: .25rem 0 0; font-size: 15px; color: #d5ddf3; }
+    .fq-cta-btns { display: flex; flex-wrap: wrap; gap: .6rem; }
+    .fq-btn { display: inline-block; padding: .75rem 1.25rem; border-radius: 999px; background: #E4FF5A; color: #001a4d; font-weight: 800; font-size: 15px; text-decoration: none; }
+    .fq-btn-ghost { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.5); }
+    @media (max-width: 600px) { .fq-hero { padding: 6.5rem 0 2.25rem; } .fq-item summary { font-size: 15.5px; } }
+  </style>
   <link rel="canonical" href="https://www.superstate.in/pages/faqs/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="SuperState" />
@@ -93,86 +133,208 @@
     </div>
   </div>
 
-  <section class="faq-hero">
-    <div class="container">
-      <h1 style="margin-bottom: 1rem;">Common questions.<br>Honest answers.</h1>
-      <p class="subheadline" style="margin: 0 auto;">We don't hide behind vague answers. Ask us anything.</p>
+  <!-- FAQ HERO -->
+  <section class="fq-hero">
+    <div class="fq-wrap">
+      <span class="fq-kicker">FAQs</span>
+      <h1>questions? <em>good.</em></h1>
+      <p>we'd rather you ask than guess. 31 honest answers below, and a real human on WhatsApp for everything else.</p>
+      <label class="fq-search">
+        <span aria-hidden="true">🔎</span>
+        <input type="search" id="fq-search" placeholder="search: magnesium, shipping, codes…" autocomplete="off" aria-label="Search FAQs">
+      </label>
+      <nav class="fq-chips" aria-label="FAQ topics">
+          <a class="fq-chip" href="#fq-basics"><span>🌙</span>the basics</a>
+          <a class="fq-chip" href="#fq-inside"><span>🧪</span>ingredients &amp; safety</a>
+          <a class="fq-chip" href="#fq-ritual"><span>☕</span>using it</a>
+          <a class="fq-chip" href="#fq-orders"><span>🛍️</span>orders, prices &amp; codes</a>
+          <a class="fq-chip" href="#fq-shipping"><span>📦</span>shipping &amp; returns</a>
+          <a class="fq-chip" href="#fq-trust"><span>🔍</span>trust &amp; transparency</a>
+      </nav>
     </div>
   </section>
 
-  <section class="bg-white" style="border-radius: var(--border-radius) var(--border-radius) 0 0; padding-top: 4rem;">
-    <div class="container" style="max-width: 800px;">
-      
-      <div class="faq-category fade-up">
-        <h2 class="faq-category-title">A. The basics</h2>
-        <div class="faq-item">
-          <div class="faq-header">What is Sleep Well? <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">A dark chocolate drink mix for your evenings. You stir one sachet into warm milk or water and sip it about 30 minutes before bed. Think of it as coffee, but for sleep.</div></div>
+  <main class="fq-main">
+    <div class="fq-wrap">
+      <section class="fq-group" id="fq-basics">
+        <h2 class="fq-group-h"><span class="fq-emoji">🌙</span>the basics</h2>
+          <details class="fq-item">
+            <summary>What is Sleep Well?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">A dark chocolate drink for your evenings. Stir one sachet into warm milk or water and sip it about 30 minutes before bed. Think of it as coffee, but for sleep.</div>
+          </details>
+          <details class="fq-item">
+            <summary>Is it a medicine or a sedative?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">No. Sleep Well is a food product, not a medicine. It has no melatonin and no sedatives. It's a nightly ritual, not a knock-out pill.</div>
+          </details>
+          <details class="fq-item">
+            <summary>What makes SuperState different?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">No proprietary blends, ever. Every ingredient and its exact amount is on the <a href="/products/sleep-well/#inside">product page</a> and printed on the pack, so you can check everything yourself.</div>
+          </details>
+          <details class="fq-item">
+            <summary>What does it taste like?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">Like a rich dark hot chocolate, because the base is real organic raw cacao, not "chocolate flavour". Most people have it with warm milk.</div>
+          </details>
+          <details class="fq-item">
+            <summary>Does it have caffeine?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">Cacao naturally contains a small amount of caffeine, far less than a cup of tea or coffee. If you're very sensitive to caffeine, check the pack and start on a night when you're relaxed.</div>
+          </details>
+      </section>
+      <section class="fq-group" id="fq-inside">
+        <h2 class="fq-group-h"><span class="fq-emoji">🧪</span>ingredients &amp; safety</h2>
+          <details class="fq-item">
+            <summary>What's inside, exactly?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">Per 10 g sachet: organic raw cacao 3,000 mg · glycine 3,000 mg · magnesium L-threonate 2,000 mg · magnesium bisglycinate 1,000 mg · tart cherry extract 500 mg · L-theanine 200 mg · apigenin (from chamomile) 50 mg. That's it.</div>
+          </details>
+          <details class="fq-item">
+            <summary>Why two kinds of magnesium?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">Different forms of magnesium behave differently, so we used two well-known ones, L-threonate and bisglycinate, instead of one cheap form. Both amounts are on the label.</div>
+          </details>
+          <details class="fq-item">
+            <summary>Why no melatonin?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">We wanted a ritual you can enjoy every night, not a hormone shortcut. So Sleep Well is built from food-based ingredients like cacao, glycine, magnesium and chamomile extract.</div>
+          </details>
+          <details class="fq-item">
+            <summary>What about allergens?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">The full ingredient and allergen list is printed on the pack. If you have a food allergy, please read it before your first cup.</div>
+          </details>
+          <details class="fq-item">
+            <summary>Who should check with a doctor first?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">Please talk to your doctor first if you're pregnant or breastfeeding, take prescription medicine, or have a medical condition. Sleep Well is not for children.</div>
+          </details>
+          <details class="fq-item">
+            <summary>Where is it made?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">In Coimbatore, India.</div>
+          </details>
+      </section>
+      <section class="fq-group" id="fq-ritual">
+        <h2 class="fq-group-h"><span class="fq-emoji">☕</span>using it</h2>
+          <details class="fq-item">
+            <summary>How do I have it?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">Stir one sachet into a cup of warm milk (or water) and drink it about 30 minutes before bed. Dim the lights, put the phone down, and let it be your wind-down cue.</div>
+          </details>
+          <details class="fq-item">
+            <summary>How much should I have?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">One sachet a day. Please don't have more than that.</div>
+          </details>
+          <details class="fq-item">
+            <summary>Can I have it every night?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">Yes, that's the idea. It's designed as a nightly ritual, one sachet a night.</div>
+          </details>
+          <details class="fq-item">
+            <summary>When will I notice a difference?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">Everyone's different. Most people treat it as a habit rather than a one-night fix, so give it a couple of weeks of having it nightly at the same time.</div>
+          </details>
+          <details class="fq-item">
+            <summary>Hot milk, cold milk, plant milk?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">Warm works best because it mixes smoothly and feels like a proper bedtime drink. Any milk you like works, including plant milks.</div>
+          </details>
+      </section>
+      <section class="fq-group" id="fq-orders">
+        <h2 class="fq-group-h"><span class="fq-emoji">🛍️</span>orders, prices &amp; codes</h2>
+          <details class="fq-item">
+            <summary>How much does it cost?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">5 sachets ₹299 · 15 sachets ₹900 · 30 sachets ₹1,500 (MRP). For launch, everyone gets 20% off, so that's ₹239.20 / ₹720 / ₹1,200.</div>
+          </details>
+          <details class="fq-item">
+            <summary>How do discount codes work?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">FIRSTNIGHT20 (20% off) is applied automatically for everyone. If a creator sent you, use their code instead for 30% off plus their free gift package. One code per order.</div>
+          </details>
+          <details class="fq-item">
+            <summary>What's the free gift?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">Every 30-night pack comes with a special SuperState gift in the box. Order with a creator's code and you get their community gift package too. The contents are a surprise 🎁</div>
+          </details>
+          <details class="fq-item">
+            <summary>How do I pay?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">UPI or card, through Razorpay, India's most-used payment gateway. We never see or store your card or UPI details.</div>
+          </details>
+          <details class="fq-item">
+            <summary>Do you offer cash on delivery?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">Not right now. We're keeping things simple with UPI and cards for launch.</div>
+          </details>
+          <details class="fq-item">
+            <summary>How do I know my order went through?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">You'll see an order-confirmed screen with your order number as soon as the payment is verified, and we'll keep you posted on WhatsApp.</div>
+          </details>
+      </section>
+      <section class="fq-group" id="fq-shipping">
+        <h2 class="fq-group-h"><span class="fq-emoji">📦</span>shipping &amp; returns</h2>
+          <details class="fq-item">
+            <summary>How long does delivery take?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">Orders ship within 5–7 working days. We'll WhatsApp you the tracking link once it's on its way.</div>
+          </details>
+          <details class="fq-item">
+            <summary>How much is shipping?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">Free, across India.</div>
+          </details>
+          <details class="fq-item">
+            <summary>Do you ship outside India?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">Not yet. If you'd like us to, tell us on WhatsApp so we know where to go next.</div>
+          </details>
+          <details class="fq-item">
+            <summary>What's your return policy?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">We offer a 10-day no-questions-asked return policy. If you don't love it, message us within 10 days of delivery and we'll sort out your refund.</div>
+          </details>
+          <details class="fq-item">
+            <summary>My order hasn't arrived / something's wrong.<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">WhatsApp us on <a href="https://wa.me/919567309388">95673 09388</a> with your order number. A real person replies.</div>
+          </details>
+      </section>
+      <section class="fq-group" id="fq-trust">
+        <h2 class="fq-group-h"><span class="fq-emoji">🔍</span>trust &amp; transparency</h2>
+          <details class="fq-item">
+            <summary>Should I just trust you?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">No, and please don't trust anyone blindly. Read the label, question the doses, compare us. If something doesn't add up, tell us. We'd rather be checked than believed.</div>
+          </details>
+          <details class="fq-item">
+            <summary>Found a mistake or something unclear?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">Call it out. Email <a href="mailto:support@superstate.in">support@superstate.in</a> or WhatsApp us. We'll fix it and say so openly.</div>
+          </details>
+          <details class="fq-item">
+            <summary>Can I ask about any ingredient or dose?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">Yes. Ask us why it's there, why that form, why that amount. If we can't explain it simply, it shouldn't be in the box.</div>
+          </details>
+          <details class="fq-item">
+            <summary>What does "SuperState" mean?<span class="fq-plus" aria-hidden="true"></span></summary>
+            <div class="fq-a">The superb version of you: comfortable with who you are, and getting where you want to go. We just want to be a small, honest part of that journey.</div>
+          </details>
+      </section>
+      <p class="fq-empty" id="fq-empty" hidden>nothing matches that. try another word, or just <a href="https://wa.me/919567309388">ask us on WhatsApp</a>.</p>
+
+      <div class="fq-cta">
+        <div>
+          <strong>still curious?</strong>
+          <p>no bots, no scripts. message us and a real person from the team replies.</p>
         </div>
-        <div class="faq-item">
-          <div class="faq-header">Is it a medicine or a sedative? <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">No. Sleep Well is a food product, not a medicine. It contains no melatonin and no sedatives.</div></div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-header">What makes SuperState different? <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">No proprietary blends. Every ingredient and its exact amount is listed on the <a href="/products/sleep-well/#inside">product page</a> and printed on the pack.</div></div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-header">What does it taste like? <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">Like a rich dark chocolate drink.</div></div>
-        </div>
-      </div>
-      <div class="faq-category fade-up">
-        <h2 class="faq-category-title">B. Ingredients &amp; safety</h2>
-        <div class="faq-item">
-          <div class="faq-header">What's in it? <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">Organic raw cacao, glycine, magnesium L-threonate, magnesium bisglycinate, tart cherry extract, L-theanine and apigenin (from chamomile). See the exact amount of each on the <a href="/products/sleep-well/#inside">product page</a>.</div></div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-header">What about allergens? <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">The full ingredient and allergen list is printed on the pack. If you have a food allergy, please check it before use.</div></div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-header">Who should check with a doctor first? <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">Please speak to your doctor before using Sleep Well if you are pregnant or breastfeeding, take prescription medicine, or have a medical condition. Not for children.</div></div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-header">Where is it made? <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">In Coimbatore, India.</div></div>
-        </div>
-      </div>
-      <div class="faq-category fade-up">
-        <h2 class="faq-category-title">C. Using it</h2>
-        <div class="faq-item">
-          <div class="faq-header">When and how do I have it? <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">Stir one sachet into a cup of warm milk or water and drink it about 30 minutes before bed.</div></div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-header">How much should I have? <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">One sachet a day. Please don't have more than that.</div></div>
-        </div>
-      </div>
-      <div class="faq-category fade-up">
-        <h2 class="faq-category-title">D. Orders &amp; support</h2>
-        <div class="faq-item">
-          <div class="faq-header">How much does shipping cost? <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">Shipping is free across India. Orders dispatch in 24–48 hours and usually arrive in 5–6 business days.</div></div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-header">Do you offer cash on delivery? <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">Yes, COD is available across most pincodes in India. You can also pay by UPI or card.</div></div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-header">What is your return policy? <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">We offer a 10-day no-questions-asked return policy. If you don't love it, we'll refund you.</div></div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-header">I have another question. <span class="faq-icon">+</span></div>
-          <div class="faq-content"><div class="faq-inner">Message us on <a href="https://wa.me/919567309388" target="_blank" rel="noopener">WhatsApp</a> or email <a href="mailto:support@superstate.in">support@superstate.in</a>. A real person replies.</div></div>
+        <div class="fq-cta-btns">
+          <a class="fq-btn" href="https://wa.me/919567309388">WhatsApp us →</a>
+          <a class="fq-btn fq-btn-ghost" href="mailto:support@superstate.in">email us</a>
         </div>
       </div>
     </div>
-  </section>
+  </main>
+
+  <script>
+    (function () {
+      var input = document.getElementById('fq-search');
+      var items = Array.prototype.slice.call(document.querySelectorAll('.fq-item'));
+      var groups = Array.prototype.slice.call(document.querySelectorAll('.fq-group'));
+      var empty = document.getElementById('fq-empty');
+      input.addEventListener('input', function () {
+        var q = input.value.trim().toLowerCase();
+        var shown = 0;
+        items.forEach(function (it) {
+          var hit = !q || it.textContent.toLowerCase().indexOf(q) !== -1;
+          it.hidden = !hit;
+          if (q && hit) it.open = true;
+          if (!q) it.open = false;
+          if (hit) shown++;
+        });
+        groups.forEach(function (g) { g.hidden = !g.querySelector('.fq-item:not([hidden])'); });
+        empty.hidden = shown > 0;
+      });
+    })();
+  </script>
+
 
   <!-- Global Footer -->
   <footer class="footer fade-up">
