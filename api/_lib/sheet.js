@@ -5,7 +5,7 @@
  * it has already logged, so calling this twice for one payment is safe.
  */
 
-const DEFAULT_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxhS7lMkCtr6ClWnCTr4vg0STeSdXis1Tr3prD5KljXsBfZ_II9t9UGO6aJxMrXTMxJ/exec';
+const DEFAULT_SHEET_URL = 'https://script.google.com/macros/s/AKfycbza8JLklPSp1mxHHkrtSTtrevjhxTQHkm-cv5Gb7hKbZUVGONPl-1Ot3rO09bK31IZo/exec';
 
 // Returns the member number the sheet assigned, or null.
 export async function logPaidPrebook(order, paymentId) {
