@@ -17,9 +17,34 @@
  * as `ss_<Event>` (e.g. ss_Purchase) with the same values, so GA4,
  * Google Ads etc. can be set up in GTM without code changes.
  * Don't add the Meta pixel inside GTM too: that would double-count.
+ *
+ * Google Analytics 4 (G-5915THJCM5) is loaded by the Google tag in each
+ * page's <head>. The same events go to GA4 under its ecommerce names
+ * (view_item, begin_checkout, add_payment_info, purchase), so revenue and
+ * coupon/creator reports work in GA4. Don't add a GA4 tag inside GTM too.
  */
 
 export const META_PIXEL_IDS = ['1380597944288890', '2385448578867386'];
+
+const GA4_EVENTS = {
+  ViewContent: 'view_item',
+  InitiateCheckout: 'begin_checkout',
+  AddPaymentInfo: 'add_payment_info',
+  Purchase: 'purchase'
+};
+
+function sendToGa4(event, params, options) {
+  const name = GA4_EVENTS[event];
+  if (!name || typeof window.gtag !== 'function') return;
+  const item = { item_id: 'sleep-well', item_name: params.content_name || 'Sleep Well', quantity: params.num_items || 1 };
+  if (params.coupon) item.coupon = params.coupon;
+  const ga = { currency: params.currency || 'INR', items: [item] };
+  if (params.value != null) ga.value = params.value;
+  if (params.coupon) ga.coupon = params.coupon;
+  if (params.creator) ga.creator = params.creator;
+  if (name === 'purchase' && options && options.eventID) ga.transaction_id = options.eventID;
+  window.gtag('event', name, ga);
+}
 
 function load() {
   if (window.fbq) return;
@@ -47,6 +72,7 @@ export function track(event, params = {}, options) {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event: `ss_${event}`, ...params, event_id: options && options.eventID });
   } catch (e) { /* ignore */ }
+  try { sendToGa4(event, params, options); } catch (e) { /* ignore */ }
   if (!META_PIXEL_IDS.length || typeof window.fbq !== 'function') return;
   try {
     if (options) window.fbq('track', event, params, options);
