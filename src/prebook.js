@@ -3,7 +3,7 @@ import {
   getSavedPrebook, clearSavedPrebook, savePrebook, memberIdFor, createOrder, verifyPayment
 } from './services/prebookService.js';
 import { captureRefFromUrl, getStoredRef, creatorName } from './shared/creators.js';
-import { initPixel, track } from './shared/pixel.js';
+import { initPixel, track, gaClientId } from './shared/pixel.js';
 
 initPixel();
 
@@ -165,7 +165,7 @@ form.addEventListener('submit', async e => {
 
   // 1. Server creates the order (and decides the amount, including the discount)
   setBusy(true, 'opening secure payment…');
-  const order = await createOrder({ ...details, code: d.code, pack, qty });
+  const order = await createOrder({ ...details, code: d.code, pack, qty, ga_cid: gaClientId() });
   if (!order.ok) {
     setBusy(false);
     setError('form', order.data.error || 'Could not start the payment. Please try again.');

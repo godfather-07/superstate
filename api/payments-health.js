@@ -26,6 +26,8 @@ export default function handler(req, res) {
     RAZORPAY_KEY_ID: id ? `set (${mode} key)` : 'MISSING',
     RAZORPAY_KEY_SECRET: secret ? `set (${secret.length} chars)` : 'MISSING',
     RAZORPAY_WEBHOOK_SECRET: (process.env.RAZORPAY_WEBHOOK_SECRET || '').trim() ? 'set' : 'MISSING (optional, but recommended for live)',
+    SHOPIFY_ADMIN_TOKEN: (process.env.SHOPIFY_ADMIN_TOKEN || '').trim() ? 'set' : 'MISSING (orders won\'t be copied to Shopify)',
+    GA4_API_SECRET: (process.env.GA4_API_SECRET || '').trim() ? 'set' : 'MISSING (purchases only tracked from the browser)',
     razorpay_variable_names_seen: similarNames
   });
 }
