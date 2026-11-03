@@ -26,6 +26,10 @@ const activeDiscount = () => discountFor(typedCode()) || discountFor(LAUNCH_CODE
 let price = priceFor(pack, qty, activeDiscount().code);
 track('InitiateCheckout', { content_name: 'Sleep Well', content_ids: ['sleep-well'], currency: 'INR', value: price.pre, creator: activeDiscount().creator || undefined });
 
+// Arrived from the product page with a pack already chosen: skip the pack
+// picker and marketing, show a short summary + one form (class set in <head>).
+const express = document.documentElement.classList.contains('pv-express');
+
 const submitBtn = $('pb-submit');
 const payLabel = () => `pay ${rupees(price.pre)} →`;
 
@@ -57,6 +61,13 @@ function renderOrder(animate) {
   $('pv-saved').innerHTML = `you save <b class="num">${rupees(price.off)}</b>`;
   $('pv-badge').textContent = `−${d.pct}%`;
 
+  const serves = PACKS[pack].serves;
+  $('pv-x-name').textContent = `Sleep Well · ${serves} sachets`;
+  $('pv-x-serve').textContent = pack === GIFT_PACK ? `${serves} nights · + a SuperState gift 🎁` : `${serves} nights · 1 sachet a night`;
+  $('pv-x-qty').textContent = qty;
+  $('pv-x-minus').disabled = qty <= 1;
+  $('pv-x-plus').disabled = qty >= 20;
+
   $('pv-sticky-label').textContent = `${pack} × ${qty}`;
   $('pv-sticky-total').textContent = rupees(price.pre);
   if (!submitBtn.disabled) submitBtn.textContent = payLabel();
@@ -78,11 +89,30 @@ function renderGift(d) {
   } else {
     note.innerHTML = `<span class="pb-ref-ok">✓ ${LAUNCH_CODE} applied: 20% off.</span> got a creator's code? type it here for 30% off + a free gift 🎁`;
   }
+  renderCodeApplied(d, raw);
   if (!name) return;
   $('pv-gift-title').textContent = `because you follow ${name} 🎁`;
   $('pv-gift-text').textContent = `you get ${d.pct}% off, and your order comes with a special package of SuperState gifts, just for ${name}'s community.`;
   $('pv-gift-line-label').textContent = `${name}'s gift package`;
 }
+
+// Express mode: the code box stays tucked away unless someone wants it
+const codeField = $('pb-code-field');
+function renderCodeApplied(d, raw) {
+  const el = $('pb-code-applied');
+  if (raw && !discountFor(raw)) codeField.classList.add('open');
+  if (codeField.classList.contains('open')) { el.textContent = ''; return; }
+  el.innerHTML = d.creator
+    ? `✓ ${d.code} applied: ${d.pct}% off + ${creatorName(d.creator)}'s gift 🎁 <button type="button" data-code-open>change</button>`
+    : `✓ 20% launch discount applied. <button type="button" data-code-open>have a creator code?</button>`;
+}
+$('pb-code-applied').addEventListener('click', e => {
+  if (!e.target.closest('[data-code-open]')) return;
+  codeField.classList.add('open');
+  renderCodeApplied(activeDiscount(), typedCode());
+  if (!discountFor(typedCode()) || !activeDiscount().creator) refInput.value = '';
+  refInput.focus();
+});
 
 document.querySelectorAll('.pv-pack').forEach(btn => btn.addEventListener('click', () => {
   pack = btn.dataset.pack;
@@ -90,6 +120,8 @@ document.querySelectorAll('.pv-pack').forEach(btn => btn.addEventListener('click
 }));
 $('pv-minus').addEventListener('click', () => { if (qty > 1) { qty--; renderOrder(true); } });
 $('pv-plus').addEventListener('click', () => { if (qty < 20) { qty++; renderOrder(true); } });
+$('pv-x-minus').addEventListener('click', () => { if (qty > 1) { qty--; renderOrder(true); } });
+$('pv-x-plus').addEventListener('click', () => { if (qty < 20) { qty++; renderOrder(true); } });
 refInput.addEventListener('input', () => { setError('ref', ''); renderOrder(true); });
 
 /* ---------- Returning customer: show their last order ---------- */
@@ -100,6 +132,52 @@ if (saved && saved.paid && !params.get('pack')) showDone(saved, false);
 const form = $('pb-form');
 const fields = ['name', 'phone', 'email', 'address', 'pincode', 'city', 'state', 'ref'];
 fields.forEach(f => $(`pb-${f}`).addEventListener('input', () => setError(f, '')));
+
+/* ---------- Pincode -> city + state (less typing) ---------- */
+const placeRow = $('pb-place-row');
+const pinPlace = $('pb-pin-place');
+function showPlaceFields() {
+  placeRow.classList.remove('auto');
+  pinPlace.textContent = '';
+}
+function showPlace(city, state) {
+  placeRow.classList.add('auto');
+  pinPlace.innerHTML = `📍 ${city}, ${state} <button type="button">edit</button>`;
+}
+pinPlace.addEventListener('click', e => { if (e.target.closest('button')) { showPlaceFields(); $('pb-city').focus(); } });
+let pinLookup = 0;
+async function lookupPincode() {
+  const pin = $('pb-pincode').value.replace(/\D/g, '');
+  if (!/^[1-9]\d{5}$/.test(pin)) return;
+  const id = ++pinLookup;
+  pinPlace.textContent = 'finding your city…';
+  try {
+    const res = await fetch(`/api/pincode?pin=${pin}`);
+    const data = await res.json();
+    if (id !== pinLookup) return;
+    if (!res.ok || !data.city) throw new Error(data.error || 'lookup failed');
+    $('pb-city').value = data.city;
+    $('pb-state').value = data.state;
+    setError('city', ''); setError('state', '');
+    showPlace(data.city, data.state);
+  } catch (err) {
+    if (id === pinLookup) showPlaceFields();
+  }
+}
+$('pb-pincode').addEventListener('input', lookupPincode);
+if (express) placeRow.classList.add('auto');
+
+/* ---------- Returning customer: remember their details on this device ---------- */
+const DETAILS_KEY = 'superstate_details';
+try {
+  const remembered = JSON.parse(localStorage.getItem(DETAILS_KEY) || 'null');
+  if (remembered) {
+    ['name', 'phone', 'email', 'address', 'pincode', 'city', 'state'].forEach(f => {
+      if (remembered[f] && !$(`pb-${f}`).value) $(`pb-${f}`).value = remembered[f];
+    });
+    if (remembered.city && remembered.state) showPlace(remembered.city, remembered.state);
+  }
+} catch (e) { /* private mode: fine */ }
 
 function setBusy(on, label) {
   submitBtn.disabled = on;
@@ -151,12 +229,14 @@ form.addEventListener('submit', async e => {
     check.errors.ref = `We don't know that code. Clear it to use ${LAUNCH_CODE} (20% off).`;
   }
   if (!check.isValid) {
+    if (check.errors.city || check.errors.state) showPlaceFields();
     const firstBad = fields.find(f => check.errors[f]);
     Object.entries(check.errors).forEach(([k, msg]) => setError(k, msg));
     if (firstBad) $(`pb-${firstBad}`).focus();
     return;
   }
   details.phone = check.phone;
+  try { localStorage.setItem(DETAILS_KEY, JSON.stringify(details)); } catch (e) { /* private mode: fine */ }
 
   if (typeof window.Razorpay !== 'function') {
     setError('form', "Payments couldn't load. Check your connection and refresh the page.");

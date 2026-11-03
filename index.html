@@ -316,7 +316,7 @@
       width: auto;
       max-width: 100%;
       height: auto;
-      max-height: min(560px, 70vh);
+      max-height: min(400px, 56vh); /* the pouch photo is 548px tall: never upscale it */
       filter: drop-shadow(0 30px 32px rgba(0, 10, 40, 0.55)) drop-shadow(0 6px 10px rgba(0, 10, 40, 0.35));
       animation: home-float 6s ease-in-out infinite;
     }
@@ -324,7 +324,7 @@
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
     }
-    .hero-art { position: absolute; left: 50%; top: 50%; width: min(620px, 118%); transform: translate(-50%, -50%); z-index: 0; pointer-events: none; overflow: visible; }
+    .hero-art { position: absolute; left: 50%; top: 50%; width: min(500px, 100%); transform: translate(-50%, -50%); z-index: 0; pointer-events: none; overflow: visible; }
     .home-hero-visual .home-hero-link { position: relative; z-index: 1; }
     .ha-ring { transform-origin: 300px 300px; animation: hero-spin 80s linear infinite; }
     .ha-pulse { transform-origin: 300px 300px; animation: ha-pulse 6s ease-in-out infinite; }
@@ -339,7 +339,7 @@
     @keyframes ha-pulse { 50% { transform: scale(1.05); opacity: .75; } }
     @keyframes ha-steam { 0% { opacity: 0; transform: translateY(10px); } 40% { opacity: .9; } 100% { opacity: 0; transform: translateY(-14px); } }
     @keyframes ha-drift { 50% { translate: 0 -10px; } }
-    @media (max-width: 860px) { .hero-art { width: 330px; } }
+    @media (max-width: 860px) { .hero-art { width: 290px; } }
     @media (prefers-reduced-motion: reduce) { .ha-ring, .ha-pulse, .ha-steam path, .ha-bean, .ha-twinkle { animation: none; } }
     .home-sticker {
       position: absolute;
@@ -369,7 +369,7 @@
         order: -1;
       }
       .home-hero-visual img {
-        max-height: min(240px, 30vh);
+        max-height: min(200px, 26vh);
       }
       .home-sticker {
         top: auto;

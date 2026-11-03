@@ -6,7 +6,12 @@
  * - SHOPIFY_ADMIN_TOKEN   Admin API access token (starts with shpat_) from a
  *                         custom app with read_orders + write_orders scopes.
  *                         Secret: never put it in frontend code.
- * - SHOPIFY_STORE_DOMAIN  optional, defaults to superstate-2.myshopify.com
+ * - SHOPIFY_STORE_DOMAIN  your store's xxxx.myshopify.com address (Shopify
+ *                         admin → Settings → Domains). Not www.superstate.in.
+ * - SHOPIFY_VARIANT_IDS   optional, e.g. {"Pack Of 5":123,"Pack Of 15":456,"Pack Of 30":789}
+ *                         to link orders to your Shopify products (stock counts).
+ *                         Without it, orders use plain "Sleep Well · Pack Of N"
+ *                         lines, which work on any store.
  *
  * Each Shopify order is tagged with the Razorpay payment id; before creating
  * one we look for that tag, so a retried webhook never makes a duplicate.
@@ -17,17 +22,25 @@ import { PACKS } from '../../src/shared/packs.js';
 const API_VERSION = '2025-01';
 const DEFAULT_DOMAIN = 'superstate-2.myshopify.com';
 
-// Same variants the old Shopify checkout used (Sleep Well packs).
-const VARIANT_IDS = {
+// Product variants on the old superstate-2 store; only used for that store.
+const DEFAULT_VARIANT_IDS = {
   'Pack Of 5': 45350782140459,
   'Pack Of 15': 45350782173227,
   'Pack Of 30': 45350782205995
 };
 
+function variantIds(domain) {
+  const raw = (process.env.SHOPIFY_VARIANT_IDS || '').trim();
+  if (raw) {
+    try { return JSON.parse(raw); } catch (e) { console.error('SHOPIFY_VARIANT_IDS is not valid JSON'); }
+  }
+  return domain === DEFAULT_DOMAIN ? DEFAULT_VARIANT_IDS : {};
+}
+
 function config() {
   const token = (process.env.SHOPIFY_ADMIN_TOKEN || '').trim();
   const domain = (process.env.SHOPIFY_STORE_DOMAIN || DEFAULT_DOMAIN).trim().replace(/^https?:\/\//, '').replace(/\/$/, '');
-  return token ? { token, domain } : null;
+  return token ? { token, domain, variants: variantIds(domain) } : null;
 }
 
 export function shopifyConfigured() {
@@ -61,12 +74,15 @@ async function findByPayment(cfg, paymentId) {
 const money = n => (Math.round(Number(n) * 100) / 100).toFixed(2);
 
 // Builds the Shopify order from the Razorpay order notes (set by create-order).
-export function buildShopifyOrder(order, paymentId, memberNumber) {
+export function buildShopifyOrder(order, paymentId, memberNumber, variants = {}) {
   const n = order.notes || {};
   const qty = Number(n.qty) || 1;
   const pack = PACKS[n.pack];
-  const variantId = VARIANT_IDS[n.pack];
-  if (!pack || !variantId) throw new Error(`unknown pack "${n.pack}"`);
+  if (!pack) throw new Error(`unknown pack "${n.pack}"`);
+  const variantId = Number(variants[n.pack]) || null;
+  const lineItem = variantId
+    ? { variant_id: variantId, quantity: qty, price: money(pack.price) }
+    : { title: `Sleep Well · ${n.pack}`, quantity: qty, price: money(pack.price), requires_shipping: true, taxable: true };
 
   const paid = order.amount / 100;
   const full = pack.price * qty;
@@ -90,7 +106,7 @@ export function buildShopifyOrder(order, paymentId, memberNumber) {
 
   return {
     order: {
-      line_items: [{ variant_id: variantId, quantity: qty, price: money(pack.price) }],
+      line_items: [lineItem],
       email: n.email || undefined,
       shipping_address: address,
       billing_address: address,
@@ -123,7 +139,7 @@ export async function syncShopifyOrder(order, paymentId, memberNumber) {
   if (existing) return { status: 'exists', name: existing.name };
   const data = await shopify(cfg, 'orders.json', {
     method: 'POST',
-    body: JSON.stringify(buildShopifyOrder(order, paymentId, memberNumber))
+    body: JSON.stringify(buildShopifyOrder(order, paymentId, memberNumber, cfg.variants))
   });
   return { status: 'created', name: data.order && data.order.name };
 }

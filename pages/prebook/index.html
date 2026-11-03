@@ -839,9 +839,43 @@
       .pv-product-stage { width: min(240px, 62%); }
       .pv-product-badge { width: 70px; height: 70px; font-size: 21px; }
     }
-  </style>
+  
+    /* ---------- Express checkout: pack already chosen on the product page ---------- */
+    .pv-x-head, .pv-x-item, .pb-code-applied { display: none; }
+    .pv-express .pv-hero, .pv-express .pv-ticker, .pv-express .pv-perks-section,
+    .pv-express .pv-order > .pv-kicker, .pv-express .pv-order > .pv-h3,
+    .pv-express .pv-packs, .pv-express .pv-qty-row, .pv-express .pv-step2,
+    .pv-express .pv-sticky { display: none !important; }
+    .pv-express .pv-checkout { padding-top: 1.25rem; }
+    .pv-express .pv-x-head { display: block; margin-bottom: 1rem; }
+    .pv-x-back { color: #b9c6ea; font-size: 14px; font-weight: 700; text-decoration: none; }
+    .pv-x-back:hover { color: #fff; }
+    .pv-x-title { margin: .35rem 0 .1rem; font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; font-size: 44px; line-height: 1; color: #fff; }
+    .pv-x-sub { margin: 0; color: #d5ddf3; font-size: 15px; }
+    .pv-express .pv-x-item {
+      display: flex; align-items: center; gap: .9rem; margin-bottom: .9rem; padding: .8rem .9rem;
+      border-radius: 18px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16);
+    }
+    .pv-x-item img { width: 52px; height: auto; flex: none; filter: drop-shadow(0 6px 10px rgba(0,10,40,.4)); }
+    .pv-x-item-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: .15rem; }
+    .pv-x-item-txt strong { color: #fff; font-size: 16px; }
+    .pv-x-item-txt span { color: #b9c6ea; font-size: 13px; }
+    .pv-x-change { color: #E4FF5A; font-size: 13px; font-weight: 700; }
+    .pv-x-qty { flex: none; }
+    .pv-express .pb-code-applied { display: block; margin: .25rem 0 1rem; font-size: 14px; color: #0b6b3a; font-weight: 600; }
+    .pb-code-applied button { border: 0; background: none; padding: 0; color: #003399; font: inherit; font-weight: 700; text-decoration: underline; cursor: pointer; }
+    .pv-express .pb-code-field:not(.open) { display: none; }
+    .pb-opt { font-weight: 500; opacity: .6; text-transform: none; letter-spacing: 0; }
+    .pb-pin-place { display: block; margin-top: .35rem; font-size: 13.5px; font-weight: 600; color: #0b6b3a; min-height: 0; }
+    .pb-pin-place button { border: 0; background: none; padding: 0; margin-left: .35rem; color: #003399; font: inherit; text-decoration: underline; cursor: pointer; }
+    .pv-express .pb-place-row.auto { display: none; }
+    @media (min-width: 900px) {
+      .pv-express .pv-checkout { align-items: start; }
+    }
+</style>
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://www.superstate.in/assets/og-sleep-well.jpg" />
+  <script>if (/[?&]pack=/.test(location.search)) document.documentElement.classList.add('pv-express');</script>
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -933,6 +967,24 @@
       <!-- CHECKOUT -->
       <section class="pb-wrap pv-checkout" id="checkout">
         <div class="pv-order">
+          <div class="pv-x-head">
+            <a class="pv-x-back" href="/products/sleep-well/#buy-section">← back</a>
+            <h1 class="pv-x-title">checkout</h1>
+            <p class="pv-x-sub">one quick form and you're done ✦</p>
+          </div>
+          <div class="pv-x-item">
+            <img src="/assets/sleep-well-pouch.webp" alt="" width="349" height="548">
+            <div class="pv-x-item-txt">
+              <strong id="pv-x-name">Sleep Well · 5 sachets</strong>
+              <span id="pv-x-serve">5 nights · 1 sachet a night</span>
+              <a class="pv-x-change" href="/products/sleep-well/#buy-section">change pack</a>
+            </div>
+            <div class="pv-qty pv-x-qty">
+              <button type="button" id="pv-x-minus" aria-label="Fewer">−</button>
+              <output id="pv-x-qty" class="num" aria-live="polite">1</output>
+              <button type="button" id="pv-x-plus" aria-label="More">+</button>
+            </div>
+          </div>
           <span class="pv-kicker">step 1</span>
           <h2 class="pv-h3">pick your pack</h2>
           <div class="pv-packs" role="radiogroup" aria-label="Pack size">
@@ -963,9 +1015,9 @@
         </div>
 
         <div class="pb-card-form">
-          <span class="pv-kicker pv-kicker-dark">step 2</span>
-          <h2 class="pb-form-title">your details</h2>
-          <p class="pb-form-sub">we only use these to ship your order.</p>
+          <span class="pv-kicker pv-kicker-dark pv-step2">step 2</span>
+          <h2 class="pb-form-title">where should we send it?</h2>
+          <p class="pb-form-sub">we only use these to ship your order. tracking comes on WhatsApp.</p>
           <form id="pb-form" novalidate>
             <div class="pb-field">
               <label class="pb-label" for="pb-name">Name</label>
@@ -978,33 +1030,35 @@
               <span class="pb-err" id="pb-phone-err"></span>
             </div>
             <div class="pb-field">
-              <label class="pb-label" for="pb-email">Email</label>
-              <input class="pb-input" id="pb-email" type="email" inputmode="email" autocomplete="email" placeholder="arjun@email.com" required>
+              <label class="pb-label" for="pb-email">Email <span class="pb-opt">(optional, for your receipt)</span></label>
+              <input class="pb-input" id="pb-email" type="email" inputmode="email" autocomplete="email" placeholder="arjun@email.com">
               <span class="pb-err" id="pb-email-err"></span>
             </div>
             <div class="pb-field">
-              <label class="pb-label" for="pb-address">Delivery address</label>
-              <textarea class="pb-input pb-input-area" id="pb-address" autocomplete="street-address" placeholder="Flat / house no., building, street, area" maxlength="200" rows="2" required></textarea>
+              <label class="pb-label" for="pb-pincode">Pincode</label>
+              <input class="pb-input" id="pb-pincode" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="560001" maxlength="6" required>
+              <span class="pb-pin-place" id="pb-pin-place" aria-live="polite"></span>
+              <span class="pb-err" id="pb-pincode-err"></span>
+            </div>
+            <div class="pb-field">
+              <label class="pb-label" for="pb-address">House no., street, area</label>
+              <textarea class="pb-input pb-input-area" id="pb-address" autocomplete="street-address" placeholder="Flat 4B, Green Residency, MG Road" maxlength="200" rows="2" required></textarea>
               <span class="pb-err" id="pb-address-err"></span>
             </div>
-            <div class="pb-row">
-              <div class="pb-field">
-                <label class="pb-label" for="pb-pincode">Pincode</label>
-                <input class="pb-input" id="pb-pincode" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="560001" maxlength="6" required>
-                <span class="pb-err" id="pb-pincode-err"></span>
-              </div>
+            <div class="pb-row pb-place-row" id="pb-place-row">
               <div class="pb-field">
                 <label class="pb-label" for="pb-city">City</label>
                 <input class="pb-input" id="pb-city" type="text" autocomplete="address-level2" placeholder="Bengaluru" maxlength="40" required>
                 <span class="pb-err" id="pb-city-err"></span>
               </div>
+              <div class="pb-field">
+                <label class="pb-label" for="pb-state">State</label>
+                <input class="pb-input" id="pb-state" type="text" autocomplete="address-level1" placeholder="Karnataka" maxlength="40" required>
+                <span class="pb-err" id="pb-state-err"></span>
+              </div>
             </div>
-            <div class="pb-field">
-              <label class="pb-label" for="pb-state">State</label>
-              <input class="pb-input" id="pb-state" type="text" autocomplete="address-level1" placeholder="Karnataka" maxlength="40" required>
-              <span class="pb-err" id="pb-state-err"></span>
-            </div>
-            <div class="pb-field pb-code-field">
+            <p class="pb-code-applied" id="pb-code-applied"></p>
+            <div class="pb-field pb-code-field" id="pb-code-field">
               <label class="pb-label" for="pb-ref">Discount code</label>
               <input class="pb-input pb-ref-input" id="pb-ref" type="text" placeholder="FIRSTNIGHT20" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="24">
               <span class="pb-err" id="pb-ref-err"></span>
