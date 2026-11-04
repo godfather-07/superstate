@@ -8,12 +8,17 @@
  * RAZORPAY_WEBHOOK_SECRET). The webhook secret is the one you choose when
  * creating the webhook in the Razorpay dashboard (not the API key secret).
  *
+ * It also copies the order into Shopify (skipped if it's already there)
+ * and, if verify-payment didn't get there first, sends the GA4 purchase.
+ *
  * Duplicates are fine: the Apps Script skips orders it has already logged.
  */
 
 import crypto from 'node:crypto';
 import { getRazorpay, sendJson } from './_lib/razorpay.js';
 import { logPaidPrebook } from './_lib/sheet.js';
+import { syncShopifyOrder } from './_lib/shopify.js';
+import { sendGa4Purchase } from './_lib/ga4.js';
 
 // Read the exact bytes Razorpay signed. Don't touch req.body first: on
 // Vercel it parses (and re-serialises) the body lazily on access.
@@ -63,10 +68,14 @@ export default async function handler(req, res) {
   try {
     const order = await getRazorpay().orders.fetch(payment.order_id);
     if (!order.notes || order.notes.type !== 'prebook') return sendJson(res, 200, { ignored: 'not a pre-book' });
-    const memberNumber = await logPaidPrebook(order, payment.id);
-    return sendJson(res, 200, { logged: true, member_number: memberNumber });
+    const { memberNumber, duplicate } = await logPaidPrebook(order, payment.id);
+    if (!duplicate) {
+      await sendGa4Purchase(order, payment.id).catch(err => console.error('razorpay-webhook: GA4', err && err.message));
+    }
+    const shopify = await syncShopifyOrder(order, payment.id, memberNumber);
+    return sendJson(res, 200, { logged: true, member_number: memberNumber, shopify: shopify.status });
   } catch (err) {
-    // 500 makes Razorpay retry later, which is what we want for a sheet hiccup.
+    // 500 makes Razorpay retry later, which is what we want for a sheet or Shopify hiccup.
     console.error('razorpay-webhook: could not log payment', err && (err.error || err.message));
     return sendJson(res, 500, { error: 'Could not log payment; Razorpay will retry.' });
   }

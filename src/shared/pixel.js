@@ -66,6 +66,13 @@ export function initPixel() {
   window.fbq('track', 'PageView');
 }
 
+// GA4 client id from the _ga cookie ("GA1.1.123.456" -> "123.456"), or ''.
+// Sent with the order so the server-side purchase joins this visit.
+export function gaClientId() {
+  const m = document.cookie.match(/(?:^|;\s*)_ga=GA\d\.\d\.(\d+\.\d+)/);
+  return m ? m[1] : '';
+}
+
 // track('Purchase', { value: 750, currency: 'INR' }, { eventID: 'pay_123' })
 export function track(event, params = {}, options) {
   try {

@@ -61,7 +61,9 @@ export default async function handler(req, res) {
         state: String(state).slice(0, 40),
         ref,
         discount_code: price.code,
-        full_price: String(price.full)
+        full_price: String(price.full),
+        // GA4 client id, so the server-side purchase joins this visitor's session
+        ga_cid: /^\d+\.\d+$/.test(String(body.ga_cid || '')) ? String(body.ga_cid) : ''
       }
     });
     return sendJson(res, 200, {

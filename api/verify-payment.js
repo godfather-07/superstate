@@ -6,11 +6,16 @@
  * Signature = HMAC-SHA256(order_id + "|" + payment_id, KEY_SECRET).
  * On a match, the paid pre-booking is logged to the Google Sheet from the
  * server, using the details stored on the Razorpay order (not the client).
+ * The first of verify-payment / webhook to log it also sends the GA4
+ * purchase. The webhook copies the order to Shopify; if no webhook is set
+ * up, this does it instead.
  */
 
 import crypto from 'node:crypto';
 import { getKeys, getRazorpay, sendJson, readJson, missingKeysMessage } from './_lib/razorpay.js';
 import { logPaidPrebook } from './_lib/sheet.js';
+import { syncShopifyOrder } from './_lib/shopify.js';
+import { sendGa4Purchase } from './_lib/ga4.js';
 
 export function isValidSignature(orderId, paymentId, signature, secret) {
   const expected = crypto.createHmac('sha256', secret).update(`${orderId}|${paymentId}`).digest('hex');
@@ -46,11 +51,21 @@ export default async function handler(req, res) {
 
   // Verified. Log it to the sheet; a sheet hiccup must not fail a real payment.
   let memberNumber = null;
+  let order = null;
+  let duplicate = true;
   try {
-    const order = await getRazorpay().orders.fetch(orderId);
-    memberNumber = await logPaidPrebook(order, paymentId);
+    order = await getRazorpay().orders.fetch(orderId);
+    ({ memberNumber, duplicate } = await logPaidPrebook(order, paymentId));
   } catch (err) {
     console.error('verify-payment: could not log to sheet', err && (err.error || err.message));
+  }
+
+  if (order && !duplicate) {
+    await sendGa4Purchase(order, paymentId).catch(err => console.error('verify-payment: GA4', err && err.message));
+    if (!(process.env.RAZORPAY_WEBHOOK_SECRET || '').trim()) {
+      await syncShopifyOrder(order, paymentId, memberNumber)
+        .catch(err => console.error('verify-payment: Shopify', err && err.message));
+    }
   }
 
   return sendJson(res, 200, { verified: true, member_number: memberNumber });

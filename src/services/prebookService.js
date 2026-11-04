@@ -31,7 +31,8 @@ export function validatePrebook({ name, phone, email, address, pincode, city, st
   if (!name || name.trim().length < 2) errors.name = 'Please enter your name.';
   const digits = (phone || '').replace(/\D/g, '').replace(/^91(?=\d{10}$)/, '');
   if (!/^[6-9]\d{9}$/.test(digits)) errors.phone = 'Enter a 10-digit WhatsApp number.';
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) errors.email = 'Enter a valid email address.';
+  // Email is optional (receipt only); if given, it must look right.
+  if (email && email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) errors.email = 'Check your email address, or leave it blank.';
   if (!address || address.trim().length < 8) errors.address = 'Enter your full delivery address.';
   if (!/^[1-9]\d{5}$/.test(String(pincode || '').trim())) errors.pincode = 'Enter a 6-digit pincode.';
   if (!city || city.trim().length < 2) errors.city = 'Enter your city.';

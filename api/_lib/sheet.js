@@ -7,7 +7,8 @@
 
 const DEFAULT_SHEET_URL = 'https://script.google.com/macros/s/AKfycbza8JLklPSp1mxHHkrtSTtrevjhxTQHkm-cv5Gb7hKbZUVGONPl-1Ot3rO09bK31IZo/exec';
 
-// Returns the member number the sheet assigned, or null.
+// Returns { memberNumber, duplicate }. duplicate = the sheet had already
+// logged this order (the other of verify-payment / webhook got there first).
 export async function logPaidPrebook(order, paymentId) {
   const url = process.env.SHEET_WEBHOOK_URL || process.env.VITE_WAITLIST_SHEET_URL || DEFAULT_SHEET_URL;
   const n = order.notes || {};
@@ -33,7 +34,7 @@ export async function logPaidPrebook(order, paymentId) {
   const res = await fetch(url, { method: 'POST', body: form, redirect: 'follow' });
   const data = await res.json().catch(() => ({}));
   const num = Number(data.memberNumber);
-  return Number.isInteger(num) && num > 0 ? num : null;
+  return { memberNumber: Number.isInteger(num) && num > 0 ? num : null, duplicate: data.result === 'duplicate' };
 }
 
 // Saves a contact-form message to the "Messages" tab. Throws if the sheet
