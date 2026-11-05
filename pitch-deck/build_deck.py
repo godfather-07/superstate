@@ -53,7 +53,7 @@ FONT_FILES = {
 
 SW, SH = 13.333, 7.5
 LM = 0.8
-TOTAL = 17
+TOTAL = 16
 
 
 # ── Low-level helpers ───────────────────────────────────────────────────────
@@ -583,28 +583,7 @@ def build():
          size=15, color=INK, spacing=1.3)
     footer(s, n)
 
-    # 16 · The ask (founder to complete) ────────────────────────────────────
-    s = new()
-    kicker(s, 'The ask')
-    headline(s, LM, 1.0, ['Help us build SuperState', 'the right way, from the start.'], size=36,
-             hl={1: 'the right way, from the start.'})
-    rect(s, LM, 2.85, 4.4, 3.2, fill=BLUE, shape=MSO_SHAPE.ROUNDED_RECTANGLE, radius=0.06)
-    text(s, LM + 0.4, 3.15, 3.6, 0.3, 'RAISING', size=12, font=BODY_B, color=EMERGE)
-    text(s, LM + 0.4, 3.55, 3.6, 0.9, '₹ [ X ] Cr', size=44, font=HEAD, color=WHITE)
-    text(s, LM + 0.4, 4.6, 3.6, 1.2, '[ round type · instrument · runway in months ]', size=14, color=BLUE_SOFT, spacing=1.25)
-    uses = [('Product & evidence', 'Finished-formula testing, batch reports, next products'),
-            ('Brand & creator-led growth', 'Creators, community, content'),
-            ('Team & operations', 'Supply chain, quality, customer experience')]
-    for i, (a, b) in enumerate(uses):
-        yy = 2.95 + i * 1.0
-        text(s, 5.75, yy, 1.3, 0.6, '[ % ]', size=24, font=HEAD, color=ROOT)
-        text(s, 7.15, yy + 0.02, 5.4, 0.3, a, size=15, font=BODY_B, color=INK)
-        text(s, 7.15, yy + 0.35, 5.4, 0.3, b, size=12.5, color=GREY)
-        rect(s, 5.75, yy + 0.82, 6.78, 0.012, fill=MINT_LINE)
-    source(s, 'Placeholder slide: founder to complete amounts and allocation before sharing.')
-    footer(s, n)
-
-    # 17 · Close ─────────────────────────────────────────────────────────────
+    # 16 · Close ─────────────────────────────────────────────────────────────
     s = new()
     s.shapes.add_picture(backdrop, 0, 0, Inches(SW), Inches(SH))
     rect(s, 6.1, 0, SW - 6.1, SH, fill=BLUE)

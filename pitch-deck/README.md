@@ -1,6 +1,6 @@
 # SuperState — Founder Pitch Deck
 
-17-slide investor / founder-story deck built from the founder script, superstate.in content and the
+16-slide founder-story deck built from the founder script, superstate.in content and the
 SuperState Brand Identity Guidelines (06.05.2026), structured on the classic Airbnb pitch-deck flow.
 
 | File | What it is |
@@ -13,7 +13,6 @@ SuperState Brand Identity Guidelines (06.05.2026), structured on the classic Air
 
 ## Before sharing
 - **Slide 13 (Traction)** — add units sold, repeat-purchase rate, CAC by channel, average rating.
-- **Slide 16 (The Ask)** — fill raise amount, instrument, runway and use-of-funds split (or delete for a story-only pitch).
 - Install **Lora** and **Bricolage Grotesque** (Google Fonts) to edit the PPTX with correct typography.
   The PDF already embeds them.
 
