@@ -1,20 +1,22 @@
-# SuperState — Founder Pitch Deck
+# SuperState: Founder Story Deck
 
-16-slide founder-story deck built from the founder script, superstate.in content and the
-SuperState Brand Identity Guidelines (06.05.2026), structured on the classic Airbnb pitch-deck flow.
+15-slide founder story pitch, built from the founder script and the SuperState Brand Identity
+Guidelines (06.05.2026). It follows the Airbnb-deck idea: one thought per slide, big type, nothing busy.
+
+- **Look:** Deep Knowing blue and white, Lora SemiBold headlines, Bricolage Grotesque body text,
+  First Light highlighter marks, and Emerge accents.
+- **Imagery:** only the new Sleep Well box and pouch packshots, plus the wordmark motif.
+- **Speaker notes:** the full founder script is in each slide's notes (Presenter View).
 
 | File | What it is |
 |---|---|
-| `SuperState_Pitch_Deck.pptx` | Editable deck (PowerPoint / Keynote / Google Slides) |
 | `SuperState_Pitch_Deck.pdf` | Share-ready PDF with brand fonts embedded |
+| `SuperState_Pitch_Deck.pptx` | Editable deck with speaker notes |
 | `build_deck.py` | Generator (python-pptx + MckEngine from the `mck-ppt-design` skill) |
-| `render_preview.sh` | Rebuilds the deck and renders PDF + preview sheets via LibreOffice |
-| `assets/` | Logo variants, packshots, founder photo, ingredient and creator imagery |
+| `render_preview.sh` | Rebuilds the deck and renders the PDF and previews with LibreOffice |
+| `assets/` | Logo variants and Sleep Well packshots (plus background-removed cut-outs) |
 
-## Before sharing
-- **Slide 13 (Traction)** — add units sold, repeat-purchase rate, CAC by channel, average rating.
-- Install **Lora** and **Bricolage Grotesque** (Google Fonts) to edit the PPTX with correct typography.
-  The PDF already embeds them.
+To edit the PPTX with the right typography, install **Lora** and **Bricolage Grotesque** from Google Fonts.
 
 ## Rebuild
 ```bash
