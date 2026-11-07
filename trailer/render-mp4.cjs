@@ -1,5 +1,5 @@
 // Renders sleep-well-trailer.html to an MP4, frame by frame, from its master clock.
-// Usage: node trailer/render-mp4.cjs [out.mp4] [fps]
+// Usage: node trailer/render-mp4.cjs [out.mp4] [fps] [16x9|9x16] [audio.wav]
 // Needs Playwright (Chromium) and ffmpeg on PATH.
 const { chromium } = require('playwright');
 const { spawn } = require('child_process');
@@ -7,11 +7,14 @@ const path = require('path');
 
 const OUT = path.resolve(process.argv[2] || 'sleep-well-trailer.mp4');
 const FPS = Number(process.argv[3] || 30);
-const PAGE = 'file://' + path.join(__dirname, 'sleep-well-trailer.html') + '?paused';
+const AR = process.argv[4] === '9x16' ? '9x16' : '16x9';
+const AUDIO = process.argv[5] ? path.resolve(process.argv[5]) : null;
+const [VW, VH] = AR === '9x16' ? [1080, 1920] : [1920, 1080];
+const PAGE = 'file://' + path.join(__dirname, 'sleep-well-trailer.html') + '?paused&ar=' + AR;
 
 (async () => {
   const browser = await chromium.launch();
-  const page = await browser.newPage({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 1 });
+  const page = await browser.newPage({ viewport: { width: VW, height: VH }, deviceScaleFactor: 1 });
   const errors = [];
   page.on('pageerror', e => errors.push(e.message));
   await page.goto(PAGE);
@@ -25,6 +28,7 @@ const PAGE = 'file://' + path.join(__dirname, 'sleep-well-trailer.html') + '?pau
   const ff = spawn('ffmpeg', [
     '-y', '-loglevel', 'error',
     '-f', 'image2pipe', '-framerate', String(FPS), '-i', '-',
+    ...(AUDIO ? ['-i', AUDIO, '-map', '0:v', '-map', '1:a', '-c:a', 'aac', '-b:a', '192k', '-af', 'loudnorm=I=-14:TP=-1.5:LRA=11', '-ar', '48000', '-shortest'] : []),
     '-c:v', 'libx264', '-preset', 'slow', '-crf', '16', '-tune', 'film',
     '-pix_fmt', 'yuv420p', '-color_primaries', 'bt709', '-color_trc', 'bt709', '-colorspace', 'bt709',
     '-movflags', '+faststart', OUT
