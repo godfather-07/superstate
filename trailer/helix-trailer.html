@@ -10,7 +10,8 @@
 <style>
 :root{--blue:#1D4FF0;--blue2:#4F7BFF;--accent:#2546E8;--light:#F3F3F0}
 *{box-sizing:border-box}
-html,body{margin:0;height:100%;background:#000;overflow:hidden}
+html,body{margin:0;height:100%;background:#000;overflow:hidden;color-scheme:dark}
+html{background:#000}
 body{font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 #stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;overflow:hidden;background:#000;color:#fff}
 .layer{position:absolute;left:0;top:0;width:1920px;height:1080px}
@@ -219,7 +220,7 @@ body{font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 </head>
 <body>
 <div id="stage"></div>
-<div id="pauseTag">PAUSED · SPACE TO PLAY · ←/→ SCENES</div>
+<div id="pauseTag">PAUSED · CLICK OR SPACE TO PLAY · ←/→ SCENES</div>
 <script>
 (() => {
 'use strict';
@@ -948,6 +949,7 @@ function frame(now) {
   pauseTag.style.display = playing || params.has('render') ? 'none' : 'block';
   requestAnimationFrame(frame);
 }
+addEventListener('pointerdown', () => { playing = !playing; });
 addEventListener('keydown', ev => {
   if (ev.code === 'Space') { ev.preventDefault(); playing = !playing; }
   else if (ev.code === 'ArrowRight') { ev.preventDefault(); const nx = SCENES.find(s => s > T + 0.01); T = nx == null ? 0 : nx; render(T); }
