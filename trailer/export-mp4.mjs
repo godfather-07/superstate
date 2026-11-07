@@ -5,6 +5,7 @@
 //   node trailer/export-mp4.mjs --fps 30 --workers 4 --out ~/Desktop/helix.mp4
 //   node trailer/export-mp4.mjs --from 27 --to 31.5  # export one section only
 //   node trailer/export-mp4.mjs --png                # lossless frames (slower)
+//   node trailer/export-mp4.mjs --audio soundtrack.wav   # add music (python3 trailer/soundtrack.py makes one)
 //
 // Needs: ffmpeg on PATH, and Playwright with Chromium (npm i -D playwright && npx playwright install chromium).
 // Each frame is drawn with window.render(t), so the result is the same however fast the machine is.
@@ -25,6 +26,7 @@ const scale = Number(args.scale || 1);                       // 0.5 = 960x540 pr
 const workers = Math.max(1, Number(args.workers || 2));
 const crf = String(args.crf || 18);
 const png = args.png === 'true';                           // lossless frames: sharper, ~3x slower
+const audio = args.audio ? resolve(args.audio) : null;      // optional soundtrack, normalised to -14 LUFS
 const out = resolve(args.out || resolve(here, 'out/helix-trailer.mp4'));
 const page = pathToFileURL(resolve(here, 'helix-trailer.html')).href + '?render';
 
@@ -52,6 +54,8 @@ const total = Math.round((to - from) * fps);
 mkdirSync(dirname(out), { recursive: true });
 const ff = spawn('ffmpeg', [
   '-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(fps), '-c:v', png ? 'png' : 'mjpeg', '-i', '-',
+  ...(audio ? ['-ss', String(from), '-i', audio, '-map', '0:v', '-map', '1:a', '-af', 'loudnorm=I=-14:TP=-1.5:LRA=11',
+    '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-shortest'] : []),
   '-c:v', 'libx264', '-preset', 'slow', '-crf', crf, '-pix_fmt', 'yuv420p', '-movflags', '+faststart', out,
 ], { stdio: ['pipe', 'inherit', 'inherit'] });
 const ffDone = new Promise((ok, fail) => ff.on('close', c => (c === 0 ? ok() : fail(new Error('ffmpeg exited with code ' + c)))));
