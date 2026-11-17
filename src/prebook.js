@@ -5,6 +5,28 @@ import {
 import { captureRefFromUrl, getStoredRef, creatorName } from './shared/creators.js';
 import { initPixel, track, gaClientId } from './shared/pixel.js';
 
+/* ---------- Abandoned cart tracking ---------- */
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwaEJowZ6_LHvjI9F8zuk9WPy_rffW3X9U9HTcllmgRVwebnIhTlOw1dmvSBjMnvNoh/exec';
+function trackCheckoutStarted(details, pack, qty, amount) {
+  fetch(SHEET_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      event: 'checkout_started',
+      name: details.name,
+      whatsapp: details.phone,
+      email: details.email,
+      pincode: details.pincode,
+      product: 'Sleep Well',
+      pack,
+      qty,
+      amount,
+      timestamp: new Date().toISOString()
+    })
+  }).catch(() => {});
+}
+
 initPixel();
 
 const $ = id => document.getElementById(id);
@@ -265,7 +287,15 @@ form.addEventListener('submit', async e => {
     description: `Sleep Well · ${pack} × ${qty} (${d.code}, ${d.pct}% off)`,
     image: `${location.origin}/logo-wordmark.png`,
     prefill: { name: details.name, email: details.email, contact: `+91${details.phone}` },
-    notes: { pack, qty: String(qty) },
+    notes: {
+      pack,
+      qty: String(qty),
+      customer_name: details.name,
+      email: details.email,
+      phone: details.phone,
+      pincode: details.pincode,
+      discount_code: d.code
+    },
     theme: { color: '#003399' },
     // Only UPI and cards are enabled on our Razorpay account for now.
     config: {
@@ -329,6 +359,9 @@ form.addEventListener('submit', async e => {
     setBusy(false);
     setError('form', `Payment failed${reason ? `: ${reason}` : ''}. No money was taken. Please try again.`);
   });
+
+  // Track checkout start for abandoned cart recovery
+  trackCheckoutStarted(details, pack, qty, price.pre);
 
   rzp.open();
 });
