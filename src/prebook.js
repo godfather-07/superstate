@@ -1,6 +1,6 @@
 import {
   PACKS, priceFor, discountFor, LAUNCH_CODE, GIFT_PACK, formatINR, validatePrebook,
-  getSavedPrebook, clearSavedPrebook, savePrebook, memberIdFor, createOrder, verifyPayment
+  getSavedPrebook, clearSavedPrebook, savePrebook, memberIdFor
 } from './services/prebookService.js';
 import { captureRefFromUrl, getStoredRef, creatorName } from './shared/creators.js';
 import { initPixel, track, gaClientId } from './shared/pixel.js';
@@ -260,110 +260,51 @@ form.addEventListener('submit', async e => {
   details.phone = check.phone;
   try { localStorage.setItem(DETAILS_KEY, JSON.stringify(details)); } catch (e) { /* private mode: fine */ }
 
-  if (typeof window.Razorpay !== 'function') {
-    setError('form', "Payments couldn't load. Check your connection and refresh the page.");
+  // --- Shopify checkout redirect ---
+  // Instead of opening a Razorpay modal, we redirect to Shopify's hosted
+  // checkout. Shopify handles payment (Razorpay gateway), abandoned cart
+  // recovery, order management and analytics natively.
+
+  const SHOPIFY_DOMAIN = 'superstate-2.myshopify.com';
+  const SHOPIFY_VARIANT_IDS = {
+    'Pack Of 5': 45350782140459,
+    'Pack Of 15': 45350782173227,
+    'Pack Of 30': 45350782205995
+  };
+
+  const variantId = SHOPIFY_VARIANT_IDS[pack];
+  if (!variantId) {
+    setError('form', 'Something went wrong with this pack. Please refresh and try again.');
     return;
   }
 
-  // 1. Server creates the order (and decides the amount, including the discount)
-  setBusy(true, 'opening secure payment…');
-  const order = await createOrder({ ...details, code: d.code, pack, qty, ga_cid: gaClientId() });
-  if (!order.ok) {
-    setBusy(false);
-    setError('form', order.data.error || 'Could not start the payment. Please try again.');
-    return;
-  }
+  setBusy(true, 'taking you to checkout…');
+
+  // Track abandoned cart (the customer is leaving our site)
+  trackCheckoutStarted(details, pack, qty, price.pre);
 
   const creator = d.creator || undefined;
   track('AddPaymentInfo', { content_name: `Sleep Well · ${pack}`, content_ids: ['sleep-well'], currency: 'INR', value: price.pre, num_items: qty, creator });
 
-  // 2. Razorpay checkout modal
-  const rzp = new window.Razorpay({
-    key: order.data.key_id, // public Key ID, sent by our server with each order
-    order_id: order.data.order_id,
-    amount: order.data.amount,
-    currency: order.data.currency,
-    name: 'SuperState',
-    description: `Sleep Well · ${pack} × ${qty} (${d.code}, ${d.pct}% off)`,
-    image: `${location.origin}/logo-wordmark.png`,
-    prefill: { name: details.name, email: details.email, contact: `+91${details.phone}` },
-    notes: {
-      pack,
-      qty: String(qty),
-      customer_name: details.name,
-      email: details.email,
-      phone: details.phone,
-      pincode: details.pincode,
-      discount_code: d.code
-    },
-    theme: { color: '#003399' },
-    // Only UPI and cards are enabled on our Razorpay account for now.
-    config: {
-      display: {
-        blocks: {
-          pay: {
-            name: 'Pay with UPI or card',
-            instruments: [{ method: 'upi' }, { method: 'card' }]
-          }
-        },
-        sequence: ['block.pay'],
-        preferences: { show_default_blocks: false }
-      }
-    },
-    handler: async response => {
-      // 3. Server verifies the signature before we show anything as paid
-      setBusy(true, 'confirming your payment…');
-      const result = await verifyPayment(response);
-      if (!result.ok || !result.data.verified) {
-        setBusy(false);
-        setError('form', `We couldn't confirm this payment. If money left your account, WhatsApp us with ID ${response.razorpay_payment_id} and we'll sort it out.`);
-        return;
-      }
-      const orderNumber = result.data.member_number || null;
-      const record = {
-        ...details,
-        pack,
-        qty,
-        code: d.code,
-        pct: d.pct,
-        creator: d.creator,
-        fullPrice: price.full,
-        prebookPrice: price.pre,
-        saved: price.off,
-        paid: true,
-        paymentId: response.razorpay_payment_id,
-        orderId: response.razorpay_order_id,
-        submittedAt: new Date().toISOString(),
-        orderNumber,
-        orderLabel: memberIdFor(orderNumber, details.phone)
-      };
-      savePrebook(record);
-      // eventID = Razorpay payment id, so a future server-side (CAPI) event can be de-duplicated
-      track('Purchase', {
-        content_name: `Sleep Well · ${pack}`, content_ids: ['sleep-well'], content_type: 'product',
-        currency: 'INR', value: price.pre, num_items: qty, creator, coupon: d.code
-      }, { eventID: response.razorpay_payment_id });
-      setBusy(false);
-      showDone(record, true);
-    },
-    modal: {
-      ondismiss: () => {
-        setBusy(false);
-        setError('form', 'Payment cancelled. Your launch discount is still here whenever you’re ready.');
-      }
-    }
-  });
+  // Build Shopify cart permalink with pre-filled customer details
+  const params = new URLSearchParams();
+  if (details.email) params.set('checkout[email]', details.email);
+  if (details.name) {
+    const [first, ...rest] = details.name.trim().split(/\s+/);
+    params.set('checkout[shipping_address][first_name]', first || '');
+    params.set('checkout[shipping_address][last_name]', rest.join(' ') || '');
+  }
+  if (details.phone) params.set('checkout[shipping_address][phone]', `+91${details.phone}`);
+  if (details.address) params.set('checkout[shipping_address][address1]', details.address);
+  if (details.city) params.set('checkout[shipping_address][city]', details.city);
+  if (details.state) params.set('checkout[shipping_address][province]', details.state);
+  if (details.pincode) params.set('checkout[shipping_address][zip]', details.pincode);
+  params.set('checkout[shipping_address][country]', 'IN');
+  if (d.code) params.set('discount', d.code);
+  params.set('ref', 'superstate-website');
 
-  rzp.on('payment.failed', resp => {
-    const reason = resp && resp.error && resp.error.description;
-    setBusy(false);
-    setError('form', `Payment failed${reason ? `: ${reason}` : ''}. No money was taken. Please try again.`);
-  });
-
-  // Track checkout start for abandoned cart recovery
-  trackCheckoutStarted(details, pack, qty, price.pre);
-
-  rzp.open();
+  const checkoutUrl = `https://${SHOPIFY_DOMAIN}/cart/${variantId}:${qty}?${params.toString()}`;
+  window.location.href = checkoutUrl;
 });
 
 function setError(field, msg) {
