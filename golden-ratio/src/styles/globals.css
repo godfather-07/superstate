@@ -1,0 +1,259 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------ */
+/*  Design tokens (PRD §6). The named custom properties are the source */
+/*  of truth; Tailwind's theme maps onto them so utilities stay in sync. */
+/* ------------------------------------------------------------------ */
+:root {
+  --gold-primary: #c8a95e;
+  --gold-light: #d4ba7a;
+  --gold-dark: #a68b3c;
+  --black-primary: #0a0a0a;
+  --black-secondary: #111111;
+  --black-tertiary: #1a1a1a;
+  --white-primary: #fafafa;
+  --white-secondary: #e0e0e0;
+  --white-muted: #888888;
+  --gold-gradient: linear-gradient(135deg, #c8a95e, #a68b3c);
+  --divider: rgba(200, 169, 94, 0.3);
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --header-h: 80px;
+}
+
+@theme {
+  --color-gold: #c8a95e;
+  --color-gold-light: #d4ba7a;
+  --color-gold-dark: #a68b3c;
+  --color-ink: #0a0a0a;
+  --color-ink-2: #111111;
+  --color-ink-3: #1a1a1a;
+  --color-paper: #fafafa;
+  --color-paper-2: #e0e0e0;
+  --color-muted: #888888;
+  --color-line: rgba(200, 169, 94, 0.3);
+
+  --font-serif: var(--font-cormorant), 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans: var(--font-inter), Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  /* Fibonacci spacing scale (PRD §6.3): 8 13 21 34 55 89 144 */
+  --spacing-phi-1: 8px;
+  --spacing-phi-2: 13px;
+  --spacing-phi-3: 21px;
+  --spacing-phi-4: 34px;
+  --spacing-phi-5: 55px;
+  --spacing-phi-6: 89px;
+  --spacing-phi-7: 144px;
+
+  --container-site: 1440px;
+
+  --breakpoint-sm: 640px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1440px;
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-marquee: marquee 48s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Base                                                               */
+/* ------------------------------------------------------------------ */
+@layer base {
+  html {
+    background: var(--black-primary);
+    color: var(--white-primary);
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--header-h);
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background: var(--black-primary);
+    color: var(--white-primary);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: clip;
+  }
+
+  @media (min-width: 1024px) {
+    body { font-size: 17px; }
+  }
+
+  ::selection {
+    background: var(--gold-primary);
+    color: var(--black-primary);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  :focus-visible {
+    outline: 1px solid var(--gold-primary);
+    outline-offset: 4px;
+  }
+
+  img, svg, video { display: block; max-width: 100%; }
+
+  /* The custom cursor hides the native one only on fine pointers. */
+  html.has-custom-cursor,
+  html.has-custom-cursor * {
+    cursor: none !important;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Typography scale (PRD §6.2)                                        */
+/* ------------------------------------------------------------------ */
+@layer components {
+  .type-display {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: clamp(2.5rem, 1.1rem + 6.2vw, 7.5rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+  }
+  .type-h2 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(2rem, 1.3rem + 2.6vw, 4rem);
+    line-height: 1.05;
+  }
+  .type-h3 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(1.5rem, 1.2rem + 1.1vw, 2.5rem);
+    line-height: 1.1;
+  }
+  .type-label {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+  @media (min-width: 1024px) {
+    .type-label { font-size: 12px; }
+  }
+  .type-body {
+    color: var(--white-secondary);
+    line-height: 1.75;
+  }
+
+  .container-site {
+    width: 100%;
+    max-width: var(--container-site);
+    margin-inline: auto;
+    padding-inline: 21px;
+  }
+  @media (min-width: 640px) {
+    .container-site { padding-inline: 34px; }
+  }
+  @media (min-width: 1024px) {
+    .container-site { padding-inline: 55px; }
+  }
+
+  .section-pad {
+    padding-block: 55px;
+  }
+  @media (min-width: 640px) {
+    .section-pad { padding-block: 89px; }
+  }
+  @media (min-width: 1024px) {
+    .section-pad { padding-block: 144px; }
+  }
+
+  .divider { border-color: var(--divider); }
+
+  /* Text link: gold, underline draws left → right on hover (PRD §6.4) */
+  .link-draw {
+    position: relative;
+    display: inline-block;
+    color: var(--gold-primary);
+  }
+  .link-draw::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s var(--ease-expo);
+  }
+  .link-draw:hover::after,
+  .link-draw:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  /* Prose for long-form pages (privacy, terms) */
+  .prose-gr h2 {
+    font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.3rem);
+    color: var(--gold-primary);
+    margin-top: 55px;
+    margin-bottom: 13px;
+  }
+  .prose-gr p,
+  .prose-gr li {
+    color: var(--white-secondary);
+    max-width: 68ch;
+  }
+  .prose-gr p + p { margin-top: 13px; }
+  .prose-gr ul {
+    list-style: none;
+    margin-top: 13px;
+    display: grid;
+    gap: 8px;
+  }
+  .prose-gr li {
+    padding-left: 21px;
+    position: relative;
+  }
+  .prose-gr li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.85em;
+    width: 8px;
+    height: 1px;
+    background: var(--gold-primary);
+  }
+  .prose-gr a { color: var(--gold-primary); text-decoration: underline; text-underline-offset: 3px; }
+}
+
+/* Intro loader: hidden before paint when already seen this session.   */
+/* The inline script in layout.tsx sets data-intro before hydration.    */
+html[data-intro='seen'] #intro-loader { display: none; }
+html[data-intro='pending'] body { overflow: hidden; }
+
+/* Calendly iframe should never cause horizontal scroll */
+.calendly-inline-widget iframe { width: 100% !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
