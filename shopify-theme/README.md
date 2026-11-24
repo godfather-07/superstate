@@ -21,12 +21,12 @@ launch-sale nudge card, GA4, GTM and Meta Pixel.
 
 ## Setup (once)
 
-1. **Upload the theme**: zip the contents of this folder (`cd shopify-theme && zip -r ../superstate-theme.zip assets config layout locales sections snippets templates`),
+1. **Upload the theme** (already done once, as "SuperState (ported from superstate.in)"; a ready ZIP is in `shopify-theme-dist/`): zip the contents of this folder (`cd shopify-theme && zip -r ../superstate-theme.zip assets config layout locales sections snippets templates`),
    then Shopify admin → Online Store → Themes → Add theme → Upload zip.
    Or with Shopify CLI: `shopify theme push --unpublished --path shopify-theme`.
-2. **Product**: one product, handle `sleep-well`, one option ("Pack") with
-   variants named exactly `Pack Of 5`, `Pack Of 15`, `Pack Of 30` at full price
-   (₹299 / ₹900 / ₹1,500). The number at the end of the name drives the
+2. **Product**: the store's product is `sleep-well-dark-chocolate` (set under
+   Theme settings → Shop → Main product), with variants `Pack of 5`, `Pack of 15`,
+   `Pack of 30` at full price. Old `/products/sleep-well` links redirect to it. The number at the end of the name drives the
    "₹/serve" figure and the "best value" tag. Add product photos if you like:
    the first image replaces the built-in box photo.
 3. **Pages**: create these pages (title + handle) and pick the template:

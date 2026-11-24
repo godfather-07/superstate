@@ -862,16 +862,6 @@ section {
   }
 }
 
-.fade-up {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.fade-up.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
 
 /* Waitlist Popup */
 .popup-overlay {
@@ -2187,3 +2177,22 @@ section {
 .ss-search-form input { flex: 1; min-height: 48px; padding: 0 1rem; border: 0; border-radius: 14px; font: inherit; font-size: 16px; }
 .ss-form-errors { margin: 0 0 1rem; padding: .85rem 1rem; border-radius: 12px; background: #fee2e2; color: #991b1b; font-size: 15px; }
 .ss-form-success { margin: 0 0 1rem; padding: .85rem 1rem; border-radius: 12px; background: #dcfce7; color: #166534; font-size: 15px; font-weight: 700; }
+
+/* Scroll fade-in. Only hidden once theme.js is running (html.js-fade),
+   so content is never invisible if the script is slow or blocked. */
+.js-fade .fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.js-fade .fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .js-fade .fade-up { opacity: 1; transform: none; transition: none; }
+}
+/* Without the scroll animation, show the lime marker behind highlighted words
+   (their text is blue, so it needs the marker to be readable). */
+html:not(.js-fade) .marker-highlight::before { width: 100%; }
+@media (prefers-reduced-motion: reduce) { .marker-highlight::before { width: 100% !important; transition: none !important; } }

@@ -1,9 +1,37 @@
 {
   "current": {
+    "launch_code": "FIRSTNIGHT20",
+    "launch_discount_pct": 20,
+    "creator_codes": "ABHIJITH30 | Abhijith | 30\nABHIMANYU30 | Abhimanyu | 30\nFAIHA30 | Faiha | 30\nKRISHNA30 | Krishna | 30\nSALIH30 | Salih | 30\nSHAMNAS30 | Shamnas | 30",
+    "gift_pack": "Pack of 30",
+    "show_nudge": true,
+    "whatsapp_number": "919567309388",
+    "whatsapp_label": "95673 09388",
+    "support_email": "support@superstate.in",
+    "instagram_url": "https://www.instagram.com/superstate.in/",
+    "linkedin_url": "https://www.linkedin.com/company/super-state/",
+    "x_url": "https://x.com/_superstate_",
+    "ga4_id": "G-5915THJCM5",
+    "gtm_id": "GTM-TGW85RP2",
+    "meta_pixel_ids": "1380597944288890, 2385448578867386",
     "featured_product": "sleep-well-dark-chocolate"
   },
   "presets": {
     "Default": {
+      "launch_code": "FIRSTNIGHT20",
+      "launch_discount_pct": 20,
+      "creator_codes": "ABHIJITH30 | Abhijith | 30\nABHIMANYU30 | Abhimanyu | 30\nFAIHA30 | Faiha | 30\nKRISHNA30 | Krishna | 30\nSALIH30 | Salih | 30\nSHAMNAS30 | Shamnas | 30",
+      "gift_pack": "Pack of 30",
+      "show_nudge": true,
+      "whatsapp_number": "919567309388",
+      "whatsapp_label": "95673 09388",
+      "support_email": "support@superstate.in",
+      "instagram_url": "https://www.instagram.com/superstate.in/",
+      "linkedin_url": "https://www.linkedin.com/company/super-state/",
+      "x_url": "https://x.com/_superstate_",
+      "ga4_id": "G-5915THJCM5",
+      "gtm_id": "GTM-TGW85RP2",
+      "meta_pixel_ids": "1380597944288890, 2385448578867386",
       "featured_product": "sleep-well-dark-chocolate"
     }
   }

@@ -51,6 +51,7 @@
     {%- when 'policy' -%}{{ 'page-policy.css' | asset_url | stylesheet_tag }}
   {%- endcase -%}
 
+  <script>document.documentElement.classList.add('js-fade');setTimeout(function(){if(!window.SS_FADE_READY)document.documentElement.classList.remove('js-fade');},3000);</script>
   {%- render 'theme-config' -%}
   <script src="{{ 'theme.js' | asset_url }}" defer></script>
 

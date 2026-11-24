@@ -336,6 +336,7 @@
   markScrolled();
 
   /* ---------- fade-up on scroll ---------- */
+  window.SS_FADE_READY = true;
   const fades = document.querySelectorAll('.fade-up');
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries, obs) => entries.forEach(en => {
@@ -343,6 +344,7 @@
     }), { threshold: 0.1 });
     fades.forEach(el => io.observe(el));
   } else {
+    document.documentElement.classList.remove('js-fade');
     fades.forEach(el => el.classList.add('visible'));
   }
 
