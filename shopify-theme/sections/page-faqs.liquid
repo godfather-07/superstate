@@ -1,0 +1,229 @@
+{%- liquid
+  assign ss_product = settings.featured_product | default: all_products['sleep-well']
+  assign product_url = ss_product.url | default: '/products/sleep-well'
+-%}
+<!-- FAQ HERO -->
+<section class="fq-hero">
+  <div class="fq-wrap">
+    <span class="fq-kicker">FAQs</span>
+    <h1>questions? <em>good.</em></h1>
+    <p>we'd rather you ask than guess. 31 honest answers below, and a real human on WhatsApp for everything else.</p>
+    <label class="fq-search">
+      <span aria-hidden="true">🔎</span>
+      <input type="search" id="fq-search" placeholder="search: magnesium, shipping, codes…" autocomplete="off" aria-label="Search FAQs">
+    </label>
+    <nav class="fq-chips" aria-label="FAQ topics">
+        <a class="fq-chip" href="#fq-basics"><span>🌙</span>the basics</a>
+        <a class="fq-chip" href="#fq-inside"><span>🧪</span>ingredients &amp; safety</a>
+        <a class="fq-chip" href="#fq-ritual"><span>☕</span>using it</a>
+        <a class="fq-chip" href="#fq-orders"><span>🛍️</span>orders, prices &amp; codes</a>
+        <a class="fq-chip" href="#fq-shipping"><span>📦</span>shipping &amp; returns</a>
+        <a class="fq-chip" href="#fq-trust"><span>🔍</span>trust &amp; transparency</a>
+    </nav>
+  </div>
+</section>
+
+<main class="fq-main">
+  <div class="fq-wrap">
+    <section class="fq-group" id="fq-basics">
+      <h2 class="fq-group-h"><span class="fq-emoji">🌙</span>the basics</h2>
+        <details class="fq-item">
+          <summary>What is Sleep Well?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">A dark chocolate drink for your evenings. Stir one sachet into 150 ml of hot water and sip it about 30 minutes before bed. Think of it as coffee, but for sleep.</div>
+        </details>
+        <details class="fq-item">
+          <summary>Is it a medicine or a sedative?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">No. Sleep Well is a food product, not a medicine. It has no melatonin and no sedatives. It's a nightly ritual, not a knock-out pill.</div>
+        </details>
+        <details class="fq-item">
+          <summary>What makes SuperState different?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">No proprietary blends, ever. Every ingredient and its exact amount is on the <a href="{{ product_url }}#inside">product page</a> and printed on the pack, so you can check everything yourself.</div>
+        </details>
+        <details class="fq-item">
+          <summary>What does it taste like?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">Like a rich dark hot chocolate, because the base is real organic raw cacao, not "chocolate flavour". Made with 150 ml of hot water it's light and chocolatey; with milk it's creamier.</div>
+        </details>
+        <details class="fq-item">
+          <summary>Does it have caffeine?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">Cacao naturally contains a small amount of caffeine, far less than a cup of tea or coffee. If you're very sensitive to caffeine, check the pack and start on a night when you're relaxed.</div>
+        </details>
+    </section>
+    <section class="fq-group" id="fq-inside">
+      <h2 class="fq-group-h"><span class="fq-emoji">🧪</span>ingredients &amp; safety</h2>
+        <details class="fq-item">
+          <summary>What's inside, exactly?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">Per 10 g sachet: organic raw cacao 3,000 mg · glycine 3,000 mg · magnesium L-threonate 2,000 mg · magnesium bisglycinate 1,000 mg · tart cherry extract 500 mg · L-theanine 200 mg · apigenin (from chamomile) 50 mg. That's it.</div>
+        </details>
+        <details class="fq-item">
+          <summary>Why two kinds of magnesium?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">Different forms of magnesium behave differently, so we used two well-known ones, L-threonate and bisglycinate, instead of one cheap form. Both amounts are on the label.</div>
+        </details>
+        <details class="fq-item">
+          <summary>Why no melatonin?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">We wanted a ritual you can enjoy every night, not a hormone shortcut. So Sleep Well is built from food-based ingredients like cacao, glycine, magnesium and chamomile extract.</div>
+        </details>
+        <details class="fq-item">
+          <summary>What about allergens?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">The full ingredient and allergen list is printed on the pack. If you have a food allergy, please read it before your first cup.</div>
+        </details>
+        <details class="fq-item">
+          <summary>Who should check with a doctor first?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">Please talk to your doctor first if you're pregnant or breastfeeding, take prescription medicine, or have a medical condition. Sleep Well is not for children.</div>
+        </details>
+        <details class="fq-item">
+          <summary>Where is it made?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">In Coimbatore, India.</div>
+        </details>
+    </section>
+    <section class="fq-group" id="fq-ritual">
+      <h2 class="fq-group-h"><span class="fq-emoji">☕</span>using it</h2>
+        <details class="fq-item">
+          <summary>How do I have it?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">Stir one sachet into 150 ml of hot water (or warm milk, if you like it creamier) and drink it about 30 minutes before bed. Dim the lights, put the phone down, and let it be your wind-down cue.</div>
+        </details>
+        <details class="fq-item">
+          <summary>How much should I have?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">One sachet a day. Please don't have more than that.</div>
+        </details>
+        <details class="fq-item">
+          <summary>Can I have it every night?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">Yes, that's the idea. It's designed as a nightly ritual, one sachet a night.</div>
+        </details>
+        <details class="fq-item">
+          <summary>When will I notice a difference?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">Everyone's different. Most people treat it as a habit rather than a one-night fix, so give it a couple of weeks of having it nightly at the same time.</div>
+        </details>
+        <details class="fq-item">
+          <summary>Water or milk?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">The serving size is one 10 g sachet in 150 ml of hot water. If you prefer it creamier, warm milk or plant milk works too. Hot mixes best.</div>
+        </details>
+    </section>
+    <section class="fq-group" id="fq-orders">
+      <h2 class="fq-group-h"><span class="fq-emoji">🛍️</span>orders, prices &amp; codes</h2>
+        <details class="fq-item">
+          <summary>How much does it cost?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">
+            {%- assign pct = settings.launch_discount_pct | default: 0 -%}
+            {%- assign keep = 100 | minus: pct -%}
+            {%- for v in ss_product.variants -%}
+              {{ v.title | replace: 'Pack Of ', '' }} sachets {{ v.price | money_without_trailing_zeros }}{% unless forloop.last %} · {% endunless %}
+            {%- endfor %} (MRP).
+            {%- if pct > 0 %} For launch, everyone gets {{ pct }}% off, so that's
+              {%- for v in ss_product.variants %} {{ v.price | times: keep | divided_by: 100 | money_without_trailing_zeros }}{% unless forloop.last %} /{% endunless %}{% endfor -%}.
+            {%- endif %}</div>
+        </details>
+        <details class="fq-item">
+          <summary>How do discount codes work?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">{{ settings.launch_code }} ({{ settings.launch_discount_pct }}% off) is applied automatically for everyone. If a creator sent you, use their code instead for 30% off plus their free gift package. One code per order.</div>
+        </details>
+        <details class="fq-item">
+          <summary>What's the free gift?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">Every 30-night pack comes with a special SuperState gift in the box. Order with a creator's code and you get their community gift package too. The contents are a surprise 🎁</div>
+        </details>
+        <details class="fq-item">
+          <summary>How do I pay?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">UPI or card, on Shopify's secure checkout (payments processed by Razorpay). We never see or store your card or UPI details.</div>
+        </details>
+        <details class="fq-item">
+          <summary>Do you offer cash on delivery?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">Not right now. We're keeping things simple with UPI and cards for launch.</div>
+        </details>
+        <details class="fq-item">
+          <summary>How do I know my order went through?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">You'll see an order-confirmed screen with your order number as soon as the payment is verified, and we'll keep you posted on WhatsApp.</div>
+        </details>
+    </section>
+    <section class="fq-group" id="fq-shipping">
+      <h2 class="fq-group-h"><span class="fq-emoji">📦</span>shipping &amp; returns</h2>
+        <details class="fq-item">
+          <summary>How long does delivery take?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">Orders ship within 5–7 working days. We'll WhatsApp you the tracking link once it's on its way.</div>
+        </details>
+        <details class="fq-item">
+          <summary>How much is shipping?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">Free, across India.</div>
+        </details>
+        <details class="fq-item">
+          <summary>Do you ship outside India?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">Not yet. If you'd like us to, tell us on WhatsApp so we know where to go next.</div>
+        </details>
+        <details class="fq-item">
+          <summary>What's your return policy?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">We offer a 10-day no-questions-asked return policy. If you don't love it, message us within 10 days of delivery and we'll sort out your refund.</div>
+        </details>
+        <details class="fq-item">
+          <summary>My order hasn't arrived / something's wrong.<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">WhatsApp us on <a href="https://wa.me/{{ settings.whatsapp_number | remove: ' ' | remove: '+' }}">95673 09388</a> with your order number. A real person replies.</div>
+        </details>
+    </section>
+    <section class="fq-group" id="fq-trust">
+      <h2 class="fq-group-h"><span class="fq-emoji">🔍</span>trust &amp; transparency</h2>
+        <details class="fq-item">
+          <summary>Should I just trust you?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">No, and please don't trust anyone blindly. Read the label, question the doses, compare us. If something doesn't add up, tell us. We'd rather be checked than believed.</div>
+        </details>
+        <details class="fq-item">
+          <summary>Found a mistake or something unclear?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">Call it out. Email <a href="mailto:{{ settings.support_email }}">support@superstate.in</a> or WhatsApp us. We'll fix it and say so openly.</div>
+        </details>
+        <details class="fq-item">
+          <summary>Can I ask about any ingredient or dose?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">Yes. Ask us why it's there, why that form, why that amount. If we can't explain it simply, it shouldn't be in the box.</div>
+        </details>
+        <details class="fq-item">
+          <summary>What does "SuperState" mean?<span class="fq-plus" aria-hidden="true"></span></summary>
+          <div class="fq-a">The superb version of you: comfortable with who you are, and getting where you want to go. We just want to be a small, honest part of that journey.</div>
+        </details>
+    </section>
+    <p class="fq-empty" id="fq-empty" hidden>nothing matches that. try another word, or just <a href="https://wa.me/{{ settings.whatsapp_number | remove: ' ' | remove: '+' }}">ask us on WhatsApp</a>.</p>
+
+    <div class="fq-cta">
+      <div>
+        <strong>still curious?</strong>
+        <p>no bots, no scripts. message us and a real person from the team replies.</p>
+      </div>
+      <div class="fq-cta-btns">
+        <a class="fq-btn" href="https://wa.me/{{ settings.whatsapp_number | remove: ' ' | remove: '+' }}">WhatsApp us →</a>
+        <a class="fq-btn fq-btn-ghost" href="mailto:{{ settings.support_email }}">email us</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  (function () {
+    var input = document.getElementById('fq-search');
+    var items = Array.prototype.slice.call(document.querySelectorAll('.fq-item'));
+    var groups = Array.prototype.slice.call(document.querySelectorAll('.fq-group'));
+    var empty = document.getElementById('fq-empty');
+    input.addEventListener('input', function () {
+      var q = input.value.trim().toLowerCase();
+      var shown = 0;
+      items.forEach(function (it) {
+        var hit = !q || it.textContent.toLowerCase().indexOf(q) !== -1;
+        it.hidden = !hit;
+        if (q && hit) it.open = true;
+        if (!q) it.open = false;
+        if (hit) shown++;
+      });
+      groups.forEach(function (g) { g.hidden = !g.querySelector('.fq-item:not([hidden])'); });
+      empty.hidden = shown > 0;
+    });
+  })();
+</script>
+
+
+<!-- Global Footer -->
+
+
+{% schema %}
+{
+  "name": "FAQs",
+  "settings": [],
+  "presets": [
+    {
+      "name": "FAQs"
+    }
+  ]
+}
+{% endschema %}

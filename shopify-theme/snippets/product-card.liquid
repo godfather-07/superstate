@@ -1,0 +1,10 @@
+{%- comment -%} Usage: {% render 'product-card', product: product %} {%- endcomment -%}
+<a class="ss-card" href="{{ product.url }}">
+  {%- if product.featured_image -%}
+    <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" loading="lazy" width="300" height="260">
+  {%- else -%}
+    <img src="{{ 'sleep-well-box.webp' | asset_url }}" alt="{{ product.title | escape }}" loading="lazy" width="300" height="260">
+  {%- endif -%}
+  <b>{{ product.title }}</b>
+  <span>{% if product.price_varies %}from {% endif %}{{ product.price_min | money_without_trailing_zeros }}</span>
+</a>

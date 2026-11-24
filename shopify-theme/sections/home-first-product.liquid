@@ -1,0 +1,146 @@
+{%- liquid
+  assign ss_product = settings.featured_product | default: all_products['sleep-well']
+  assign product_url = ss_product.url | default: '/products/sleep-well'
+-%}
+  <!-- SECTION 6 — FIRST PRODUCT -->
+  <section class="first-product fade-up">
+    <div class="container first-product-grid">
+      <div class="first-product-copy">
+        <span class="fp-tag">launch sale live ✶ {{ settings.launch_discount_pct }}% off</span>
+        <h2 class="fp-title">sleep is the <em>best supplement</em> in the whole world.</h2>
+        <p class="fp-text fp-text-short">batch 01 sold out fast. batch 02 is better, and it's shipping now 🐎</p>
+        <p class="fp-text fp-text-long">so we started with the night. sleep well is a dark chocolate drink you mix and sip 30 minutes before bed. our first batch sold out way faster than we planned, so we made it even better. batch 02 is shipping now 🐎</p>
+        <p class="fp-coffee"><em>coffee, but for sleep ☾</em></p>
+        <div class="fp-offers">
+          <a href="{{ product_url }}" class="btn fp-btn">Shop now →</a>
+          <a href="{{ product_url }}" class="fp-link">{{ settings.launch_discount_pct }}% off for launch with <span>{{ settings.launch_code }}</span></a>
+        </div>
+      </div>
+      <div class="first-product-visual">
+        <a href="{{ product_url }}" class="home-hero-link" aria-label="Shop Sleep Well">
+          <img src="{{ 'sleep-well-box.webp' | asset_url }}" alt="SuperState Sleep Well box" width="763" height="1172" loading="lazy">
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .first-product {
+      background: radial-gradient(circle at 75% 50%, rgba(77, 128, 255, 0.55), rgba(0, 51, 153, 0) 45%), #003399;
+      color: #ffffff;
+      padding: 6rem 0;
+      overflow: hidden;
+    }
+    .first-product-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+      gap: 3rem;
+      align-items: center;
+    }
+    .fp-tag {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #E4FF5A;
+      border: 1px solid rgba(228, 255, 90, 0.5);
+      border-radius: 999px;
+      padding: 0.35rem 0.85rem;
+      margin-bottom: 1.75rem;
+    }
+    .fp-title {
+      color: #ffffff;
+      font-weight: 800;
+      font-size: clamp(30px, 4.29vw, 56px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin: 0 0 1.5rem;
+      text-transform: lowercase;
+    }
+    .fp-title em,
+    .fp-coffee em {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+    .fp-title em {
+      background: linear-gradient(transparent 58%, rgba(228, 255, 90, 0.85) 58%, rgba(228, 255, 90, 0.85) 92%, transparent 92%);
+      padding: 0 0.1em;
+    }
+    .fp-text {
+      font-size: clamp(17px, 1.8vw, 20px);
+      line-height: 1.55;
+      color: #cbd5e1;
+      max-width: 36ch;
+      margin: 0 0 1.25rem;
+    }
+    .fp-coffee {
+      font-size: clamp(26px, 3vw, 36px);
+      color: #E4FF5A;
+      margin: 0 0 2rem;
+    }
+    .fp-btn {
+      background: #E4FF5A !important;
+      color: #003399 !important;
+      border: none !important;
+      font-weight: 800;
+    }
+    .fp-offers {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem 1.5rem;
+    }
+    .fp-link {
+      color: #ffffff;
+      font-weight: 700;
+      text-decoration: none;
+      border-bottom: 2px solid rgba(228, 255, 90, 0.7);
+      padding-bottom: 2px;
+    }
+    .fp-link span {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: #E4FF5A;
+    }
+    .first-product-visual {
+      display: flex;
+      justify-content: center;
+    }
+    .first-product-visual img {
+      width: auto;
+      max-width: 100%;
+      max-height: 480px;
+      height: auto;
+      transform: rotate(4deg);
+      filter: drop-shadow(0 30px 32px rgba(0, 10, 40, 0.55));
+    }
+    @media (max-width: 860px) {
+      .first-product {
+        padding: 4.5rem 0;
+      }
+      .first-product-grid {
+        grid-template-columns: 1fr;
+      }
+      .first-product-visual {
+        order: -1;
+      }
+      .first-product-visual img {
+        max-height: 340px;
+      }
+    }
+  </style>
+
+{% schema %}
+{
+  "name": "Home: Sleep Well",
+  "tag": "div",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Home: Sleep Well"
+    }
+  ]
+}
+{% endschema %}

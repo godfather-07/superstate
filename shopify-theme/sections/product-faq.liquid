@@ -1,0 +1,71 @@
+<!-- FAQ -->
+<section class="simple-section">
+  <div class="container simple-container">
+    <h2 class="simple-title">Questions</h2>
+    <div class="pdp-accordions-group">
+
+      <div class="pdp-accordion-item">
+        <div class="pdp-accordion-header" role="button" tabindex="0" aria-expanded="false">
+          <span>Does it contain melatonin?</span>
+          <span class="pdp-accordion-icon">+</span>
+        </div>
+        <div class="pdp-accordion-body">
+          No. There is no melatonin and no other hormone in Sleep Well. The full list of ingredients is above.
+        </div>
+      </div>
+
+      <div class="pdp-accordion-item">
+        <div class="pdp-accordion-header" role="button" tabindex="0" aria-expanded="false">
+          <span>Who should check with a doctor first?</span>
+          <span class="pdp-accordion-icon">+</span>
+        </div>
+        <div class="pdp-accordion-body">
+          Please speak to your doctor before using it if you are pregnant or breastfeeding, take prescription medicine, or have a medical condition. Not for children.
+        </div>
+      </div>
+
+      <div class="pdp-accordion-item">
+        <div class="pdp-accordion-header" role="button" tabindex="0" aria-expanded="false">
+          <span>When will my order ship?</span>
+          <span class="pdp-accordion-icon">+</span>
+        </div>
+        <div class="pdp-accordion-body">
+          Within 5–7 working days. Pay with UPI or card on our secure checkout and we'll WhatsApp you the tracking link once it's on its way. Shipping is free across India, and every 30-night pack comes with a SuperState gift in the box.
+        </div>
+      </div>
+
+      <div class="pdp-accordion-item">
+        <div class="pdp-accordion-header" role="button" tabindex="0" aria-expanded="false">
+          <span>Do you have discount codes?</span>
+          <span class="pdp-accordion-icon">+</span>
+        </div>
+        <div class="pdp-accordion-body">
+          For launch, everyone gets {{ settings.launch_discount_pct }}% off with {{ settings.launch_code }}, applied automatically at checkout. If a creator sent you, use their code instead for 30% off plus a free gift package.
+        </div>
+      </div>
+
+      <div class="pdp-accordion-item">
+        <div class="pdp-accordion-header" role="button" tabindex="0" aria-expanded="false">
+          <span>Something else?</span>
+          <span class="pdp-accordion-icon">+</span>
+        </div>
+        <div class="pdp-accordion-body">
+          Message us on <a href="https://wa.me/{{ settings.whatsapp_number | remove: ' ' | remove: '+' }}" target="_blank" rel="noopener">WhatsApp</a> or email <a href="mailto:{{ settings.support_email }}">{{ settings.support_email }}</a>. A real person replies.
+        </div>
+      </div>
+
+    </div>
+    <p class="simple-note" style="margin-top: 2rem;">This is a food product and is not intended to diagnose, treat, cure or prevent any disease. Not for medicinal use.</p>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Product: questions",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Product: questions"
+    }
+  ]
+}
+{% endschema %}

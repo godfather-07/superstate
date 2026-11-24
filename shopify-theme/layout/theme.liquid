@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code | default: 'en' }}-IN">
+<head>
+  <meta charset="utf-8">
+  {%- if settings.ga4_id != blank -%}
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ settings.ga4_id | strip | url_encode }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', {{ settings.ga4_id | strip | json }});
+    </script>
+  {%- endif -%}
+  {%- if settings.gtm_id != blank -%}
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer',{{ settings.gtm_id | strip | json }});</script>
+  {%- endif -%}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="only light">
+  <meta name="theme-color" content="#003399">
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  {%- render 'meta-tags' -%}
+
+  {%- if settings.favicon != blank -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 192, height: 192 }}">
+    <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180, height: 180 }}">
+  {%- else -%}
+    <link rel="icon" type="image/png" sizes="512x512" href="{{ 'favicon.png' | asset_url }}">
+    <link rel="apple-touch-icon" href="{{ 'apple-touch-icon.png' | asset_url }}">
+  {%- endif -%}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Lora:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&family=Caveat:wght@500;700&family=Inter:wght@500..800&display=swap" rel="stylesheet">
+
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+  {{ 'cart.css' | asset_url | stylesheet_tag }}
+  {%- case template.name -%}
+    {%- when 'product' -%}{{ 'product.css' | asset_url | stylesheet_tag }}
+  {%- endcase -%}
+  {%- case template.suffix -%}
+    {%- when 'our-story' -%}{{ 'page-our-story.css' | asset_url | stylesheet_tag }}
+    {%- when 'faqs' -%}{{ 'page-faqs.css' | asset_url | stylesheet_tag }}
+    {%- when 'contact' -%}{{ 'page-contact.css' | asset_url | stylesheet_tag }}
+    {%- when 'policy' -%}{{ 'page-policy.css' | asset_url | stylesheet_tag }}
+  {%- endcase -%}
+
+  {%- render 'theme-config' -%}
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+
+  {{ content_for_header }}
+
+  {%- if template.name == 'index' -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": {{ shop.url | append: '/#organization' | json }},
+        "name": {{ shop.name | json }},
+        "alternateName": ["Super State", "superstate"],
+        "url": {{ shop.url | append: '/' | json }},
+        "logo": { "@type": "ImageObject", "url": {{ 'favicon.png' | asset_url | prepend: 'https:' | json }}, "width": 512, "height": 512 },
+        "description": "SuperState makes health simple. Our first product is Sleep Well, a dark chocolate drink for your evenings.",
+        "email": {{ settings.support_email | json }},
+        "sameAs": [{{ settings.instagram_url | json }}, {{ settings.linkedin_url | json }}, {{ settings.x_url | json }}]
+      },
+      {
+        "@type": "WebSite",
+        "@id": {{ shop.url | append: '/#website' | json }},
+        "name": {{ shop.name | json }},
+        "url": {{ shop.url | append: '/' | json }},
+        "publisher": { "@id": {{ shop.url | append: '/#organization' | json }} },
+        "inLanguage": "en-IN"
+      }
+    ]
+  }
+  </script>
+  {%- endif -%}
+</head>
+
+{%- liquid
+  assign body_class = 'template-' | append: template.name
+  if template.suffix != blank
+    assign body_class = body_class | append: ' template-' | append: template.name | append: '-' | append: template.suffix
+  endif
+  case template.suffix
+    when 'faqs'
+      assign body_class = body_class | append: ' bg-primary'
+    when 'contact', 'policy'
+      assign body_class = body_class | append: ' bg-white'
+  endcase
+-%}
+<body class="{{ body_class }}">
+  {%- if settings.gtm_id != blank -%}
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ settings.gtm_id | strip | url_encode }}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  {%- endif -%}
+  {%- if settings.meta_pixel_ids != blank -%}
+    <noscript>
+      {%- assign pixel_ids = settings.meta_pixel_ids | split: ',' -%}
+      {%- for pid in pixel_ids -%}
+        <img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id={{ pid | strip | url_encode }}&amp;ev=PageView&amp;noscript=1">
+      {%- endfor -%}
+    </noscript>
+  {%- endif -%}
+
+  <a class="skip-link" href="#MainContent">Skip to content</a>
+
+  {% sections 'header-group' %}
+
+  <div id="MainContent" role="main" tabindex="-1">
+    {{ content_for_layout }}
+  </div>
+
+  {% sections 'footer-group' %}
+
+  {%- render 'cart-drawer' -%}
+  {%- render 'nudge' -%}
+
+  {%- if template.name != 'product' -%}
+  <a href="https://wa.me/{{ settings.whatsapp_number | remove: ' ' | remove: '+' }}" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" title="Chat with us">
+    {%- render 'icon', name: 'whatsapp-round' -%}
+  </a>
+  {%- endif -%}
+</body>
+</html>

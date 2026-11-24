@@ -1,0 +1,304 @@
+{%- liquid
+  assign ss_product = settings.featured_product | default: all_products['sleep-well']
+  assign product_url = ss_product.url | default: '/products/sleep-well'
+-%}
+  <!-- SECTION 1 — HERO -->
+  <header class="home-hero">
+    <div class="container home-hero-grid">
+
+      <div class="home-hero-copy">
+        <span class="home-pill"><span class="home-pill-dot"></span> sleep well is live 🎉 {{ settings.launch_discount_pct }}% off for launch</span>
+        <h1 class="home-h1">Health,<br><em>simplified.</em></h1>
+        <p class="home-sub">we make health simple in a world that makes it <span class="home-mark">complicated.</span></p>
+        <div class="home-ctas">
+          <a href="{{ product_url }}" class="home-btn home-btn-primary">Shop Sleep Well · {{ settings.launch_discount_pct }}% off</a>
+          <a href="/pages/our-story" class="home-btn home-btn-ghost">our story →</a>
+        </div>
+      </div>
+
+      <div class="home-hero-visual">
+        <svg class="hero-art" viewBox="0 0 600 600" aria-hidden="true">
+          <defs>
+            <radialGradient id="ha-moon" cx="42%" cy="38%" r="65%">
+              <stop offset="0" stop-color="#F7FFC9"/><stop offset=".6" stop-color="#E4FF5A"/><stop offset="1" stop-color="#C9E83A"/>
+            </radialGradient>
+            <radialGradient id="ha-glow" cx="50%" cy="50%" r="50%">
+              <stop offset=".55" stop-color="#E4FF5A" stop-opacity=".35"/><stop offset="1" stop-color="#E4FF5A" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <circle cx="300" cy="300" r="290" fill="url(#ha-glow)" class="ha-pulse"/>
+          <circle cx="300" cy="300" r="200" fill="url(#ha-moon)"/>
+          <g fill="#B8D42E" opacity=".45">
+            <circle cx="214" cy="232" r="22"/><circle cx="392" cy="398" r="30"/><circle cx="380" cy="210" r="11"/><circle cx="230" cy="402" r="13"/>
+          </g>
+          <circle cx="300" cy="300" r="246" fill="none" stroke="rgba(228,255,90,.5)" stroke-width="1.5" stroke-dasharray="2 10" class="ha-ring"/>
+          <g class="ha-steam" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity=".85">
+            <path d="M262 88c-14-16 14-26 0-44"/><path d="M300 78c-14-16 14-26 0-44"/><path d="M338 88c-14-16 14-26 0-44"/>
+          </g>
+          <g class="ha-bean ha-bean-a" transform="translate(92 410) rotate(-30)">
+            <ellipse rx="26" ry="16" fill="#5B3A29"/><path d="M-20 0c10-7 30-7 40 0" fill="none" stroke="#8A5A3F" stroke-width="3" stroke-linecap="round"/>
+          </g>
+          <g class="ha-bean ha-bean-b" transform="translate(520 150) rotate(25)">
+            <ellipse rx="20" ry="12" fill="#5B3A29"/><path d="M-15 0c8-5 22-5 30 0" fill="none" stroke="#8A5A3F" stroke-width="3" stroke-linecap="round"/>
+          </g>
+          <g class="ha-bean ha-bean-c" transform="translate(500 470) rotate(60)">
+            <ellipse rx="15" ry="9" fill="#5B3A29"/>
+          </g>
+          <g class="ha-twinkle" fill="#ffffff">
+            <path d="M96 140l5 13 13 5-13 5-5 13-5-13-13-5 13-5z"/>
+            <path d="M540 300l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" opacity=".7"/>
+            <circle cx="150" cy="70" r="3"/><circle cx="470" cy="60" r="2.5"/><circle cx="60" cy="300" r="2.5"/>
+          </g>
+        </svg>
+        <span class="home-sticker" aria-hidden="true">coffee, but for sleep ☾</span>
+        <a href="{{ product_url }}" class="home-hero-link" aria-label="Shop Sleep Well">
+          <img src="{{ 'sleep-well-pouch.webp' | asset_url }}" alt="SuperState Sleep Well pouch" width="349" height="548" fetchpriority="high">
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <style>
+    .home-hero {
+      position: relative;
+      overflow: hidden;
+      color: #ffffff;
+      background: radial-gradient(circle at 72% 50%, rgba(77, 128, 255, 0.55), rgba(0, 51, 153, 0) 42%), #003399;
+    }
+    .home-hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      align-items: center;
+      gap: 2rem;
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+      min-height: clamp(560px, calc(100vh - 84px), 820px);
+    }
+    .home-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 13px;
+      font-weight: 700;
+      color: #E4FF5A;
+      border: 1px solid rgba(228, 255, 90, 0.5);
+      border-radius: 999px;
+      padding: 0.35rem 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+    .home-pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ff6b6b;
+      animation: home-pulse 1.8s infinite;
+    }
+    @keyframes home-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(255, 107, 107, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); }
+    }
+    .home-h1 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 800;
+      font-size: clamp(42px, 5.85vw, 81px);
+      line-height: 0.95;
+      letter-spacing: -0.045em;
+      color: #ffffff;
+      margin: 0 0 1.25rem;
+    }
+    .home-h1 em {
+      font-family: 'Instrument Serif', serif;
+      font-weight: 400;
+      font-style: italic;
+      letter-spacing: -0.01em;
+      background: linear-gradient(transparent 60%, rgba(228, 255, 90, 0.85) 60%, rgba(228, 255, 90, 0.85) 92%, transparent 92%);
+      padding: 0 0.08em;
+    }
+    .home-sub {
+      font-size: clamp(18px, 1.6vw, 21px);
+      line-height: 1.5;
+      color: #ffffff;
+      margin: 0 0 2rem;
+      max-width: 32ch;
+    }
+    .home-mark {
+      display: inline-block;
+      background: #E4FF5A;
+      color: #003399;
+      font-weight: 700;
+      padding: 0 0.4rem;
+      border-radius: 4px;
+      transform: rotate(-2deg);
+    }
+    .home-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem 1.25rem;
+    }
+    .home-btn {
+      display: inline-block;
+      font-weight: 800;
+      font-size: 16px;
+      text-decoration: none;
+      border-radius: 14px;
+      padding: 0.95rem 1.5rem;
+      line-height: 1.2;
+      transition: transform 0.2s ease;
+    }
+    .home-btn:hover {
+      transform: translateY(-2px);
+    }
+    .home-btn-primary {
+      background: #E4FF5A;
+      color: #003399;
+    }
+    .home-btn-ghost {
+      color: #ffffff;
+      padding-left: 0.25rem;
+      padding-right: 0.25rem;
+      text-decoration: underline;
+      text-underline-offset: 5px;
+      text-decoration-color: rgba(255, 255, 255, 0.5);
+    }
+    .home-hero-link { display: block; cursor: pointer; transition: transform .25s ease; }
+    .home-hero-link:hover { transform: scale(1.02); }
+    .home-hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+    .home-hero-visual img {
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      max-height: min(400px, 56vh); /* the pouch photo is 548px tall: never upscale it */
+      filter: drop-shadow(0 30px 32px rgba(0, 10, 40, 0.55)) drop-shadow(0 6px 10px rgba(0, 10, 40, 0.35));
+      animation: home-float 6s ease-in-out infinite;
+    }
+    @keyframes home-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .hero-art { position: absolute; left: 50%; top: 50%; width: min(500px, 100%); transform: translate(-50%, -50%); z-index: 0; pointer-events: none; overflow: visible; }
+    .home-hero-visual .home-hero-link { position: relative; z-index: 1; }
+    .ha-ring { transform-origin: 300px 300px; animation: hero-spin 80s linear infinite; }
+    .ha-pulse { transform-origin: 300px 300px; animation: ha-pulse 6s ease-in-out infinite; }
+    .ha-steam path { animation: ha-steam 3.2s ease-in-out infinite; }
+    .ha-steam path:nth-child(2) { animation-delay: .5s; }
+    .ha-steam path:nth-child(3) { animation-delay: 1s; }
+    .ha-bean { animation: ha-drift 7s ease-in-out infinite; }
+    .ha-bean-b { animation-delay: 1.5s; } .ha-bean-c { animation-delay: 3s; }
+    .ha-twinkle { animation: hero-twinkle 3s ease-in-out infinite; }
+    @keyframes hero-spin { to { transform: rotate(360deg); } }
+    @keyframes hero-twinkle { 50% { opacity: .45; } }
+    @keyframes ha-pulse { 50% { transform: scale(1.05); opacity: .75; } }
+    @keyframes ha-steam { 0% { opacity: 0; transform: translateY(10px); } 40% { opacity: .9; } 100% { opacity: 0; transform: translateY(-14px); } }
+    @keyframes ha-drift { 50% { translate: 0 -10px; } }
+    @media (max-width: 860px) { .hero-art { width: 290px; } }
+    @media (prefers-reduced-motion: reduce) { .ha-ring, .ha-pulse, .ha-steam path, .ha-bean, .ha-twinkle { animation: none; } }
+    .home-sticker {
+      position: absolute;
+      top: 14%;
+      left: 2%;
+      z-index: 2;
+      transform: rotate(-6deg);
+      background: #E4FF5A;
+      color: #003399;
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: clamp(16px, 2vw, 22px);
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      box-shadow: 0 8px 20px rgba(0, 10, 40, 0.35);
+      white-space: nowrap;
+    }
+    @media (max-width: 860px) {
+      .home-hero-grid {
+        grid-template-columns: 1fr;
+        min-height: 0;
+        padding-top: 1.25rem;
+        padding-bottom: 2.5rem;
+        gap: 1rem;
+      }
+      .home-hero-visual {
+        order: -1;
+      }
+      .home-hero-visual img {
+        max-height: min(200px, 26vh);
+      }
+      .home-sticker {
+        top: auto;
+        left: 0;
+        bottom: 2%;
+        font-size: 14px;
+      }
+      .home-pill {
+        margin-bottom: 1rem;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .home-hero-visual img, .home-pill-dot { animation: none; }
+    }
+
+    /* ---------- Mobile: centred, one clear action ---------- */
+    @media (max-width: 860px) {
+      .home-hero-copy {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .home-sub {
+        max-width: 26ch;
+      }
+      .home-ctas {
+        justify-content: center;
+      }
+    }
+    @media (max-width: 600px) {
+      .home-h1 {
+        font-size: clamp(37px, 10.92vw, 47px);
+        margin-bottom: 0.9rem;
+      }
+      .home-sub {
+        font-size: 18px;
+        margin-bottom: 1.5rem;
+      }
+      .home-ctas {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        max-width: 340px;
+        gap: 0.5rem;
+      }
+      .home-btn {
+        text-align: center;
+        min-height: 48px;
+      }
+      .fp-text-long {
+        display: none;
+      }
+    }
+    @media (min-width: 601px) {
+      .fp-text-short {
+        display: none;
+      }
+    }
+
+  </style>
+
+{% schema %}
+{
+  "name": "Home: hero",
+  "tag": "div",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Home: hero"
+    }
+  ]
+}
+{% endschema %}

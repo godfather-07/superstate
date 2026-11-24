@@ -1,0 +1,57 @@
+  <!-- SECTION 3 — WHAT WE BELIEVE (Typography) -->
+  <section class="beliefs-manifesto bg-white fade-up" style="padding: clamp(3rem, 6vw, 4.5rem) 0; position: relative; overflow: hidden;">
+    <!-- Faint concentric circles background -->
+    <svg style="position: absolute; top: 50%; right: -20%; transform: translateY(-50%); width: 800px; height: 800px; z-index: 0; pointer-events: none; opacity: 0.04;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="48" fill="none" stroke="#000" stroke-width="0.2"/>
+      <circle cx="50" cy="50" r="36" fill="none" stroke="#000" stroke-width="0.2"/>
+      <circle cx="50" cy="50" r="24" fill="none" stroke="#000" stroke-width="0.2"/>
+      <circle cx="50" cy="50" r="12" fill="none" stroke="#000" stroke-width="0.2"/>
+    </svg>
+
+    <div class="container" style="position: relative; z-index: 1; max-width: 1040px; margin: 0 auto; text-align: left;">
+      
+      <div style="margin-bottom: 2rem;">
+        <h2 style="font-size: clamp(28px, 3.9vw, 47px); line-height: 1.05; color: var(--text-primary); font-family: var(--font-heading); margin-bottom: 0.5rem; letter-spacing: -0.02em;">
+          We believe health should <br>
+          be <span style="color: var(--color-deep-knowing); font-style: italic;">simple.</span>
+        </h2>
+        <p style="font-family: var(--font-body); color: #777; font-size: clamp(16px, 1.8vw, 19px); font-weight: 500; margin-top: 0.6rem;">
+          Not dumbed down but explained with <span style="color: var(--text-primary); position: relative; display: inline-block;">
+            clarity.
+            <span style="position: absolute; bottom: 2px; left: 0; width: 100%; height: 3px; background-color: var(--color-first-light); z-index: -1;"></span>
+          </span>
+        </p>
+      </div>
+
+      <div>
+        <style>
+          .rough-double-underline {
+            background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 100 40' preserveAspectRatio='none' overflow='visible' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='r'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.08' numOctaves='3' result='n'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='n' scale='3'/%3E%3C/filter%3E%3Cpath d='M0,18 Q25,20 50,17 T100,19 M0,30 Q30,28 60,32 T100,29' fill='none' stroke='%23ccff00' stroke-width='4' stroke-linecap='round' filter='url(%23r)'/%3E%3C/svg%3E");
+            background-position: left bottom;
+            background-repeat: repeat-x;
+            background-size: 150px 40px;
+            padding-bottom: 14px;
+          }
+        </style>
+        <h2 style="font-size: clamp(28px, 3.12vw, 36px); line-height: 1.2; color: var(--text-primary); font-family: var(--font-heading); font-weight: 600; letter-spacing: -0.02em; margin: 0;">
+          Simplicity is the highest <br>
+          form of science, & <br>
+          <span class="rough-double-underline">Science is the only thing we <span style="color: var(--color-deep-knowing); font-style: italic;">trust.</span></span>
+        </h2>
+      </div>
+
+    </div>
+  </section>
+
+{% schema %}
+{
+  "name": "Home: what we believe",
+  "tag": "div",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Home: what we believe"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,182 @@
+  <!-- SECTION 2 — THE PROBLEM (Bold Diagnosis) -->
+  <!-- SECTION 2 — THE PROBLEM (Bold Diagnosis) -->
+  <section id="why-we-exist" class="problem-manifesto bg-dark fade-up"
+    style="padding: var(--space-21) 0; color: var(--text-light);">
+    <div class="container">
+      <div class="problem-layout">
+        <div class="problem-title-side fade-up">
+          <h2
+            style="font-size: clamp(37px, 4.68vw, 66px); line-height: 1.1; margin: 0; color: var(--text-light); font-family: var(--font-heading);">
+            The industry <br>
+            is <span class="marker-highlight">BROKEN.</span>
+          </h2>
+        </div>
+
+        <div class="problem-items-side">
+          <div class="problem-item-new fade-up" style="transition-delay: 0.1s;">
+            <div class="problem-num">01</div>
+            <h2 class="problem-heading">Complexity is a <span class="marker-highlight">trap.</span></h2>
+          </div>
+
+          <div class="problem-item-new fade-up" style="transition-delay: 0.2s;">
+            <div class="problem-num">02</div>
+            <h2 class="problem-heading">Transparency is a <span class="highlight-italic marker-highlight">lie.</span>
+            </h2>
+          </div>
+
+          <div class="problem-item-new fade-up" style="transition-delay: 0.3s;">
+            <div class="problem-num">03</div>
+            <h2 class="problem-heading">Profit over <span class="highlight-italic marker-highlight">people.</span></h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .problem-layout {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 4rem;
+      }
+
+      .problem-title-side {
+        flex: 1;
+        max-width: 500px;
+      }
+
+      .problem-items-side {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        /* Push items to the right */
+      }
+
+      .problem-item-new {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1.5rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        width: 100%;
+        max-width: 480px;
+        /* Constrain width of items */
+      }
+
+      .problem-item-new:first-child {
+        padding-top: 0;
+      }
+
+      .problem-item-new:last-child {
+        border-bottom: none;
+      }
+
+      .problem-num {
+        width: 52px;
+        height: 52px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-heading);
+        font-size: 18px;
+        font-weight: 800;
+        flex-shrink: 0;
+        color: var(--color-emerge);
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      }
+
+      .problem-item-new:hover .problem-num {
+        background-color: var(--color-first-light);
+        border-color: var(--color-first-light);
+        color: var(--color-deep-knowing);
+        transform: scale(1.15);
+        box-shadow: 0 0 20px rgba(228, 255, 90, 0.3);
+      }
+
+      .problem-heading {
+        margin: 0;
+        font-size: clamp(22px, 2.5vw, 32px);
+        color: var(--text-light);
+        font-weight: 500;
+        line-height: 1.2;
+        font-family: var(--font-heading);
+      }
+
+      .marker-highlight {
+        position: relative;
+        z-index: 1;
+        padding: 0 0.4rem;
+        font-style: italic;
+        font-family: var(--font-heading);
+        color: var(--color-deep-knowing) !important;
+        display: inline-block;
+        margin-left: 0.2rem;
+      }
+
+      .marker-highlight::before {
+        content: "";
+        position: absolute;
+        top: 5%;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background-color: var(--color-first-light);
+        z-index: -1;
+        transform: rotate(-1.5deg);
+        border-radius: 2px;
+        transition: width 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+        transition-delay: inherit;
+      }
+
+      .visible .marker-highlight::before {
+        width: 100%;
+      }
+
+      @media (max-width: 992px) {
+        .problem-layout {
+          flex-direction: column;
+          gap: 3rem;
+          text-align: center;
+        }
+
+        .problem-title-side {
+          text-align: center;
+          margin: 0 auto;
+        }
+
+        .problem-items-side {
+          width: 100%;
+          align-items: center;
+        }
+
+        .problem-item-new {
+          gap: 1.5rem;
+          padding: 2rem 0;
+          margin: 0 auto;
+          text-align: left;
+        }
+
+        .problem-num {
+          width: 56px;
+          height: 56px;
+          font-size: 16px;
+        }
+      }
+    </style>
+  </section>
+
+{% schema %}
+{
+  "name": "Home: industry is broken",
+  "tag": "div",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Home: industry is broken"
+    }
+  ]
+}
+{% endschema %}

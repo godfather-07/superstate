@@ -1,0 +1,40 @@
+{%- liquid
+  assign og_title = page_title | default: shop.name
+  if template.name == 'index'
+    assign og_title = shop.name | append: ' | Health, simplified.'
+  endif
+  assign og_type = 'website'
+  if template.name == 'product'
+    assign og_type = 'product'
+  endif
+  if page_image
+    assign og_image = page_image | image_url: width: 1200 | prepend: 'https:'
+  elsif settings.share_image != blank
+    assign og_image = settings.share_image | image_url: width: 1200 | prepend: 'https:'
+  else
+    assign og_image = 'og-sleep-well.jpg' | asset_url | prepend: 'https:'
+  endif
+  assign og_description = page_description | default: 'SuperState makes health simple. Our first product, Sleep Well, is a dark chocolate drink for your evenings: coffee, but for sleep.'
+-%}
+<title>
+  {{- page_title -}}
+  {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+  {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+  {%- unless page_title contains shop.name %} | {{ shop.name }}{% endunless -%}
+</title>
+<meta name="description" content="{{ og_description | escape }}">
+<meta property="og:site_name" content="{{ shop.name | escape }}">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:title" content="{{ og_title | escape }}">
+<meta property="og:type" content="{{ og_type }}">
+<meta property="og:description" content="{{ og_description | escape }}">
+<meta property="og:image" content="{{ og_image }}">
+<meta property="og:image:secure_url" content="{{ og_image }}">
+{%- if template.name == 'product' -%}
+  <meta property="og:price:amount" content="{{ product.price | money_without_currency | strip_html | remove: ',' }}">
+  <meta property="og:price:currency" content="{{ cart.currency.iso_code }}">
+{%- endif -%}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ og_title | escape }}">
+<meta name="twitter:description" content="{{ og_description | escape }}">
+<meta name="twitter:image" content="{{ og_image }}">

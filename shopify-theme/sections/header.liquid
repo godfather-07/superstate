@@ -1,0 +1,77 @@
+{%- liquid
+  assign ss_product = settings.featured_product | default: all_products['sleep-well']
+  assign product_url = ss_product.url | default: '/products/sleep-well'
+  if settings.logo != blank
+    assign logo_src = settings.logo | image_url: width: 400
+  else
+    assign logo_src = 'logo-wordmark.png' | asset_url
+  endif
+  assign menu = linklists[section.settings.menu]
+-%}
+<nav class="navbar">
+  <div class="container navbar-container">
+    <a href="{{ routes.root_url }}" class="brand">
+      <img src="{{ logo_src }}" alt="{{ shop.name | escape }}" class="logo-img" width="200" height="40">
+    </a>
+    <ul class="nav-links">
+      {%- if menu.links.size > 0 -%}
+        {%- for link in menu.links -%}
+          <li><a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a></li>
+        {%- endfor -%}
+      {%- else -%}
+        <li><a href="{{ routes.root_url }}">Home</a></li>
+        <li><a href="/pages/our-story">Our Story</a></li>
+        <li><a href="{{ product_url }}">Shop</a></li>
+        <li><a href="/pages/faqs">FAQs</a></li>
+        <li><a href="/pages/contact">Contact</a></li>
+      {%- endif -%}
+    </ul>
+    <div class="nav-actions">
+      {%- if template.name == 'product' -%}
+        <a href="#buy-section" class="btn btn-primary nav-cta">Buy now</a>
+      {%- else -%}
+        <a href="{{ product_url }}" class="btn btn-primary nav-cta">{{ section.settings.cta_label | escape }}</a>
+      {%- endif -%}
+      <a href="{{ routes.cart_url }}" class="cart-toggle-btn" data-cart-open aria-label="Open cart">
+        {%- render 'icon', name: 'bag' -%}
+        <span class="nav-cart-count" data-cart-count{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>
+      </a>
+    </div>
+    <button class="mobile-menu-btn" aria-label="Open menu"><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-drawer ss-drawer" aria-hidden="true">
+  <div class="ssd-top">
+    <a href="{{ routes.root_url }}" class="ssd-logo" aria-label="{{ shop.name | escape }} home"><img src="{{ logo_src }}" alt="{{ shop.name | escape }}" width="200" height="42"></a>
+    <button type="button" class="close-drawer ssd-close" aria-label="Close menu"><span></span><span></span></button>
+  </div>
+  <nav class="ssd-nav" aria-label="Menu">
+    <a href="{{ routes.root_url }}"{% if template.name == 'index' %} aria-current="page"{% endif %}><i>01</i><span>home</span><b aria-hidden="true">→</b></a>
+    <a href="{{ product_url }}"{% if template.name == 'product' %} aria-current="page"{% endif %}><i>02</i><span>shop sleep well</span>{% if settings.launch_discount_pct > 0 %}<em>{{ settings.launch_discount_pct }}% off</em>{% endif %}<b aria-hidden="true">→</b></a>
+    <a href="/pages/our-story"{% if page.handle == 'our-story' %} aria-current="page"{% endif %}><i>03</i><span>our story</span><b aria-hidden="true">→</b></a>
+    <a href="/pages/faqs"{% if page.handle == 'faqs' %} aria-current="page"{% endif %}><i>04</i><span>FAQs</span><b aria-hidden="true">→</b></a>
+    <a href="/pages/contact"{% if page.handle == 'contact' %} aria-current="page"{% endif %}><i>05</i><span>contact</span><b aria-hidden="true">→</b></a>
+  </nav>
+  <a class="ssd-cta" href="{{ product_url }}#buy-section">shop Sleep Well{% if settings.launch_discount_pct > 0 %} · {{ settings.launch_discount_pct }}% off{% endif %} →</a>
+  <div class="ssd-foot">
+    <a href="https://wa.me/{{ settings.whatsapp_number | remove: ' ' | remove: '+' }}" class="ssd-wa">{%- render 'icon', name: 'whatsapp' -%}<span>WhatsApp us</span></a>
+    <a href="mailto:{{ settings.support_email }}">{{ settings.support_email }}</a>
+    <div class="ssd-social">
+      {%- if settings.instagram_url != blank -%}<a href="{{ settings.instagram_url }}" aria-label="Instagram">{%- render 'icon', name: 'instagram' -%}</a>{%- endif -%}
+      {%- if settings.linkedin_url != blank -%}<a href="{{ settings.linkedin_url }}" aria-label="LinkedIn">{%- render 'icon', name: 'linkedin' -%}</a>{%- endif -%}
+      {%- if settings.x_url != blank -%}<a href="{{ settings.x_url }}" aria-label="X">{%- render 'icon', name: 'x' -%}</a>{%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "ss-header-section",
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Desktop menu", "info": "Leave empty to use Home · Our Story · Shop · FAQs · Contact." },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "View Product" }
+  ]
+}
+{% endschema %}

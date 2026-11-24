@@ -1,0 +1,16 @@
+<section class="ss-page-hero">
+  <div class="container"><span class="k">shop</span><h1>Collections</h1></div>
+</section>
+<div class="ss-grid">
+  {%- for collection in collections -%}
+    <a class="ss-card" href="{{ collection.url }}">
+      {%- if collection.featured_image -%}<img src="{{ collection.featured_image | image_url: width: 600 }}" alt="{{ collection.title | escape }}" loading="lazy" width="300" height="260">{%- endif -%}
+      <b>{{ collection.title }}</b>
+      <span>{{ collection.products_count }} product{% if collection.products_count != 1 %}s{% endif %}</span>
+    </a>
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{ "name": "Collections list", "settings": [] }
+{% endschema %}

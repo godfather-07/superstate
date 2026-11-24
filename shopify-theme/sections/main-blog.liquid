@@ -1,0 +1,19 @@
+<section class="ss-page-hero">
+  <div class="container"><span class="k">journal</span><h1>{{ blog.title }}</h1></div>
+</section>
+{%- paginate blog.articles by 12 -%}
+  <div class="ss-grid">
+    {%- for article in blog.articles -%}
+      <a class="ss-card" href="{{ article.url }}">
+        {%- if article.image -%}<img src="{{ article.image | image_url: width: 600 }}" alt="{{ article.image.alt | default: article.title | escape }}" loading="lazy" width="300" height="260" style="object-fit:cover;border-radius:14px">{%- endif -%}
+        <b>{{ article.title }}</b>
+        <span>{{ article.published_at | date: '%d %b %Y' }}</span>
+      </a>
+    {%- endfor -%}
+  </div>
+  {%- if paginate.pages > 1 -%}<div class="ss-page" style="text-align:center;padding-top:0">{{ paginate | default_pagination }}</div>{%- endif -%}
+{%- endpaginate -%}
+
+{% schema %}
+{ "name": "Blog", "settings": [] }
+{% endschema %}

@@ -1,0 +1,31 @@
+{%- comment -%} Launch-sale nudge card, cloned by assets/theme.js (shown once per visit, never on product/cart). {%- endcomment -%}
+{%- liquid
+  assign ss_product = settings.featured_product | default: all_products['sleep-well']
+  assign pct = settings.launch_discount_pct | default: 0
+  assign gift_variant = nil
+  for v in ss_product.variants
+    if v.title == settings.gift_pack
+      assign gift_variant = v
+    endif
+  endfor
+-%}
+{%- if settings.show_nudge and pct > 0 and ss_product -%}
+<template id="ss-nudge-template">
+  <aside class="ss-nudge" role="dialog" aria-labelledby="ss-nudge-title">
+    <button type="button" class="ss-nudge-close" aria-label="Close">✕</button>
+    <span class="ss-nudge-badge">launch sale · {{ pct }}% off</span>
+    <p class="ss-nudge-title" id="ss-nudge-title">Sleep Well is live. <em>{{ pct }}% off</em> for launch.</p>
+    {%- if gift_variant -%}
+      {%- assign nights = gift_variant.title | remove: 'Pack Of ' | strip -%}
+      {%- assign keep = 100 | minus: pct -%}
+      {%- assign sale = gift_variant.price | times: keep | divided_by: 100 -%}
+      <p class="ss-nudge-sub">coffee, but for sleep. {{ nights }} nights for {{ sale | money_without_trailing_zeros }} <s>{{ gift_variant.price | money_without_trailing_zeros }}</s>, with a SuperState gift in the box. ships in 5–7 days.</p>
+      <a class="ss-nudge-cta" href="{{ ss_product.url }}?variant={{ gift_variant.id }}#buy-section">shop the launch →</a>
+    {%- else -%}
+      <p class="ss-nudge-sub">coffee, but for sleep. ships in 5–7 days.</p>
+      <a class="ss-nudge-cta" href="{{ ss_product.url }}#buy-section">shop the launch →</a>
+    {%- endif -%}
+    <button type="button" class="ss-nudge-later">maybe later</button>
+  </aside>
+</template>
+{%- endif -%}

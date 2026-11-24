@@ -1,0 +1,233 @@
+{%- liquid
+  assign ss_product = settings.featured_product | default: all_products['sleep-well']
+  assign product_url = ss_product.url | default: '/products/sleep-well'
+-%}
+<main class="st">
+
+  <!-- HERO -->
+  <header class="st-hero">
+    <div class="st-wrap">
+      <span class="st-kicker">our story</span>
+      <h1>health was never meant to be this <em>complicated.</em></h1>
+      <p>so we're here to untangle it. here's why SuperState exists.</p>
+      <svg viewBox="0 0 560 120" aria-hidden="true">
+        <path class="scribble" d="M20 70 C60 10 90 110 120 60 S170 0 190 70 S240 120 250 50 S300 10 290 80 S330 110 340 60 C350 30 380 40 370 70" fill="none" stroke="#ff5c8a" stroke-width="5" stroke-linecap="round"/>
+        <path class="straight" d="M380 65 L540 65" fill="none" stroke="#E4FF5A" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="540" cy="65" r="9" fill="#E4FF5A"/>
+        <text x="80" y="112" fill="#ff9db8" font-family="Caveat, cursive" font-size="22" font-weight="700">the industry</text>
+        <text x="420" y="105" fill="#E4FF5A" font-family="Caveat, cursive" font-size="22" font-weight="700">us</text>
+      </svg>
+    </div>
+  </header>
+
+  <!-- 1: HOW WE GOT HERE -->
+  <section class="ch">
+    <div class="st-wrap ch-grid">
+      <div class="fade-up">
+        <span class="ch-num">01 · how we got here</span>
+        <h2>first they sold us the problem. <em>then the "cure".</em></h2>
+        <p>packaged food got sweeter, snacks got bigger, and convenience won. a lot of us ended up heavier, more tired, and sleeping worse than ever.</p>
+        <p>then the same kind of big FMCG and supplement brands showed up with the fix: a shiny tub, a big promise on the front, and a label nobody can actually read.</p>
+      </div>
+      <div class="ch-art fade-up">
+        <svg viewBox="0 0 460 360" aria-hidden="true">
+          <rect x="20" y="40" width="420" height="300" rx="28" fill="#fff5e6"/>
+          <g class="float">
+            <rect x="60" y="90" width="150" height="200" rx="18" fill="#ff5c8a"/>
+            <rect x="60" y="90" width="150" height="40" rx="18" fill="#e0336e"/>
+            <text x="135" y="175" text-anchor="middle" fill="#fff" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="22">SNACK</text>
+            <text x="135" y="203" text-anchor="middle" fill="#fff" font-family="Bricolage Grotesque, sans-serif" font-size="13">now 40% bigger!</text>
+          </g>
+          <path d="M225 190 h40" stroke="#0f1d3d" stroke-width="4" stroke-linecap="round" marker-end="url(#ar)"/>
+          <defs><marker id="ar" markerWidth="10" markerHeight="10" refX="6" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#0f1d3d"/></marker></defs>
+          <g class="float" style="animation-delay:.8s">
+            <rect x="290" y="110" width="120" height="170" rx="14" fill="#7c5cff"/>
+            <rect x="300" y="90" width="100" height="28" rx="8" fill="#5a3ee0"/>
+            <text x="350" y="180" text-anchor="middle" fill="#fff" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="16">MIRACLE</text>
+            <text x="350" y="200" text-anchor="middle" fill="#fff" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="16">FIX™</text>
+            <text x="350" y="228" text-anchor="middle" fill="#e6dcff" font-family="Bricolage Grotesque, sans-serif" font-size="11">clinically amazing*</text>
+          </g>
+          <text x="240" y="330" text-anchor="middle" fill="#0f1d3d" font-family="Caveat, cursive" font-weight="700" font-size="24">problem → "solution" → profit</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2: PIXIE DUST -->
+  <section class="ch alt flip">
+    <div class="st-wrap ch-grid">
+      <div class="fade-up">
+        <span class="ch-num">02 · the trick</span>
+        <h2>big on the front. <em>pixie dust</em> inside.</h2>
+        <p>it has a name in the industry: <b>pixie dusting</b>. add a pinch of a fancy ingredient, just enough to print it in big letters on the front, then fill the rest with cheap stuff.</p>
+        <p>use the cheapest form of an ingredient. hide amounts behind a "proprietary blend". make it cheap to produce, sell it at a premium, and hope nobody flips the pack over.</p>
+        <ul class="tags"><li>pixie-dusted doses</li><li>cheap forms</li><li>hidden blends</li><li>fine print</li></ul>
+      </div>
+      <div class="ch-art fade-up">
+        <svg viewBox="0 0 460 380" aria-hidden="true">
+          <rect x="20" y="20" width="420" height="340" rx="28" fill="#f2f5ff"/>
+          <rect x="70" y="70" width="170" height="250" rx="22" fill="#0f1d3d"/>
+          <rect x="70" y="70" width="170" height="44" rx="22" fill="#26345c"/>
+          <text x="155" y="160" text-anchor="middle" fill="#E4FF5A" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="20">ULTRA SLEEP</text>
+          <text x="155" y="186" text-anchor="middle" fill="#fff" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="28">2000mg</text>
+          <text x="155" y="210" text-anchor="middle" fill="#cbd5e1" font-family="Bricolage Grotesque, sans-serif" font-size="12">advanced complex</text>
+          <text x="155" y="292" text-anchor="middle" fill="#7d8bb0" font-family="Bricolage Grotesque, sans-serif" font-size="9">*proprietary blend</text>
+          <circle cx="300" cy="200" r="78" fill="#fff" stroke="#003399" stroke-width="10"/>
+          <line x1="355" y1="255" x2="410" y2="315" stroke="#003399" stroke-width="16" stroke-linecap="round"/>
+          <rect x="255" y="150" width="90" height="70" rx="8" fill="#e5e7eb"/>
+          <text x="300" y="180" text-anchor="middle" fill="#6b7280" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="13">filler</text>
+          <text x="300" y="198" text-anchor="middle" fill="#6b7280" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="13">filler</text>
+          <text x="300" y="335" text-anchor="middle" fill="#ff5c8a" font-family="Caveat, cursive" font-weight="700" font-size="20">↑ the "hero" ingredient (a pinch)</text>
+          <circle class="sparkle" cx="338" cy="232" r="3" fill="#ff5c8a"/>
+          <circle class="sparkle" cx="345" cy="224" r="2" fill="#ff5c8a"/>
+          <circle class="sparkle" cx="350" cy="236" r="2.5" fill="#ff5c8a"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3: NOT DUMB, BUSY -->
+  <section class="ch dark">
+    <div class="st-wrap ch-grid">
+      <div class="fade-up">
+        <span class="ch-num">03 · what they're counting on</span>
+        <h2>you're not dumb. <em>you're busy.</em></h2>
+        <p>you've got work, family, a life. nobody has the time to research every ingredient, every form, every dose. <b>and a lot of brands know that.</b></p>
+        <p>they're not betting on you being foolish. they're betting on you being tired. that's the part that made us angry.</p>
+        <p class="quote hand">"they'll never flip the pack over."</p>
+      </div>
+      <div class="ch-art fade-up">
+        <svg viewBox="0 0 460 360" aria-hidden="true">
+          <rect x="20" y="20" width="420" height="320" rx="28" fill="#1a2a52"/>
+          <g class="swing"><circle cx="300" cy="70" r="6" fill="#E4FF5A"/></g>
+          <circle cx="150" cy="170" r="82" fill="#fff"/>
+          <circle cx="150" cy="170" r="82" fill="none" stroke="#E4FF5A" stroke-width="10"/>
+          <line x1="150" y1="170" x2="150" y2="118" stroke="#0f1d3d" stroke-width="8" stroke-linecap="round"/>
+          <line x1="150" y1="170" x2="190" y2="188" stroke="#ff5c8a" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="150" cy="170" r="7" fill="#0f1d3d"/>
+          <rect x="270" y="90" width="130" height="200" rx="18" fill="#0b1430" stroke="#3d4f80" stroke-width="3"/>
+          <rect x="285" y="115" width="100" height="22" rx="6" fill="#ff5c8a"/>
+          <text x="335" y="131" text-anchor="middle" fill="#fff" font-family="Bricolage Grotesque, sans-serif" font-weight="700" font-size="11">meeting · 9:00</text>
+          <rect x="285" y="145" width="100" height="22" rx="6" fill="#7c5cff"/>
+          <text x="335" y="161" text-anchor="middle" fill="#fff" font-family="Bricolage Grotesque, sans-serif" font-weight="700" font-size="11">deadline · 6pm</text>
+          <rect x="285" y="175" width="100" height="22" rx="6" fill="#33cc99"/>
+          <text x="335" y="191" text-anchor="middle" fill="#0b1430" font-family="Bricolage Grotesque, sans-serif" font-weight="700" font-size="11">gym? maybe</text>
+          <rect x="285" y="205" width="100" height="22" rx="6" fill="#3d4f80"/>
+          <text x="335" y="221" text-anchor="middle" fill="#cbd5e1" font-family="Bricolage Grotesque, sans-serif" font-weight="700" font-size="11">read labels: never</text>
+          <text x="150" y="300" text-anchor="middle" fill="#E4FF5A" font-family="Caveat, cursive" font-weight="700" font-size="24">no time to check</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4: WE BROKE IT -->
+  <section class="ch flip">
+    <div class="st-wrap ch-grid">
+      <div class="fade-up">
+        <span class="ch-num">04 · so we decided to fix it</span>
+        <h2>we're here to <em>destroy the complexity.</em></h2>
+        <p>no pixie dust, no hidden blends, no fine print. if it's in the box, you'll see exactly how much, and why it's there, in words a normal person can understand.</p>
+        <ul class="tags good"><li>every dose on the label</li><li>forms we can explain</li><li>zero proprietary blends</li><li>one simple habit</li></ul>
+      </div>
+      <div class="ch-art fade-up">
+        <svg viewBox="0 0 460 360" aria-hidden="true">
+          <rect x="20" y="20" width="420" height="320" rx="28" fill="#e9f0ff"/>
+          <path d="M70 200 C90 120 160 260 180 170 S240 110 230 200 S170 260 150 220" fill="none" stroke="#ff5c8a" stroke-width="7" stroke-linecap="round" opacity=".55"/>
+          <g transform="translate(250 70) rotate(28)">
+            <rect x="40" y="0" width="18" height="170" rx="9" fill="#a0683c"/>
+            <rect x="0" y="-10" width="100" height="46" rx="10" fill="#0f1d3d"/>
+          </g>
+          <g fill="#E4FF5A" stroke="#0f1d3d" stroke-width="3">
+            <path d="M195 150 l18 -10 l-4 20z"/><path d="M228 175 l20 6 l-14 12z"/><path d="M180 205 l-16 12 l20 4z"/>
+          </g>
+          <text x="60" y="95" fill="#003399" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="30" transform="rotate(-10 60 95)">CRACK!</text>
+          <path d="M80 300 L380 300" stroke="#003399" stroke-width="7" stroke-linecap="round"/>
+          <circle cx="380" cy="300" r="9" fill="#003399"/>
+          <text x="230" y="290" text-anchor="middle" fill="#003399" font-family="Caveat, cursive" font-weight="700" font-size="24">simple. clear. honest.</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5: DON'T TRUST US BLINDLY -->
+  <section class="ch alt">
+    <div class="st-wrap ch-grid">
+      <div class="fade-up">
+        <span class="ch-num">05 · and one more thing</span>
+        <h2>don't trust us <em>blindly</em> either.</h2>
+        <p>we're humans too. we'll make mistakes. so scrutinize us: read our label, question our doses, compare us with anyone, and point out where we got it wrong.</p>
+        <p>if you genuinely care about your health, we'll be as transparent as you want us to be. ask us anything, and we'll answer in plain words.</p>
+        <div class="st-btns">
+          <a class="st-btn" href="{{ product_url }}#inside">check our label →</a>
+          <a class="st-btn ghost" href="https://wa.me/{{ settings.whatsapp_number | remove: ' ' | remove: '+' }}">question us on WhatsApp</a>
+        </div>
+      </div>
+      <div class="ch-art fade-up">
+        <svg viewBox="0 0 460 360" aria-hidden="true">
+          <rect x="20" y="20" width="420" height="320" rx="28" fill="#fbf8ef"/>
+          <rect x="80" y="60" width="200" height="240" rx="16" fill="#fff" stroke="#0f1d3d" stroke-width="3"/>
+          <text x="100" y="95" fill="#003399" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="16">SLEEP WELL · per sachet</text>
+          <g font-family="Bricolage Grotesque, sans-serif" font-size="13" fill="#0f1d3d">
+            <text x="100" y="128">cacao</text><text x="260" y="128" text-anchor="end" font-weight="700">3,000 mg</text>
+            <text x="100" y="152">glycine</text><text x="260" y="152" text-anchor="end" font-weight="700">3,000 mg</text>
+            <text x="100" y="176">mg L-threonate</text><text x="260" y="176" text-anchor="end" font-weight="700">2,000 mg</text>
+            <text x="100" y="200">mg bisglycinate</text><text x="260" y="200" text-anchor="end" font-weight="700">1,000 mg</text>
+            <text x="100" y="224">tart cherry</text><text x="260" y="224" text-anchor="end" font-weight="700">500 mg</text>
+            <text x="100" y="248">L-theanine</text><text x="260" y="248" text-anchor="end" font-weight="700">200 mg</text>
+            <text x="100" y="272">apigenin</text><text x="260" y="272" text-anchor="end" font-weight="700">50 mg</text>
+          </g>
+          <g class="float">
+            <circle cx="300" cy="190" r="62" fill="rgba(228,255,90,.35)" stroke="#003399" stroke-width="9"/>
+            <line x1="344" y1="234" x2="392" y2="290" stroke="#003399" stroke-width="15" stroke-linecap="round"/>
+          </g>
+          <text x="300" y="46" text-anchor="middle" fill="#ff5c8a" font-family="Caveat, cursive" font-weight="700" font-size="22">go on, check us ↓</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEANING -->
+  <section class="meaning">
+    <div class="st-wrap fade-up">
+      <span class="st-kicker">why superstate?</span>
+      <div class="word"><span>super</span>state <b class="eq">=</b> <em>the superb version of you.</em></div>
+      <p>not a perfect version. a version that's comfortable with who you are and goes after what you want to achieve.</p>
+      <p>we want to be a small, honest part of that journey and help you get there. that's why SuperState was born.</p>
+      <svg viewBox="0 0 420 160" aria-hidden="true">
+        <circle cx="330" cy="70" r="40" fill="#E4FF5A"/>
+        <path d="M20 140 C120 140 160 90 230 100 S330 60 400 60" fill="none" stroke="#003399" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 14"/>
+        <circle cx="40" cy="140" r="9" fill="#003399"/>
+        <text x="22" y="118" fill="#4a5878" font-family="Caveat, cursive" font-weight="700" font-size="20">you, today</text>
+        <text x="330" y="132" text-anchor="middle" fill="#003399" font-family="Caveat, cursive" font-weight="700" font-size="22">your superstate</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- END -->
+  <section class="st-end">
+    <div class="st-wrap fade-up">
+      <h2>we started with sleep. <em>the rest of your journey is next.</em></h2>
+      <p>Sleep Well is our first product: a dark chocolate drink for your nights, with every dose on the label and no melatonin.</p>
+      <div class="st-btns">
+        <a href="{{ product_url }}" class="st-btn">try Sleep Well{% if settings.launch_discount_pct > 0 %} · {{ settings.launch_discount_pct }}% off{% endif %} →</a>
+        <a href="/pages/faqs" class="st-btn ghost">read the FAQs</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Global Footer -->
+
+
+{% schema %}
+{
+  "name": "Our story",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Our story"
+    }
+  ]
+}
+{% endschema %}

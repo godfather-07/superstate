@@ -1,0 +1,45 @@
+<!-- HOW TO USE: THE 10PM RITUAL -->
+<section class="ritual" id="how-to-use">
+  <div class="container ritual-grid">
+    <div class="ritual-video-wrap">
+      <video class="ritual-video" src="{{ 'ritual.mp4' | asset_url }}" poster="{{ 'ritual-poster.jpg' | asset_url }}" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+      <span class="ritual-chip">● now playing: wind-down.mp4</span>
+    </div>
+
+    <div class="ritual-copy">
+      <span class="manifesto-tag">how to use</span>
+      <h2 class="ritual-title">your <em>10pm</em> ritual.</h2>
+      <p class="ritual-lead">four steps. zero effort. it's giving main character bedtime.</p>
+
+      <ol class="ritual-steps">
+        <li>
+          <time>9:30 pm</time>
+          <div><strong>rip it.</strong><p>tear open one sachet. that's one serving.</p></div>
+        </li>
+        <li>
+          <time>9:31 pm</time>
+          <div><strong>stir it.</strong><p>into 150 ml of hot water (or milk, if you like it creamier).</p></div>
+        </li>
+        <li>
+          <time>9:35 pm</time>
+          <div><strong>sip it slow.</strong><p>lights low, phone face-down, candle optional.</p></div>
+        </li>
+        <li>
+          <time>10:00 pm</time>
+          <div><strong>lights out.</strong><p>that's it. same time tomorrow?</p></div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Product: 10pm ritual",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Product: 10pm ritual"
+    }
+  ]
+}
+{% endschema %}

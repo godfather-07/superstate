@@ -1,0 +1,53 @@
+{%- comment -%}
+  Policy pages (template: page.policy). Shows the page's own content if you
+  write some in Shopify admin; otherwise the built-in SuperState policy for the
+  handles shipping, refunds, privacy and terms.
+{%- endcomment -%}
+{%- liquid
+  case page.handle
+    when 'shipping'
+      assign pol_sub = 'how your Sleep Well gets to you, and how long it takes.'
+    when 'refunds'
+      assign pol_sub = 'if you don&#39;t love it, we&#39;ll make it right.'
+    when 'privacy'
+      assign pol_sub = 'what we collect, why, and what we never do with it.'
+    when 'terms'
+      assign pol_sub = 'the simple rules for using superstate.in and buying from us.'
+    else
+      assign pol_sub = section.settings.sub
+  endcase
+-%}
+<section class="pol-hero">
+  <div class="container">
+    <span class="k">{{ section.settings.kicker }}</span>
+    <h1>{{ page.title }}</h1>
+    {%- if pol_sub != blank -%}<p>{{ pol_sub }}</p>{%- endif -%}
+  </div>
+</section>
+
+<main class="pol">
+  {%- if page.content != blank -%}
+    {{ page.content }}
+  {%- else -%}
+    {%- case page.handle -%}
+      {%- when 'shipping' -%}
+        {%- render 'policy-shipping' -%}
+      {%- when 'refunds' -%}
+        {%- render 'policy-refunds' -%}
+      {%- when 'privacy' -%}
+        {%- render 'policy-privacy' -%}
+      {%- when 'terms' -%}
+        {%- render 'policy-terms' -%}
+    {%- endcase -%}
+  {%- endif -%}
+</main>
+
+{% schema %}
+{
+  "name": "Policy page",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "policy" },
+    { "type": "text", "id": "sub", "label": "Sub-line (for other handles)" }
+  ]
+}
+{% endschema %}

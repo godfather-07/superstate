@@ -1,0 +1,55 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "SuperState",
+    "theme_version": "1.0.0",
+    "theme_author": "SuperState",
+    "theme_documentation_url": "https://www.superstate.in/",
+    "theme_support_email": "support@superstate.in"
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      { "type": "image_picker", "id": "logo", "label": "Logo (white wordmark)", "info": "Leave empty to use the built-in SuperState wordmark." },
+      { "type": "image_picker", "id": "favicon", "label": "Favicon", "info": "Square, at least 192 × 192 px." },
+      { "type": "image_picker", "id": "share_image", "label": "Default social share image", "info": "1200 × 630 px. Leave empty to use the built-in Sleep Well image." }
+    ]
+  },
+  {
+    "name": "Shop",
+    "settings": [
+      { "type": "product", "id": "featured_product", "label": "Main product", "info": "Sleep Well. Used by the header button, footer, homepage and the launch nudge. Falls back to the product with the handle sleep-well." }
+    ]
+  },
+  {
+    "name": "Launch offer & creator codes",
+    "settings": [
+      { "type": "paragraph", "content": "Every code below must ALSO exist in Shopify admin → Discounts with the same %. The theme only shows the price and passes the code to checkout; Shopify applies it." },
+      { "type": "text", "id": "launch_code", "label": "Launch code (applied automatically)", "default": "FIRSTNIGHT20" },
+      { "type": "range", "id": "launch_discount_pct", "label": "Launch discount %", "min": 0, "max": 50, "step": 1, "unit": "%", "default": 20, "info": "Set to 0 to turn the launch sale off. Prices are then shown at full price (or against the compare-at price)." },
+      { "type": "textarea", "id": "creator_codes", "label": "Creator codes", "default": "ABHIJITH30 | Abhijith | 30\nABHIMANYU30 | Abhimanyu | 30\nFAIHA30 | Faiha | 30\nKRISHNA30 | Krishna | 30\nSALIH30 | Salih | 30\nSHAMNAS30 | Shamnas | 30", "info": "One per line: CODE | Name | %. Creator links: https://www.superstate.in/?ref=CODE (works on any page, remembered for 30 days)." },
+      { "type": "text", "id": "gift_pack", "label": "Pack that comes with a free gift", "default": "Pack Of 30", "info": "Must match the variant name exactly." },
+      { "type": "checkbox", "id": "show_nudge", "label": "Show the launch-sale nudge card", "default": true, "info": "Small dismissible card on non-product pages." }
+    ]
+  },
+  {
+    "name": "Contact & social",
+    "settings": [
+      { "type": "text", "id": "whatsapp_number", "label": "WhatsApp number (with country code, digits only)", "default": "919567309388" },
+      { "type": "text", "id": "whatsapp_label", "label": "WhatsApp number as shown", "default": "95673 09388" },
+      { "type": "text", "id": "support_email", "label": "Support email", "default": "support@superstate.in" },
+      { "type": "url", "id": "instagram_url", "label": "Instagram", "default": "https://www.instagram.com/superstate.in/" },
+      { "type": "url", "id": "linkedin_url", "label": "LinkedIn", "default": "https://www.linkedin.com/company/super-state/" },
+      { "type": "url", "id": "x_url", "label": "X (Twitter)", "default": "https://x.com/_superstate_" }
+    ]
+  },
+  {
+    "name": "Tracking",
+    "settings": [
+      { "type": "paragraph", "content": "These fire on the storefront only (PageView, ViewContent, AddToCart, InitiateCheckout). Purchases happen on Shopify checkout: track them with the Facebook & Instagram and Google & YouTube apps (Settings → Customer events). If you connect a pixel through those apps, blank its ID here so page events aren't counted twice." },
+      { "type": "text", "id": "ga4_id", "label": "Google Analytics 4 measurement ID", "default": "G-5915THJCM5" },
+      { "type": "text", "id": "gtm_id", "label": "Google Tag Manager container ID", "default": "GTM-TGW85RP2" },
+      { "type": "text", "id": "meta_pixel_ids", "label": "Meta Pixel IDs (comma separated)", "default": "1380597944288890, 2385448578867386" }
+    ]
+  }
+]

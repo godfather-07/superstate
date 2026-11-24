@@ -1,0 +1,81 @@
+{%- liquid
+  assign ss_product = settings.featured_product | default: all_products['sleep-well']
+  assign product_url = ss_product.url | default: '/products/sleep-well'
+  if settings.logo != blank
+    assign logo_src = settings.logo | image_url: width: 400
+  else
+    assign logo_src = 'logo-wordmark.png' | asset_url
+  endif
+  assign wa = settings.whatsapp_number | remove: ' ' | remove: '+'
+  assign gift_variant = nil
+  for v in ss_product.variants
+    if v.title == settings.gift_pack
+      assign gift_variant = v
+    endif
+  endfor
+-%}
+<footer class="footer ss-footer">
+  <div class="container">
+    <div class="ssf-hero">
+      <div>
+        <img src="{{ logo_src }}" alt="{{ shop.name | escape }}" class="ssf-logo" width="200" height="42" loading="lazy">
+        <p class="ssf-tag">{{ section.settings.tagline }}</p>
+        <div class="ssf-social">
+          {%- if settings.instagram_url != blank -%}<a href="{{ settings.instagram_url }}" aria-label="Instagram">{%- render 'icon', name: 'instagram' -%}</a>{%- endif -%}
+          {%- if settings.linkedin_url != blank -%}<a href="{{ settings.linkedin_url }}" aria-label="LinkedIn">{%- render 'icon', name: 'linkedin' -%}</a>{%- endif -%}
+          {%- if settings.x_url != blank -%}<a href="{{ settings.x_url }}" aria-label="X">{%- render 'icon', name: 'x' -%}</a>{%- endif -%}
+          <a href="https://wa.me/{{ wa }}" aria-label="WhatsApp">{%- render 'icon', name: 'whatsapp' -%}</a>
+        </div>
+      </div>
+      <a class="ssf-shop" href="{{ product_url }}">
+        <img src="{{ 'sleep-well-box.webp' | asset_url }}" alt="" width="64" height="98" loading="lazy">
+        <span><b>Sleep Well</b><small>coffee, but for sleep{% if settings.launch_discount_pct > 0 %} · {{ settings.launch_discount_pct }}% off for launch{% endif %}</small></span>
+        <i aria-hidden="true">→</i>
+      </a>
+    </div>
+    <div class="ssf-cols">
+      <div>
+        <h4>shop</h4>
+        <a href="{{ product_url }}">Sleep Well</a>
+        {%- if gift_variant -%}
+          <a href="{{ product_url }}?variant={{ gift_variant.id }}#buy-section">{{ gift_variant.title | replace: 'Pack Of ', '' }}-night pack + gift</a>
+        {%- endif -%}
+        <a href="/pages/faqs#fq-orders">prices &amp; codes</a>
+      </div>
+      <div>
+        <h4>superstate</h4>
+        <a href="/pages/our-story">our story</a>
+        <a href="/pages/faqs">FAQs</a>
+        <a href="/pages/contact">contact</a>
+      </div>
+      <div>
+        <h4>help</h4>
+        <a href="/pages/shipping">shipping policy</a>
+        <a href="/pages/refunds">returns &amp; refunds</a>
+        <a href="/pages/privacy">privacy policy</a>
+        <a href="/pages/terms">terms of use</a>
+      </div>
+      <div>
+        <h4>talk to us</h4>
+        <a href="https://wa.me/{{ wa }}">WhatsApp: {{ settings.whatsapp_label }}</a>
+        <a href="mailto:{{ settings.support_email }}">{{ settings.support_email }}</a>
+        <span class="ssf-note">a real person replies</span>
+      </div>
+    </div>
+    <div class="ssf-bottom">
+      <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }} · made in India 🇮🇳</span>
+      <span>{{ section.settings.payments_note }}</span>
+    </div>
+    <div class="ssf-giant" aria-hidden="true">superstate</div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "inline_richtext", "id": "tagline", "label": "Tagline", "default": "health, <em>simplified.</em> every dose on the label, nothing hidden." },
+    { "type": "text", "id": "payments_note", "label": "Payments note", "default": "secure checkout by Shopify · UPI & cards" }
+  ]
+}
+{% endschema %}

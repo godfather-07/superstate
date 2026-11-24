@@ -1,0 +1,38 @@
+{%- comment -%}
+  Exposes theme settings to assets/theme.js and assets/product.js as window.SS.
+  Creator codes come from Theme settings → Launch offer & creator codes.
+{%- endcomment -%}
+{%- liquid
+  assign ss_product = settings.featured_product | default: all_products['sleep-well']
+  assign creator_lines = settings.creator_codes | newline_to_br | split: '<br />'
+-%}
+<script>
+  window.SS = {
+    launchCode: {{ settings.launch_code | strip | upcase | json }},
+    launchPct: {{ settings.launch_discount_pct | default: 0 }},
+    giftPack: {{ settings.gift_pack | strip | json }},
+    creators: {
+      {%- for line in creator_lines -%}
+        {%- assign parts = line | strip | split: '|' -%}
+        {%- if parts.size >= 2 -%}
+          {%- assign c_code = parts[0] | strip | upcase -%}
+          {%- assign c_name = parts[1] | strip -%}
+          {%- assign c_pct = parts[2] | strip | default: '30' | plus: 0 -%}
+          {{ c_code | json }}: { "name": {{ c_name | json }}, "pct": {{ c_pct }} }{% unless forloop.last %},{% endunless %}
+        {%- endif -%}
+      {%- endfor -%}
+    },
+    metaPixelIds: {{ settings.meta_pixel_ids | remove: ' ' | split: ',' | json }},
+    showNudge: {{ settings.show_nudge | json }},
+    template: {{ template.name | json }},
+    productUrl: {{ ss_product.url | default: '/products/sleep-well' | json }},
+    routes: {
+      root: {{ routes.root_url | json }},
+      cart: {{ routes.cart_url | json }},
+      cartAdd: {{ routes.cart_add_url | json }},
+      cartChange: {{ routes.cart_change_url | json }},
+      cartUpdate: {{ routes.cart_update_url | json }}
+    },
+    whatsapp: {{ settings.whatsapp_number | remove: ' ' | remove: '+' | json }}
+  };
+</script>

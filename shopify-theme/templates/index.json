@@ -1,0 +1,31 @@
+{
+  "sections": {
+    "home-hero": {
+      "type": "home-hero",
+      "settings": {}
+    },
+    "home-manifesto": {
+      "type": "home-manifesto",
+      "settings": {}
+    },
+    "home-beliefs": {
+      "type": "home-beliefs",
+      "settings": {}
+    },
+    "home-gap": {
+      "type": "home-gap",
+      "settings": {}
+    },
+    "home-first-product": {
+      "type": "home-first-product",
+      "settings": {}
+    }
+  },
+  "order": [
+    "home-hero",
+    "home-manifesto",
+    "home-beliefs",
+    "home-gap",
+    "home-first-product"
+  ]
+}

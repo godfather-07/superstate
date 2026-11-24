@@ -1,0 +1,136 @@
+{%- comment -%}
+  "they tried it first": creator reels. Each block is one creator.
+  Video: pick a Shopify-hosted video, or type the name of a file in the theme's
+  assets folder (the four launch reels ship with the theme).
+{%- endcomment -%}
+{%- liquid
+  assign ss_product = settings.featured_product | default: all_products['sleep-well']
+  assign product_url = ss_product.url | default: '/products/sleep-well'
+  assign gift_variant = nil
+  for v in ss_product.variants
+    if v.title == settings.gift_pack
+      assign gift_variant = v
+    endif
+  endfor
+-%}
+<section class="reels-section" id="reels">
+  <div class="container">
+    <div class="reels-head">
+      <span class="reels-kicker">{{ section.settings.kicker }}</span>
+      <h2 class="reels-title">{{ section.settings.title }}</h2>
+      <p class="reels-sub">{{ section.settings.sub }}</p>
+    </div>
+    <ul class="reels-row" id="reels-row" aria-label="Creator reels and reviews">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign who = block.settings.handle | prepend: '@'
+          if block.settings.handle == blank
+            assign who = block.settings.name | default: 'on Instagram'
+          endif
+          assign label = who
+          if block.settings.name != blank and block.settings.handle != blank
+            assign label = block.settings.name | append: ' · ' | append: who
+          endif
+          assign video_src = blank
+          assign poster_src = blank
+          if block.settings.video != blank
+            assign mp4 = block.settings.video.sources | where: 'format', 'mp4' | first
+            assign video_src = mp4.url
+            assign poster_src = block.settings.video.preview_image | image_url: width: 600
+          elsif block.settings.video_asset != blank
+            assign video_src = block.settings.video_asset | asset_url
+          endif
+          if block.settings.poster != blank
+            assign poster_src = block.settings.poster | image_url: width: 600
+          elsif block.settings.poster_asset != blank
+            assign poster_src = block.settings.poster_asset | asset_url
+          endif
+        -%}
+        {%- case block.type -%}
+          {%- when 'reel' -%}
+            <li class="reel-card" {{ block.shopify_attributes }}>
+              <div class="reel-frame">
+                {%- if video_src != blank -%}
+                  <video src="{{ video_src }}"{% if poster_src != blank %} poster="{{ poster_src }}"{% endif %} muted loop playsinline preload="none" aria-hidden="true"></video>
+                {%- endif -%}
+                {%- if block.settings.url != blank -%}
+                  <a class="reel-link" href="{{ block.settings.url }}" target="_blank" rel="noopener" aria-label="Watch {{ block.settings.name | default: who | escape }}'s reel on Instagram"><span class="reel-play" aria-hidden="true">▶ watch on Instagram</span></a>
+                {%- endif -%}
+              </div>
+              <div class="reel-meta">
+                {%- if block.settings.url != blank -%}
+                  <a class="reel-handle" href="{{ block.settings.url }}" target="_blank" rel="noopener">{{ label | escape }} ↗</a>
+                {%- else -%}
+                  <span class="reel-handle">{{ label | escape }}</span>
+                {%- endif -%}
+                {%- if block.settings.code != blank -%}
+                  {%- assign code = block.settings.code | upcase -%}
+                  <a class="reel-code" href="{{ product_url }}?ref={{ code }}{% if gift_variant %}&amp;variant={{ gift_variant.id }}{% endif %}#buy-section">use code {{ code }} · {{ block.settings.code_pct }}% off →</a>
+                {%- endif -%}
+              </div>
+            </li>
+          {%- when 'review' -%}
+            <li class="reel-card" {{ block.shopify_attributes }}>
+              <figure class="reel-frame review-frame">
+                <span class="review-mark" aria-hidden="true">“</span>
+                <blockquote>{{ block.settings.quote | escape }}</blockquote>
+                <figcaption><b>{{ block.settings.name | escape }}</b>{% if block.settings.place != blank %}, {{ block.settings.place | escape }}{% endif %}{% if block.settings.pack != blank %}<span>{{ block.settings.pack | escape }}</span>{% endif %}</figcaption>
+              </figure>
+              <div class="reel-meta"><span class="reel-handle">verified customer</span></div>
+            </li>
+        {%- endcase -%}
+      {%- endfor -%}
+      {%- if section.settings.show_tag_card -%}
+        <li class="reel-card">
+          <div class="reel-frame review-frame review-cta">
+            <span class="review-mark" aria-hidden="true">🌙</span>
+            <p class="review-cta-h">your night <em>here.</em></p>
+            <p>tried Sleep Well? post your 10pm ritual and tag <b>@superstate.in</b>. we'll feature the best ones right here.</p>
+            <a class="reel-code" href="{{ settings.instagram_url }}" target="_blank" rel="noopener">tag us on Instagram →</a>
+          </div>
+          <div class="reel-meta"><span class="reel-handle">could be you ✨</span></div>
+        </li>
+      {%- endif -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product: creator reels",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "real people, real nights" },
+    { "type": "inline_richtext", "id": "title", "label": "Title", "default": "they tried it <em>first.</em>" },
+    { "type": "text", "id": "sub", "label": "Sub-line", "default": "creators we sent Sleep Well to, trying it in their own words." },
+    { "type": "checkbox", "id": "show_tag_card", "label": "Show the \"tag us\" card at the end", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "reel",
+      "name": "Creator reel",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name" },
+        { "type": "text", "id": "handle", "label": "Instagram handle (no @)" },
+        { "type": "url", "id": "url", "label": "Instagram reel link" },
+        { "type": "video", "id": "video", "label": "Preview video (short, silent loop)" },
+        { "type": "text", "id": "video_asset", "label": "…or theme asset file name", "info": "e.g. reel-hridya-preview.mp4" },
+        { "type": "image_picker", "id": "poster", "label": "Poster image" },
+        { "type": "text", "id": "poster_asset", "label": "…or theme asset file name", "info": "e.g. reel-hridya-poster.jpg" },
+        { "type": "text", "id": "code", "label": "Creator code (optional)", "info": "Also add it under Theme settings → Creator codes and in Shopify Discounts." },
+        { "type": "number", "id": "code_pct", "label": "Creator code %", "default": 30 }
+      ]
+    },
+    {
+      "type": "review",
+      "name": "Customer review",
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "Quote", "info": "Real customer words only, with their OK to show them." },
+        { "type": "text", "id": "name", "label": "Name" },
+        { "type": "text", "id": "place", "label": "City" },
+        { "type": "text", "id": "pack", "label": "Pack", "default": "30 nights" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Product: creator reels" }]
+}
+{% endschema %}

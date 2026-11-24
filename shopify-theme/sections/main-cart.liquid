@@ -1,0 +1,64 @@
+{%- comment -%} /cart page. The drawer is the main cart; this is the no-JS / direct-link version. {%- endcomment -%}
+<section class="ss-page-hero">
+  <div class="container">
+    <span class="k">your cart</span>
+    <h1>{% if cart.item_count > 0 %}almost bedtime.{% else %}your cart is empty.{% endif %}</h1>
+    {%- if cart.item_count == 0 -%}<p>ready for some science-backed sleep?</p>{%- endif -%}
+  </div>
+</section>
+<div class="ss-page" style="max-width: 900px;">
+  {%- if cart.item_count > 0 -%}
+    <form action="{{ routes.cart_url }}" method="post" id="cart-form">
+      <table class="ss-cart-table">
+        <thead><tr><th>Item</th><th>Qty</th><th style="text-align:right">Total</th></tr></thead>
+        <tbody>
+          {%- for item in cart.items -%}
+            <tr>
+              <td>
+                <div class="ss-cart-item">
+                  {%- if item.image -%}<img src="{{ item.image | image_url: width: 160 }}" alt="{{ item.product.title | escape }}" width="72" height="110" loading="lazy">{%- endif -%}
+                  <div>
+                    <a href="{{ item.url }}">{{ item.product.title }}</a>
+                    {%- unless item.product.has_only_default_variant -%}<small>{{ item.variant.title }}</small>{%- endunless -%}
+                    <small><a href="{{ item.url_to_remove }}" style="font-weight:600;color:#64748b;text-decoration:underline">remove</a></small>
+                  </div>
+                </div>
+              </td>
+              <td><input class="ss-cart-qty" type="number" name="updates[]" value="{{ item.quantity }}" min="0" max="20" aria-label="Quantity for {{ item.product.title | escape }}"></td>
+              <td style="text-align:right;font-weight:800;color:#0f1d3d">{{ item.final_line_price | money }}</td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+
+      <div class="ss-cart-summary">
+        <div class="row"><span>Subtotal</span><span>{{ cart.total_price | money }}</span></div>
+        <div class="row"><span>Shipping</span><span>FREE</span></div>
+        <div class="row" data-cart-page-code hidden><span>Code</span><span data-cart-page-code-value></span></div>
+        <p style="margin:.5rem 0 0;font-size:14px;color:#64748b">your launch or creator code is applied at checkout. taxes included.</p>
+        <div class="ss-cart-actions">
+          <button type="submit" name="update" class="ss-btn ss-btn-ghost">Update cart</button>
+          <button type="submit" name="checkout" class="ss-btn" data-cart-page-checkout>Checkout securely →</button>
+        </div>
+      </div>
+    </form>
+    <script>
+      (() => {
+        const SS = window.SS;
+        if (!SS || !SS.discount) return;
+        const d = SS.discount();
+        if (!d.code) return;
+        const row = document.querySelector('[data-cart-page-code]');
+        row.hidden = false;
+        row.querySelector('[data-cart-page-code-value]').textContent = d.code;
+        document.querySelector('[data-cart-page-checkout]').addEventListener('click', e => { e.preventDefault(); SS.goToCheckout(); });
+      })();
+    </script>
+  {%- else -%}
+    <p style="text-align:center"><a class="ss-btn" href="{{ settings.featured_product.url | default: '/products/sleep-well' }}">Shop Sleep Well</a></p>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{ "name": "Cart", "settings": [] }
+{% endschema %}

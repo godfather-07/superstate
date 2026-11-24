@@ -1,0 +1,16 @@
+<section class="ss-page-hero">
+  <div class="container">
+    <span class="k">{{ blog.title }}</span>
+    <h1>{{ article.title }}</h1>
+    <p>{{ article.published_at | date: '%d %B %Y' }}</p>
+  </div>
+</section>
+<article class="ss-page rte">
+  {%- if article.image -%}<img src="{{ article.image | image_url: width: 1400 }}" alt="{{ article.image.alt | default: article.title | escape }}" width="{{ article.image.width }}" height="{{ article.image.height }}" style="margin-bottom:1.5rem">{%- endif -%}
+  {{ article.content }}
+  <p style="margin-top:2.5rem"><a href="{{ blog.url }}">← back to {{ blog.title }}</a></p>
+</article>
+
+{% schema %}
+{ "name": "Article", "settings": [] }
+{% endschema %}

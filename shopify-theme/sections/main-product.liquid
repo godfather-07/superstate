@@ -1,0 +1,264 @@
+{%- comment -%}
+  Sleep Well product page: gallery, pack picker (Shopify variants), buy box,
+  launch bar and the win-your-code sheep game.
+  Prices: the launch % (Theme settings) is taken off the variant price for
+  display; Shopify applies the real discount at checkout from the code.
+{%- endcomment -%}
+{%- liquid
+  assign pct = settings.launch_discount_pct | default: 0
+  assign keep = 100 | minus: pct
+  assign current = product.selected_or_first_available_variant
+  assign creator_lines = settings.creator_codes | newline_to_br | split: '<br />'
+  assign first_creator = creator_lines | first | split: '|'
+  assign creator_pct = first_creator[2] | strip | default: '30'
+  if section.settings.image != blank
+    assign hero_src = section.settings.image | image_url: width: 1200
+  elsif product.featured_image
+    assign hero_src = product.featured_image | image_url: width: 1200
+  else
+    assign hero_src = 'sleep-well-box.webp' | asset_url
+  endif
+  assign max_serves = 0
+  for v in product.variants
+    assign s = v.title | split: ' ' | last | plus: 0
+    if s > max_serves
+      assign max_serves = s
+    endif
+  endfor
+-%}
+<section class="pdp-hero-section" data-product-section data-product-title="{{ product.title | escape }}">
+  <div class="container">
+    <div class="pdp-grid">
+
+      <div class="pdp-gallery-column">
+        <div class="pdp-gallery-viewport">
+          {%- if section.settings.sticker != blank -%}
+            <span class="hero-sticker" aria-hidden="true">{{ section.settings.sticker }}</span>
+          {%- endif -%}
+          <img id="main-gallery-img" src="{{ hero_src }}" alt="{{ section.settings.image.alt | default: 'SuperState Sleep Well dark chocolate ritual box' | escape }}" width="763" height="1172" fetchpriority="high">
+        </div>
+      </div>
+
+      <div class="pdp-info-column" id="buy-section">
+        <h1 class="product-headline" style="margin-top: 0.5rem; margin-bottom: 0.5rem;">{{ section.settings.headline }}</h1>
+        <p class="pdp-subline">{{ section.settings.subline }}</p>
+
+        {%- liquid
+          if pct > 0
+            assign top_sale = current.price | times: keep | divided_by: 100
+            assign top_strike = current.price
+            assign top_pct = pct
+          elsif current.compare_at_price > current.price
+            assign top_sale = current.price
+            assign top_strike = current.compare_at_price
+            assign top_pct = current.compare_at_price | minus: current.price | times: 100 | divided_by: current.compare_at_price
+          else
+            assign top_sale = current.price
+            assign top_strike = 0
+            assign top_pct = 0
+          endif
+        -%}
+        <div class="pdp-price-row" style="margin-bottom: 0.25rem;">
+          <div class="pdp-price-current" data-top-price>{{ top_sale | money_without_trailing_zeros }}</div>
+          <div class="pdp-price-original" data-top-original{% if top_strike == 0 %} style="display:none"{% endif %}>{{ top_strike | money_without_trailing_zeros }}</div>
+          <div class="pdp-price-badge" data-top-badge{% if top_pct == 0 %} style="display:none"{% endif %}>{{ top_pct }}% OFF</div>
+        </div>
+        <div class="pdp-tax-note" style="margin-bottom: 1rem;" data-price-note>
+          {%- if pct > 0 -%}launch price · {{ pct }}% off for everyone · {{ creator_pct }}% with a creator code · incl. taxes{%- else -%}incl. taxes · free shipping in India{%- endif -%}
+        </div>
+        <ul class="serve-facts" aria-label="Serving details">
+          <li><span aria-hidden="true">🥄</span><p><b>1 sachet a day</b>10 g serving</p></li>
+          <li><span aria-hidden="true">☕</span><p><b>150 ml hot water</b>stir &amp; sip</p></li>
+          <li><span aria-hidden="true">🌙</span><p><b>30 min before bed</b>your wind-down cue</p></li>
+          <li><span aria-hidden="true">🚫</span><p><b>no melatonin</b>every dose listed</p></li>
+        </ul>
+
+        {%- form 'product', product, id: 'product-form', class: 'pdp-form' -%}
+          <input type="hidden" name="id" value="{{ current.id }}" data-variant-input>
+
+          {%- unless product.has_only_default_variant -%}
+          <div style="margin-bottom: 2rem;">
+            <div style="margin-bottom: 0.75rem;">
+              <span class="selector-label" style="margin-bottom: 0px; text-transform: none; font-size: 18px; font-family: var(--font-body); font-weight: 700; letter-spacing: normal;">Select Pack Size</span>
+            </div>
+            <div class="supply-pack-stack" role="radiogroup" aria-label="Pack size">
+              {%- for v in product.variants -%}
+                {%- liquid
+                  assign serves = v.title | split: ' ' | last | plus: 0
+                  if pct > 0
+                    assign sale = v.price | times: keep | divided_by: 100
+                    assign strike = v.price
+                  elsif v.compare_at_price > v.price
+                    assign sale = v.price
+                    assign strike = v.compare_at_price
+                  else
+                    assign sale = v.price
+                    assign strike = 0
+                  endif
+                -%}
+                <div class="pack-pill-card{% if v.id == current.id %} active{% endif %}{% unless v.available %} sold-out{% endunless %}"
+                  role="radio" tabindex="0" aria-checked="{% if v.id == current.id %}true{% else %}false{% endif %}"
+                  data-variant-id="{{ v.id }}"
+                  data-title="{{ v.title | escape }}"
+                  data-price="{{ v.price }}"
+                  data-compare="{{ v.compare_at_price | default: 0 }}"
+                  data-serves="{{ serves }}"
+                  data-available="{{ v.available }}">
+                  {%- if serves == max_serves and product.variants.size > 1 -%}<span class="pack-best-tag">best value ✶</span>{%- endif -%}
+                  <div style="display: flex; align-items: center; gap: 0.5rem; width: 100%;">
+                    <span style="font-weight: 700; font-size: 16px; color: #000000; font-family: var(--font-body);">{{ v.title | escape }}</span>
+                  </div>
+                  <div class="pack-price" style="font-weight: 700; font-size: 18px; color: #000000; margin-top: 0.25rem;">
+                    <span data-pack-sale>{{ sale | money_without_trailing_zeros }}</span>
+                    <s class="pack-was" data-pack-was{% if strike == 0 %} style="display:none"{% endif %}>{{ strike | money_without_trailing_zeros }}</s>
+                  </div>
+                  <div style="font-size: 13px; color: #777777; margin-top: 0.15rem; font-weight: 500;">
+                    {%- if serves > 0 -%}
+                      <span data-pack-serve>₹{{ sale | divided_by: serves | divided_by: 100.0 | round }}/serve</span>
+                    {%- endif -%}
+                    {%- if v.title == settings.gift_pack %} · + gift 🎁{% endif -%}
+                    {%- unless v.available %} · sold out{% endunless -%}
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+          </div>
+          {%- endunless -%}
+
+          <div style="display: flex; gap: 1rem; width: 100%; max-width: 600px; align-items: center; margin-bottom: 0.75rem;">
+            <div style="display: flex; width: 160px; height: 50px; border: 1px solid #d1d1d1; border-radius: 8px; overflow: hidden; background-color: #ffffff; align-items: center;">
+              <button type="button" data-qty-minus aria-label="Decrease quantity" style="flex: 1; height: 100%; border: none; background: transparent; font-size: 22px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #000000; outline: none; transition: background-color 0.2s;">−</button>
+              <input type="text" id="pdp-qty-input" name="quantity" value="1" inputmode="numeric" readonly aria-label="Quantity" style="width: 50px; height: 100%; border-top: none; border-bottom: none; border-left: 1px solid #d1d1d1; border-right: 1px solid #d1d1d1; text-align: center; font-size: 18px; font-weight: 700; color: #000000; background: transparent; outline: none;" />
+              <button type="button" data-qty-plus aria-label="Increase quantity" style="flex: 1; height: 100%; border: none; background: transparent; font-size: 22px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #000000; outline: none; transition: background-color 0.2s;">+</button>
+            </div>
+
+            <button type="button" id="prebook-btn" data-buy-now{% unless current.available %} disabled{% endunless %} style="flex: 1; height: 50px; background-color: #000000; color: #ffffff; border: none; border-radius: 8px; font-size: 18px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: opacity 0.2s; outline: none; font-family: var(--font-body);">
+              {%- if current.available -%}Buy now{% if pct > 0 %} · {{ pct }}% off{% endif %}{%- else -%}Sold out{%- endif -%}
+            </button>
+          </div>
+          <button type="submit" class="pdp-add-to-cart" data-add-to-cart{% unless current.available %} disabled{% endunless %}>or add to cart</button>
+          <p class="pdp-form-error" data-form-error role="alert" hidden></p>
+        {%- endform -%}
+
+        {%- if pct > 0 -%}
+          <p class="launch-note" data-launch-note>🎉 <b>launch sale:</b> {{ pct }}% off is applied automatically at checkout. a creator sent you? use their code at checkout for <b>{{ creator_pct }}% off + a free gift</b>.</p>
+        {%- endif -%}
+
+        <ul class="pdp-facts-row">
+          <li>Secure Shopify checkout · UPI &amp; cards</li>
+          <li>Free shipping in India</li>
+          <li>No melatonin</li>
+        </ul>
+      </div>
+
+      {%- if pct > 0 -%}
+      <!-- LAUNCH BAR (spans both columns on desktop) -->
+      <div class="era-bar-wrap">
+        <div class="era-card">
+          <div class="era-top">
+            <span class="era-badge">launch sale is live 🎉</span>
+            <span class="era-batch">batch 02</span>
+          </div>
+          <p class="era-copy">ok so… batch 01 got <strong>absolutely cleared.</strong> y'all ate it up way faster than we planned 🫠 we took notes, made it <em>even better</em>, and it's <strong>shipping now</strong>.</p>
+          <div class="era-progress">
+            <p class="era-foot">{{ pct }}% off for everyone · {{ creator_pct }}% with a creator code · ships in 5–7 days. <a href="#buy-section" class="era-link">grab yours →</a></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXTRAS: win-your-code game -->
+      <div class="pdp-extras">
+        <div class="game-card" id="win">
+          <!-- intro -->
+          <div class="game-state" data-state="intro">
+            <span class="game-eyebrow">while you're here 🐑</span>
+            <h3 class="game-title">wanna <em>play</em> for your {{ pct }}%?</h3>
+            <p class="game-sub">help a sleepy sheep jump 10 alarms. (spoiler: the {{ pct }}% is already applied at checkout, but winning it feels better 😌)</p>
+            <div class="game-actions">
+              <button type="button" class="game-btn game-btn-primary" data-action="play">yes, let's play 🐑</button>
+              <button type="button" class="game-btn game-btn-ghost" data-action="skip">nah, just give me the code</button>
+            </div>
+          </div>
+
+          <!-- playing -->
+          <div class="game-state" data-state="play" hidden>
+            <div class="game-hud"><span id="game-score">0 / 10</span><span class="game-hint">tap · click · space to jump</span></div>
+            <canvas id="sheep-canvas" aria-label="Sheep jump game. Press space or tap to jump."></canvas>
+          </div>
+
+          <!-- lost -->
+          <div class="game-state" data-state="lost" hidden>
+            <h3 class="game-title">oop, the alarm got you ⏰</h3>
+            <p class="game-sub">so close. run it back?</p>
+            <div class="game-actions">
+              <button type="button" class="game-btn game-btn-primary" data-action="play">try again</button>
+              <button type="button" class="game-btn game-btn-ghost" data-action="skip">just give me the code</button>
+            </div>
+          </div>
+
+          <!-- reveal -->
+          <div class="game-state" data-state="reveal" hidden>
+            <span class="game-eyebrow" id="reveal-eyebrow">you did that ✨</span>
+            <h3 class="game-title">your code: <span class="game-code" id="game-code">{{ settings.launch_code | escape }}</span></h3>
+            <p class="game-sub">{{ pct }}% off, already applied at checkout. go treat yourself to better nights.</p>
+            <div class="game-actions">
+              <a href="#buy-section" class="game-btn game-btn-primary">buy now · {{ pct }}% off →</a>
+              <button type="button" class="game-btn game-btn-ghost" data-action="copy">copy code</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {%- endif -%}
+
+    </div>
+  </div>
+</section>
+
+<div class="sticky-buy" id="sticky-buy" aria-hidden="true">
+  <img src="{{ hero_src }}" alt="" width="32" height="49">
+  <div class="sticky-buy-info" role="button" tabindex="0" aria-label="Change pack size">
+    <span id="sticky-buy-meta" data-sticky-meta>{{ current.title }} · {{ top_sale | money_without_trailing_zeros }}</span>
+    <small>change pack ⌄</small>
+  </div>
+  <button type="button" data-buy-now tabindex="-1">Buy now →</button>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "brand": { "@type": "Brand", "name": {{ product.vendor | default: shop.name | json }} },
+  "description": {{ product.description | strip_html | strip | default: section.settings.subline | json }},
+  "image": [{% if product.featured_image %}{{ product.featured_image | image_url: width: 1200 | prepend: 'https:' | json }}{% else %}{{ 'sleep-well-box.webp' | asset_url | prepend: 'https:' | json }}{% endif %}],
+  "url": {{ shop.url | append: product.url | json }},
+  "offers": [
+    {%- for v in product.variants -%}
+    {
+      "@type": "Offer",
+      "name": {{ v.title | json }},
+      {%- if v.sku != blank %}"sku": {{ v.sku | json }},{% endif %}
+      "price": {{ v.price | divided_by: 100.0 | json }},
+      "priceCurrency": {{ cart.currency.iso_code | json }},
+      "availability": "https://schema.org/{% if v.available %}InStock{% else %}OutOfStock{% endif %}",
+      "url": {{ shop.url | append: v.url | json }}
+    }{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ]
+}
+</script>
+
+<script src="{{ 'product.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Product: buy box",
+  "tag": "div",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Main image", "info": "Leave empty to use the product's first image (or the built-in box photo)." },
+    { "type": "text", "id": "sticker", "label": "Image sticker", "default": "coffee, but for sleep ☾" },
+    { "type": "inline_richtext", "id": "headline", "label": "Headline", "default": "Sleep <em>Well</em>" },
+    { "type": "text", "id": "subline", "label": "Sub-line", "default": "A dark chocolate drink for your evenings. Mix one sachet, sip it 30 minutes before bed." }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,97 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {}
+    },
+    "ticker": {
+      "type": "product-ticker",
+      "settings": {}
+    },
+    "manifesto": {
+      "type": "product-manifesto",
+      "settings": {}
+    },
+    "inside": {
+      "type": "product-inside",
+      "settings": {}
+    },
+    "reels": {
+      "type": "product-reels",
+      "settings": {},
+      "blocks": {
+        "reel_abhimanyu": {
+          "type": "reel",
+          "settings": {
+            "name": "Abhimanyu",
+            "handle": "abhimanyuu._p",
+            "url": "https://www.instagram.com/abhimanyuu._p/reel/DeZV2_LMjYW/",
+            "video_asset": "reel-abhimanyu-preview.mp4",
+            "poster_asset": "reel-abhimanyu-poster.jpg",
+            "code": "ABHIMANYU30",
+            "code_pct": 30
+          }
+        },
+        "reel_hridya": {
+          "type": "reel",
+          "settings": {
+            "name": "Hridya",
+            "handle": "_luttu_",
+            "url": "https://www.instagram.com/_luttu_/reel/De9TEsnSyXo/",
+            "video_asset": "reel-hridya-preview.mp4",
+            "poster_asset": "reel-hridya-poster.jpg",
+            "code": "",
+            "code_pct": 30
+          }
+        },
+        "reel_shreya": {
+          "type": "reel",
+          "settings": {
+            "name": "Shreya",
+            "handle": "dietician.shreya",
+            "url": "https://www.instagram.com/dietician.shreya/reel/DeCD1C7TZxE/",
+            "video_asset": "reel-shreya-preview.mp4",
+            "poster_asset": "reel-shreya-poster.jpg",
+            "code": "",
+            "code_pct": 30
+          }
+        },
+        "reel_shanavas": {
+          "type": "reel",
+          "settings": {
+            "name": "Shamnas",
+            "handle": "sham_shoven",
+            "url": "https://www.instagram.com/p/DetKVM7vVpa/",
+            "video_asset": "reel-shanavas-preview.mp4",
+            "poster_asset": "reel-shanavas-poster.jpg",
+            "code": "SHAMNAS30",
+            "code_pct": 30
+          }
+        }
+      },
+      "block_order": [
+        "reel_abhimanyu",
+        "reel_hridya",
+        "reel_shreya",
+        "reel_shanavas"
+      ]
+    },
+    "ritual": {
+      "type": "product-ritual",
+      "settings": {}
+    },
+    "faq": {
+      "type": "product-faq",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "ticker",
+    "manifesto",
+    "inside",
+    "reels",
+    "ritual",
+    "faq"
+  ]
+}

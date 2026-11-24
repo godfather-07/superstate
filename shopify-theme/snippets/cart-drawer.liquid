@@ -1,0 +1,56 @@
+{%- comment -%}
+  Site-wide cart drawer. Filled in by assets/theme.js from /cart.js.
+  The launch / creator code is passed to Shopify checkout (?discount=CODE).
+{%- endcomment -%}
+<div class="cart-drawer-overlay" id="cart-overlay" data-cart-drawer aria-hidden="true">
+  <div class="cart-drawer-panel" role="dialog" aria-modal="true" aria-labelledby="cart-drawer-title">
+    <div class="cart-drawer-header">
+      <span class="cart-drawer-title" id="cart-drawer-title">Shopping Cart</span>
+      <button type="button" class="cart-drawer-close" data-cart-close aria-label="Close cart">✕</button>
+    </div>
+
+    <div class="cart-items-scroll" id="cart-items-list" data-cart-items>
+      <div class="cart-empty-state" data-cart-empty>
+        <div class="cart-empty-icon" style="color: var(--color-first-light);">
+          <svg style="width: 48px; height: 48px; fill: none; stroke: currentColor; stroke-width: 1.5; display: block; margin: 0 auto 1rem;" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+          </svg>
+        </div>
+        <div class="cart-empty-text">Your cart is empty. Ready for some science-backed sleep?</div>
+        <a class="pdp-cta-btn cart-empty-cta" href="{{ settings.featured_product.url | default: '/products/sleep-well' }}">Shop Sleep Well</a>
+      </div>
+    </div>
+
+    <div class="cart-drawer-footer" data-cart-footer hidden>
+      <form class="cart-coupon-box" data-coupon-form>
+        <input type="text" class="cart-coupon-input" data-coupon-input autocomplete="off" autocapitalize="characters" placeholder="Creator code? (e.g. ABHIMANYU30)" aria-label="Discount code">
+        <button type="submit" class="cart-coupon-btn">Apply</button>
+      </form>
+      <p class="cart-coupon-msg" data-coupon-msg role="status" aria-live="polite"></p>
+
+      <div class="cart-summary-line">
+        <span>Subtotal</span>
+        <span data-cart-subtotal></span>
+      </div>
+      <div class="cart-summary-line" data-cart-discount-line hidden>
+        <span data-cart-discount-label>Discount</span>
+        <span data-cart-discount></span>
+      </div>
+      <div class="cart-summary-line">
+        <span>Shipping</span>
+        <span>FREE</span>
+      </div>
+      <div class="cart-summary-line total">
+        <span>Estimated total</span>
+        <span data-cart-total></span>
+      </div>
+
+      <a href="{{ routes.root_url }}checkout" class="cart-checkout-btn" data-cart-checkout>Proceed to Secure Checkout</a>
+
+      <div class="cart-trust-footer">
+        <span>SHOPIFY SECURED</span>
+        <span>UPI &amp; CARDS</span>
+      </div>
+    </div>
+  </div>
+</div>

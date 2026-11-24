@@ -1,0 +1,12 @@
+<section class="ss-page-hero" style="padding-bottom:5rem">
+  <div class="container">
+    <span class="k">404</span>
+    <h1>this page is fast asleep 😴</h1>
+    <p>we couldn't find what you were looking for.</p>
+    <p style="margin-top:1.5rem"><a class="ss-btn ss-btn-lime" href="{{ routes.root_url }}">back home</a>&nbsp; <a class="ss-btn ss-btn-lime" href="{{ settings.featured_product.url | default: '/products/sleep-well' }}">shop Sleep Well</a></p>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "404", "settings": [] }
+{% endschema %}

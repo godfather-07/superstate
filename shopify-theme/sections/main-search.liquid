@@ -1,0 +1,30 @@
+<section class="ss-page-hero">
+  <div class="container">
+    <span class="k">search</span>
+    <h1>{% if search.performed %}results for “{{ search.terms | escape }}”{% else %}search{% endif %}</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="ss-search-form">
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="search superstate.in" aria-label="Search">
+      <input type="hidden" name="options[prefix]" value="last">
+      <button type="submit" class="ss-btn ss-btn-lime">Search</button>
+    </form>
+  </div>
+</section>
+{%- if search.performed -%}
+  {%- paginate search.results by 24 -%}
+    <div class="ss-grid">
+      {%- for item in search.results -%}
+        {%- if item.object_type == 'product' -%}
+          {%- render 'product-card', product: item -%}
+        {%- else -%}
+          <a class="ss-card" href="{{ item.url }}"><b>{{ item.title }}</b><span>{{ item.content | strip_html | truncatewords: 18 }}</span></a>
+        {%- endif -%}
+      {%- else -%}
+        <p>nothing matched. try “sleep”, or <a href="/pages/faqs">read the FAQs</a>.</p>
+      {%- endfor -%}
+    </div>
+  {%- endpaginate -%}
+{%- endif -%}
+
+{% schema %}
+{ "name": "Search", "settings": [] }
+{% endschema %}
