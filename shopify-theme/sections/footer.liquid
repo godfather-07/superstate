@@ -1,6 +1,6 @@
 {%- liquid
-  assign ss_product = settings.featured_product | default: all_products['sleep-well']
-  assign product_url = ss_product.url | default: '/products/sleep-well'
+  assign ss_product = settings.featured_product | default: all_products['sleep-well-dark-chocolate']
+  assign product_url = ss_product.url | default: '/products/sleep-well-dark-chocolate'
   if settings.logo != blank
     assign logo_src = settings.logo | image_url: width: 400
   else
@@ -8,8 +8,10 @@
   endif
   assign wa = settings.whatsapp_number | remove: ' ' | remove: '+'
   assign gift_variant = nil
+  assign gift_lower = settings.gift_pack | downcase | strip
   for v in ss_product.variants
-    if v.title == settings.gift_pack
+    assign v_lower = v.title | downcase | strip
+    if v_lower == gift_lower
       assign gift_variant = v
     endif
   endfor
@@ -38,7 +40,7 @@
         <h4>shop</h4>
         <a href="{{ product_url }}">Sleep Well</a>
         {%- if gift_variant -%}
-          <a href="{{ product_url }}?variant={{ gift_variant.id }}#buy-section">{{ gift_variant.title | replace: 'Pack Of ', '' }}-night pack + gift</a>
+          <a href="{{ product_url }}?variant={{ gift_variant.id }}#buy-section">{{ gift_variant.title | downcase | remove: 'pack of' | strip }}-night pack + gift</a>
         {%- endif -%}
         <a href="/pages/faqs#fq-orders">prices &amp; codes</a>
       </div>

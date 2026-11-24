@@ -28,7 +28,7 @@
       { "type": "text", "id": "launch_code", "label": "Launch code (applied automatically)", "default": "FIRSTNIGHT20" },
       { "type": "range", "id": "launch_discount_pct", "label": "Launch discount %", "min": 0, "max": 50, "step": 1, "unit": "%", "default": 20, "info": "Set to 0 to turn the launch sale off. Prices are then shown at full price (or against the compare-at price)." },
       { "type": "textarea", "id": "creator_codes", "label": "Creator codes", "default": "ABHIJITH30 | Abhijith | 30\nABHIMANYU30 | Abhimanyu | 30\nFAIHA30 | Faiha | 30\nKRISHNA30 | Krishna | 30\nSALIH30 | Salih | 30\nSHAMNAS30 | Shamnas | 30", "info": "One per line: CODE | Name | %. Creator links: https://www.superstate.in/?ref=CODE (works on any page, remembered for 30 days)." },
-      { "type": "text", "id": "gift_pack", "label": "Pack that comes with a free gift", "default": "Pack Of 30", "info": "Must match the variant name exactly." },
+      { "type": "text", "id": "gift_pack", "label": "Pack that comes with a free gift", "default": "Pack of 30", "info": "Variant name (not case-sensitive)." },
       { "type": "checkbox", "id": "show_nudge", "label": "Show the launch-sale nudge card", "default": true, "info": "Small dismissible card on non-product pages." }
     ]
   },

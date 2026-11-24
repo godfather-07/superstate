@@ -1,6 +1,6 @@
 {%- liquid
-  assign ss_product = settings.featured_product | default: all_products['sleep-well']
-  assign product_url = ss_product.url | default: '/products/sleep-well'
+  assign ss_product = settings.featured_product | default: all_products['sleep-well-dark-chocolate']
+  assign product_url = ss_product.url | default: '/products/sleep-well-dark-chocolate'
   if settings.logo != blank
     assign logo_src = settings.logo | image_url: width: 400
   else

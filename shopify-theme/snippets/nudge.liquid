@@ -1,10 +1,12 @@
 {%- comment -%} Launch-sale nudge card, cloned by assets/theme.js (shown once per visit, never on product/cart). {%- endcomment -%}
 {%- liquid
-  assign ss_product = settings.featured_product | default: all_products['sleep-well']
+  assign ss_product = settings.featured_product | default: all_products['sleep-well-dark-chocolate']
   assign pct = settings.launch_discount_pct | default: 0
   assign gift_variant = nil
+  assign gift_lower = settings.gift_pack | downcase | strip
   for v in ss_product.variants
-    if v.title == settings.gift_pack
+    assign v_lower = v.title | downcase | strip
+    if v_lower == gift_lower
       assign gift_variant = v
     endif
   endfor
@@ -16,7 +18,7 @@
     <span class="ss-nudge-badge">launch sale · {{ pct }}% off</span>
     <p class="ss-nudge-title" id="ss-nudge-title">Sleep Well is live. <em>{{ pct }}% off</em> for launch.</p>
     {%- if gift_variant -%}
-      {%- assign nights = gift_variant.title | remove: 'Pack Of ' | strip -%}
+      {%- assign nights = gift_variant.title | downcase | remove: 'pack of' | strip -%}
       {%- assign keep = 100 | minus: pct -%}
       {%- assign sale = gift_variant.price | times: keep | divided_by: 100 -%}
       <p class="ss-nudge-sub">coffee, but for sleep. {{ nights }} nights for {{ sale | money_without_trailing_zeros }} <s>{{ gift_variant.price | money_without_trailing_zeros }}</s>, with a SuperState gift in the box. ships in 5–7 days.</p>

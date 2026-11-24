@@ -1,6 +1,6 @@
 {%- liquid
-  assign ss_product = settings.featured_product | default: all_products['sleep-well']
-  assign product_url = ss_product.url | default: '/products/sleep-well'
+  assign ss_product = settings.featured_product | default: all_products['sleep-well-dark-chocolate']
+  assign product_url = ss_product.url | default: '/products/sleep-well-dark-chocolate'
 -%}
 <!-- FAQ HERO -->
 <section class="fq-hero">
@@ -106,7 +106,7 @@
             {%- assign pct = settings.launch_discount_pct | default: 0 -%}
             {%- assign keep = 100 | minus: pct -%}
             {%- for v in ss_product.variants -%}
-              {{ v.title | replace: 'Pack Of ', '' }} sachets {{ v.price | money_without_trailing_zeros }}{% unless forloop.last %} · {% endunless %}
+              {{ v.title | downcase | remove: 'pack of' | strip }} sachets {{ v.price | money_without_trailing_zeros }}{% unless forloop.last %} · {% endunless %}
             {%- endfor %} (MRP).
             {%- if pct > 0 %} For launch, everyone gets {{ pct }}% off, so that's
               {%- for v in ss_product.variants %} {{ v.price | times: keep | divided_by: 100 | money_without_trailing_zeros }}{% unless forloop.last %} /{% endunless %}{% endfor -%}.

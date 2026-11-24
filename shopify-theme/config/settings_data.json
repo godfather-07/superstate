@@ -1,6 +1,10 @@
 {
-  "current": "Default",
+  "current": {
+    "featured_product": "sleep-well-dark-chocolate"
+  },
   "presets": {
-    "Default": {}
+    "Default": {
+      "featured_product": "sleep-well-dark-chocolate"
+    }
   }
 }

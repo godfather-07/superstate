@@ -3,7 +3,7 @@
   Creator codes come from Theme settings → Launch offer & creator codes.
 {%- endcomment -%}
 {%- liquid
-  assign ss_product = settings.featured_product | default: all_products['sleep-well']
+  assign ss_product = settings.featured_product | default: all_products['sleep-well-dark-chocolate']
   assign creator_lines = settings.creator_codes | newline_to_br | split: '<br />'
 -%}
 <script>
@@ -25,7 +25,7 @@
     metaPixelIds: {{ settings.meta_pixel_ids | remove: ' ' | split: ',' | json }},
     showNudge: {{ settings.show_nudge | json }},
     template: {{ template.name | json }},
-    productUrl: {{ ss_product.url | default: '/products/sleep-well' | json }},
+    productUrl: {{ ss_product.url | default: '/products/sleep-well-dark-chocolate' | json }},
     routes: {
       root: {{ routes.root_url | json }},
       cart: {{ routes.cart_url | json }},

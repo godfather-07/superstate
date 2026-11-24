@@ -4,11 +4,13 @@
   assets folder (the four launch reels ship with the theme).
 {%- endcomment -%}
 {%- liquid
-  assign ss_product = settings.featured_product | default: all_products['sleep-well']
-  assign product_url = ss_product.url | default: '/products/sleep-well'
+  assign ss_product = settings.featured_product | default: all_products['sleep-well-dark-chocolate']
+  assign product_url = ss_product.url | default: '/products/sleep-well-dark-chocolate'
   assign gift_variant = nil
+  assign gift_lower = settings.gift_pack | downcase | strip
   for v in ss_product.variants
-    if v.title == settings.gift_pack
+    assign v_lower = v.title | downcase | strip
+    if v_lower == gift_lower
       assign gift_variant = v
     endif
   endfor

@@ -13,7 +13,7 @@
   assign creator_pct = first_creator[2] | strip | default: '30'
   if section.settings.image != blank
     assign hero_src = section.settings.image | image_url: width: 1200
-  elsif product.featured_image
+  elsif section.settings.use_product_image and product.featured_image
     assign hero_src = product.featured_image | image_url: width: 1200
   else
     assign hero_src = 'sleep-well-box.webp' | asset_url
@@ -116,7 +116,7 @@
                     {%- if serves > 0 -%}
                       <span data-pack-serve>₹{{ sale | divided_by: serves | divided_by: 100.0 | round }}/serve</span>
                     {%- endif -%}
-                    {%- if v.title == settings.gift_pack %} · + gift 🎁{% endif -%}
+                    {%- assign v_lower = v.title | downcase | strip -%}{%- assign gift_lower = settings.gift_pack | downcase | strip -%}{%- if v_lower == gift_lower %} · + gift 🎁{% endif -%}
                     {%- unless v.available %} · sold out{% endunless -%}
                   </div>
                 </div>
@@ -255,7 +255,8 @@
   "name": "Product: buy box",
   "tag": "div",
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Main image", "info": "Leave empty to use the product's first image (or the built-in box photo)." },
+    { "type": "image_picker", "id": "image", "label": "Main image", "info": "Leave empty to use the built-in cut-out box photo." },
+    { "type": "checkbox", "id": "use_product_image", "label": "Use the product's own first image instead", "default": false },
     { "type": "text", "id": "sticker", "label": "Image sticker", "default": "coffee, but for sleep ☾" },
     { "type": "inline_richtext", "id": "headline", "label": "Headline", "default": "Sleep <em>Well</em>" },
     { "type": "text", "id": "subline", "label": "Sub-line", "default": "A dark chocolate drink for your evenings. Mix one sachet, sip it 30 minutes before bed." }
