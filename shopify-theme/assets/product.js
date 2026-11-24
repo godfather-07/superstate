@@ -109,8 +109,10 @@
     errorEl.hidden = !msg;
   }
 
-  // Buy now → cart permalink → Shopify checkout with the code applied
-  function buyNow(btn) {
+  // Buy now → put exactly this pack in the cart → Shopify checkout with the code.
+  // (Not a /cart/<id>:<qty> link: Shopify sends those to the primary domain,
+  // so they break whenever that domain isn't pointing at the store.)
+  async function buyNow(btn) {
     const id = variantId();
     if (!id) return;
     const d = SS.discount ? SS.discount() : {};
@@ -121,16 +123,30 @@
       value: (p.sale * qty) / 100, num_items: qty, variant: card && card.dataset.title,
       coupon: d.code || undefined, creator: d.creator || undefined
     });
-    const params = new URLSearchParams();
-    if (d.code) params.set('discount', d.code);
-    if (d.creator) params.set('attributes[Referred by]', d.creator);
-    if (d.code) params.set('attributes[Discount code]', d.code);
-    params.set('ref', 'superstate-website');
-    if (btn) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Opening checkout…'; }
-    const root = (SS.routes && SS.routes.root ? SS.routes.root : '/').replace(/\/?$/, '/');
-    location.href = `${root}cart/${id}:${qty}?${params.toString()}`;
-    // if the visitor comes back with the back button, re-enable
-    setTimeout(() => { if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label; } }, 4000);
+    const label = btn ? btn.textContent : '';
+    if (btn) { btn.disabled = true; btn.textContent = 'Opening checkout…'; }
+    const routes = SS.routes || {};
+    const root = (routes.root || '/').replace(/\/?$/, '/');
+    const post = (url, body) => fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(body)
+    }).then(async r => {
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(data.description || data.message || 'Could not start checkout');
+      return data;
+    });
+    try {
+      await post(`${root}cart/clear.js`, {});
+      await post(`${routes.cartAdd || root + 'cart/add'}.js`, { items: [{ id: Number(id), quantity: qty }] });
+      await post(`${routes.cartUpdate || root + 'cart/update'}.js`, {
+        attributes: { 'Referred by': d.creator || '', 'Discount code': d.code || '' }
+      });
+      location.href = SS.checkoutUrl ? SS.checkoutUrl() : `${root}checkout`;
+    } catch (err) {
+      showError(err.message || 'Could not start checkout. Please try again.');
+      if (btn) { btn.disabled = false; btn.textContent = label; }
+    }
   }
   document.querySelectorAll('[data-buy-now]').forEach(b => b.addEventListener('click', () => buyNow(b)));
 
